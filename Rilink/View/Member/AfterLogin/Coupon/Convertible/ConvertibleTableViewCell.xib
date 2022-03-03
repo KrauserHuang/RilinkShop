@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="convertibleTableViewCell" rowHeight="88" id="KGk-i7-Jjw" customClass="ConvertibleTableViewCell" customModule="Rilink" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="101"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="343" height="101"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保健食品消費滿1000元可打9折" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORD-KL-fvk">
+                        <rect key="frame" x="12" y="12" width="240" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="兌換期限：無期限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6J-g7-uMS">
+                        <rect key="frame" x="12" y="72" width="115" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2N-xi-gl8">
+                        <rect key="frame" x="211" y="55" width="120" height="34"/>
+                        <color key="backgroundColor" red="0.039215686270000001" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="cLU-rZ-jbM"/>
+                            <constraint firstAttribute="height" constant="34" id="isM-eV-ame"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="複製折扣碼">
+                            <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="copyAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8FT-7w-wpT"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ORD-KL-fvk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="5dr-lq-o8d"/>
+                    <constraint firstItem="M6J-g7-uMS" firstAttribute="leading" secondItem="ORD-KL-fvk" secondAttribute="leading" id="Ho0-EL-Qfy"/>
+                    <constraint firstItem="n2N-xi-gl8" firstAttribute="bottom" secondItem="M6J-g7-uMS" secondAttribute="bottom" id="dzr-6d-TD5"/>
+                    <constraint firstAttribute="bottom" secondItem="M6J-g7-uMS" secondAttribute="bottom" constant="12" id="g6h-iw-Rcw"/>
+                    <constraint firstAttribute="trailing" secondItem="n2N-xi-gl8" secondAttribute="trailing" constant="12" id="nRB-wB-djR"/>
+                    <constraint firstItem="ORD-KL-fvk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="sF3-eW-pf2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="copyButton" destination="n2N-xi-gl8" id="SXn-lB-EN4"/>
+                <outlet property="exchangeDate" destination="M6J-g7-uMS" id="vW6-VK-3TY"/>
+                <outlet property="name" destination="ORD-KL-fvk" id="3ms-iC-GTu"/>
+            </connections>
+            <point key="canvasLocation" x="203.62318840579712" y="95.089285714285708"/>
+        </tableViewCell>
+    </objects>
+</document>

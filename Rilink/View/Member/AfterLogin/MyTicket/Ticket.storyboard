@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Ticket View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="Ticket" id="Y6W-OH-hqX" customClass="TicketViewController" customModule="Rilink" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fgK-Xt-y1i">
+                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="sUI-jj-BwI"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="可使用"/>
+                                    <segment title="已使用"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeView:" destination="Y6W-OH-hqX" eventType="valueChanged" id="aom-VI-P8k"/>
+                                </connections>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1O-S0-d3k" userLabel="Container View[0]">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <connections>
+                                    <segue destination="fgM-tb-Ulq" kind="embed" id="UDj-ZT-6mA"/>
+                                </connections>
+                            </containerView>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4h-kb-wc4" userLabel="Container View[1]">
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <connections>
+                                    <segue destination="oeo-dd-JmU" kind="embed" id="zD9-KL-Q53"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fgK-Xt-y1i" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="1GU-38-Zok"/>
+                            <constraint firstItem="L1O-S0-d3k" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="2yA-do-j2V"/>
+                            <constraint firstItem="fgK-Xt-y1i" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="KCk-A2-bMF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="R4h-kb-wc4" secondAttribute="trailing" id="KnR-ZJ-0RF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="L1O-S0-d3k" secondAttribute="trailing" id="Och-t0-TuY"/>
+                            <constraint firstItem="L1O-S0-d3k" firstAttribute="top" secondItem="fgK-Xt-y1i" secondAttribute="bottom" id="Sqd-G8-avg"/>
+                            <constraint firstItem="R4h-kb-wc4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="anf-mH-JyW"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="L1O-S0-d3k" secondAttribute="bottom" id="idK-kb-HVN"/>
+                            <constraint firstItem="fgK-Xt-y1i" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="s6Y-af-jBn"/>
+                            <constraint firstItem="R4h-kb-wc4" firstAttribute="top" secondItem="fgK-Xt-y1i" secondAttribute="bottom" id="usT-r3-SNz"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="R4h-kb-wc4" secondAttribute="bottom" id="vIp-zI-chU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Kc7-36-uf8"/>
+                    <connections>
+                        <outlet property="segment" destination="fgK-Xt-y1i" id="qXg-De-dEc"/>
+                        <outletCollection property="containerViews" destination="L1O-S0-d3k" collectionClass="NSMutableArray" id="SLP-tY-RtJ"/>
+                        <outletCollection property="containerViews" destination="R4h-kb-wc4" collectionClass="NSMutableArray" id="LCB-yu-sqd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="133" y="139"/>
+        </scene>
+        <!--Usable Ticket View Controller-->
+        <scene sceneID="ZV0-zy-4Hs">
+            <objects>
+                <viewController id="fgM-tb-Ulq" customClass="UsableTicketViewController" customModule="Rilink" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AuA-3Y-bXA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KrW-ro-FMy">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="lux-ZD-1xA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KrW-ro-FMy" firstAttribute="leading" secondItem="AuA-3Y-bXA" secondAttribute="leading" id="1P5-x2-5iE"/>
+                            <constraint firstAttribute="trailing" secondItem="KrW-ro-FMy" secondAttribute="trailing" id="DvB-bg-JhC"/>
+                            <constraint firstItem="KrW-ro-FMy" firstAttribute="top" secondItem="AuA-3Y-bXA" secondAttribute="top" id="W7o-JQ-l7c"/>
+                            <constraint firstAttribute="bottom" secondItem="KrW-ro-FMy" secondAttribute="bottom" id="yPc-MV-hmL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableViiew" destination="KrW-ro-FMy" id="Pq5-H1-Js4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QzN-C4-Ind" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-172" y="826"/>
+        </scene>
+        <!--Used Ticket View Controller-->
+        <scene sceneID="ycY-1r-khD">
+            <objects>
+                <viewController id="oeo-dd-JmU" customClass="UsedTicketViewController" customModule="Rilink" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tPL-rZ-vV5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SAL-E6-Kpa">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0tD-y5-9D5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SAL-E6-Kpa" secondAttribute="trailing" id="S4k-Xn-XNA"/>
+                            <constraint firstAttribute="bottom" secondItem="SAL-E6-Kpa" secondAttribute="bottom" id="Uej-tg-hag"/>
+                            <constraint firstItem="SAL-E6-Kpa" firstAttribute="leading" secondItem="tPL-rZ-vV5" secondAttribute="leading" id="YFH-FU-Ikt"/>
+                            <constraint firstItem="SAL-E6-Kpa" firstAttribute="top" secondItem="tPL-rZ-vV5" secondAttribute="top" id="iHd-2P-Ljv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableViiew" destination="SAL-E6-Kpa" id="zUB-dz-7md"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gcU-sv-1EH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="452" y="826"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
