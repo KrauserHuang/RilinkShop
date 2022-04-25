@@ -1,6 +1,0 @@
-${PODS_ROOT}/Target Support Files/Pods-Rilink/Pods-Rilink-frameworks.sh
-${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
-${BUILT_PRODUCTS_DIR}/EzPopup/EzPopup.framework
-${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework
-${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
-${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework

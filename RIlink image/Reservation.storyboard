@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CRY-0I-Aee">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--預約-->
+        <scene sceneID="Nyt-AE-LTh">
+            <objects>
+                <tableViewController id="be7-mj-yuO" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="diB-xb-RKB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="be7-mj-yuO" id="Emd-By-cNO"/>
+                            <outlet property="delegate" destination="be7-mj-yuO" id="Fjz-LQ-ouS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="預約" id="VKA-Rs-g7N">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="bell" id="94G-se-qQS"/>
+                            <barButtonItem title="Item" image="shoppingCart" id="3fO-sO-XOS"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1OR-ZF-ece" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="435" y="61"/>
+        </scene>
+        <!--預約-->
+        <scene sceneID="B2f-UC-Vwb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CRY-0I-Aee" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="預約" image="calendar2" id="7Sg-IU-Ixo"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lPT-3p-xp3">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="be7-mj-yuO" kind="relationship" relationship="rootViewController" id="5eC-8i-dts"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SRn-ch-ZQj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-517.39130434782612" y="0.6696428571428571"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bell" width="28.5" height="28.5"/>
+        <image name="calendar2" width="24" height="24"/>
+        <image name="shoppingCart" width="28.5" height="28.5"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

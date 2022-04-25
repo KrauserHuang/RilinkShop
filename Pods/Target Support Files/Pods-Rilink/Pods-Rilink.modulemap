@@ -1,6 +1,0 @@
-framework module Pods_Rilink {
-  umbrella header "Pods-Rilink-umbrella.h"
-
-  export *
-  module * { export * }
-}

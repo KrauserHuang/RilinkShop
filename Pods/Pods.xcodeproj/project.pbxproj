@@ -47,6 +47,7 @@
 		3AD5DBB915C2623991F7DBACD173BBB4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C9D77BAC1933E1A32D3FB2C75CC06F /* Foundation.framework */; };
 		3AF7DB9AEFF47F1F7F91AF28440E4AC6 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94D25D4C8B48197059CF9A58FF1FB9 /* Filter.swift */; };
 		3E4E56584545A9F057D6A39565EEBE81 /* FSCalendar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 413139E81031BFB67E47AB7ED061D1A7 /* FSCalendar-dummy.m */; };
+		3FF43F392303BB3DE5BD1E8D2DAAC94E /* Pods-RilinkShop-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AC32C2F286EEEEC23126FEC2E8D647F /* Pods-RilinkShop-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		420C200A05BB29E1D299D1BADE9139D2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACD2415F1490774AF1AF5096C41AC6C5 /* CFNetwork.framework */; };
 		457BE444ED617FA7D6851D6DAA9D7234 /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2885F57FEFB503FA0D8433002A84A /* Delegate.swift */; };
 		4634BA717BFCE522E5B42304C6A78B5D /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC184AA62E82897E4C03C9A9E312510 /* ParameterEncoding.swift */; };
@@ -64,6 +65,7 @@
 		52BE6F747C26DF2A24532458E55DC10F /* HTTPHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2264ABDDACF049A7F4AD56FCBD28CF /* HTTPHeaders.swift */; };
 		57FC31B14C753B5C63CEF00560F8A6EF /* SizeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1CB5FCB95584A492D1FCF4C505893B /* SizeExtensions.swift */; };
 		582D59E0D2EF62E0575933C99B393704 /* GraphicsContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BDD410EB80F00A6550853F6785AC95 /* GraphicsContext.swift */; };
+		590D2552BF4EE743F2F63FB7C0B8D751 /* Pods-RilinkShop-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F992FA9921951ECD84745C028B93F4E /* Pods-RilinkShop-dummy.m */; };
 		59BC9047F4BEBBC06235608D974E230D /* NSTextAttachment+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC722A3F79EB7DFD5E7F1804FAFB1DFD /* NSTextAttachment+Kingfisher.swift */; };
 		5ADB30DD9A03859018550A999ACB0652 /* KFImageOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBAD8F6B235E91ABCBCD1139CAD0A60 /* KFImageOptions.swift */; };
 		5E27DD292D3A55657712DD7AFA7B8FCA /* KFImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24114A2A0E333C46C130C3F0E9A860E0 /* KFImage.swift */; };
@@ -72,7 +74,6 @@
 		5F852F38CBC282496CCBE37C51324B2F /* ImageProgressive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5ED19F68863AFA86E963D4A0BF2EFD /* ImageProgressive.swift */; };
 		5FA526557719FDBE81B1974B113CF600 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD01056E98EB138169A3780390041D /* SwiftyJSON-dummy.m */; };
 		6040741383F6F8F6979D6C547230C132 /* FSCalendarSeparatorDecorationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F6EBC6DCB72AA689D50D0EB27B9EDC /* FSCalendarSeparatorDecorationView.m */; };
-		608474D098B9A311F1F5A43246412896 /* Pods-Rilink-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3374B0E693943F372F63A04D13A00F56 /* Pods-Rilink-dummy.m */; };
 		60CFDC4002EA677B53ECC413F67C149D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C9D77BAC1933E1A32D3FB2C75CC06F /* Foundation.framework */; };
 		6201BB85A0AAF8FA6C4771308917BAB2 /* FSCalendarTransitionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = C32397489C5C2B550CF933C7932B225D /* FSCalendarTransitionCoordinator.m */; };
 		62FFC4B2AA010A5445E5D9D6294C62B6 /* FSCalendarCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 71C9E1F7138DC6EE52A8FA7FD66CDDEC /* FSCalendarCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -92,8 +93,8 @@
 		8B9CDBE3FFD712120CD66DD8B06C44E4 /* ParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0492E9A0D874F8D5E4E711D46014179 /* ParameterEncoder.swift */; };
 		8D5833379E9F51BFEEA066AA1C4A25A0 /* FSCalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D5D43E4926724C53296F789F1059A2 /* FSCalendarConstants.m */; };
 		8F9E1EEF2FE52E3231A769722D5C4148 /* ServerTrustEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40E35731BD103F2E53BB0F17E7A608E /* ServerTrustEvaluation.swift */; };
+		93A450EB1889F6F330817C41795175BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C9D77BAC1933E1A32D3FB2C75CC06F /* Foundation.framework */; };
 		941822CDF68EB8F4D49F150457A82616 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECA5139D67492CD0AB23AEEFFE575F1 /* ResponseSerialization.swift */; };
-		97258AC4B67ADD686A16DE4D8EA025C6 /* Pods-Rilink-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BD57904564DC1CF5994FA4EB28BB3514 /* Pods-Rilink-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		97584BC08D2B494417BDEE268CFF38C9 /* Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32C5A26489DD05B9DEB0C3064971895 /* Combine.swift */; };
 		9B0A78AC22E7EDA755F51D86527E2D9C /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CED3D6A88D28B5C1D4CE29E404ED39 /* Source.swift */; };
 		9C0BE8FA0030B2BC1DF7C159FA059389 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C9D77BAC1933E1A32D3FB2C75CC06F /* Foundation.framework */; };
@@ -119,7 +120,6 @@
 		C6ED706364847164CB566CEA1A6FFDD6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB2A2503407C27A577BA3F500F846CE /* QuartzCore.framework */; };
 		C7ACD835AAE2936FB6B623084612825D /* FSCalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC323DA2AC97271E259CE84EAB485A3 /* FSCalendarExtensions.m */; };
 		C7F66519CE6148F21D7DB11423F1D34D /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58616C236B6D7F584A8F454CCDB748E8 /* Response.swift */; };
-		CBCC42A30AF835676BFBC6E4A22EB672 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C9D77BAC1933E1A32D3FB2C75CC06F /* Foundation.framework */; };
 		CD7AC3E1C98EA54F7C05C36C52805220 /* CacheSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C734E6D048CC7048FA981A43E876C12 /* CacheSerializer.swift */; };
 		CE132491B81D44BB6B692C3F72FBC980 /* FSCalendarCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEF12EED2ECE76C931F6A609666273C /* FSCalendarCollectionViewLayout.m */; };
 		CF10A50704D5CF6F07D5949BA4AB3EAB /* FSCalendarDelegationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA59BC58A172C5DF3FE59FFE2D4D94 /* FSCalendarDelegationFactory.m */; };
@@ -162,40 +162,40 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1D0FF8C01465FEEDC56B9161E74076FF /* PBXContainerItemProxy */ = {
+		34B82173460889F4662CF3EF22B8E17A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E8022D22FAA6690B5E1C379C1BCE1491;
 			remoteInfo = Kingfisher;
 		};
-		1F6AAA51DD679306145BBC1420E303C9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 08A1D84C2FADBB24163DC3D193767386;
-			remoteInfo = EzPopup;
-		};
-		4272007FCD04C09DAE6B372F3F195FBA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EAAA1AD3A8A1B59AB91319EE40752C6D;
-			remoteInfo = Alamofire;
-		};
-		6A49D141EDF746CC486D9D8B1286BF96 /* PBXContainerItemProxy */ = {
+		370907F31C6400EE1B021CFA6386561A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D118A6A04828FD3CDA8640CD2B6796D2;
 			remoteInfo = SwiftyJSON;
 		};
-		ABBC4C76A85A702DB0BD6578B2C2394B /* PBXContainerItemProxy */ = {
+		46FAE41C0DC9CB560CC2BE924E41FFD0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13285D54682BEAD805960F9E6EEB9949;
 			remoteInfo = FSCalendar;
+		};
+		5C558637CFE4C79A27EBBA822D27B9E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08A1D84C2FADBB24163DC3D193767386;
+			remoteInfo = EzPopup;
+		};
+		A14F794E8CBF9124325170F1A9BA276D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAAA1AD3A8A1B59AB91319EE40752C6D;
+			remoteInfo = Alamofire;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -205,12 +205,12 @@
 		039223C104BEB6A4C38FAE821DA8E896 /* FSCalendarCalculator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCalculator.m; path = FSCalendar/FSCalendarCalculator.m; sourceTree = "<group>"; };
 		03D5D43E4926724C53296F789F1059A2 /* FSCalendarConstants.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarConstants.m; path = FSCalendar/FSCalendarConstants.m; sourceTree = "<group>"; };
 		0417A686B5510B195AF33E2905A7AB78 /* SwiftyJSON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.debug.xcconfig; sourceTree = "<group>"; };
+		052638A1340874DEB70D735E4D1E4CB7 /* Pods-RilinkShop-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RilinkShop-acknowledgements.plist"; sourceTree = "<group>"; };
 		06C06FB164943858D4764148C20796DF /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
 		08F2885F57FEFB503FA0D8433002A84A /* Delegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Delegate.swift; path = Sources/Utility/Delegate.swift; sourceTree = "<group>"; };
 		090898DB18F8A39AB18FA256335E21BD /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
 		0A94D25D4C8B48197059CF9A58FF1FB9 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Image/Filter.swift; sourceTree = "<group>"; };
 		0C2C054FA0D43A69D05D21F35758F229 /* AlamofireExtended.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AlamofireExtended.swift; path = Source/AlamofireExtended.swift; sourceTree = "<group>"; };
-		0E29B2E4A21558E5221DCF53D0CC201B /* Pods-Rilink-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Rilink-Info.plist"; sourceTree = "<group>"; };
 		0EBAD8F6B235E91ABCBCD1139CAD0A60 /* KFImageOptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KFImageOptions.swift; path = Sources/SwiftUI/KFImageOptions.swift; sourceTree = "<group>"; };
 		0FB2A2503407C27A577BA3F500F846CE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		1033CFED4270BCFAED5B3DB62D3E552F /* FSCalendarWeekdayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarWeekdayView.h; path = FSCalendar/FSCalendarWeekdayView.h; sourceTree = "<group>"; };
@@ -224,16 +224,15 @@
 		24114A2A0E333C46C130C3F0E9A860E0 /* KFImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KFImage.swift; path = Sources/SwiftUI/KFImage.swift; sourceTree = "<group>"; };
 		244E7D472C88061E0C2AB12E1DC46A52 /* Alamofire-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Alamofire-Info.plist"; sourceTree = "<group>"; };
 		25A73D58485DC78B5470F2588CE1F5BC /* NSButton+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSButton+Kingfisher.swift"; path = "Sources/Extensions/NSButton+Kingfisher.swift"; sourceTree = "<group>"; };
-		269D6DA3E237B139298DE88F667C2E5B /* Pods-Rilink-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Rilink-acknowledgements.markdown"; sourceTree = "<group>"; };
 		26FA2A968C2C46B7A2BF49F00663E179 /* CPListItem+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CPListItem+Kingfisher.swift"; path = "Sources/Extensions/CPListItem+Kingfisher.swift"; sourceTree = "<group>"; };
 		29B006C7039A26A63155DF74D1C18E20 /* RequestTaskMap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestTaskMap.swift; path = Source/RequestTaskMap.swift; sourceTree = "<group>"; };
+		2B1A360C72FDA4E822CFCAB92E73C28C /* Pods-RilinkShop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RilinkShop.release.xcconfig"; sourceTree = "<group>"; };
 		2BDB5069FDF00A3BCD4B12CBA6942C85 /* StringEncoding+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "StringEncoding+Alamofire.swift"; path = "Source/StringEncoding+Alamofire.swift"; sourceTree = "<group>"; };
 		2ECA5139D67492CD0AB23AEEFFE575F1 /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
+		2ED4BF7E3C9E366D99ACB48F954AE92A /* Pods-RilinkShop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RilinkShop.debug.xcconfig"; sourceTree = "<group>"; };
 		30780D5F484EE6C67D722525413021AA /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
 		31FD01056E98EB138169A3780390041D /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
 		333AEFD08EFF57EF21D72EF5FC9C03B7 /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
-		3374B0E693943F372F63A04D13A00F56 /* Pods-Rilink-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Rilink-dummy.m"; sourceTree = "<group>"; };
-		33EF3F258D99AF74B12E7CBF95C3E7F6 /* Pods-Rilink */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Rilink"; path = Pods_Rilink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33FDEC52C786873E013DC20D4A0B8964 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
 		350FDF41682FF1C519B483F2348A57AF /* EzPopup.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EzPopup.debug.xcconfig; sourceTree = "<group>"; };
 		35B4FB647EF3466823CF179DEDB25A11 /* CachedResponseHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CachedResponseHandler.swift; path = Source/CachedResponseHandler.swift; sourceTree = "<group>"; };
@@ -251,10 +250,10 @@
 		42596379B83ABD1E14DFBD9B86BC6E23 /* FSCalendarExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarExtensions.h; path = FSCalendar/FSCalendarExtensions.h; sourceTree = "<group>"; };
 		45F140BF8D211EB198FAC5175EBF44B4 /* RedirectHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RedirectHandler.swift; path = Source/RedirectHandler.swift; sourceTree = "<group>"; };
 		461A118469E01F5B7B19E058824BDA1D /* FSCalendarStickyHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarStickyHeader.m; path = FSCalendar/FSCalendarStickyHeader.m; sourceTree = "<group>"; };
-		488EADAF3E7F16EDBCC283367684C697 /* Pods-Rilink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Rilink.release.xcconfig"; sourceTree = "<group>"; };
 		48B8309486C83C0779B3039CB0411F19 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON/SwiftyJSON.swift; sourceTree = "<group>"; };
 		48C1C6496147BEF899D6AD7DB5C31722 /* HTTPMethod.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPMethod.swift; path = Source/HTTPMethod.swift; sourceTree = "<group>"; };
 		4E9484FF475EA1CB5EC95B894F66563D /* Alamofire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.debug.xcconfig; sourceTree = "<group>"; };
+		4F9C23B0F84A015943B9021B2D1099F0 /* Pods-RilinkShop */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-RilinkShop"; path = Pods_RilinkShop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51227D7DFCB72ECED7B03DAFDB38479F /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
 		5253042045655FC2F3C0B3DD1254A344 /* ImageView+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ImageView+Kingfisher.swift"; path = "Sources/Extensions/ImageView+Kingfisher.swift"; sourceTree = "<group>"; };
 		534E2E7C3AA265872B772F262E03EA51 /* Kingfisher-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Kingfisher-dummy.m"; sourceTree = "<group>"; };
@@ -267,8 +266,8 @@
 		5ABF1900C0E96E08512E91BA8792D9CC /* FormatIndicatedCacheSerializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FormatIndicatedCacheSerializer.swift; path = Sources/Cache/FormatIndicatedCacheSerializer.swift; sourceTree = "<group>"; };
 		5B8F28627AD0F2649D80E607A5F7E844 /* EzPopup-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "EzPopup-Info.plist"; sourceTree = "<group>"; };
 		5C9F3AF1BE5D33C5CD55C23E39DB90DE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		60A29A60074F141B406467EED8744862 /* Pods-Rilink-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Rilink-frameworks.sh"; sourceTree = "<group>"; };
+		5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F992FA9921951ECD84745C028B93F4E /* Pods-RilinkShop-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RilinkShop-dummy.m"; sourceTree = "<group>"; };
 		6105EDD142977FE564C96359AE1685D8 /* URLEncodedFormEncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = URLEncodedFormEncoder.swift; path = Source/URLEncodedFormEncoder.swift; sourceTree = "<group>"; };
 		61D28251547F8F000AA742ED1502504D /* Alamofire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.release.xcconfig; sourceTree = "<group>"; };
 		62E5AB0FBDAA1865CE6612B08C6FA5CE /* FSCalendar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSCalendar-prefix.pch"; sourceTree = "<group>"; };
@@ -300,6 +299,7 @@
 		8667069BBA22C5B992C119125770F03B /* WKInterfaceImage+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "WKInterfaceImage+Kingfisher.swift"; path = "Sources/Extensions/WKInterfaceImage+Kingfisher.swift"; sourceTree = "<group>"; };
 		8676D8092A8308B54AB5BED0A2B0B3CD /* FSCalendarCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarCell.m; path = FSCalendar/FSCalendarCell.m; sourceTree = "<group>"; };
 		86AE2DE1057805CFF5C4512AE0347DBF /* Placeholder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Placeholder.swift; path = Sources/Image/Placeholder.swift; sourceTree = "<group>"; };
+		86FE3F2A1D285CAC9BA2DF8334000696 /* Pods-RilinkShop-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RilinkShop-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8A446ADCA94D94A1D34930A65347387E /* ImageBinder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageBinder.swift; path = Sources/SwiftUI/ImageBinder.swift; sourceTree = "<group>"; };
 		8C66805BEA2692416A7067289D5EE69B /* KingfisherError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KingfisherError.swift; path = Sources/General/KingfisherError.swift; sourceTree = "<group>"; };
 		8C6948FC57CCFA590ABA78DF74228E59 /* FSCalendarHeaderView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarHeaderView.h; path = FSCalendar/FSCalendarHeaderView.h; sourceTree = "<group>"; };
@@ -307,21 +307,22 @@
 		8CB78292EFEB3195D7CA8DC3DA00DB2D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		8CF5BDE7FACD8780B80F069ECB8CB54F /* FSCalendarTransitionCoordinator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarTransitionCoordinator.h; path = FSCalendar/FSCalendarTransitionCoordinator.h; sourceTree = "<group>"; };
 		8DAF37521749ED6838B16AAF38748ED8 /* EzPopup.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EzPopup.release.xcconfig; sourceTree = "<group>"; };
+		8DFED9BA48831C18DB6104D4FBFC0826 /* Pods-RilinkShop-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RilinkShop-frameworks.sh"; sourceTree = "<group>"; };
 		8E8618FCB718A11B2008D9AC39BDF333 /* ImageContext.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageContext.swift; path = Sources/SwiftUI/ImageContext.swift; sourceTree = "<group>"; };
 		900327D6714D0BE15500BEA96B6B2C1A /* FSCalendar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FSCalendar.modulemap; sourceTree = "<group>"; };
 		90B25F8C34E0E88764725649755937A7 /* Resource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Resource.swift; path = Sources/General/ImageSource/Resource.swift; sourceTree = "<group>"; };
 		9164DCD4DE808C96509B9FF800B7D059 /* FSCalendarAppearance.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarAppearance.h; path = FSCalendar/FSCalendarAppearance.h; sourceTree = "<group>"; };
 		9450331C7C0F87FA0C8F1B8E8876D35F /* UIButton+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIButton+Kingfisher.swift"; path = "Sources/Extensions/UIButton+Kingfisher.swift"; sourceTree = "<group>"; };
-		95209B8BB966524BC76543F99C75F5FE /* FSCalendar */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FSCalendar; path = FSCalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95209B8BB966524BC76543F99C75F5FE /* FSCalendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FSCalendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D875080EF1BD0DDD29024705DEF7C0 /* Kingfisher-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Kingfisher-Info.plist"; sourceTree = "<group>"; };
 		96F2C545AC1BC1FC490F801348AF1498 /* PopupViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PopupViewController.swift; path = EzPopup/Classes/PopupViewController.swift; sourceTree = "<group>"; };
 		9A0BE4A41304D3BD8F9067D80E16BD78 /* FSCalendarWeekdayView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarWeekdayView.m; path = FSCalendar/FSCalendarWeekdayView.m; sourceTree = "<group>"; };
 		9A31B4691B98E04FE3A00C90C10B606F /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
 		9A611A64054868F17A268A67030A8605 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		9AC32C2F286EEEEC23126FEC2E8D647F /* Pods-RilinkShop-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RilinkShop-umbrella.h"; sourceTree = "<group>"; };
 		9AF36F63ABC45AD26BD8796906026355 /* FSCalendarSeparatorDecorationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarSeparatorDecorationView.h; path = FSCalendar/FSCalendarSeparatorDecorationView.h; sourceTree = "<group>"; };
 		9CCC1C46043D5215C52794AA90400AE9 /* FSCalendarCollectionViewLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarCollectionViewLayout.h; path = FSCalendar/FSCalendarCollectionViewLayout.h; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9E896B1F64F873AA47BED35382984C66 /* Pods-Rilink-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Rilink-acknowledgements.plist"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0492E9A0D874F8D5E4E711D46014179 /* ParameterEncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoder.swift; path = Source/ParameterEncoder.swift; sourceTree = "<group>"; };
 		A4325D611317852CE93C54F51D6F846E /* ImageFormat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageFormat.swift; path = Sources/Image/ImageFormat.swift; sourceTree = "<group>"; };
 		A7D88CD3254B2061A16082E677514953 /* String+MD5.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+MD5.swift"; path = "Sources/Utility/String+MD5.swift"; sourceTree = "<group>"; };
@@ -337,7 +338,6 @@
 		BA6D9DB1E872E2BE610D2FD6862DAB9D /* FSCalendarStickyHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarStickyHeader.h; path = FSCalendar/FSCalendarStickyHeader.h; sourceTree = "<group>"; };
 		BCF645A420BF2211BD58B728D0011976 /* FSCalendar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSCalendar.release.xcconfig; sourceTree = "<group>"; };
 		BD401C29315BC4C07A15802E35BBA76B /* SwiftyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyJSON-Info.plist"; sourceTree = "<group>"; };
-		BD57904564DC1CF5994FA4EB28BB3514 /* Pods-Rilink-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Rilink-umbrella.h"; sourceTree = "<group>"; };
 		BD84B8E1E98377DC66E132ED2F7FE5EB /* Indicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Indicator.swift; path = Sources/Views/Indicator.swift; sourceTree = "<group>"; };
 		BF2D1759B5850C554DCAE9FB376C85C2 /* EzPopup-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EzPopup-dummy.m"; sourceTree = "<group>"; };
 		C12CA0832EE2C5126DE26796430AF062 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
@@ -349,16 +349,15 @@
 		CC722A3F79EB7DFD5E7F1804FAFB1DFD /* NSTextAttachment+Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSTextAttachment+Kingfisher.swift"; path = "Sources/Extensions/NSTextAttachment+Kingfisher.swift"; sourceTree = "<group>"; };
 		CCF89D3A7986E50CB200225585B636D7 /* Result+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Result+Alamofire.swift"; path = "Source/Result+Alamofire.swift"; sourceTree = "<group>"; };
 		CE064FFB78A1D55DEBB28AF8DF4B72C8 /* ImageDownloaderDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageDownloaderDelegate.swift; path = Sources/Networking/ImageDownloaderDelegate.swift; sourceTree = "<group>"; };
-		D10CFCC7D4ED51AC4251C81535BFDD81 /* Pods-Rilink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Rilink.debug.xcconfig"; sourceTree = "<group>"; };
 		D1459533A68385E16193066EDE85A92A /* Protected.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Protected.swift; path = Source/Protected.swift; sourceTree = "<group>"; };
 		D179A2C5581F4DAE6DBED4CFCC32F4A0 /* FSCalendar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendar.h; path = FSCalendar/FSCalendar.h; sourceTree = "<group>"; };
-		D379290D6294D98F5B0E5CD952BD37DC /* Pods-Rilink.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Rilink.modulemap"; sourceTree = "<group>"; };
 		D42526F8ECAA5CCA4152383D9AC2C284 /* RetryPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RetryPolicy.swift; path = Source/RetryPolicy.swift; sourceTree = "<group>"; };
 		D5578B4DB1DFB5536FE14B670655E723 /* RequestModifier.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestModifier.swift; path = Sources/Networking/RequestModifier.swift; sourceTree = "<group>"; };
 		D7EFB053047B65B05240AD3835784683 /* Kingfisher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Kingfisher.release.xcconfig; sourceTree = "<group>"; };
 		D890576669928CF356FC8437622FBD46 /* AVAssetImageDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AVAssetImageDataProvider.swift; path = Sources/General/ImageSource/AVAssetImageDataProvider.swift; sourceTree = "<group>"; };
 		DADF3A70CDBDC16C7920CBA2E06CE531 /* ImagePrefetcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImagePrefetcher.swift; path = Sources/Networking/ImagePrefetcher.swift; sourceTree = "<group>"; };
 		DCD5845FFDE7A99B78726A68C9D25099 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Sources/Networking/SessionDelegate.swift; sourceTree = "<group>"; };
+		DE05F699450589FD471AAA2656BA2975 /* Pods-RilinkShop-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RilinkShop-Info.plist"; sourceTree = "<group>"; };
 		DE1CB5FCB95584A492D1FCF4C505893B /* SizeExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SizeExtensions.swift; path = Sources/Utility/SizeExtensions.swift; sourceTree = "<group>"; };
 		DE2264ABDDACF049A7F4AD56FCBD28CF /* HTTPHeaders.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPHeaders.swift; path = Source/HTTPHeaders.swift; sourceTree = "<group>"; };
 		DE63516084649FD01E70DEB6B3C4181F /* URLSessionConfiguration+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLSessionConfiguration+Alamofire.swift"; path = "Source/URLSessionConfiguration+Alamofire.swift"; sourceTree = "<group>"; };
@@ -366,7 +365,7 @@
 		DFC184AA62E82897E4C03C9A9E312510 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
 		E1647B4B4ECB7879D5023677E13F8019 /* SwiftyJSON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.release.xcconfig; sourceTree = "<group>"; };
 		E2072FD6EFF1F2AC3FF971D078E87301 /* KFImageProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KFImageProtocol.swift; path = Sources/SwiftUI/KFImageProtocol.swift; sourceTree = "<group>"; };
-		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E32C5A26489DD05B9DEB0C3064971895 /* Combine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Combine.swift; path = Source/Combine.swift; sourceTree = "<group>"; };
 		E3B08D41454D9BBC073B1013A10D1A52 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Sources/Utility/Result.swift; sourceTree = "<group>"; };
 		E4323998DC649CC57732F02D60F5C523 /* MemoryStorage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MemoryStorage.swift; path = Sources/Cache/MemoryStorage.swift; sourceTree = "<group>"; };
@@ -385,6 +384,7 @@
 		F927D2E0D9B40B4870EDA2AEAAB464A9 /* FSCalendarAppearance.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSCalendarAppearance.m; path = FSCalendar/FSCalendarAppearance.m; sourceTree = "<group>"; };
 		F9A81C30F08D1CF939E659290ABEE564 /* KFImageRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KFImageRenderer.swift; path = Sources/SwiftUI/KFImageRenderer.swift; sourceTree = "<group>"; };
 		FA300206386BC4D5DE9BA94482C2B34B /* GIFAnimatedImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GIFAnimatedImage.swift; path = Sources/Image/GIFAnimatedImage.swift; sourceTree = "<group>"; };
+		FD7F14B30808412EC77EFC105BDF78B7 /* Pods-RilinkShop.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-RilinkShop.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +405,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5CC76DB99E9BBD3B8A86488EE9982094 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93A450EB1889F6F330817C41795175BF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81DB1665E1495609510BA493822E5A85 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,14 +430,6 @@
 				60CFDC4002EA677B53ECC413F67C149D /* Foundation.framework in Frameworks */,
 				C6ED706364847164CB566CEA1A6FFDD6 /* QuartzCore.framework in Frameworks */,
 				4683418880504CD2212FE56C4F1E8F80 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		92808FF977A9668C8D095957DBC0C2D5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CBCC42A30AF835676BFBC6E4A22EB672 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,14 +457,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Kingfisher";
-			sourceTree = "<group>";
-		};
-		349C1FD8CBC7CE7DBED3D241A9540BAA /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				4BB52D3C4C8F5BFFFF4F987A8FE6B5B4 /* Pods-Rilink */,
-			);
-			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		3AA6A037D24CBA809F0426C5B11D35AD /* FSCalendar */ = {
@@ -503,25 +495,24 @@
 				9A0BE4A41304D3BD8F9067D80E16BD78 /* FSCalendarWeekdayView.m */,
 				9C35BE389CBF0F929ACD50BACE5516D5 /* Support Files */,
 			);
-			name = FSCalendar;
 			path = FSCalendar;
 			sourceTree = "<group>";
 		};
-		4BB52D3C4C8F5BFFFF4F987A8FE6B5B4 /* Pods-Rilink */ = {
+		3DA393632C077EF7F00BF992848E309A /* Pods-RilinkShop */ = {
 			isa = PBXGroup;
 			children = (
-				D379290D6294D98F5B0E5CD952BD37DC /* Pods-Rilink.modulemap */,
-				269D6DA3E237B139298DE88F667C2E5B /* Pods-Rilink-acknowledgements.markdown */,
-				9E896B1F64F873AA47BED35382984C66 /* Pods-Rilink-acknowledgements.plist */,
-				3374B0E693943F372F63A04D13A00F56 /* Pods-Rilink-dummy.m */,
-				60A29A60074F141B406467EED8744862 /* Pods-Rilink-frameworks.sh */,
-				0E29B2E4A21558E5221DCF53D0CC201B /* Pods-Rilink-Info.plist */,
-				BD57904564DC1CF5994FA4EB28BB3514 /* Pods-Rilink-umbrella.h */,
-				D10CFCC7D4ED51AC4251C81535BFDD81 /* Pods-Rilink.debug.xcconfig */,
-				488EADAF3E7F16EDBCC283367684C697 /* Pods-Rilink.release.xcconfig */,
+				FD7F14B30808412EC77EFC105BDF78B7 /* Pods-RilinkShop.modulemap */,
+				86FE3F2A1D285CAC9BA2DF8334000696 /* Pods-RilinkShop-acknowledgements.markdown */,
+				052638A1340874DEB70D735E4D1E4CB7 /* Pods-RilinkShop-acknowledgements.plist */,
+				5F992FA9921951ECD84745C028B93F4E /* Pods-RilinkShop-dummy.m */,
+				8DFED9BA48831C18DB6104D4FBFC0826 /* Pods-RilinkShop-frameworks.sh */,
+				DE05F699450589FD471AAA2656BA2975 /* Pods-RilinkShop-Info.plist */,
+				9AC32C2F286EEEEC23126FEC2E8D647F /* Pods-RilinkShop-umbrella.h */,
+				2ED4BF7E3C9E366D99ACB48F954AE92A /* Pods-RilinkShop.debug.xcconfig */,
+				2B1A360C72FDA4E822CFCAB92E73C28C /* Pods-RilinkShop.release.xcconfig */,
 			);
-			name = "Pods-Rilink";
-			path = "Target Support Files/Pods-Rilink";
+			name = "Pods-RilinkShop";
+			path = "Target Support Files/Pods-RilinkShop";
 			sourceTree = "<group>";
 		};
 		57CB56AF7F040D88F482338B73B86CE7 /* SwiftyJSON */ = {
@@ -530,8 +521,15 @@
 				48B8309486C83C0779B3039CB0411F19 /* SwiftyJSON.swift */,
 				ECFB9964AF821AB9ECAC40C43A885A33 /* Support Files */,
 			);
-			name = SwiftyJSON;
 			path = SwiftyJSON;
+			sourceTree = "<group>";
+		};
+		6294ED1EB88A1EE80221E1A0FA10A34E /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3DA393632C077EF7F00BF992848E309A /* Pods-RilinkShop */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		69F5F96D2654843BB288FCE09445C4AA /* EzPopup */ = {
@@ -540,21 +538,7 @@
 				96F2C545AC1BC1FC490F801348AF1498 /* PopupViewController.swift */,
 				6FBA04312D84E607AD0244D511B82254 /* Support Files */,
 			);
-			name = EzPopup;
 			path = EzPopup;
-			sourceTree = "<group>";
-		};
-		6A6E4E630E14360DEEAF24C804B19F3E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */,
-				7E04694284ECE7F371A4DB86CDE04DD9 /* EzPopup */,
-				95209B8BB966524BC76543F99C75F5FE /* FSCalendar */,
-				C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher */,
-				33EF3F258D99AF74B12E7CBF95C3E7F6 /* Pods-Rilink */,
-				E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		6FBA04312D84E607AD0244D511B82254 /* Support Files */ = {
@@ -661,8 +645,20 @@
 				8667069BBA22C5B992C119125770F03B /* WKInterfaceImage+Kingfisher.swift */,
 				15D780F556FF62DFD2E2625AA378D0B6 /* Support Files */,
 			);
-			name = Kingfisher;
 			path = Kingfisher;
+			sourceTree = "<group>";
+		};
+		CDDE4DADAF84B7A58934BA48559607D0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */,
+				7E04694284ECE7F371A4DB86CDE04DD9 /* EzPopup */,
+				95209B8BB966524BC76543F99C75F5FE /* FSCalendar.framework */,
+				C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher */,
+				4F9C23B0F84A015943B9021B2D1099F0 /* Pods-RilinkShop */,
+				E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -671,8 +667,8 @@
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				B94D7768568A9992200DB461E8CF687F /* Frameworks */,
 				E2CCA8AC919BDD8980A246585B3BBE8C /* Pods */,
-				6A6E4E630E14360DEEAF24C804B19F3E /* Products */,
-				349C1FD8CBC7CE7DBED3D241A9540BAA /* Targets Support Files */,
+				CDDE4DADAF84B7A58934BA48559607D0 /* Products */,
+				6294ED1EB88A1EE80221E1A0FA10A34E /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -743,7 +739,6 @@
 				21F62CB38600CF9E54F0D4A04A19891F /* Validation.swift */,
 				D48A367F4AFFD1122A6606FB480832F5 /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -777,6 +772,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		01E31D53A976D74F54FDF1914B1AC629 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FF43F392303BB3DE5BD1E8D2DAAC94E /* Pods-RilinkShop-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14FF1799C5ADBC71E1DB963F2AF8853D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -806,14 +809,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CB75D4F5C49A5471A413E791AEADD66 /* EzPopup-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D28AD953E768C318290367E0C2C3C4C /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				97258AC4B67ADD686A16DE4D8EA025C6 /* Pods-Rilink-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -877,30 +872,7 @@
 			);
 			name = FSCalendar;
 			productName = FSCalendar;
-			productReference = 95209B8BB966524BC76543F99C75F5FE /* FSCalendar */;
-			productType = "com.apple.product-type.framework";
-		};
-		5F9F67EDE9343CBC36D0CD928FCA8CBC /* Pods-Rilink */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 511DDF19694633573E2460E50CD31AD6 /* Build configuration list for PBXNativeTarget "Pods-Rilink" */;
-			buildPhases = (
-				9D28AD953E768C318290367E0C2C3C4C /* Headers */,
-				270B62213AB3D8CC73E0A383EA201FF3 /* Sources */,
-				92808FF977A9668C8D095957DBC0C2D5 /* Frameworks */,
-				BC5386F62D950B23327B73B23045E309 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9986968956C3DBFA315EC1DF77D4AFBD /* PBXTargetDependency */,
-				A048EA0E56FAC4EFF88377C68298FC68 /* PBXTargetDependency */,
-				1DF8AC411B780EA7348E613091D01553 /* PBXTargetDependency */,
-				217211D0D502052366240EBE059F3206 /* PBXTargetDependency */,
-				553163D973FAF14C153C430E60BE5A4C /* PBXTargetDependency */,
-			);
-			name = "Pods-Rilink";
-			productName = Pods_Rilink;
-			productReference = 33EF3F258D99AF74B12E7CBF95C3E7F6 /* Pods-Rilink */;
+			productReference = 95209B8BB966524BC76543F99C75F5FE /* FSCalendar.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */ = {
@@ -918,7 +890,30 @@
 			);
 			name = SwiftyJSON;
 			productName = SwiftyJSON;
-			productReference = E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON */;
+			productReference = E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D1E7C7DC786095D8CC5B3593A1033881 /* Pods-RilinkShop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74066B6179CFA18E1F0D1B17D01F3269 /* Build configuration list for PBXNativeTarget "Pods-RilinkShop" */;
+			buildPhases = (
+				01E31D53A976D74F54FDF1914B1AC629 /* Headers */,
+				B4ED22622AAF4F74C20ADB40923C340F /* Sources */,
+				5CC76DB99E9BBD3B8A86488EE9982094 /* Frameworks */,
+				B64E13B13C24D2E216C11EB4799154A6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				97633CFDE1F28488B91131E6D69CF670 /* PBXTargetDependency */,
+				43B595484B8E882C364DBB8DEE747642 /* PBXTargetDependency */,
+				6444228009F272D387E7425C1E9BE6BD /* PBXTargetDependency */,
+				07350696A6F72DB61840CAF9B8786735 /* PBXTargetDependency */,
+				C7B5E4EE593AA721264528DC14E2C656 /* PBXTargetDependency */,
+			);
+			name = "Pods-RilinkShop";
+			productName = Pods_RilinkShop;
+			productReference = 4F9C23B0F84A015943B9021B2D1099F0 /* Pods-RilinkShop */;
 			productType = "com.apple.product-type.framework";
 		};
 		E8022D22FAA6690B5E1C379C1BCE1491 /* Kingfisher */ = {
@@ -954,7 +949,7 @@
 			);
 			name = Alamofire;
 			productName = Alamofire;
-			productReference = 5D797E9A5C5782CE845840781FA1CC81 /* Alamofire */;
+			productReference = 5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -964,7 +959,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1320;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 10.0";
@@ -975,7 +970,7 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 6A6E4E630E14360DEEAF24C804B19F3E /* Products */;
+			productRefGroup = CDDE4DADAF84B7A58934BA48559607D0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -983,7 +978,7 @@
 				08A1D84C2FADBB24163DC3D193767386 /* EzPopup */,
 				13285D54682BEAD805960F9E6EEB9949 /* FSCalendar */,
 				E8022D22FAA6690B5E1C379C1BCE1491 /* Kingfisher */,
-				5F9F67EDE9343CBC36D0CD928FCA8CBC /* Pods-Rilink */,
+				D1E7C7DC786095D8CC5B3593A1033881 /* Pods-RilinkShop */,
 				D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */,
 			);
 		};
@@ -1018,7 +1013,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BC5386F62D950B23327B73B23045E309 /* Resources */ = {
+		B64E13B13C24D2E216C11EB4799154A6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1055,14 +1050,6 @@
 				24E5EE988A4BD7C15B55708C6D88AE04 /* FSCalendarStickyHeader.m in Sources */,
 				6201BB85A0AAF8FA6C4771308917BAB2 /* FSCalendarTransitionCoordinator.m in Sources */,
 				3960120DF8907DA574823ACE7ED96076 /* FSCalendarWeekdayView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		270B62213AB3D8CC73E0A383EA201FF3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				608474D098B9A311F1F5A43246412896 /* Pods-Rilink-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1196,117 +1183,50 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B4ED22622AAF4F74C20ADB40923C340F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				590D2552BF4EE743F2F63FB7C0B8D751 /* Pods-RilinkShop-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1DF8AC411B780EA7348E613091D01553 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FSCalendar;
-			target = 13285D54682BEAD805960F9E6EEB9949 /* FSCalendar */;
-			targetProxy = ABBC4C76A85A702DB0BD6578B2C2394B /* PBXContainerItemProxy */;
-		};
-		217211D0D502052366240EBE059F3206 /* PBXTargetDependency */ = {
+		07350696A6F72DB61840CAF9B8786735 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Kingfisher;
 			target = E8022D22FAA6690B5E1C379C1BCE1491 /* Kingfisher */;
-			targetProxy = 1D0FF8C01465FEEDC56B9161E74076FF /* PBXContainerItemProxy */;
+			targetProxy = 34B82173460889F4662CF3EF22B8E17A /* PBXContainerItemProxy */;
 		};
-		553163D973FAF14C153C430E60BE5A4C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftyJSON;
-			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
-			targetProxy = 6A49D141EDF746CC486D9D8B1286BF96 /* PBXContainerItemProxy */;
-		};
-		9986968956C3DBFA315EC1DF77D4AFBD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Alamofire;
-			target = EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */;
-			targetProxy = 4272007FCD04C09DAE6B372F3F195FBA /* PBXContainerItemProxy */;
-		};
-		A048EA0E56FAC4EFF88377C68298FC68 /* PBXTargetDependency */ = {
+		43B595484B8E882C364DBB8DEE747642 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = EzPopup;
 			target = 08A1D84C2FADBB24163DC3D193767386 /* EzPopup */;
-			targetProxy = 1F6AAA51DD679306145BBC1420E303C9 /* PBXContainerItemProxy */;
+			targetProxy = 5C558637CFE4C79A27EBBA822D27B9E4 /* PBXContainerItemProxy */;
+		};
+		6444228009F272D387E7425C1E9BE6BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FSCalendar;
+			target = 13285D54682BEAD805960F9E6EEB9949 /* FSCalendar */;
+			targetProxy = 46FAE41C0DC9CB560CC2BE924E41FFD0 /* PBXContainerItemProxy */;
+		};
+		97633CFDE1F28488B91131E6D69CF670 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = EAAA1AD3A8A1B59AB91319EE40752C6D /* Alamofire */;
+			targetProxy = A14F794E8CBF9124325170F1A9BA276D /* PBXContainerItemProxy */;
+		};
+		C7B5E4EE593AA721264528DC14E2C656 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyJSON;
+			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
+			targetProxy = 370907F31C6400EE1B021CFA6386561A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		113BDBB024E1A2BBB206F86D8560304B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 488EADAF3E7F16EDBCC283367684C697 /* Pods-Rilink.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Rilink/Pods-Rilink-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Rilink/Pods-Rilink.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		13260FF7AB0761E5661258E9DE6B050E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D10CFCC7D4ED51AC4251C81535BFDD81 /* Pods-Rilink.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Rilink/Pods-Rilink-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Rilink/Pods-Rilink.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		24CB875D5B25BF16969BE395662EAFD0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1647B4B4ECB7879D5023677E13F8019 /* SwiftyJSON.release.xcconfig */;
@@ -1322,7 +1242,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1357,7 +1277,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/FSCalendar/FSCalendar-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/FSCalendar/FSCalendar-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1392,7 +1312,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Alamofire/Alamofire-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1475,6 +1395,43 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		90A1408B3B2E4C43874B9308BB483FDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2ED4BF7E3C9E366D99ACB48F954AE92A /* Pods-RilinkShop.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RilinkShop/Pods-RilinkShop-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RilinkShop/Pods-RilinkShop.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
@@ -1626,7 +1583,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/FSCalendar/FSCalendar-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/FSCalendar/FSCalendar-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1661,7 +1618,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1716,6 +1673,44 @@
 			};
 			name = Release;
 		};
+		D0F899B306E17AF000C3C6A84A2F6083 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B1A360C72FDA4E822CFCAB92E73C28C /* Pods-RilinkShop.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RilinkShop/Pods-RilinkShop-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RilinkShop/Pods-RilinkShop.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		DDE66E9EF2650949C1F28ED6BFEEEFED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E9484FF475EA1CB5EC95B894F66563D /* Alamofire.debug.xcconfig */;
@@ -1732,7 +1727,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Alamofire/Alamofire-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1825,20 +1820,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		511DDF19694633573E2460E50CD31AD6 /* Build configuration list for PBXNativeTarget "Pods-Rilink" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				13260FF7AB0761E5661258E9DE6B050E /* Debug */,
-				113BDBB024E1A2BBB206F86D8560304B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		69ACD8654734266A348C6FF68E734010 /* Build configuration list for PBXNativeTarget "Kingfisher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				980A58862D8A5086E2825CF9017AC8DD /* Debug */,
 				BFD9E4B58F44191AF73A3434AAF6831F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74066B6179CFA18E1F0D1B17D01F3269 /* Build configuration list for PBXNativeTarget "Pods-RilinkShop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90A1408B3B2E4C43874B9308BB483FDE /* Debug */,
+				D0F899B306E17AF000C3C6A84A2F6083 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
