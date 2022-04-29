@@ -10,5 +10,6 @@ target 'RilinkShop' do
   pod 'Kingfisher', '~> 7.0'
   pod 'FSCalendar'
   pod 'EzPopup'
+  pod 'BadgeHub'
 
 end

@@ -21,6 +21,7 @@ class MemberCenterTableViewController: UITableViewController {
 
    
     
+    @IBOutlet weak var cartButton: UIBarButtonItem!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var camera: UIButton!
     @IBAction func cameraAction(_ sender: UIButton) {
@@ -42,10 +43,16 @@ class MemberCenterTableViewController: UITableViewController {
         
         userImage.layer.cornerRadius = userImage.frame.height / 2
         camera.layer.cornerRadius = camera.frame.height / 2
-        
+        cartButton.setBadge()
     }
 
     weak var delegate: MemberCenterTableViewControllerDelegate?
+    
+    @IBAction func toCartVC(_ sender: UIBarButtonItem) {
+        let cartVC = CartViewController()
+        navigationController?.pushViewController(cartVC, animated: true)
+    }
+    
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -68,6 +75,13 @@ class MemberCenterTableViewController: UITableViewController {
         default:
             break
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 2 {
+            return 0
+        }
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

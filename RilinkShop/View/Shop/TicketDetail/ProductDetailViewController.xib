@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailViewController" customModule="RilinkShop" customModuleProvider="target">
+            <connections>
+                <outlet property="addButton" destination="vNW-iP-6tc" id="EcR-4B-OOk"/>
+                <outlet property="addToCartButton" destination="RJf-EJ-oTr" id="svO-rO-hE0"/>
+                <outlet property="buyNowButton" destination="syy-LH-O5A" id="alk-4w-6vj"/>
+                <outlet property="costLabel" destination="T1Q-G1-58K" id="0ZF-cO-oOh"/>
+                <outlet property="itemNumberLabel" destination="upR-1P-mWR" id="FxE-nE-XvD"/>
+                <outlet property="nameLabel" destination="2Ef-Ic-9N7" id="y5b-V6-xi0"/>
+                <outlet property="stepperOuterView" destination="Cua-b9-dWt" id="ytJ-dL-edq"/>
+                <outlet property="substractButton" destination="Fnb-AX-Cgi" id="x28-Dj-n6G"/>
+                <outlet property="ticketImageView" destination="Gd7-Nf-6Mc" id="sAj-6Z-lPs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sf-td-uea">
+                    <rect key="frame" x="0.0" y="44" width="375" height="674"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xf4-ag-9Vl">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="637.33333333333337"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mtc-bI-A1q">
+                                    <rect key="frame" x="30" y="0.0" width="315" height="637.33333333333337"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nft" translatesAutoresizingMaskIntoConstraints="NO" id="Gd7-Nf-6Mc">
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="200"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="200" id="3aV-pB-Zrn"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Vf4-V6-3t6">
+                                            <rect key="frame" x="0.0" y="215" width="303.66666666666669" height="70.333333333333314"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品名稱：[瑞典 Oatly] 咖啡師燕麥奶箱購6入組 (1000ml/瓶) (全素)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ef-Ic-9N7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="303.66666666666669" height="42.333333333333336"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="售價：NT$1254" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1Q-G1-58K">
+                                                    <rect key="frame" x="0.0" y="47.333333333333314" width="303.66666666666669" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cua-b9-dWt">
+                                            <rect key="frame" x="0.0" y="300.33333333333331" width="100" height="30"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="a9A-h4-s9L">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnb-AX-Cgi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="32.666666666666664" height="30"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" image="minus" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="itemNumberStepper:" destination="-1" eventType="touchUpInside" id="fmg-Qa-1N0"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upR-1P-mWR">
+                                                            <rect key="frame" x="33.666666666666671" y="0.0" width="32.666666666666671" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNW-iP-6tc">
+                                                            <rect key="frame" x="67.333333333333329" y="0.0" width="32.666666666666671" height="30"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal">
+                                                                <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="itemNumberStepper:" destination="-1" eventType="touchUpInside" id="Vlm-hG-I4m"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="0tK-q7-jte"/>
+                                                <constraint firstAttribute="bottom" secondItem="a9A-h4-s9L" secondAttribute="bottom" id="34w-BM-aa0"/>
+                                                <constraint firstAttribute="width" constant="100" id="FPi-70-YbA"/>
+                                                <constraint firstItem="a9A-h4-s9L" firstAttribute="top" secondItem="Cua-b9-dWt" secondAttribute="top" id="SvX-2e-7Cv"/>
+                                                <constraint firstAttribute="trailing" secondItem="a9A-h4-s9L" secondAttribute="trailing" id="Uot-yI-kqt"/>
+                                                <constraint firstItem="a9A-h4-s9L" firstAttribute="leading" secondItem="Cua-b9-dWt" secondAttribute="leading" id="mg7-jX-CHr"/>
+                                            </constraints>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="P5I-bG-Yoz">
+                                            <rect key="frame" x="0.0" y="345.33333333333331" width="314.33333333333331" height="291.99999999999994"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品敘述：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICa-LQ-f0I">
+                                                    <rect key="frame" x="0.0" y="0.0" width="314.33333333333331" height="23"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8U-5M-ed1">
+                                                    <rect key="frame" x="0.0" y="28" width="314.33333333333331" height="264"/>
+                                                    <string key="text">．咖啡師 每100ml 含糖 3.2g｜10% 燕麥含量 ｜熱量 58.2 kcal
+．OATLY來自於瑞典，是歐洲燕麥製品領域的品牌。
+．瑞典禁止使用多種殺蟲劑，使燕麥的食用安全受到保障。且不添加防腐劑、人工色素及化學調味料。
+．OATLY希望為大家帶來的是一種生活方式，用更多醇味的產品味大家增添營養，而不是僅僅提供乳製品的替代品。
+．高品質燕麥奶，不含牛奶、無乳糖，是素食及乳糖不耐者的健康新選擇。
+．此款咖啡師燕麥奶廣受知名咖啡店使用，主打容易發泡，讓咖啡師可以掌控泡沫的密度和呈現。</string>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="mtc-bI-A1q" firstAttribute="leading" secondItem="Xf4-ag-9Vl" secondAttribute="leading" constant="30" id="BXX-1Z-G1Z"/>
+                                <constraint firstAttribute="trailing" secondItem="mtc-bI-A1q" secondAttribute="trailing" constant="30" id="L3N-Z1-YVo"/>
+                                <constraint firstItem="mtc-bI-A1q" firstAttribute="top" secondItem="Xf4-ag-9Vl" secondAttribute="top" id="TsF-fd-NXq"/>
+                                <constraint firstAttribute="bottom" secondItem="mtc-bI-A1q" secondAttribute="bottom" id="cie-bS-JmD"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Xf4-ag-9Vl" firstAttribute="leading" secondItem="eQ0-d4-ZrV" secondAttribute="leading" id="HBw-u9-fBV"/>
+                        <constraint firstItem="Xf4-ag-9Vl" firstAttribute="width" secondItem="rGy-Xz-f1e" secondAttribute="width" id="IqP-Mp-khd"/>
+                        <constraint firstItem="Xf4-ag-9Vl" firstAttribute="top" secondItem="eQ0-d4-ZrV" secondAttribute="top" id="aCg-Mz-7kR"/>
+                        <constraint firstItem="Xf4-ag-9Vl" firstAttribute="trailing" secondItem="eQ0-d4-ZrV" secondAttribute="trailing" id="jxU-ma-huz"/>
+                        <constraint firstItem="Xf4-ag-9Vl" firstAttribute="bottom" secondItem="eQ0-d4-ZrV" secondAttribute="bottom" id="vWw-4h-OG8"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="eQ0-d4-ZrV"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="rGy-Xz-f1e"/>
+                </scrollView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="y7X-MH-Pph">
+                    <rect key="frame" x="30" y="728" width="315" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJf-EJ-oTr">
+                            <rect key="frame" x="0.0" y="0.0" width="147.66666666666666" height="40"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="加入購物車"/>
+                            <connections>
+                                <action selector="addToCartButtonTapped:" destination="-1" eventType="touchUpInside" id="xju-1a-xrV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="syy-LH-O5A">
+                            <rect key="frame" x="167.66666666666663" y="0.0" width="147.33333333333337" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="cgt-QF-rKV"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="立即購買"/>
+                            <connections>
+                                <action selector="buyNowButtonTapped:" destination="-1" eventType="touchUpInside" id="HyT-5c-IPf"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="5sf-td-uea" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1Tl-1x-hbb"/>
+                <constraint firstItem="y7X-MH-Pph" firstAttribute="top" secondItem="5sf-td-uea" secondAttribute="bottom" constant="10" id="DJZ-dk-LFC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="y7X-MH-Pph" secondAttribute="bottom" constant="10" id="ZQo-sz-yPk"/>
+                <constraint firstItem="5sf-td-uea" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="iAG-Ez-v5P"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="y7X-MH-Pph" secondAttribute="trailing" constant="30" id="lPW-OT-fLP"/>
+                <constraint firstItem="y7X-MH-Pph" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="wZv-oI-gBW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5sf-td-uea" secondAttribute="trailing" id="ydt-4Q-JZa"/>
+            </constraints>
+            <point key="canvasLocation" x="138.40000000000001" y="90.886699507389167"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="nft" width="1037" height="1046"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

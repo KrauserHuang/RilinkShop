@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShopRuleViewController" customModule="RilinkShop" customModuleProvider="target">
+            <connections>
+                <outlet property="borderView" destination="GWf-LQ-zsk" id="uj7-0Z-HRN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4a3-I3-bMG">
+                    <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWf-LQ-zsk">
+                            <rect key="frame" x="16" y="25" width="343" height="1150.3333333333333"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDR-Np-ixp">
+                                    <rect key="frame" x="16" y="25" width="311" height="1075.3333333333333"/>
+                                    <attributedString key="attributedText">
+                                        <fragment content="近期獲得不少玩家關注、運行在幣安智能鏈 (BSC) 上的玩賺 (P2E) 遊戲 ">
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="BNB HEROS">
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.96862999999999999" green="0.050979999999999998" blue="0.15686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <url key="NSLink" string="https://bnbheroes.io/"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" ，昨日傍晚左右驚傳發生大量擠兌！原本該遊戲的 BNB 獎勵池昨日早上還有超過 20,000 枚，但在無預警下，大量 BNB 遭提出，當獎金池剩下 3,000 枚 BNB 時候，項目方甚至一度將獎金池鎖住。">
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                            <attributes>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">幾個小時解鎖過後，獎金池並沒有就此穩定，反而遭提領一空，目前該遊戲的獎金池合約中，代幣價值僅剩 1.65 美元，已無資產讓玩家提取獎勵。由於獎池金中的 BNB 急速縮減，引發遊戲玩家們害怕未來沒有獎勵了的恐慌，也紛紛拋售 BNBH、並引起幣價下跌近 80%。據 Coinmarketcap</string>
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" 數據">
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.96862999999999999" green="0.050979999999999998" blue="0.15686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <url key="NSLink" string="https://coinmarketcap.com/zh-tw/currencies/bnb-hero-token/"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="，幣價從昨日高點的 3.33 美元開始，一路下挫至截稿前的 0.53 美元。目前，項目方尚未針對該事件提出任何聲明。但據社群玩家們的討論，認為獎勵池的擠兌發生原因可能有以下三點：">
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                            <attributes>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="① 部分玩家因為官方修改獎勵機制導致不滿，而拋售 BNBH② 新出的遊戲角色有 bug，可以賺到很多 BNB，而導致獎勵池崩潰③ 項目方惡意擠兌、捲款跑路據《Knowledge Gap Expert》5 日的">
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="報導">
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.96862999999999999" green="0.050979999999999998" blue="0.15686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <url key="NSLink" string="https://knowledgegapexpert.com/bnb-heroes-token-review-legit-or-scam/"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="，就對該遊戲的安全性提出幾項疑慮。包括 BNB Heros 團隊聲稱他們具有反鯨魚機制，可以保護代幣的小額持有者免受大型鯨魚的攻擊和利用，最大買入和最大賣出設定為 200,000 BNBH。">
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                            <attributes>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">但據報導查核，事實卻並非如此。BNB Heros 代幣的前 4 位所有者擁有整個供應量的 30% 左右，這使得這幾個人可以很容易地操縱 BNBH 的價格。此外，遊戲背後的開發人員在其官方網站上僅列出了無法驗證的名稱和卡通形象，且在網路上搜尋的結果中並沒有發現任何可追蹤的內容；而該團隊也沒有提供白皮書資料。</string>
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                            <attributes>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">雖然目前的證據還沒有明確指出項目方是否有惡意擠兌或捲款的行為，但可以確定的是每名投資者都需要保持緊覺性，提防因惡意項目造成可能損失的狀況 據官網說明：BNB HEROES 是一款基於 Oracle 的 NFT 收藏卡牌遊戲，專注於遊戲經濟、擴展和可持續性。</string>
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                            <attributes>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="計劃讓這款遊戲持久且可靠，讓許多玩家在玩遊戲時直接賺取 BNB。我們的團隊致力於為所有遊戲玩家提供簡單、有趣、易於訪問、可持續且有利可圖的遊戲。">
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="16" name="PingFangTC-Regular"/>
+                                                <real key="NSKern" value="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="20" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops/>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="SDR-Np-ixp" secondAttribute="trailing" constant="16" id="1lL-wV-hES"/>
+                                <constraint firstItem="SDR-Np-ixp" firstAttribute="top" secondItem="GWf-LQ-zsk" secondAttribute="top" constant="25" id="2ez-nJ-ufc"/>
+                                <constraint firstItem="SDR-Np-ixp" firstAttribute="leading" secondItem="GWf-LQ-zsk" secondAttribute="leading" constant="16" id="Ru5-8n-whM"/>
+                                <constraint firstAttribute="bottom" secondItem="SDR-Np-ixp" secondAttribute="bottom" constant="50" id="lQE-mQ-Loh"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="GWf-LQ-zsk" firstAttribute="top" secondItem="hCb-3C-0fs" secondAttribute="top" constant="25" id="4JV-fi-r0K"/>
+                        <constraint firstItem="GWf-LQ-zsk" firstAttribute="centerX" secondItem="D4u-Jr-d0C" secondAttribute="centerX" id="ZwN-88-VBO"/>
+                        <constraint firstItem="GWf-LQ-zsk" firstAttribute="bottom" secondItem="hCb-3C-0fs" secondAttribute="bottom" constant="-25" id="mMB-be-4s4"/>
+                        <constraint firstItem="GWf-LQ-zsk" firstAttribute="leading" secondItem="hCb-3C-0fs" secondAttribute="leading" constant="16" id="o3S-Zq-gJP"/>
+                        <constraint firstItem="GWf-LQ-zsk" firstAttribute="trailing" secondItem="hCb-3C-0fs" secondAttribute="trailing" constant="-16" id="vls-DA-Wjg"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="hCb-3C-0fs"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="D4u-Jr-d0C"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4a3-I3-bMG" secondAttribute="bottom" id="BcV-Wt-lWg"/>
+                <constraint firstItem="4a3-I3-bMG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ewB-lq-1sc"/>
+                <constraint firstItem="4a3-I3-bMG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ihr-um-XnD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4a3-I3-bMG" secondAttribute="trailing" id="o8B-YO-YbX"/>
+            </constraints>
+            <point key="canvasLocation" x="133" y="91"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

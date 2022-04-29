@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.4)
+  - BadgeHub (1.0.0)
   - EzPopup (1.2.3)
   - FSCalendar (2.8.2)
   - Kingfisher (7.1.2)
@@ -7,6 +8,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.4)
+  - BadgeHub
   - EzPopup
   - FSCalendar
   - Kingfisher (~> 7.0)
@@ -15,6 +17,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - BadgeHub
     - EzPopup
     - FSCalendar
     - Kingfisher
@@ -22,11 +25,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  BadgeHub: b227771329f78c37a2dae7502607ec6d00a50bd4
   EzPopup: bd911825754e020b926287453ad4947045a04d1e
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 03cfa6f9f3fa2927104aa70a0bc47bd977679e1b
+PODFILE CHECKSUM: 254e187def6a4a637311d12dec29c6580849e144
 
 COCOAPODS: 1.11.2

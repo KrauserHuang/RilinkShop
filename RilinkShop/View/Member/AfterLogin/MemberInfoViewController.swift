@@ -35,6 +35,7 @@ class MemberInfoViewController: UIViewController {
     @IBOutlet weak var heightTF: UITextField!
     @IBOutlet weak var weightTF: UITextField!
     @IBOutlet weak var numberTF: UITextField!
+    @IBOutlet weak var phoneTF: UITextField! // new!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var addressTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!

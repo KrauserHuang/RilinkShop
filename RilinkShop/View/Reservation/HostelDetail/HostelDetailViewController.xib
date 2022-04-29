@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HostelDetailViewController" customModule="RilinkShop" customModuleProvider="target">
+            <connections>
+                <outlet property="descriptionLabel" destination="qnP-HG-Q9m" id="OhR-4R-hia"/>
+                <outlet property="hostelImageView" destination="cQc-dl-Sue" id="lEH-Dk-k2X"/>
+                <outlet property="openTimeLabel" destination="QFl-UI-Tve" id="lYi-Jf-dRV"/>
+                <outlet property="phoneNoLabel" destination="5Qr-A4-8ZG" id="BCH-s3-bjE"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gRq-3D-9N0">
+                    <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFH-p5-7J5">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="389.33333333333331"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="AQa-jz-NkK">
+                                    <rect key="frame" x="30" y="0.0" width="315" height="389.33333333333331"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nft" translatesAutoresizingMaskIntoConstraints="NO" id="cQc-dl-Sue">
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="200"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="200" id="bPh-UI-Lnm"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ggD-Tj-dlR">
+                                            <rect key="frame" x="0.0" y="215" width="86.666666666666671" height="43.333333333333314"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="營業時間：" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFl-UI-Tve">
+                                                    <rect key="frame" x="0.0" y="0.0" width="86.666666666666671" height="20.333333333333332"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="電話：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qr-A4-8ZG">
+                                                    <rect key="frame" x="0.0" y="20.333333333333314" width="86.666666666666671" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Pf-zK-8ud">
+                                            <rect key="frame" x="0.0" y="273.33333333333331" width="314.33333333333331" height="116"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="旅館簡介：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtE-Hr-djZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="314.33333333333331" height="23"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="台北文華東方酒店是一間超水準的五星級豪華酒店，坐落於市中心繁華地段，讓您在城市綠洲的環境中盡情放鬆。酒店擁有多間精緻優雅的餐廳，並設有全台灣最大型的酒店水療中心，必定令每位來賓樂而忘返。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnP-HG-Q9m">
+                                                    <rect key="frame" x="0.0" y="23" width="314.33333333333331" height="93"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="AQa-jz-NkK" secondAttribute="bottom" id="9RO-Sb-Ze6"/>
+                                <constraint firstItem="AQa-jz-NkK" firstAttribute="top" secondItem="OFH-p5-7J5" secondAttribute="top" id="BbC-gb-c08"/>
+                                <constraint firstAttribute="trailing" secondItem="AQa-jz-NkK" secondAttribute="trailing" constant="30" id="b6G-NC-Ucu"/>
+                                <constraint firstItem="AQa-jz-NkK" firstAttribute="leading" secondItem="OFH-p5-7J5" secondAttribute="leading" constant="30" id="hJ9-5w-NAa"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="OFH-p5-7J5" firstAttribute="width" secondItem="AE2-Ja-VdK" secondAttribute="width" id="6YL-Dx-M3k"/>
+                        <constraint firstItem="OFH-p5-7J5" firstAttribute="top" secondItem="iWY-Xd-lVF" secondAttribute="top" id="9bo-5s-a7j"/>
+                        <constraint firstItem="OFH-p5-7J5" firstAttribute="trailing" secondItem="iWY-Xd-lVF" secondAttribute="trailing" id="dew-hx-RAZ"/>
+                        <constraint firstItem="OFH-p5-7J5" firstAttribute="bottom" secondItem="iWY-Xd-lVF" secondAttribute="bottom" id="olw-Xb-lUp"/>
+                        <constraint firstItem="OFH-p5-7J5" firstAttribute="leading" secondItem="iWY-Xd-lVF" secondAttribute="leading" id="yfj-B6-8wP"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="iWY-Xd-lVF"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="AE2-Ja-VdK"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gRq-3D-9N0" secondAttribute="trailing" id="HOI-Ve-vI5"/>
+                <constraint firstItem="gRq-3D-9N0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="TRP-po-N9h"/>
+                <constraint firstItem="gRq-3D-9N0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sgb-Bt-Fuf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="gRq-3D-9N0" secondAttribute="bottom" id="yXI-hX-PKd"/>
+            </constraints>
+            <point key="canvasLocation" x="-47" y="222"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="nft" width="1037" height="1046"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

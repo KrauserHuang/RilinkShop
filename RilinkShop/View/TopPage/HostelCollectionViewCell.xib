@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HostelCollectionViewCell" customModule="RilinkShop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="263"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="382" height="263"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage" translatesAutoresizingMaskIntoConstraints="NO" id="Ps9-03-U82">
+                        <rect key="frame" x="0.0" y="0.0" width="382" height="263"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="263" id="5L4-A7-U9R"/>
+                            <constraint firstAttribute="width" constant="382" id="czY-2D-McS"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Ps9-03-U82" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="eed-H9-nLo"/>
+                <constraint firstItem="Ps9-03-U82" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="fw4-gb-NKQ"/>
+            </constraints>
+            <size key="customSize" width="276" height="175"/>
+            <connections>
+                <outlet property="hostelImageView" destination="Ps9-03-U82" id="QGA-Zo-6pl"/>
+            </connections>
+            <point key="canvasLocation" x="301.44927536231887" y="134.26339285714286"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="testImage" width="2864" height="1778"/>
+    </resources>
+</document>

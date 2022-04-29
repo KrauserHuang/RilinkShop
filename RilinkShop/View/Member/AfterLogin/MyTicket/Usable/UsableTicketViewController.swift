@@ -33,6 +33,9 @@ extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource
         
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = TicketDetailViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
     
 }
