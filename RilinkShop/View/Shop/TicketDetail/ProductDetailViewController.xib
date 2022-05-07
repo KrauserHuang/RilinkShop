@@ -16,6 +16,7 @@
                 <outlet property="addToCartButton" destination="RJf-EJ-oTr" id="svO-rO-hE0"/>
                 <outlet property="buyNowButton" destination="syy-LH-O5A" id="alk-4w-6vj"/>
                 <outlet property="costLabel" destination="T1Q-G1-58K" id="0ZF-cO-oOh"/>
+                <outlet property="descriptionLabel" destination="T8U-5M-ed1" id="LCG-F0-HUw"/>
                 <outlet property="itemNumberLabel" destination="upR-1P-mWR" id="FxE-nE-XvD"/>
                 <outlet property="nameLabel" destination="2Ef-Ic-9N7" id="y5b-V6-xi0"/>
                 <outlet property="stepperOuterView" destination="Cua-b9-dWt" id="ytJ-dL-edq"/>
@@ -33,10 +34,10 @@
                     <rect key="frame" x="0.0" y="44" width="375" height="674"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xf4-ag-9Vl">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="637.33333333333337"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="671.66666666666663"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mtc-bI-A1q">
-                                    <rect key="frame" x="30" y="0.0" width="315" height="637.33333333333337"/>
+                                    <rect key="frame" x="30" y="0.0" width="315" height="671.66666666666663"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nft" translatesAutoresizingMaskIntoConstraints="NO" id="Gd7-Nf-6Mc">
                                             <rect key="frame" x="0.0" y="0.0" width="315" height="200"/>
@@ -44,8 +45,8 @@
                                                 <constraint firstAttribute="height" constant="200" id="3aV-pB-Zrn"/>
                                             </constraints>
                                         </imageView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Vf4-V6-3t6">
-                                            <rect key="frame" x="0.0" y="215" width="303.66666666666669" height="70.333333333333314"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Vf4-V6-3t6">
+                                            <rect key="frame" x="0.0" y="215" width="303.66666666666669" height="91"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品名稱：[瑞典 Oatly] 咖啡師燕麥奶箱購6入組 (1000ml/瓶) (全素)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ef-Ic-9N7">
                                                     <rect key="frame" x="0.0" y="0.0" width="303.66666666666669" height="42.333333333333336"/>
@@ -54,21 +55,21 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="售價：NT$1254" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1Q-G1-58K">
-                                                    <rect key="frame" x="0.0" y="47.333333333333314" width="303.66666666666669" height="23"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="0.0" y="62.333333333333307" width="303.66666666666669" height="28.666666666666664"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                    <color key="textColor" red="0.3112416267" green="0.51907396319999999" blue="0.42351847889999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cua-b9-dWt">
-                                            <rect key="frame" x="0.0" y="300.33333333333331" width="100" height="30"/>
+                                            <rect key="frame" x="0.0" y="321" width="100" height="32.666666666666686"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="a9A-h4-s9L">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="32.666666666666664"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fnb-AX-Cgi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="32.666666666666664" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="32.666666666666664" height="32.666666666666664"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" image="minus" catalog="system"/>
                                                             <connections>
@@ -76,13 +77,17 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="upR-1P-mWR">
-                                                            <rect key="frame" x="33.666666666666671" y="0.0" width="32.666666666666671" height="30"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <rect key="frame" x="33.666666666666671" y="0.0" width="32.666666666666671" height="32.666666666666664"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNW-iP-6tc">
-                                                            <rect key="frame" x="67.333333333333329" y="0.0" width="32.666666666666671" height="30"/>
+                                                            <rect key="frame" x="67.333333333333329" y="0.0" width="32.666666666666671" height="32.666666666666664"/>
+                                                            <color key="backgroundColor" red="0.83921568627450982" green="0.89803921568627454" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="vNW-iP-6tc" secondAttribute="height" multiplier="1:1" id="LUP-Gg-pX5"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal">
@@ -97,7 +102,6 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="0tK-q7-jte"/>
                                                 <constraint firstAttribute="bottom" secondItem="a9A-h4-s9L" secondAttribute="bottom" id="34w-BM-aa0"/>
                                                 <constraint firstAttribute="width" constant="100" id="FPi-70-YbA"/>
                                                 <constraint firstItem="a9A-h4-s9L" firstAttribute="top" secondItem="Cua-b9-dWt" secondAttribute="top" id="SvX-2e-7Cv"/>
@@ -105,17 +109,17 @@
                                                 <constraint firstItem="a9A-h4-s9L" firstAttribute="leading" secondItem="Cua-b9-dWt" secondAttribute="leading" id="mg7-jX-CHr"/>
                                             </constraints>
                                         </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="P5I-bG-Yoz">
-                                            <rect key="frame" x="0.0" y="345.33333333333331" width="314.33333333333331" height="291.99999999999994"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="P5I-bG-Yoz">
+                                            <rect key="frame" x="0.0" y="368.66666666666674" width="314.33333333333331" height="303"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品敘述：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICa-LQ-f0I">
-                                                    <rect key="frame" x="0.0" y="0.0" width="314.33333333333331" height="23"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="314.33333333333331" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8U-5M-ed1">
-                                                    <rect key="frame" x="0.0" y="28" width="314.33333333333331" height="264"/>
+                                                    <rect key="frame" x="0.0" y="39" width="314.33333333333331" height="264"/>
                                                     <string key="text">．咖啡師 每100ml 含糖 3.2g｜10% 燕麥含量 ｜熱量 58.2 kcal
 ．OATLY來自於瑞典，是歐洲燕麥製品領域的品牌。
 ．瑞典禁止使用多種殺蟲劑，使燕麥的食用安全受到保障。且不添加防腐劑、人工色素及化學調味料。

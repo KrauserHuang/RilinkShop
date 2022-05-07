@@ -21,6 +21,9 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XSg-pa-A1Q">
                                 <rect key="frame" x="0.0" y="88" width="414" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="gXb-CO-Jht"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dbs-cG-afi">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -38,19 +41,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cWf-m2-OqL">
-                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="hGJ-yF-5id"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tue-19-j6t">
-                                    <size key="itemSize" width="128" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0br-Mj-3Sy">
                                 <rect key="frame" x="0.0" y="148" width="414" height="665"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -59,14 +49,10 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cWf-m2-OqL" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="05T-gn-m73"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0br-Mj-3Sy" secondAttribute="trailing" id="FUC-u3-5Bi"/>
-                            <constraint firstItem="cWf-m2-OqL" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="M1W-x7-ITU"/>
                             <constraint firstItem="XSg-pa-A1Q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="MUn-6M-exl"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cWf-m2-OqL" secondAttribute="trailing" id="Z58-ar-N8A"/>
                             <constraint firstItem="0br-Mj-3Sy" firstAttribute="top" secondItem="XSg-pa-A1Q" secondAttribute="bottom" constant="10" id="llp-r3-KXK"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XSg-pa-A1Q" secondAttribute="trailing" id="nXB-7x-XGe"/>
-                            <constraint firstItem="0br-Mj-3Sy" firstAttribute="top" secondItem="cWf-m2-OqL" secondAttribute="bottom" constant="10" id="sU6-mW-7zb"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="0br-Mj-3Sy" secondAttribute="bottom" id="tYd-g3-ASE"/>
                             <constraint firstItem="0br-Mj-3Sy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vZK-ck-8Fs"/>
                             <constraint firstItem="XSg-pa-A1Q" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="xRB-Zv-b5L"/>
@@ -83,7 +69,6 @@
                     <connections>
                         <outlet property="anotherCategoryCollectionView" destination="XSg-pa-A1Q" id="caT-pf-Iqc"/>
                         <outlet property="cartButton" destination="CXx-gT-Uo9" id="P0q-vd-K9x"/>
-                        <outlet property="categoryCollectionView" destination="cWf-m2-OqL" id="NwU-b7-can"/>
                         <outlet property="listTableView" destination="0br-Mj-3Sy" id="flx-vr-9cN"/>
                     </connections>
                 </viewController>
@@ -110,6 +95,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gt-DE-dOq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="34.782608695652179" y="93.75"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="BNB-HS-1E4">
+            <objects>
+                <tableViewController id="5fc-Ve-sW5" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Nio-ST-oFH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="PV1-Mm-pcr">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PV1-Mm-pcr" id="Sie-qU-enI">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5fc-Ve-sW5" id="5Up-tB-wiV"/>
+                            <outlet property="delegate" destination="5fc-Ve-sW5" id="YfG-3Y-dwE"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DBl-ga-biv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="35" y="878"/>
         </scene>
     </scenes>
     <resources>

@@ -13,7 +13,7 @@ class CheckoutTableViewCell: UITableViewCell {
     
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var numebrLabel: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var totalCostLabel: UILabel!
 
     override func awakeFromNib() {
@@ -36,8 +36,17 @@ class CheckoutTableViewCell: UITableViewCell {
     func configure() {
         productImageView.image = UIImage(named: "nft")
         nameLabel.text = "阿姆斯特朗旋風噴射阿姆斯特朗砲"
-        numebrLabel.text = "x2"
+        numberLabel.text = "x2"
         totalCostLabel.text = "$1000"
+    }
+    
+    func configure(with model: Product) {
+        nameLabel.text = model.product_name
+        numberLabel.text = "X \(model.order_qty)"
+        totalCostLabel.text = "$\(model.total_amount)"
+        
+        let imageURLString = TEST_ROOT_URL + model.product_picture
+        productImageView.setImage(imageURL: imageURLString)
     }
     
 }

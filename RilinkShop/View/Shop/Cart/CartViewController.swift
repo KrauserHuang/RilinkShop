@@ -6,51 +6,101 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class CartViewController: UIViewController {
 
+    @IBOutlet weak var noItemView: UIView! {
+        didSet {
+            noItemView.isHidden = true
+        }
+    }
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var agreeButton: UIButton!
     @IBOutlet weak var clearAllButton: UIButton!
     @IBOutlet weak var keepBuyButton: UIButton!
     @IBOutlet weak var checkoutButton: UIButton!
     
-    var inCartItems = [Product]()
-    {
+    var inCartItems = [Product]() {
         didSet {
             DispatchQueue.main.async {
                 self.cartTableView.reloadData()
             }
         }
     }
+    var total = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        loadInCartItems()
         configureTableView()
         configureView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadInCartItems()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        agreeButton.isSelected = false
+    }
+    // 載入購物車資料
+    func loadInCartItems() {
+        let indicator = MBProgressHUD.showAdded(to: self.view, animated: true)
+        indicator.isUserInteractionEnabled = false
+        indicator.show(animated: true)
+        cartTableView.isHidden = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            ProductService.shared.loadShoppingCartList(id: "0910619306", pwd: "a12345678") { items in
+                self.inCartItems = items
+                self.cartTableView.isHidden = false
+                indicator.hide(animated: true)
+    //            self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
+            }
+            ProductService.shared.getShoppingCartCount(id: "0910619306", pwd: "a12345678") { response in
+                self.noItemView.isHidden = response.responseMessage == "0" ? false : true
+            }
+        }
+//        ProductService.shared.loadShoppingCartList(id: "0910619306", pwd: "a12345678") { items in
+//            self.inCartItems = items
+//            self.cartTableView.isHidden = false
+//            indicator.hide(animated: true)
+////            self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
+//        }
+//        ProductService.shared.getShoppingCartCount(id: "0910619306", pwd: "a12345678") { response in
+//            self.noItemView.isHidden = response.responseMessage == "0" ? false : true
+//        }
+//        noItemView.isHidden = self.inCartItems.isEmpty ? false : true
+    }
+    // tableView相關設定
     func configureTableView() {
         cartTableView.delegate = self
         cartTableView.dataSource = self
         cartTableView.register(UINib(nibName: CartTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CartTableViewCell.reuseIdentifier)
         cartTableView.separatorStyle = .none
     }
-    
+    // 其餘view設定
     func configureView() {
-        clearAllButton.layer.borderColor = UIColor(hex: "#54a0ff")?.cgColor
+        clearAllButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
         clearAllButton.layer.borderWidth = 1
         clearAllButton.layer.cornerRadius = 10
-        clearAllButton.tintColor = UIColor(hex: "#54a0ff")
-        keepBuyButton.layer.borderColor = UIColor(hex: "#54a0ff")?.cgColor
+        clearAllButton.tintColor = UIColor(hex: "#4F846C")
+        keepBuyButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
         keepBuyButton.layer.borderWidth = 1
         keepBuyButton.layer.cornerRadius = 10
-        keepBuyButton.tintColor = UIColor(hex: "#54a0ff")
+        keepBuyButton.tintColor = UIColor(hex: "#4F846C")
         checkoutButton.layer.cornerRadius = 10
-        checkoutButton.backgroundColor = UIColor(hex: "#54a0ff")
+        checkoutButton.backgroundColor = UIColor(hex: "#4F846C")
         checkoutButton.tintColor = .white
+    }
+    
+    @IBAction func agreeAction(_ sender: UIButton) {
+        sender.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
+        sender.isSelected.toggle()
     }
     
     @IBAction func shopRuleButtonTapped(_ sender: UIButton) {
@@ -60,23 +110,19 @@ class CartViewController: UIViewController {
     
     @IBAction func clearAllButtonTapped(_ sender: UIButton) {
         let alertController = UIAlertController(title: "是否清除全部", message: "There's no turnig back!", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "清除", style: .destructive, handler: nil)
+        let okAction = UIAlertAction(title: "清除", style: .destructive) { action in
+            ProductService.shared.clearShoppingCartItem(id: "0910619306", pwd: "a12345678") { product in }
+            self.inCartItems.removeAll()
+            ProductService.shared.inCartItems = self.inCartItems
+            self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
+        }
         let noAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         alertController.addAction(noAction)
         present(alertController, animated: true, completion: nil)
     }
-    
-    @IBAction func agreeAction(_ sender: UIButton) {
-//        sender.setImage(UIImage(named: "check_icon_2"), for: .normal)
-//        sender.setImage(UIImage(named: "check_icon"), for: .selected)
-        sender.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
-        sender.isSelected.toggle()
-    }
-    
+    // 繼續購買應該回到購買頁面首頁？
     @IBAction func keepBuyButtonTapped(_ sender: UIButton) {
-//        self.navigationController?.popToRootViewController(animated: true)
         if let controllers = navigationController?.viewControllers {
             for controller in controllers {
                 switch controller {
@@ -94,34 +140,41 @@ class CartViewController: UIViewController {
     }
     
     @IBAction func checkoutButtonTapped(_ sender: UIButton) {
-//        guard !inCartItems.isEmpty else { // 一段確認購物車有沒有東西決定是否進結帳頁
-//            let alertController = UIAlertController.simpleOKAlert(title: "", message: "購物車沒東西喔", buttonTitle: "確認", action: nil)
-//            present(alertController, animated: true, completion: nil)
-//            return
-//        }
-        guard agreeButton.isSelected else { // 二段判斷購物條款有沒有閱讀同意，有的話會將inCartItems的資訊傳到扣款頁
+        /*
+         一段確認購物車有沒有東西決定是否進結帳頁
+         二段判斷購物條款有沒有閱讀同意，有的話會將inCartItems的資訊傳到扣款頁
+         三段將各項目的total_amount加在一起顯示在結帳頁
+         */
+        guard !inCartItems.isEmpty else {
+            let alertController = UIAlertController.simpleOKAlert(title: "", message: "購物車沒東西喔", buttonTitle: "確認", action: nil)
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+        guard agreeButton.isSelected else {
             let alertController = UIAlertController.simpleOKAlert(title: "", message: "請確認是否已詳細閱讀購物條款", buttonTitle: "確認", action: nil)
             present(alertController, animated: true, completion: nil)
             return
         }
         let controller = CheckoutViewController()
+        total = inCartItems.reduce(0, { result, product in
+            result + Int(product.total_amount)!
+        })
+        controller.orderAmount = total
         self.navigationController?.pushViewController(controller, animated: true)
     }
-    
- 
-    
 }
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return inCartItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.reuseIdentifier, for: indexPath) as! CartTableViewCell
         
         cell.delegate = self
-        cell.configure()
+        let inCartItem = inCartItems[indexPath.row]
+        cell.configure(with: inCartItem)
         
         return cell
     }
@@ -129,10 +182,19 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - Cell Delegate
 extension CartViewController: CartTableViewCellDelegate {
     func removeItem(_ cell: CartTableViewCell) {
-//        guard let indexPath = cartTableView.indexPath(for: cell) else { return }
+        guard let indexPath = cartTableView.indexPath(for: cell) else { return }
         
         let alertController = UIAlertController(title: "", message: "確定要刪除此商品？", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "確認", style: .default, handler: nil)
+        let okAction = UIAlertAction(title: "確認", style: .default) { action in
+            let no = self.inCartItems[indexPath.row].product_no
+            ProductService.shared.removeShoppingCartItem(id: "0910619306", pwd: "a12345678", no: no) { product in }
+            self.inCartItems.remove(at: indexPath.row)
+            ProductService.shared.inCartItems = self.inCartItems
+            self.cartTableView.beginUpdates()
+            self.cartTableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
+            self.cartTableView.endUpdates()
+            self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
+        }
         let noAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         alertController.addAction(noAction)

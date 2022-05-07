@@ -15,6 +15,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let navBarAppearance = UINavigationBarAppearance()
+        var backButtonImage = UIImage(systemName: "arrow.backward", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20.0, weight: .semibold))
+        backButtonImage = backButtonImage?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0))
+        navBarAppearance.setBackIndicatorImage(backButtonImage, transitionMaskImage: backButtonImage)
+        UINavigationBar.appearance().tintColor = .black
+        UINavigationBar.appearance().standardAppearance = navBarAppearance
+//        UINavigationBar.appearance().compactAppearance = navBarAppearance
+//        UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        
+        // 調整back button文字
+//        let attributes = [NSAttributedString.Key.font:  UIFont(name: "Helvetica-Bold", size: 0.1)!, NSAttributedString.Key.foregroundColor: UIColor.clear]
+//        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal)
+//        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .highlighted)
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for: .default)
+        
         return true
     }
 

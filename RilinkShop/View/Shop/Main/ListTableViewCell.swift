@@ -40,15 +40,17 @@ class ListTableViewCell: UITableViewCell {
     }
     
     func configure(with model: Product) {
-        nameLabel.text = model.productName
-        costLabel.text = model.productPrice
+//        nameLabel.text = model.productName
+//        costLabel.text = model.productPrice
+        nameLabel.text = model.product_name
+        costLabel.text = "$\(model.product_price)"
         
-//        if let imageURL = URL(string: OFFICIAL_ROOT_URL + model.productPicture) {
-//            itemImageView.isHidden = false
-//            itemImageView.kf.setImage(with: imageURL)
-//        } else {
-//            itemImageView.isHidden = true
-//        }
+        if let imageURL = URL(string: TEST_ROOT_URL + model.product_picture) {
+            itemImageView.isHidden = false
+            itemImageView.kf.setImage(with: imageURL)
+        } else {
+            itemImageView.isHidden = true
+        }
     }
     
 }

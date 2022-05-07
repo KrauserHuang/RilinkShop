@@ -19,17 +19,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ys5-YA-axc">
-                        <rect key="frame" x="10" y="10" width="423" height="119"/>
+                        <rect key="frame" x="10" y="10" width="423" height="122"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nft" translatesAutoresizingMaskIntoConstraints="NO" id="Dej-6b-Rbl">
-                                <rect key="frame" x="0.0" y="9.5" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="11" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="XJq-rd-gzX"/>
                                     <constraint firstAttribute="width" secondItem="Dej-6b-Rbl" secondAttribute="height" multiplier="1:1" id="nCU-Fw-g77"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bge-Vk-za0">
-                                <rect key="frame" x="110" y="19" width="313" height="81.5"/>
+                                <rect key="frame" x="110" y="20" width="313" height="82.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品名稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYy-SY-MAn">
                                         <rect key="frame" x="0.0" y="0.0" width="313" height="20.5"/>
@@ -38,13 +38,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="售價：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jp7-qt-hvv">
-                                        <rect key="frame" x="0.0" y="30.5" width="313" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="30.5" width="313" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-vm-f6L">
-                                        <rect key="frame" x="0.0" y="61" width="313" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="62" width="313" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -54,17 +54,17 @@
                         </subviews>
                     </stackView>
                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uy5-4H-HcP">
-                        <rect key="frame" x="20" y="134" width="403" height="1"/>
+                        <rect key="frame" x="20" y="137" width="403" height="1"/>
                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="LCZ-Xz-d4X"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDO-ie-8EO">
-                        <rect key="frame" x="10" y="140" width="423" height="34"/>
+                        <rect key="frame" x="10" y="143" width="423" height="31"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9e-96-7Dh">
-                                <rect key="frame" x="0.0" y="0.0" width="306" height="34"/>
+                                <rect key="frame" x="0.0" y="0.0" width="295.5" height="31"/>
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="移除商品" image="trash.circle" catalog="system">
@@ -78,9 +78,9 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小記：$29,980" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9F-vT-KAf">
-                                <rect key="frame" x="306" y="0.0" width="117" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="295.5" y="0.0" width="127.5" height="31"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <color key="textColor" red="0.3112416267" green="0.51907396319999999" blue="0.42351847889999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

@@ -21,7 +21,7 @@ class ShopRuleViewController: UIViewController {
     
     func configureView() {
         borderView.layer.borderWidth = 1
-        borderView.layer.borderColor = UIColor(hex: "#54a0ff")?.cgColor
+        borderView.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
         borderView.layer.cornerRadius = 25
     }
 }

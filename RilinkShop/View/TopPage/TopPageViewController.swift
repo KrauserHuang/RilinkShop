@@ -34,14 +34,21 @@ class TopPageViewController: UIViewController {
     @IBOutlet weak var hostelScrollView: UIScrollView!
     @IBOutlet weak var ticketCollectionView: UICollectionView!
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, String>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, String>
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, Package>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Package>
     
     private var nftImages = (1...10).map { "DoodleIcons-\($0)" }
     
     private lazy var dataSource = configureDataSource()
     let badgeSize: CGFloat = 15
     let badgeTag = 123456
+    var packages = [Package]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.ticketCollectionView.reloadData()
+            }
+        }
+    }
     
     // 購物車按鈕
     lazy var cartButton: UIButton =  {
@@ -93,7 +100,8 @@ class TopPageViewController: UIViewController {
         ticketCollectionView.dataSource = dataSource
         ticketCollectionView.delegate = self
         ticketCollectionView.collectionViewLayout = createGridLayout()
-        updateSnapshot()
+        loadPackage()
+//        updateSnapshot()
         
 //        addShoppingCart()
 //        NSLayoutConstraint.activate([
@@ -112,6 +120,8 @@ class TopPageViewController: UIViewController {
         super.viewWillAppear(animated)
         
 //        labelUI()
+        self.tabBarController?.hidesBottomBarWhenPushed = false
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func addShoppingCart() {
@@ -145,6 +155,13 @@ class TopPageViewController: UIViewController {
         obj.layer.cornerRadius = 20
         obj.layer.shadowOpacity = 0.15
         obj.backgroundColor = .white
+    }
+    
+    func loadPackage() {
+        ProductService.shared.loadPackageList(id: "0910619306", pwd: "a12345678") { packagesResponse in
+            self.packages = packagesResponse
+            self.updateSnapshot()
+        }
     }
     
     @IBAction func toHostelPage(_ sender: Any) {
@@ -205,15 +222,20 @@ extension TopPageViewController: UICollectionViewDelegate {
 //        let controller = ShopLocationTableViewController()
         let controller = ProductDetailViewController()
         navigationController?.pushViewController(controller, animated: true)
+//        let package = packages[indexPath.item]
+//        let packageDetailVC = PackageDetailViewController()
+//        packageDetailVC.package = package
+//        navigationController?.pushViewController(packageDetailVC, animated: true)
     }
 }
 // MARK: - DataSource/Snapshot/CompositionalLayout
 extension TopPageViewController {
     // data source
     func configureDataSource() -> DataSource {
-        let dataSource = DataSource(collectionView: ticketCollectionView) { collectionView, indexPath, imageName -> UICollectionViewCell? in
+        let dataSource = DataSource(collectionView: ticketCollectionView) { collectionView, indexPath, package -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageShopCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageShopCollectionViewCell
-            cell.imageView.image = UIImage(named: imageName)
+            cell.configure(with: package)
+//            cell.imageView.image = UIImage(named: imageName)
             
             return cell
         }
@@ -223,7 +245,7 @@ extension TopPageViewController {
     func updateSnapshot(animatingChange: Bool = false) {
         var snapshot = Snapshot()
         snapshot.appendSections([.all])
-        snapshot.appendItems(nftImages, toSection: .all)
+        snapshot.appendItems(packages, toSection: .all)
         
         dataSource.apply(snapshot, animatingDifferences: false)
     }

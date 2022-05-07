@@ -4,6 +4,7 @@ PODS:
   - EzPopup (1.2.3)
   - FSCalendar (2.8.2)
   - Kingfisher (7.1.2)
+  - MBProgressHUD (1.2.0)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - EzPopup
   - FSCalendar
   - Kingfisher (~> 7.0)
+  - MBProgressHUD (~> 1.2.0)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -21,6 +23,7 @@ SPEC REPOS:
     - EzPopup
     - FSCalendar
     - Kingfisher
+    - MBProgressHUD
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -29,8 +32,9 @@ SPEC CHECKSUMS:
   EzPopup: bd911825754e020b926287453ad4947045a04d1e
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 254e187def6a4a637311d12dec29c6580849e144
+PODFILE CHECKSUM: 252fe6e326db82dddf850aef003e29505b04454f
 
 COCOAPODS: 1.11.2

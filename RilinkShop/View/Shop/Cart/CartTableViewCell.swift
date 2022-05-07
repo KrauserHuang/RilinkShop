@@ -50,6 +50,17 @@ class CartTableViewCell: UITableViewCell {
         numberLabel.text = "X 1"
         totalCostLabel.text = "小記：$29,980"
     }
+    
+    func configure(with model: Product) {
+        nameLabel.text = model.product_name
+        numberLabel.text = "X \(model.order_qty)"
+        costLabel.text = "$\(model.product_price)"
+        totalCostLabel.text = "小記：$\(model.total_amount)"
+        
+        let imageURLString = TEST_ROOT_URL + model.product_picture
+        productImageView.setImage(imageURL: imageURLString)
+    }
+    
     @IBAction func removeItemButtonTapped(_ sender: UIButton) {
         delegate?.removeItem(self)
     }

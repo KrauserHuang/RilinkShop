@@ -46,8 +46,10 @@ class LoginViewController: UIViewController {
         loginButton.backgroundColor = tool.customOrange
         tool.makeRoundedCornersButton(button: signUpButton)
         signUpButton.backgroundColor = tool.customOrange
-        
+        print("我有進來嗎？")
     }
+    
+    
 
     func hideKeyBoard(){
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(cancelFocus))

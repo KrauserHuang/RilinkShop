@@ -16,6 +16,7 @@
                 <outlet property="checkoutButton" destination="g5H-uD-1m9" id="6HL-4m-Wtl"/>
                 <outlet property="clearAllButton" destination="uEd-1e-f6j" id="Iao-l0-AGe"/>
                 <outlet property="keepBuyButton" destination="84N-dx-Vcc" id="bVT-KH-ir3"/>
+                <outlet property="noItemView" destination="sET-Yd-nV2" id="MvE-dR-0xQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,6 +25,38 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SM0-Bv-avj">
+                    <rect key="frame" x="0.0" y="44" width="375" height="639"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sET-Yd-nV2">
+                    <rect key="frame" x="0.0" y="44" width="375" height="649"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GM2-1d-P68">
+                            <rect key="frame" x="109.66666666666669" y="245.33333333333331" width="156" height="158.33333333333331"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_cart" translatesAutoresizingMaskIntoConstraints="NO" id="9tU-8X-FhB">
+                                    <rect key="frame" x="14" y="0.0" width="128" height="128"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="128" id="BYv-2Y-MKg"/>
+                                        <constraint firstAttribute="width" secondItem="9tU-8X-FhB" secondAttribute="height" multiplier="1:1" id="QsX-bO-yDQ"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="購物車還沒有商品喔" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQb-QM-bjP">
+                                    <rect key="frame" x="0.0" y="138" width="156" height="20.333333333333343"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="GM2-1d-P68" firstAttribute="centerY" secondItem="sET-Yd-nV2" secondAttribute="centerY" id="loL-UY-14S"/>
+                        <constraint firstItem="GM2-1d-P68" firstAttribute="centerX" secondItem="sET-Yd-nV2" secondAttribute="centerX" id="vHE-ba-ISY"/>
+                    </constraints>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eqf-bX-Yk4">
                     <rect key="frame" x="30" y="728" width="315" height="40"/>
                     <subviews>
@@ -65,9 +98,10 @@
                                 <constraint firstAttribute="width" secondItem="PkL-g6-ZNB" secondAttribute="height" multiplier="1:1" id="4f1-vC-MfV"/>
                                 <constraint firstAttribute="height" constant="25" id="aF4-0E-Rzc"/>
                             </constraints>
+                            <color key="tintColor" red="0.3112416267" green="0.51907396319999999" blue="0.42351847889999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="checkmark.circle" catalog="system">
-                                <color key="titleColor" red="0.3294117647" green="0.62745098040000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="titleColor" red="0.3112416267" green="0.51907396319999999" blue="0.42351847889999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </state>
                             <connections>
                                 <action selector="agreeAction:" destination="-1" eventType="touchUpInside" id="jML-YS-fmv"/>
@@ -87,7 +121,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="購物條款">
-                                        <color key="titleColor" red="0.32941176470588235" green="0.62745098039215685" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="titleColor" red="0.30980392156862746" green="0.51764705882352935" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </state>
                                     <connections>
                                         <action selector="shopRuleButtonTapped:" destination="-1" eventType="touchUpInside" id="pYu-aa-Stq"/>
@@ -97,15 +131,13 @@
                         </stackView>
                     </subviews>
                 </stackView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SM0-Bv-avj">
-                    <rect key="frame" x="0.0" y="44" width="375" height="639"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="SM0-Bv-avj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="649-Xf-07t"/>
+                <constraint firstItem="G4O-87-1di" firstAttribute="top" secondItem="sET-Yd-nV2" secondAttribute="bottom" id="7nQ-Nb-I1J"/>
+                <constraint firstItem="sET-Yd-nV2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="D1X-aK-YJE"/>
                 <constraint firstItem="G4O-87-1di" firstAttribute="top" secondItem="SM0-Bv-avj" secondAttribute="bottom" constant="10" id="Dsd-Ck-py0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eqf-bX-Yk4" secondAttribute="trailing" constant="30" id="Q2a-LY-KCB"/>
                 <constraint firstItem="G4O-87-1di" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="TGm-VP-Wzu"/>
@@ -114,12 +146,15 @@
                 <constraint firstItem="SM0-Bv-avj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bAt-C2-fbD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eqf-bX-Yk4" secondAttribute="bottom" constant="10" id="mAP-uO-RTg"/>
                 <constraint firstItem="eqf-bX-Yk4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="rOv-XQ-1cx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sET-Yd-nV2" secondAttribute="trailing" id="yv5-Ja-Xcp"/>
+                <constraint firstItem="sET-Yd-nV2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="zE6-xw-x9y"/>
             </constraints>
             <point key="canvasLocation" x="133" y="91"/>
         </view>
     </objects>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="empty_cart" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

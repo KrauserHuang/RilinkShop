@@ -17,5 +17,9 @@ class HostelCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+//    func configure(with model: Package) {
+//        let imageURLString = TEST_ROOT_URL + model.productPicture
+//        hostelImageView.setImage(imageURL: imageURLString)
+//    }
 }

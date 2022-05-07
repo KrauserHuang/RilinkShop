@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,7 +28,7 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="shz-OO-q0q">
-                                <rect key="frame" x="85" y="16.5" width="206" height="46"/>
+                                <rect key="frame" x="85" y="15" width="206" height="49.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阿姆斯特朗旋風噴射阿姆斯特朗砲" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YqA-FN-VYG">
                                         <rect key="frame" x="0.0" y="0.0" width="206" height="20.5"/>
@@ -38,18 +37,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cb-ok-zWQ">
-                                        <rect key="frame" x="0.0" y="25.5" width="206" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="25.5" width="206" height="24"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="x1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMh-tl-cKK">
-                                                <rect key="frame" x="0.0" y="0.0" width="157" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="145.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6G1-is-i2X">
-                                                <rect key="frame" x="157" y="0.0" width="49" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" systemColor="systemOrangeColor"/>
+                                                <rect key="frame" x="145.5" y="0.0" width="60.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <color key="textColor" red="0.3112416267" green="0.51907396319999999" blue="0.42351847889999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -69,7 +68,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="nameLabel" destination="YqA-FN-VYG" id="Vge-na-T9o"/>
-                <outlet property="numebrLabel" destination="qMh-tl-cKK" id="hZh-dj-jhc"/>
+                <outlet property="numberLabel" destination="qMh-tl-cKK" id="hZh-dj-jhc"/>
                 <outlet property="productImageView" destination="j6H-9u-w7i" id="ykA-Kx-3K7"/>
                 <outlet property="totalCostLabel" destination="6G1-is-i2X" id="qjR-kY-9Qr"/>
             </connections>
@@ -78,8 +77,5 @@
     </objects>
     <resources>
         <image name="nft" width="1037" height="1046"/>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>

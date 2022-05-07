@@ -46,7 +46,8 @@ class ShopTypeTableViewCell: UITableViewCell {
     }
     
     func loadProductType() {
-        ProductService.shared.getProductType(id: "0911838460", pwd: "simon07801") { responseCategories in
+//        ProductService.shared.getProductType(id: "0911838460", pwd: "simon07801") { responseCategories in
+        ProductService.shared.getProductType(id: "0910619306", pwd: "a12345678") { responseCategories in
             var isFirstCategory = true
             self.categories = responseCategories.map {
                 if isFirstCategory {

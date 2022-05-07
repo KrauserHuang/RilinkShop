@@ -13,17 +13,16 @@ class ShopNavigationViewController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let controller = ShopViewController()
+        controller.delegate = self
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension ShopNavigationViewController: ShopViewControllerDelegate {
+    func showInfo(_ viewController: ShopViewController, for item: Product) {
+//        viewController.delegate = self
+        let productDetailVC = ProductDetailViewController()
+        productDetailVC.itemInfo = item
+        viewController.navigationController?.pushViewController(productDetailVC, animated: true)
     }
-    */
-
 }

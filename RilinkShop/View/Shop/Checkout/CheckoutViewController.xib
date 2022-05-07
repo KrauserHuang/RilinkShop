@@ -12,11 +12,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckoutViewController" customModule="RilinkShop" customModuleProvider="target">
             <connections>
                 <outlet property="backButton" destination="La5-DA-Hiy" id="wvZ-EI-3ZO"/>
-                <outlet property="bonusDiscountLabel" destination="7rl-jg-zCX" id="YxG-Rb-VyU"/>
+                <outlet property="bonusPointLabel" destination="nEX-mb-lvu" id="epc-Hp-pwj"/>
+                <outlet property="bonusPointTextField" destination="aXb-Gk-VQz" id="Myd-yo-dh4"/>
                 <outlet property="cartTableView" destination="FoN-Gb-VvH" id="KYm-20-W5Z"/>
-                <outlet property="cartTotalLabel" destination="OQQ-cO-ZUH" id="wRs-uw-udB"/>
                 <outlet property="checkoutButton" destination="g0l-rr-36E" id="LLi-Q6-EuK"/>
-                <outlet property="overallCostLabel" destination="G7N-uS-pse" id="C4a-H1-8o4"/>
+                <outlet property="discountAmountLabel" destination="7rl-jg-zCX" id="YxG-Rb-VyU"/>
+                <outlet property="orderAmountLabel" destination="OQQ-cO-ZUH" id="wRs-uw-udB"/>
+                <outlet property="orderPayLabel" destination="G7N-uS-pse" id="C4a-H1-8o4"/>
+                <outlet property="tableViewHeightConstraint" destination="vBO-95-zaK" id="s9b-1k-myG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -38,7 +41,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="340"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="340" id="OhG-bg-2ou"/>
+                                                <constraint firstAttribute="height" constant="340" id="vBO-95-zaK"/>
                                             </constraints>
                                         </tableView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1iA-bp-V2o">

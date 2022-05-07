@@ -17,7 +17,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     var isItemSelected: Bool = false {
         didSet {
             indicatorLine.alpha = isItemSelected ? 1 : 0
-            nameLabel.textColor = isItemSelected ? UIColor(hex: "#54a0ff") : .systemGray
+            nameLabel.textColor = isItemSelected ? UIColor(hex: "#54a0ff") : .systemGray2
         }
     }
     

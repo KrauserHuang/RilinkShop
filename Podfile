@@ -11,5 +11,6 @@ target 'RilinkShop' do
   pod 'FSCalendar'
   pod 'EzPopup'
   pod 'BadgeHub'
+  pod 'MBProgressHUD', '~> 1.2.0'
 
 end

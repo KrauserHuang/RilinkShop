@@ -18,3 +18,5 @@ struct Category: Codable {
         case productTypeName = "producttype_name"
     }
 }
+
+extension Category: Hashable {}

@@ -57,6 +57,12 @@ extension MemberNavigationViewController: MemberCenterTableViewControllerDelegat
     }
     
     func logout(_ viewController: MemberCenterTableViewController) {
-        viewController.navigationController?.pushViewController(LoginViewController(), animated: true)
+//        viewController.navigationController?.pushViewController(LoginViewController(), animated: true)
+//        let controller = LoginViewController()
+//        setViewControllers([controller], animated: false)
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//        let controller = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
