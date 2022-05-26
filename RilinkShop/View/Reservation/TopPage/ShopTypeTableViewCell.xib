@@ -19,23 +19,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="98O-Co-Tay">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="10" y="0.0" width="300" height="50"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="gHb-JC-7Hr"/>
+                            <constraint firstAttribute="height" constant="50" id="mXd-kj-Irg"/>
                         </constraints>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="x4N-7w-glH">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="20" minimumInteritemSpacing="5" id="x4N-7w-glH">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
                         </collectionViewFlowLayout>
                     </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="98O-Co-Tay" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8HN-gb-jvW"/>
+                    <constraint firstItem="98O-Co-Tay" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="8HN-gb-jvW"/>
                     <constraint firstAttribute="bottom" secondItem="98O-Co-Tay" secondAttribute="bottom" id="Cgj-L5-JS4"/>
-                    <constraint firstAttribute="trailing" secondItem="98O-Co-Tay" secondAttribute="trailing" id="LnP-wO-vzr"/>
+                    <constraint firstAttribute="trailing" secondItem="98O-Co-Tay" secondAttribute="trailing" constant="10" id="LnP-wO-vzr"/>
                     <constraint firstItem="98O-Co-Tay" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZTI-hl-UIo"/>
                 </constraints>
             </tableViewCellContentView>
@@ -43,7 +43,7 @@
             <connections>
                 <outlet property="shopTypeCollectionView" destination="98O-Co-Tay" id="KN4-vW-08c"/>
             </connections>
-            <point key="canvasLocation" x="133" y="86"/>
+            <point key="canvasLocation" x="131.8840579710145" y="85.714285714285708"/>
         </tableViewCell>
     </objects>
     <resources>

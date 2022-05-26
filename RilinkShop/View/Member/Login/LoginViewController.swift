@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import MBProgressHUD
+
+protocol LoginViewControllerDelegate: AnyObject {
+    func finishLoginView(_ viewController: LoginViewController, action:finishLoginViewWith)
+}
 
 class LoginViewController: UIViewController {
 
@@ -14,29 +19,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var accountTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var visibleBtn: UIButton!
-    @IBAction func visibleAction(_ sender: UIButton) {
-        if passwordTF.isSecureTextEntry {
-            visibleBtn.setImage(UIImage(named: "eye"), for: .normal)
-            passwordTF.isSecureTextEntry = false
-        }else{
-            visibleBtn.setImage(UIImage(named: "eyeSlash"), for: .normal)
-            
-            passwordTF.isSecureTextEntry = true
-        }
-    }
-    @IBAction func forgotPwAction(_ sender: UIButton) {
-        self.navigationController?.pushViewController(ForgotPasswordViewController(), animated: true)
-    }
     @IBOutlet weak var loginButton: UIButton!
-    @IBAction func loginAction(_ sender: UIButton) {
-    }
     @IBOutlet weak var signUpButton: UIButton!
-    @IBAction func signUpAction(_ sender: UIButton) {
-        self.navigationController?.pushViewController(SignUpViewController(), animated: true)
-    }
-    @IBAction func privateAction(_ sender: UIButton) {
-        self.navigationController?.pushViewController(PrivateRuleViewController(), animated: true)
-    }
+    
+    weak var delegate: LoginViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +32,7 @@ class LoginViewController: UIViewController {
         loginButton.backgroundColor = tool.customOrange
         tool.makeRoundedCornersButton(button: signUpButton)
         signUpButton.backgroundColor = tool.customOrange
-        print("我有進來嗎？")
     }
-    
-    
 
     func hideKeyBoard(){
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(cancelFocus))
@@ -59,6 +42,32 @@ class LoginViewController: UIViewController {
     
     @objc func cancelFocus(){
         self.view.endEditing(true)
+    }
+    
+    @IBAction func visibleAction(_ sender: UIButton) {
+        if passwordTF.isSecureTextEntry {
+            visibleBtn.setImage(UIImage(named: "eye"), for: .normal)
+            passwordTF.isSecureTextEntry = false
+        } else {
+            visibleBtn.setImage(UIImage(named: "eyeSlash"), for: .normal)
+            passwordTF.isSecureTextEntry = true
+        }
+    }
+    
+    @IBAction func loginAction(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func forgotPwAction(_ sender: UIButton) {
+        self.delegate?.finishLoginView(self, action: .Forget)
+    }
+    
+    @IBAction func signUpAction(_ sender: UIButton) {
+        self.navigationController?.pushViewController(SignUpViewController_1(), animated: true)
+    }
+    
+    @IBAction func privateAction(_ sender: UIButton) {
+        self.navigationController?.pushViewController(PrivateRuleViewController(), animated: true)
     }
 }
 

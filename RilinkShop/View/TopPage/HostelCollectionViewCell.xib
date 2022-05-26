@@ -28,8 +28,10 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="Ps9-03-U82" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="eed-H9-nLo"/>
-                <constraint firstItem="Ps9-03-U82" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="fw4-gb-NKQ"/>
+                <constraint firstItem="Ps9-03-U82" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="GBQ-zZ-iRw"/>
+                <constraint firstAttribute="trailing" secondItem="Ps9-03-U82" secondAttribute="trailing" id="Plw-E9-8jO"/>
+                <constraint firstItem="Ps9-03-U82" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="and-oC-Pvm"/>
+                <constraint firstAttribute="bottom" secondItem="Ps9-03-U82" secondAttribute="bottom" id="nRh-L9-WBi"/>
             </constraints>
             <size key="customSize" width="276" height="175"/>
             <connections>

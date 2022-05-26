@@ -19,6 +19,7 @@
                 <outlet property="discountAmountLabel" destination="7rl-jg-zCX" id="YxG-Rb-VyU"/>
                 <outlet property="orderAmountLabel" destination="OQQ-cO-ZUH" id="wRs-uw-udB"/>
                 <outlet property="orderPayLabel" destination="G7N-uS-pse" id="C4a-H1-8o4"/>
+                <outlet property="scrollView" destination="C52-uE-9wE" id="H1t-if-qBf"/>
                 <outlet property="tableViewHeightConstraint" destination="vBO-95-zaK" id="s9b-1k-myG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -29,7 +30,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C52-uE-9wE">
-                    <rect key="frame" x="0.0" y="44" width="375" height="694"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="674"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqx-xe-f6G">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="681.33333333333337"/>
@@ -51,20 +52,20 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="20.333333333333332"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可使用點數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nb0-60-VO2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="326.66666666666669" height="20.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="344.66666666666669" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-mb-lvu">
-                                                            <rect key="frame" x="326.66666666666669" y="0.0" width="28.333333333333314" height="20.333333333333332"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-mb-lvu">
+                                                            <rect key="frame" x="344.66666666666669" y="0.0" width="10.333333333333314" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" systemColor="systemOrangeColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CLU-ie-080">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="CLU-ie-080">
                                                     <rect key="frame" x="0.0" y="28.333333333333314" width="355" height="34"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用點數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpR-Ef-hwm">
@@ -74,7 +75,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aXb-Gk-VQz">
-                                                            <rect key="frame" x="79.333333333333343" y="0.0" width="275.66666666666663" height="34"/>
+                                                            <rect key="frame" x="99.333333333333329" y="0.0" width="255.66666666666669" height="34"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
@@ -194,12 +195,13 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="P86-eh-YR1"/>
                 </scrollView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="b7M-PO-nWp">
-                    <rect key="frame" x="30" y="748" width="315" height="40"/>
+                    <rect key="frame" x="30" y="728" width="315" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La5-DA-Hiy">
                             <rect key="frame" x="0.0" y="0.0" width="147.66666666666666" height="40"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="回上一步驟"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="回上一步驟"/>
                             <connections>
                                 <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="KdF-5Y-vte"/>
                             </connections>
@@ -209,8 +211,9 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="c6G-T9-NYj"/>
                             </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="確認結帳"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="確認結帳"/>
                             <connections>
                                 <action selector="checkoutButtonTapped:" destination="-1" eventType="touchUpInside" id="xZz-r1-r7z"/>
                             </connections>
@@ -227,7 +230,7 @@
                 <constraint firstItem="b7M-PO-nWp" firstAttribute="top" secondItem="C52-uE-9wE" secondAttribute="bottom" constant="10" id="OxH-49-jzY"/>
                 <constraint firstItem="b7M-PO-nWp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="cjW-CD-pI9"/>
                 <constraint firstItem="C52-uE-9wE" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="wh3-pk-dCe"/>
-                <constraint firstItem="b7M-PO-nWp" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="10" id="zT6-Be-stn"/>
+                <constraint firstItem="b7M-PO-nWp" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-10" id="zT6-Be-stn"/>
             </constraints>
             <point key="canvasLocation" x="138.40000000000001" y="90.886699507389167"/>
         </view>

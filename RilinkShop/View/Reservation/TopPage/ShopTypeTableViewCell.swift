@@ -30,10 +30,10 @@ class ShopTypeTableViewCell: UITableViewCell {
         shopTypeCollectionView.showsHorizontalScrollIndicator = false
         
         if let layout = shopTypeCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.minimumLineSpacing = 0
+//            layout.minimumLineSpacing = 0
             layout.scrollDirection = .horizontal
-            let width = UIScreen.main.bounds.width / 4
-            layout.itemSize = CGSize(width: width, height: 50)
+//            let width = UIScreen.main.bounds.width / 4
+//            layout.itemSize = CGSize(width: width, height: 50)
         }
         
         loadProductType()
@@ -46,8 +46,7 @@ class ShopTypeTableViewCell: UITableViewCell {
     }
     
     func loadProductType() {
-//        ProductService.shared.getProductType(id: "0911838460", pwd: "simon07801") { responseCategories in
-        ProductService.shared.getProductType(id: "0910619306", pwd: "a12345678") { responseCategories in
+        ProductService.shared.getProductType(id: Global.ACCOUNT, pwd: Global.ACCOUNT_PASSWORD) { responseCategories in
             var isFirstCategory = true
             self.categories = responseCategories.map {
                 if isFirstCategory {
@@ -81,4 +80,11 @@ extension ShopTypeTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
             categories[index].isSelected = index == indexPath.item
         }
     }
+    
 }
+
+//extension ShopTypeTableViewCell: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        <#code#>
+//    }
+//}

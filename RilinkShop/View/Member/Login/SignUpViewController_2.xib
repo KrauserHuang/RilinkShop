@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignUpViewController_2" customModule="RilinkShop" customModuleProvider="target">
+            <connections>
+                <outlet property="passwordAgainTextField" destination="br5-W1-8Ps" id="oAR-V0-dqB"/>
+                <outlet property="passwordTextField" destination="QWF-4z-hTB" id="6uy-MX-zgN"/>
+                <outlet property="resendButton" destination="Rpc-qk-mKR" id="N98-Ow-Kkn"/>
+                <outlet property="scrollView" destination="X5h-OQ-784" id="stY-gH-i44"/>
+                <outlet property="submitButton" destination="6BL-jy-kag" id="OY2-3F-zfF"/>
+                <outlet property="verifyCodeTextField" destination="Ka3-9E-OKm" id="Gqt-Lw-pg5"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5h-OQ-784">
+                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Oo-46-kka">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="632"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zYk-Nb-zF1">
+                                    <rect key="frame" x="16" y="188" width="382" height="256"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2wR-Jm-RTZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="72"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="輸入驗證碼" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgl-he-mUY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入簡訊上的驗證碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ka3-9E-OKm">
+                                                    <rect key="frame" x="0.0" y="27" width="382" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="vQf-YE-faf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vYw-Fj-z0q">
+                                            <rect key="frame" x="0.0" y="92" width="382" height="72"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="設定登入密碼＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEV-HW-HO7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入會員手機號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QWF-4z-hTB">
+                                                    <rect key="frame" x="0.0" y="27" width="382" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="Thb-7Y-kEo"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xUJ-2o-U7k">
+                                            <rect key="frame" x="0.0" y="184" width="382" height="72"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請再次輸入密碼＊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoT-Ot-4Aa">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入會員手機號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="br5-W1-8Ps">
+                                                    <rect key="frame" x="0.0" y="27" width="382" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="thA-oI-vh3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BL-jy-kag">
+                                    <rect key="frame" x="16" y="544" width="382" height="45"/>
+                                    <color key="backgroundColor" red="0.30980392159999998" green="0.51764705879999995" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="B4g-Ae-FJc"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="送出"/>
+                                    <connections>
+                                        <action selector="submitButtonTapped:" destination="-1" eventType="touchUpInside" id="iz7-9Q-aC0"/>
+                                    </connections>
+                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="oS9-yX-8n9">
+                                    <rect key="frame" x="16" y="609" width="382" height="82"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="沒收到驗證碼嗎？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xj6-Lb-XC5">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rpc-qk-mKR">
+                                            <rect key="frame" x="0.0" y="37" width="382" height="45"/>
+                                            <color key="backgroundColor" red="0.30980392159999998" green="0.51764705879999995" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="45" id="uTT-E6-cHP"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="重新發送簡訊認證碼"/>
+                                            <connections>
+                                                <action selector="resendButtonTapped:" destination="-1" eventType="touchUpInside" id="UJW-SC-0Oo"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="6BL-jy-kag" firstAttribute="leading" secondItem="zYk-Nb-zF1" secondAttribute="leading" id="H1L-Ku-OyF"/>
+                                <constraint firstItem="oS9-yX-8n9" firstAttribute="leading" secondItem="zYk-Nb-zF1" secondAttribute="leading" id="JNH-jp-3pu"/>
+                                <constraint firstItem="oS9-yX-8n9" firstAttribute="top" secondItem="6BL-jy-kag" secondAttribute="bottom" constant="20" id="Jfp-i9-9iO"/>
+                                <constraint firstItem="zYk-Nb-zF1" firstAttribute="centerY" secondItem="8Oo-46-kka" secondAttribute="centerY" id="LSa-gp-5ZM"/>
+                                <constraint firstItem="zYk-Nb-zF1" firstAttribute="centerX" secondItem="8Oo-46-kka" secondAttribute="centerX" id="Lgv-s3-Q9j"/>
+                                <constraint firstItem="zYk-Nb-zF1" firstAttribute="top" secondItem="8Oo-46-kka" secondAttribute="top" constant="188" id="OEK-qk-0Wi"/>
+                                <constraint firstItem="oS9-yX-8n9" firstAttribute="trailing" secondItem="zYk-Nb-zF1" secondAttribute="trailing" id="QC4-8v-Psw"/>
+                                <constraint firstItem="zYk-Nb-zF1" firstAttribute="leading" secondItem="8Oo-46-kka" secondAttribute="leading" constant="16" id="Vmp-QZ-vIW"/>
+                                <constraint firstItem="6BL-jy-kag" firstAttribute="top" secondItem="zYk-Nb-zF1" secondAttribute="bottom" constant="100" id="cfk-gm-M2T"/>
+                                <constraint firstAttribute="trailing" secondItem="zYk-Nb-zF1" secondAttribute="trailing" constant="16" id="eET-NU-pmx"/>
+                                <constraint firstItem="6BL-jy-kag" firstAttribute="trailing" secondItem="zYk-Nb-zF1" secondAttribute="trailing" id="o6j-2I-ppF"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="8Oo-46-kka" firstAttribute="width" secondItem="NI2-Ao-YUf" secondAttribute="width" id="Fex-L5-QWw"/>
+                        <constraint firstItem="hLa-hP-1uN" firstAttribute="top" secondItem="8Oo-46-kka" secondAttribute="top" id="ZuV-Tr-7V0"/>
+                        <constraint firstItem="8Oo-46-kka" firstAttribute="trailing" secondItem="hLa-hP-1uN" secondAttribute="trailing" id="b09-m1-TxL"/>
+                        <constraint firstItem="8Oo-46-kka" firstAttribute="leading" secondItem="hLa-hP-1uN" secondAttribute="leading" id="f8B-y5-Es5"/>
+                        <constraint firstItem="8Oo-46-kka" firstAttribute="bottom" secondItem="hLa-hP-1uN" secondAttribute="bottom" id="ia7-cD-1ZT"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="hLa-hP-1uN"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="NI2-Ao-YUf"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="X5h-OQ-784" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="GUH-lg-QrR"/>
+                <constraint firstItem="X5h-OQ-784" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="W8R-mK-Gnw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="X5h-OQ-784" secondAttribute="trailing" id="dUK-JJ-y1l"/>
+                <constraint firstAttribute="bottom" secondItem="X5h-OQ-784" secondAttribute="bottom" id="kZ0-ub-DuL"/>
+            </constraints>
+            <point key="canvasLocation" x="-226" y="78"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

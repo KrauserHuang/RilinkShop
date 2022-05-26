@@ -8,34 +8,130 @@
 import UIKit
 
 class MemberNavigationViewController: UINavigationController {
-
-    func showRoot(){
-        if #available(iOS 13.0, *) {
-            guard let controller = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterTableViewController") as? MemberCenterTableViewController else { return }
-            controller.delegate = self
-            viewControllers = [controller]
-        } else {
-            // Fallback on earlier versions
-        }
-       
-    }
+    
+    var user = User()
+    var userImage: UIImageView?
+    var initAction: (() -> ())?
+    var initFlag = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.showRoot()
+        print(#function)
+        print(UserService.shared.didLogin)
+        print(MyKeyChain.getAccount())
+        print(MyKeyChain.getBossAccount())
         
+        if UserService.shared.didLogin {
+            tryLogin()
+        } else {
+            UserService.shared.renewUser = {
+                self.tryLogin()
+            }
+        }
+        Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
+        Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // 只在一開始執行一次
+        if initAction != nil {
+            initAction?()
+            initAction = nil
+        }
+        initFlag = true
+    }
+    
+    func tryLogin() {
+        if MyKeyChain.getAccount() == nil && MyKeyChain.getBossAccount() == nil {
+            initAction = showLogIn
+        } else {
+            initAction = {
+                self.showRoot(animated: false)
+            }
+        }
+        if initFlag, initAction != nil {
+            self.initAction?()
+            self.initAction = nil
+        }
+    }
+    // MARK: - 跳會員首頁(MemberCenterTableViewController)
+    func showRoot(animated: Bool) {
+        
+        guard let memberCenterTVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterTableViewController") as? MemberCenterTableViewController else {
+            print("showRoot失敗")
+            return
+        }
+        if MyKeyChain.getBossAccount() != nil {
+            let vc = StoreAppViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+        } else {
+            memberCenterTVC.delegate = self
+//            pushViewController(memberCenterTVC, animated: animated)
+            viewControllers = [memberCenterTVC]
+        }
+    }
+    // MARK: - 跳登入首頁(LoginViewController_1)
+    func showLogIn(){
+        let controller = LoginViewController_1()
+        controller.delegate = self
+        setViewControllers([controller], animated: false)
+        
+//        controller.modalPresentationStyle = .fullScreen
+//        present(controller, animated: true, completion: nil)
+        user = User()
+    }
+    // MARK: - 進會員首頁前要載會員資料
+    func loadUserData(){
+        guard Global.ACCOUNT != "" && Global.ACCOUNT.count == 10 else {
+            return
+        }
+        print(#function)
+        print(Global.ACCOUNT)
+        print(Global.ACCOUNT_PASSWORD)
+        
+        let accountType = "0"
+        sleep(1)
+        UserService.shared.getPersonalData(account: Global.ACCOUNT, pw: Global.ACCOUNT_PASSWORD, accountType: accountType) { success, response in
+            DispatchQueue.global(qos: .userInitiated).async {
+                URLCache.shared.removeAllCachedResponses()
+                DispatchQueue.main.sync {
+                    
+                    guard success else {
+                        return
+                    }
+                    
+                    Global.personalData = response as? User
+                    print(#function)
+                    print(Global.personalData)
+                    
+                    Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
+                    Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
+                    
+                    if Global.personalData?.cmdImageFile == nil || Global.personalData?.cmdImageFile == "" {
+                        return
+                    }
+                    if let personalCMDImageFile = Global.personalData?.cmdImageFile {
+                        self.userImage?.setImage(imageURL: API_URL + personalCMDImageFile)
+                    }
+                }
+            }
+        }
+    }
 }
-
+// MARK: - MemberCenterTVC Delegate
 extension MemberNavigationViewController: MemberCenterTableViewControllerDelegate{
     func memberInfo(_ viewController: MemberCenterTableViewController) {
-        viewController.navigationController?.pushViewController(MemberInfoViewController(), animated: true)
+        let vc = MemberInfoViewController_1()
+        vc.user = Global.personalData
+//        let vc = SignUpViewController()
+        viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
     func myTicket(_ viewController: MemberCenterTableViewController) {
         let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
+        
         viewController.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -57,12 +153,119 @@ extension MemberNavigationViewController: MemberCenterTableViewControllerDelegat
     }
     
     func logout(_ viewController: MemberCenterTableViewController) {
-//        viewController.navigationController?.pushViewController(LoginViewController(), animated: true)
-//        let controller = LoginViewController()
-//        setViewControllers([controller], animated: false)
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-//        let controller = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.navigationController?.pushViewController(controller, animated: true)
+        MyKeyChain.logout()
+        showLogIn()
+    }
+//
+    func toStoreAcc(_ viewController: MemberCenterTableViewController) {
+        let controller = StoreAppViewController()
+        viewController.navigationController?.pushViewController(controller, animated: true)
+    }
+}
+// MARK: - SignUp1 Delegate(進入第二頁面填寫認證碼、密碼)
+extension MemberNavigationViewController: SignUpViewController_1_Delegate {
+    func finishSignup1WithSubmitCode(_ viewController: SignUpViewController_1, resultType: Int) {
+        if resultType == 1 { //繼續驗證
+            let vc = SignUpViewController_2()
+            vc.delegate = self
+            present(vc, animated: true, completion: nil)
+        } else { //前往登入頁
+            let vc = LoginViewController_1()
+            vc.delegate = self
+            present(vc, animated: true, completion: nil)
+        }
+    }
+}
+// MARK: - SignUp2 Delegate(進入註冊第三頁填寫會員資訊)
+extension MemberNavigationViewController: SignupViewController_2_Delegate {
+    func finishSignup2With() {
+        let vc = SignUpViewController()
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
+    }
+}
+// MARK: - SignUp3 Delegate(註冊完直接進會員首頁-需要載入會員資料)
+extension MemberNavigationViewController: SignUpViewControllerDelegate {
+    func finishSignup3With() {
+//        showRoot()
+        showLogIn()
+    }
+}
+// MARK: - Login Delegate(登入/忘記密碼/註冊)
+extension MemberNavigationViewController: LoginViewController_1_Delegate {
+    func finishLoginView(_ viewController: LoginViewController_1, action: finishLoginViewWith) {
+        switch action {
+        case .Login:
+            loadUserData()
+            showRoot(animated: true)
+        case .Forget:
+            let vc = ForgotPasswordViewController_1()
+            vc.delegate = self
+            present(vc, animated: true, completion: nil)
+        case .Singup:
+            let vc = SignUpViewController_1()
+            vc.delegate = self
+            present(vc, animated: true, completion: nil)
+        case .BossLogIn:
+            showRoot(animated: true)
+            let vc = StoreAppViewController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
+//            vc.delegate = self
+//            self.setViewControllers([vc], animated: true)
+        }
+    }
+    func showStoreID(_ viewController: LoginViewController_1) {
+        let vc = StoreIDSelectViewController()
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
+    }
+}
+// MARK: - 忘記密碼1(重新提供手機)
+extension MemberNavigationViewController: ForgotPasswordViewController_1_Delegate {
+    func finishViewWith(tempAccount: String) {
+        let vc = ForgotPasswordViewController_2()
+        vc.delegate = self
+        present(vc, animated: true, completion: nil)
+    }
+}
+// MARK: - 忘記密碼2(完成返回登入頁面)
+extension MemberNavigationViewController: ForgotPasswordViewController_2_Delegate {
+    func finishPwdStep2ViewWith() {
+        showLogIn()
+    }
+}
+// MARK: - 選擇店家(StoreID) - 沒用到
+extension MemberNavigationViewController: StoreIDSelectViewControllerDelegate {
+    func didDismissAndPassStoreID(_ viewController: StoreIDSelectViewController, storeIDInfo: StoreIDInfo) {
+        let vc = LoginViewController_1()
+//        vc.storeIDs = storeIDInfo
+        setViewControllers([vc], animated: false)
+    }
+}
+// MARK: - StoreApp(登入後店長主頁-剩單純掃描)
+extension MemberNavigationViewController: StoreAppViewControllerDelegate {
+    func toQRScan(_ viewController: StoreAppViewController) {
+        let vc = QRCodeViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func backToLogin(_ viewController: StoreAppViewController) {
+        let vc = LoginViewController_1()
+        setViewControllers([vc], animated: true)
+    }
+}
+
+extension MemberNavigationViewController: QRCodeViewControllerDelegate {
+    func didFinishScan(_ viewController: QRCodeViewController) {
+        //
+    }
+}
+
+extension MemberNavigationViewController: MemberInfoViewControllerDelegate {
+    func memberInfoDidUpdate(_ viewController: MemberInfoViewController) {
+        loadUserData()
     }
 }

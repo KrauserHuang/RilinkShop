@@ -8,9 +8,9 @@
 import Foundation
 
 struct Category: Codable {
-    let pid: String
-    let productType: String
-    let productTypeName: String
+    var pid: String = ""
+    var productType: String = ""
+    var productTypeName: String = ""
     
     enum CodingKeys: String, CodingKey {
         case pid

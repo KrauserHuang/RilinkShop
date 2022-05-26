@@ -14,9 +14,18 @@ class HostelDetailViewController: UIViewController {
     @IBOutlet weak var phoneNoLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    var store = Store()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        showStoreInfo()
+    }
+    
+    func showStoreInfo() {
+        hostelImageView.setImage(imageURL: TEST_ROOT_URL + store.storePicture)
+        openTimeLabel.text = "營業時間：\(store.storeOpentime)"
+        phoneNoLabel.text = "電話：\(store.storePhone)"
+        descriptionLabel.text = store.storeDescript
     }
 }

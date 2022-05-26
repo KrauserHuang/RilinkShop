@@ -1,19 +1,21 @@
 PODS:
-  - Alamofire (5.4.4)
+  - Alamofire (5.5.0)
   - BadgeHub (1.0.0)
   - EzPopup (1.2.3)
   - FSCalendar (2.8.2)
   - Kingfisher (7.1.2)
   - MBProgressHUD (1.2.0)
+  - SnapKit (5.6.0)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.4)
+  - Alamofire (~> 5.5)
   - BadgeHub
   - EzPopup
   - FSCalendar
   - Kingfisher (~> 7.0)
   - MBProgressHUD (~> 1.2.0)
+  - SnapKit (~> 5.6.0)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -24,17 +26,19 @@ SPEC REPOS:
     - FSCalendar
     - Kingfisher
     - MBProgressHUD
+    - SnapKit
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   BadgeHub: b227771329f78c37a2dae7502607ec6d00a50bd4
   EzPopup: bd911825754e020b926287453ad4947045a04d1e
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 252fe6e326db82dddf850aef003e29505b04454f
+PODFILE CHECKSUM: c4fe4c2f0290e432b0285394ce137358e5554565
 
 COCOAPODS: 1.11.2

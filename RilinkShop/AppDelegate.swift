@@ -12,7 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let navBarAppearance = UINavigationBarAppearance()
@@ -29,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal)
 //        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .highlighted)
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for: .default)
+        
+        //check whether login or not
+//        MyKeyChain.setAccount("0911838460")
+//        MyKeyChain.setPassword("simon07801")
         
         return true
     }

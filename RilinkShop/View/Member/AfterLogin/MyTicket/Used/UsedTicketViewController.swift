@@ -11,26 +11,96 @@ class UsedTicketViewController: UIViewController {
 
     @IBOutlet weak var tableViiew: UITableView!
     
+    var tickets = [QRCode]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableViiew.reloadData()
+            }
+        }
+    }
+    let account = MyKeyChain.getAccount() ?? ""
+    let password = MyKeyChain.getPassword() ?? ""
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableViiew.rowHeight = 101
-        self.tableViiew.register(UINib(nibName: "UsedTableViewCell", bundle: nil), forCellReuseIdentifier: "UsedTableViewCell")
-        self.tableViiew.delegate = self
-        self.tableViiew.dataSource = self
+        tableViiew.rowHeight = 101
+        tableViiew.register(UINib(nibName: "UsedTableViewCell", bundle: nil), forCellReuseIdentifier: "UsedTableViewCell")
+        tableViiew.delegate = self
+        tableViiew.dataSource = self
+        tableViiew.allowsSelection = false
+        
+        tableViiew.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshList), for: .valueChanged)
+        
+        getTicket()
     }
 
+    func getTicket() {
+        QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
+            QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
+//                self.tickets = productResponse
+                self.tickets = productResponse + packageResponse
+//                print(#function)
+//                print(self.tickets)
+            }
+        }
+        
+//        QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "",
+//                                         pwd: MyKeyChain.getPassword() ?? "",
+//                                         ispackage: "0") { success, response in
+//            guard success else {
+//                let errorMsg = response as! String
+//                Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+//                return
+//            }
+//            self.tickets = (response as? [QRCode])!
+//            print(#function)
+//            print(self.tickets)
+//        }
+    }
+    
+    @objc func refreshList() {
+        self.refreshControl.beginRefreshing()
+        QRCodeService.shared.confirmList(id: account, pwd: password, ispackage: "0") { productResponse in
+            QRCodeService.shared.confirmList(id: self.account, pwd: self.password, ispackage: "1") { packageResponse in
+                self.tickets = productResponse + packageResponse
+                if self.tickets.count != 0 {
+                    self.refreshControl.endRefreshing()
+                    self.tableViiew.reloadData()
+                } else {
+                    self.refreshControl.endRefreshing()
+                    self.tableViiew.reloadData()
+                }
+            }
+        }
+        
+//        QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "",
+//                                         pwd: MyKeyChain.getPassword() ?? "",
+//                                         ispackage: "0") { success, response in
+//            guard success else {
+//                let errorMsg = response as! String
+//                Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+//                return
+//            }
+//
+//            print(response)
+//        }
+    }
 }
 
 extension UsedTicketViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return tickets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UsedTableViewCell") as! UsedTableViewCell
+        
+        let ticket = tickets[indexPath.row]
+        cell.configure(with: ticket)
+        
         return cell
     }
-    
-    
 }

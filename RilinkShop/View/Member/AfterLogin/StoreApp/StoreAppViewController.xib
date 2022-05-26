@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoreAppViewController" customModule="RilinkShop" customModuleProvider="target">
+            <connections>
+                <outlet property="logoutButton" destination="iuU-KF-VHe" id="7cK-8v-aRt"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7l3-yo-bc9" userLabel="QRCode View">
+                    <rect key="frame" x="40" y="84" width="295" height="200"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2o-aR-cyh">
+                            <rect key="frame" x="97.666666666666657" y="50" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="2qo-vT-pWG"/>
+                                <constraint firstAttribute="height" constant="100" id="6Y5-DR-TSU"/>
+                            </constraints>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="QRCODE"/>
+                            <connections>
+                                <action selector="scan:" destination="-1" eventType="touchUpInside" id="ApB-FQ-w0K"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="掃描核銷" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NYE-SZ-UuA">
+                            <rect key="frame" x="106.66666666666666" y="160" width="82" height="24"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.30980392159999998" green="0.51764705879999995" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstItem="NYE-SZ-UuA" firstAttribute="centerX" secondItem="7l3-yo-bc9" secondAttribute="centerX" id="DXX-Ng-Hq1"/>
+                        <constraint firstAttribute="height" constant="200" id="Kj7-9R-sBv"/>
+                        <constraint firstItem="NYE-SZ-UuA" firstAttribute="top" secondItem="f2o-aR-cyh" secondAttribute="bottom" constant="10" id="Sr3-OU-Qj2"/>
+                        <constraint firstItem="f2o-aR-cyh" firstAttribute="centerX" secondItem="7l3-yo-bc9" secondAttribute="centerX" id="odQ-R7-4wQ"/>
+                        <constraint firstItem="f2o-aR-cyh" firstAttribute="centerY" secondItem="7l3-yo-bc9" secondAttribute="centerY" id="v98-7Y-OX5"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RilinkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="mKS-lv-enR">
+                    <rect key="frame" x="20" y="435" width="335" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="BQ0-3c-dBv"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="綠悠遊店長" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NjV-qM-s48">
+                    <rect key="frame" x="100" y="384" width="175" height="36"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iuU-KF-VHe">
+                    <rect key="frame" x="100" y="665" width="175" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="ye2-PQ-wzh"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <connections>
+                        <action selector="logoutAction:" destination="-1" eventType="touchUpInside" id="53w-XD-eKV"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="7l3-yo-bc9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="6hb-TN-tUz"/>
+                <constraint firstItem="mKS-lv-enR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="7m9-lE-cEg"/>
+                <constraint firstItem="NjV-qM-s48" firstAttribute="top" secondItem="7l3-yo-bc9" secondAttribute="bottom" constant="100" id="AYZ-Cb-wxU"/>
+                <constraint firstItem="mKS-lv-enR" firstAttribute="top" secondItem="NjV-qM-s48" secondAttribute="bottom" constant="15" id="CV3-Wa-upZ"/>
+                <constraint firstItem="NjV-qM-s48" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="Gau-Md-cGy"/>
+                <constraint firstItem="7l3-yo-bc9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="PHW-83-CYl"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mKS-lv-enR" secondAttribute="trailing" constant="20" id="Rt3-Gn-4gJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NjV-qM-s48" secondAttribute="trailing" constant="100" id="SL1-U8-kTK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iuU-KF-VHe" secondAttribute="trailing" constant="100" id="WCu-OT-4lX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7l3-yo-bc9" secondAttribute="trailing" constant="40" id="kU5-Bg-6kQ"/>
+                <constraint firstItem="iuU-KF-VHe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="q6Z-rS-XPt"/>
+                <constraint firstItem="iuU-KF-VHe" firstAttribute="top" secondItem="mKS-lv-enR" secondAttribute="bottom" constant="30" id="ua6-sy-usa"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="92.364532019704441"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="QRCODE" width="484.260009765625" height="484.260009765625"/>
+        <image name="RilinkIcon" width="512" height="512"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

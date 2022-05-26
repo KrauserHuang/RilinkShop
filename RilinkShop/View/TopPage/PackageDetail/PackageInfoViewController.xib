@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PackageInfoViewController" customModule="RilinkShop" customModuleProvider="target">
+            <connections>
+                <outlet property="addToCartButton" destination="KOn-f3-qpw" id="CTP-Er-Rci"/>
+                <outlet property="buyNowButton" destination="FuR-rM-FoP" id="9DV-rh-rSZ"/>
+                <outlet property="descriptionLabel" destination="WEa-GS-dp2" id="s3J-6c-rig"/>
+                <outlet property="itemNumberLabel" destination="oHn-YH-Y1h" id="vCD-7B-Aaw"/>
+                <outlet property="minusButton" destination="OLd-vy-Bdu" id="gil-ad-d1M"/>
+                <outlet property="packageCostLabel" destination="HYS-5J-wt3" id="WDs-7k-lb3"/>
+                <outlet property="packageImageView" destination="382-uL-XUe" id="Uee-nW-RBg"/>
+                <outlet property="packageNameLabel" destination="iwg-Xv-3Ey" id="MCQ-fq-VbY"/>
+                <outlet property="plusButton" destination="UyW-Py-Jl4" id="qya-tX-mDp"/>
+                <outlet property="stepperOuterView" destination="9Cc-eo-TL9" id="OUS-Ia-bza"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmK-i7-mPW">
+                    <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4CW-7v-Cpi">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="634"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="h9T-Cv-aqx">
+                                    <rect key="frame" x="30" y="0.0" width="354" height="634"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nft" translatesAutoresizingMaskIntoConstraints="NO" id="382-uL-XUe">
+                                            <rect key="frame" x="0.0" y="0.0" width="354" height="200"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="200" id="hbn-6r-Njf"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Trj-EY-fcN">
+                                            <rect key="frame" x="0.0" y="215" width="348.5" height="91.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品名稱：[瑞典 Oatly] 咖啡師燕麥奶箱購6入組 (1000ml/瓶) (全素)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwg-Xv-3Ey">
+                                                    <rect key="frame" x="0.0" y="0.0" width="348.5" height="42.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="售價：NT$1254" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HYS-5J-wt3">
+                                                    <rect key="frame" x="0.0" y="62.5" width="348.5" height="29"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                    <color key="textColor" red="0.3112416267" green="0.51907396319999999" blue="0.42351847889999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Cc-eo-TL9">
+                                            <rect key="frame" x="0.0" y="321.5" width="100" height="32.5"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="kkn-eE-nb7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="32.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLd-vy-Bdu">
+                                                            <rect key="frame" x="0.0" y="0.0" width="32.5" height="32.5"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" image="minus" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="itemNumberStepper:" destination="-1" eventType="touchUpInside" id="jrv-2x-1r8"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHn-YH-Y1h">
+                                                            <rect key="frame" x="33.5" y="0.0" width="33" height="32.5"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UyW-Py-Jl4">
+                                                            <rect key="frame" x="67.5" y="0.0" width="32.5" height="32.5"/>
+                                                            <color key="backgroundColor" red="0.83921568629999999" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="UyW-Py-Jl4" secondAttribute="height" multiplier="1:1" id="GFF-n8-NxR"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal">
+                                                                <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="itemNumberStepper:" destination="-1" eventType="touchUpInside" id="U9z-HA-3JB"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="kkn-eE-nb7" secondAttribute="bottom" id="0T9-na-uH3"/>
+                                                <constraint firstAttribute="width" constant="100" id="3bD-uz-fyJ"/>
+                                                <constraint firstItem="kkn-eE-nb7" firstAttribute="leading" secondItem="9Cc-eo-TL9" secondAttribute="leading" id="BXO-qV-KVi"/>
+                                                <constraint firstAttribute="trailing" secondItem="kkn-eE-nb7" secondAttribute="trailing" id="i4A-mO-9yj"/>
+                                                <constraint firstItem="kkn-eE-nb7" firstAttribute="top" secondItem="9Cc-eo-TL9" secondAttribute="top" id="iTE-sF-oG7"/>
+                                            </constraints>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Wv7-9s-GeJ">
+                                            <rect key="frame" x="0.0" y="369" width="343" height="265"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品敘述：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2IT-X2-bTb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEa-GS-dp2">
+                                                    <rect key="frame" x="0.0" y="39" width="343" height="226"/>
+                                                    <string key="text">．咖啡師 每100ml 含糖 3.2g｜10% 燕麥含量 ｜熱量 58.2 kcal
+．OATLY來自於瑞典，是歐洲燕麥製品領域的品牌。
+．瑞典禁止使用多種殺蟲劑，使燕麥的食用安全受到保障。且不添加防腐劑、人工色素及化學調味料。
+．OATLY希望為大家帶來的是一種生活方式，用更多醇味的產品味大家增添營養，而不是僅僅提供乳製品的替代品。
+．高品質燕麥奶，不含牛奶、無乳糖，是素食及乳糖不耐者的健康新選擇。
+．此款咖啡師燕麥奶廣受知名咖啡店使用，主打容易發泡，讓咖啡師可以掌控泡沫的密度和呈現。</string>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="h9T-Cv-aqx" firstAttribute="top" secondItem="4CW-7v-Cpi" secondAttribute="top" id="Htr-zw-sV0"/>
+                                <constraint firstAttribute="bottom" secondItem="h9T-Cv-aqx" secondAttribute="bottom" id="aWk-YG-ldT"/>
+                                <constraint firstItem="h9T-Cv-aqx" firstAttribute="leading" secondItem="4CW-7v-Cpi" secondAttribute="leading" constant="30" id="os0-Sx-T05"/>
+                                <constraint firstAttribute="trailing" secondItem="h9T-Cv-aqx" secondAttribute="trailing" constant="30" id="p3a-4T-icg"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="4CW-7v-Cpi" firstAttribute="leading" secondItem="tyy-Fj-IGw" secondAttribute="leading" id="Mjs-N4-n0F"/>
+                        <constraint firstItem="4CW-7v-Cpi" firstAttribute="width" secondItem="u35-ld-Zge" secondAttribute="width" id="R9g-IU-RfX"/>
+                        <constraint firstItem="4CW-7v-Cpi" firstAttribute="trailing" secondItem="tyy-Fj-IGw" secondAttribute="trailing" id="Wmj-vH-OOG"/>
+                        <constraint firstItem="4CW-7v-Cpi" firstAttribute="top" secondItem="tyy-Fj-IGw" secondAttribute="top" id="dMS-iM-Vyj"/>
+                        <constraint firstItem="4CW-7v-Cpi" firstAttribute="bottom" secondItem="tyy-Fj-IGw" secondAttribute="bottom" id="uGX-rz-Ide"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="tyy-Fj-IGw"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="u35-ld-Zge"/>
+                </scrollView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QSH-dd-S6P">
+                    <rect key="frame" x="30" y="812" width="354" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOn-f3-qpw">
+                            <rect key="frame" x="0.0" y="0.0" width="167" height="40"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="加入購物車"/>
+                            <connections>
+                                <action selector="addToCartButtonTapped:" destination="-1" eventType="touchUpInside" id="Lmx-qg-szp"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FuR-rM-FoP">
+                            <rect key="frame" x="187" y="0.0" width="167" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="yHN-DJ-ojx"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="立即購買"/>
+                            <connections>
+                                <action selector="buyNowButtonTapped:" destination="-1" eventType="touchUpInside" id="uJE-34-Ght"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QSH-dd-S6P" secondAttribute="bottom" constant="10" id="Cmw-Zw-vwQ"/>
+                <constraint firstItem="QSH-dd-S6P" firstAttribute="top" secondItem="RmK-i7-mPW" secondAttribute="bottom" constant="10" id="Fiv-TR-d3C"/>
+                <constraint firstItem="RmK-i7-mPW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="HPG-Y3-Rfy"/>
+                <constraint firstItem="RmK-i7-mPW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="ROf-Fi-gmH"/>
+                <constraint firstItem="QSH-dd-S6P" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="dH7-nv-1h4"/>
+                <constraint firstItem="RmK-i7-mPW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vYb-Gx-Dnt"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QSH-dd-S6P" secondAttribute="trailing" constant="30" id="ymD-Tq-qCO"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="92.410714285714278"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="minus" catalog="system" width="128" height="24"/>
+        <image name="nft" width="1037" height="1046"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

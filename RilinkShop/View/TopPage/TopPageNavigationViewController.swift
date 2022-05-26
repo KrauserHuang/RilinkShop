@@ -8,6 +8,8 @@
 import UIKit
 
 class TopPageNavigationViewController: UINavigationController {
+    
+    var user = User()
 
     override func viewDidLoad() {
         super.viewDidLoad()

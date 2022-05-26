@@ -29,11 +29,13 @@ class CartViewController: UIViewController {
         }
     }
     var total = 0
+    let account = MyKeyChain.getAccount() ?? ""
+    let password = MyKeyChain.getPassword() ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        navigationItem.backButtonTitle = ""
         loadInCartItems()
         configureTableView()
         configureView()
@@ -54,26 +56,16 @@ class CartViewController: UIViewController {
         indicator.show(animated: true)
         cartTableView.isHidden = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            ProductService.shared.loadShoppingCartList(id: "0910619306", pwd: "a12345678") { items in
+            ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { items in
                 self.inCartItems = items
                 self.cartTableView.isHidden = false
                 indicator.hide(animated: true)
     //            self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
             }
-            ProductService.shared.getShoppingCartCount(id: "0910619306", pwd: "a12345678") { response in
+            ProductService.shared.getShoppingCartCount(id: self.account, pwd: self.password) { response in
                 self.noItemView.isHidden = response.responseMessage == "0" ? false : true
             }
         }
-//        ProductService.shared.loadShoppingCartList(id: "0910619306", pwd: "a12345678") { items in
-//            self.inCartItems = items
-//            self.cartTableView.isHidden = false
-//            indicator.hide(animated: true)
-////            self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
-//        }
-//        ProductService.shared.getShoppingCartCount(id: "0910619306", pwd: "a12345678") { response in
-//            self.noItemView.isHidden = response.responseMessage == "0" ? false : true
-//        }
-//        noItemView.isHidden = self.inCartItems.isEmpty ? false : true
     }
     // tableView相關設定
     func configureTableView() {
@@ -111,7 +103,7 @@ class CartViewController: UIViewController {
     @IBAction func clearAllButtonTapped(_ sender: UIButton) {
         let alertController = UIAlertController(title: "是否清除全部", message: "There's no turnig back!", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "清除", style: .destructive) { action in
-            ProductService.shared.clearShoppingCartItem(id: "0910619306", pwd: "a12345678") { product in }
+            ProductService.shared.clearShoppingCartItem(id: self.account, pwd: self.password) { product in }
             self.inCartItems.removeAll()
             ProductService.shared.inCartItems = self.inCartItems
             self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
@@ -187,7 +179,7 @@ extension CartViewController: CartTableViewCellDelegate {
         let alertController = UIAlertController(title: "", message: "確定要刪除此商品？", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "確認", style: .default) { action in
             let no = self.inCartItems[indexPath.row].product_no
-            ProductService.shared.removeShoppingCartItem(id: "0910619306", pwd: "a12345678", no: no) { product in }
+            ProductService.shared.removeShoppingCartItem(id: self.account, pwd: self.password, no: no) { product in }
             self.inCartItems.remove(at: indexPath.row)
             ProductService.shared.inCartItems = self.inCartItems
             self.cartTableView.beginUpdates()

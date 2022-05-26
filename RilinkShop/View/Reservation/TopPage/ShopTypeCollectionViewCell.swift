@@ -11,24 +11,13 @@ class ShopTypeCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "ShopTypeCollectionViewCell"
 
-    @IBOutlet weak var outerView: UIView! {
-        didSet {
-            outerView.backgroundColor = .clear
-//            outerView.layer.borderWidth = 1
-//            outerView.layer.borderColor = UIColor(hex: "#54a0ff")?.cgColor
-//            outerView.layer.cornerRadius = 2
-        }
-    }
-    @IBOutlet weak var typeLabel: UILabel! {
-        didSet {
-            typeLabel.textColor = UIColor(hex: "#54a0ff")
-        }
-    }
+    @IBOutlet weak var outerView: UIView!
+    @IBOutlet weak var typeLabel: UILabel!
     
     var isItemSelected: Bool = false {
         didSet {
-//            outerView.layer.borderWidth = isItemSelected ? 1 : 0
-            typeLabel.textColor = isItemSelected ? UIColor(hex: "#54a0ff") : .systemGray
+            typeLabel.textColor = isItemSelected ? .systemGray6 : UIColor(hex: "#4F846C")
+            outerView.backgroundColor = isItemSelected ? UIColor(hex: "4F846C") : .systemGray6
         }
     }
     
@@ -36,6 +25,9 @@ class ShopTypeCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         isItemSelected = false
+        outerView.layer.cornerRadius = 5
+        outerView.backgroundColor = UIColor(hex: "4F846C")
+        typeLabel.textColor = .systemGray6
     }
     
     override func prepareForReuse() {

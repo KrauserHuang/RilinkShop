@@ -18,8 +18,8 @@ class HostelCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-//    func configure(with model: Package) {
-//        let imageURLString = TEST_ROOT_URL + model.productPicture
-//        hostelImageView.setImage(imageURL: imageURLString)
-//    }
+    func configure(with model: Store) {
+        let imageURLString = TEST_ROOT_URL + model.storePicture
+        hostelImageView.setImage(imageURL: imageURLString)
+    }
 }

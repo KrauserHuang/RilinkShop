@@ -25,4 +25,20 @@ class UsedTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func configure(with model: QRCode) {
+        if let modelProductPicture = model.productPicture {
+            ticketImage.setImage(imageURL: TEST_ROOT_URL + modelProductPicture)
+        } else if let modelPackagePicture = model.packagePicture {
+            ticketImage.setImage(imageURL: TEST_ROOT_URL + modelPackagePicture)
+        }
+        if let modelProductName = model.productName {
+            name.text = modelProductName
+        } else if let modelPackageName = model.packageName {
+            name.text = modelPackageName
+        }
+        
+        buyDay.text = "購買日期：\(model.orderDate)"
+        orderNo.text = "訂單編號：\(model.orderNo)"
+    }
+    
 }

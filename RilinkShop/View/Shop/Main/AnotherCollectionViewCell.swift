@@ -17,8 +17,10 @@ class AnotherCollectionViewCell: UICollectionViewCell {
     
     var isItemSelected: Bool = false {
         didSet {
-            indicatorLine.alpha = isItemSelected ? 1 : 0
-            label.textColor = isItemSelected ? UIColor(hex: "#4F846C") : .systemGray
+//            indicatorLine.alpha = isItemSelected ? 1 : 0
+//            label.textColor = isItemSelected ? UIColor(hex: "#4F846C") : .systemGray
+            label.textColor = isItemSelected ? .systemGray6 : UIColor(hex: "#4F846C")
+            outerView.backgroundColor = isItemSelected ? UIColor(hex: "4F846C") : .systemGray6
         }
     }
     
@@ -26,7 +28,9 @@ class AnotherCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         isItemSelected = false
-        outerView.layer.cornerRadius = outerView.frame.height / 2
+        outerView.layer.cornerRadius = 5
+        outerView.backgroundColor = UIColor(hex: "4F846C")
+        label.textColor = .systemGray6
     }
     
     override func prepareForReuse() {

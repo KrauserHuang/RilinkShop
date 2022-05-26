@@ -47,7 +47,7 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SeM-4J-U90" userLabel="Promotions">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SeM-4J-U90" userLabel="Promotions">
                                                 <rect key="frame" x="0.0" y="64" width="414" height="263"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nnu-YP-elj" userLabel="PromotionsBottomView">
@@ -211,6 +211,26 @@
                                                     <constraint firstItem="Nnu-YP-elj" firstAttribute="top" secondItem="SeM-4J-U90" secondAttribute="top" id="xH4-s1-Am2"/>
                                                 </constraints>
                                             </scrollView>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JVj-gl-0i5">
+                                                <rect key="frame" x="16" y="64" width="382" height="263"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dtm-DM-dhT">
+                                                    <size key="itemSize" width="128" height="128"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="M4q-mx-AdP">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Lhw-cI-RVE">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </collectionViewCellContentView>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ehM-0K-Ohx">
                                                 <rect key="frame" x="16" y="357" width="382" height="27"/>
                                                 <subviews>
@@ -261,19 +281,23 @@
                                             <constraint firstItem="Wwt-01-Ibw" firstAttribute="leading" secondItem="YFL-oF-Tj9" secondAttribute="leading" constant="16" id="5Bf-NJ-knO"/>
                                             <constraint firstAttribute="trailing" secondItem="Wwt-01-Ibw" secondAttribute="trailing" constant="16" id="7Pu-MY-tbY"/>
                                             <constraint firstItem="gZu-uG-hdB" firstAttribute="width" secondItem="2qg-lE-Sc2" secondAttribute="width" id="EMA-OC-9uv"/>
+                                            <constraint firstItem="JVj-gl-0i5" firstAttribute="top" secondItem="SeM-4J-U90" secondAttribute="top" id="J3Q-JB-AAV"/>
                                             <constraint firstItem="2qg-lE-Sc2" firstAttribute="top" secondItem="YFL-oF-Tj9" secondAttribute="top" constant="30" id="NzH-fQ-Jvf"/>
                                             <constraint firstItem="Fh5-dD-2tY" firstAttribute="width" secondItem="2qg-lE-Sc2" secondAttribute="width" id="OBi-Bf-9Kn"/>
                                             <constraint firstItem="ehM-0K-Ohx" firstAttribute="top" secondItem="SeM-4J-U90" secondAttribute="bottom" constant="30" id="RM8-fe-eXC"/>
                                             <constraint firstAttribute="trailing" secondItem="2qg-lE-Sc2" secondAttribute="trailing" constant="16" id="T1a-6l-rSs"/>
                                             <constraint firstItem="ehM-0K-Ohx" firstAttribute="leading" secondItem="2qg-lE-Sc2" secondAttribute="leading" id="Tza-Sv-GoT"/>
                                             <constraint firstItem="q9C-QV-lO0" firstAttribute="width" secondItem="2qg-lE-Sc2" secondAttribute="width" id="VbP-xz-5qb"/>
+                                            <constraint firstItem="JVj-gl-0i5" firstAttribute="leading" secondItem="SeM-4J-U90" secondAttribute="leading" constant="16" id="Xzj-O7-xeU"/>
                                             <constraint firstItem="Wwt-01-Ibw" firstAttribute="top" secondItem="ehM-0K-Ohx" secondAttribute="bottom" constant="7" id="Zow-dL-qa4"/>
                                             <constraint firstItem="SeM-4J-U90" firstAttribute="top" secondItem="2qg-lE-Sc2" secondAttribute="bottom" constant="7" id="ata-KE-NE1"/>
                                             <constraint firstItem="2qg-lE-Sc2" firstAttribute="leading" secondItem="YFL-oF-Tj9" secondAttribute="leading" constant="16" id="cJ9-GU-jvT"/>
                                             <constraint firstItem="SeM-4J-U90" firstAttribute="leading" secondItem="YFL-oF-Tj9" secondAttribute="leading" id="g8u-KN-Snf"/>
                                             <constraint firstAttribute="trailing" secondItem="SeM-4J-U90" secondAttribute="trailing" id="hBC-8S-7Sj"/>
+                                            <constraint firstItem="JVj-gl-0i5" firstAttribute="bottom" secondItem="SeM-4J-U90" secondAttribute="bottom" id="hLR-RU-tv2"/>
                                             <constraint firstAttribute="height" constant="720" id="jSk-p1-gn6"/>
                                             <constraint firstItem="ehM-0K-Ohx" firstAttribute="trailing" secondItem="2qg-lE-Sc2" secondAttribute="trailing" id="lkD-Lu-cSB"/>
+                                            <constraint firstItem="JVj-gl-0i5" firstAttribute="trailing" secondItem="SeM-4J-U90" secondAttribute="trailing" constant="-16" id="mqd-xp-eId"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -312,6 +336,7 @@
                         <outlet property="activity2BV" destination="gZu-uG-hdB" id="dt1-S1-A1L"/>
                         <outlet property="activity3BV" destination="Fh5-dD-2tY" id="UX6-cz-bAq"/>
                         <outlet property="anotherCartButton" destination="DkS-XE-h5s" id="PKZ-54-jUL"/>
+                        <outlet property="hostelCollectionView" destination="JVj-gl-0i5" id="fFf-DL-n9F"/>
                         <outlet property="hostelScrollView" destination="SeM-4J-U90" id="Bk8-FD-rg3"/>
                         <outlet property="image1" destination="yUD-5T-g4T" id="yPC-sx-H0a"/>
                         <outlet property="image2" destination="bWR-wM-4Tf" id="YDY-Cs-A2q"/>
@@ -335,7 +360,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2yb-tr-2sJ">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="sZG-m8-UUn">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="sZG-m8-UUn" customClass="PackageDetailHeaderView" customModule="RilinkShop" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -350,6 +375,9 @@
                                         <constraint firstAttribute="trailing" secondItem="2f3-F1-zew" secondAttribute="trailing" id="jIt-kh-sWe"/>
                                         <constraint firstItem="2f3-F1-zew" firstAttribute="top" secondItem="sZG-m8-UUn" secondAttribute="top" id="kL7-bg-edZ"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="headerImageView" destination="2f3-F1-zew" id="6FO-3o-BhD"/>
+                                    </connections>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="i9B-0F-BsN">
                                     <rect key="frame" x="0.0" y="762" width="414" height="44"/>
@@ -383,7 +411,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="68" id="A9R-pf-apK" customClass="PackageDetailNameCell" customModule="RilinkShop" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PackageDetailNameCell" rowHeight="68" id="A9R-pf-apK" customClass="PackageDetailNameCell" customModule="RilinkShop" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="244.5" width="414" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A9R-pf-apK" id="xkl-0S-rIm">
@@ -408,7 +436,7 @@
                                             <outlet property="nameLabel" destination="pGJ-um-eHC" id="ONh-yd-n4g"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="68" id="Ikt-lY-nw4" customClass="PackageDetailCostCell" customModule="RilinkShop" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PackageDetailCostCell" rowHeight="68" id="Ikt-lY-nw4" customClass="PackageDetailCostCell" customModule="RilinkShop" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="312.5" width="414" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ikt-lY-nw4" id="QZ3-Wb-Rvj">
@@ -433,7 +461,7 @@
                                             <outlet property="costLabel" destination="N6J-kK-7bl" id="zZC-zI-OiM"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="68" id="oYB-xH-ufN" customClass="PackageDetailStepperCell" customModule="RilinkShop" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PackageDetailStepperCell" rowHeight="68" id="oYB-xH-ufN" customClass="PackageDetailStepperCell" customModule="RilinkShop" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="380.5" width="414" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oYB-xH-ufN" id="GLX-sn-KdV">
@@ -493,7 +521,7 @@
                                             <outlet property="plusButton" destination="qfl-ix-Xqb" id="lss-rd-Maz"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="291" id="qya-Ig-dGs" customClass="PackageDetailDescriptionCell" customModule="RilinkShop" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PackageDetailDescriptionCell" rowHeight="291" id="qya-Ig-dGs" customClass="PackageDetailDescriptionCell" customModule="RilinkShop" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="448.5" width="414" height="291"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qya-Ig-dGs" id="tex-Xl-zyT">
@@ -536,6 +564,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wNz-le-Tcc" id="p0l-SX-uVL"/>
+                                    <outlet property="delegate" destination="wNz-le-Tcc" id="zwQ-av-eWR"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="c6t-ff-Xsa"/>
@@ -547,8 +579,10 @@
                             <constraint firstItem="2yb-tr-2sJ" firstAttribute="top" secondItem="c6t-ff-Xsa" secondAttribute="top" id="gto-JO-VbU"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="HTC-RU-Frb"/>
                     <connections>
-                        <outlet property="tableView" destination="2yb-tr-2sJ" id="XHu-28-WLV"/>
+                        <outlet property="headerView" destination="sZG-m8-UUn" id="Na3-Jd-emD"/>
+                        <outlet property="infoTableView" destination="2yb-tr-2sJ" id="p6f-BH-K1L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7d-IX-0at" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

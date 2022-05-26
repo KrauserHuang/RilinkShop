@@ -21,7 +21,7 @@ class ShopLocationTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         tableView.register(UINib(nibName: ShopTypeTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: ShopTypeTableViewCell.reuseIdentifier)
         tableView.register(UINib(nibName: ShopTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: ShopTableViewCell.reuseIdentifier)
-        cartButton.setBadge()
+//        cartButton.setBadge()
     }
     
     @IBAction func toCartVC(_ sender: UIBarButtonItem) {

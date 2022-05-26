@@ -13,12 +13,7 @@ class TopPageViewController: UIViewController {
         case all
     }
 
-    @IBOutlet weak var shoppingcartButton: UIButton!
     @IBOutlet weak var anotherCartButton: UIBarButtonItem!
-    @IBOutlet weak var anouncementLabel: UILabel!
-    @IBOutlet weak var pointLabel: UILabel!
-    @IBAction func instructAvtion(_ sender: UIButton) {
-    }
     @IBAction func moreActivity(_ sender: UIButton) {
     }
     @IBAction func moreProduct(_ sender: UIButton) {
@@ -32,16 +27,17 @@ class TopPageViewController: UIViewController {
     @IBOutlet weak var image3: UIImageView!
     
     @IBOutlet weak var hostelScrollView: UIScrollView!
+    @IBOutlet weak var hostelCollectionView: UICollectionView!
     @IBOutlet weak var ticketCollectionView: UICollectionView!
     
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Package>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Package>
     
-    private var nftImages = (1...10).map { "DoodleIcons-\($0)" }
-    
     private lazy var dataSource = configureDataSource()
     let badgeSize: CGFloat = 15
     let badgeTag = 123456
+    let account = MyKeyChain.getAccount() ?? ""
+    let password = MyKeyChain.getPassword() ?? ""
     var packages = [Package]() {
         didSet {
             DispatchQueue.main.async {
@@ -49,17 +45,20 @@ class TopPageViewController: UIViewController {
             }
         }
     }
+    var stores = [Store]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.hostelCollectionView.reloadData()
+            }
+        }
+    }
     
     // 購物車按鈕
     lazy var cartButton: UIButton =  {
         var button = UIButton()
-//        button.backgroundColor = .systemBlue
-//        button.tintColor  = .white
-//        button.setImage(UIImage(systemName: "cart"), for: .normal)
         button.setImage(UIImage(named: "button_cart"), for: .normal)
         button.addTarget(self, action: #selector(toCartTVC), for: .touchUpInside)
         button.sizeToFit()
-        
         return button
     }()
     
@@ -76,12 +75,13 @@ class TopPageViewController: UIViewController {
         label.layer.borderWidth = 1
         label.layer.borderColor = UIColor.red.cgColor
         label.isHidden = true
-        
         return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.backButtonTitle = ""
         
         promotionsBottomView.backgroundColor = .clear
         
@@ -95,31 +95,21 @@ class TopPageViewController: UIViewController {
 
         hostelScrollView.isPagingEnabled = true
         hostelScrollView.showsHorizontalScrollIndicator = false
-        // setup all collectionView
-        ticketCollectionView.register(UINib(nibName: TopPageShopCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: TopPageShopCollectionViewCell.reuseIdentifier)
-        ticketCollectionView.dataSource = dataSource
-        ticketCollectionView.delegate = self
-        ticketCollectionView.collectionViewLayout = createGridLayout()
+        
+        configureCollectionView()
+        loadStore()
         loadPackage()
-//        updateSnapshot()
-        
-//        addShoppingCart()
-//        NSLayoutConstraint.activate([
-//            shoppingcartButton.widthAnchor.constraint(equalToConstant: 44),
-//            shoppingcartButton.heightAnchor.constraint(equalToConstant: 44)
-//        ])
-        
-        // Badge method1
-//        showBadge(withCount: 5)
-        // Badge method2
-//        anotherCartButton.addBadge(number: 5)
-        anotherCartButton.setBadge()
+        updateSnapshot()
+//        anotherCartButton.setBadge()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        configureCollectionView()
+        loadStore()
+        loadPackage()
+        updateSnapshot()
         
-//        labelUI()
+        super.viewWillAppear(animated)
         self.tabBarController?.hidesBottomBarWhenPushed = false
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -131,15 +121,6 @@ class TopPageViewController: UIViewController {
         cartButton.addSubview(amountLabel)
         navigationController?.navigationBar.addSubview(amountLabel)
         navigationController?.navigationBar.barTintColor = UIColor.white
-    }
-    
-    func labelUI() {
-        amountLabel.frame = CGRect(x: 0, y: 0, width: 40, height: 20)
-        amountLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            amountLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
-            amountLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10.5)
-        ])
     }
     
     @objc func toCartTVC() {
@@ -157,10 +138,36 @@ class TopPageViewController: UIViewController {
         obj.backgroundColor = .white
     }
     
+    func configureCollectionView() {
+        // setup all collectionView
+        ticketCollectionView.register(UINib(nibName: TopPageShopCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: TopPageShopCollectionViewCell.reuseIdentifier)
+        ticketCollectionView.dataSource = dataSource
+        ticketCollectionView.delegate = self
+        ticketCollectionView.collectionViewLayout = createGridLayout()
+        
+        let nib = UINib(nibName: HostelCollectionViewCell.reuseIdentifier, bundle: nil)
+        hostelCollectionView.register(nib, forCellWithReuseIdentifier: HostelCollectionViewCell.reuseIdentifier)
+        hostelCollectionView.delegate = self
+        hostelCollectionView.dataSource = self
+        hostelCollectionView.isPagingEnabled = true
+        
+        if let layout = hostelCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.minimumLineSpacing = 0
+            layout.scrollDirection = .horizontal
+            let width = UIScreen.main.bounds.width
+            layout.itemSize = CGSize(width: width, height: 263)
+        }
+    }
+    
     func loadPackage() {
-        ProductService.shared.loadPackageList(id: "0910619306", pwd: "a12345678") { packagesResponse in
+        ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "") { packagesResponse in
             self.packages = packagesResponse
             self.updateSnapshot()
+        }
+    }
+    func loadStore() {
+        StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "") { storesResponse in
+            self.stores = storesResponse
         }
     }
     
@@ -169,44 +176,6 @@ class TopPageViewController: UIViewController {
         let controller = HostelDetailViewController()
         self.navigationController?.pushViewController(controller, animated: true)
     }
-    
-    // MARK: - Badge method1
-//    func badgeLabel(withCount count: Int) -> UILabel {
-//        let badgeCount = UILabel(frame: CGRect(x: 0, y: 0, width: badgeSize, height: badgeSize))
-//        badgeCount.translatesAutoresizingMaskIntoConstraints = false
-//        badgeCount.tag = badgeTag
-//        badgeCount.layer.cornerRadius = badgeCount.bounds.size.width / 2
-//        badgeCount.textAlignment = .center
-//        badgeCount.layer.masksToBounds = true
-//        badgeCount.textColor = .white
-//        badgeCount.font = badgeCount.font.withSize(12)
-//        badgeCount.backgroundColor = .systemRed
-//        badgeCount.text = String(count)
-//        return badgeCount
-//    }
-//
-//    func showBadge(withCount count: Int) {
-//        let badge = badgeLabel(withCount: count)
-//        shoppingcartButton.addSubview(badge)
-//
-//        NSLayoutConstraint.activate([
-//            badge.leftAnchor.constraint(equalTo: shoppingcartButton.leftAnchor, constant: 30),
-//            badge.topAnchor.constraint(equalTo: shoppingcartButton.topAnchor, constant: 4),
-//            badge.widthAnchor.constraint(equalToConstant: badgeSize),
-//            badge.heightAnchor.constraint(equalToConstant: badgeSize)
-//        ])
-//    }
-//
-//    func removeBadge() {
-//        if let badge = shoppingcartButton.viewWithTag(badgeTag) {
-//            badge.removeFromSuperview()
-//        }
-//    }
-    
-//    @IBAction func toCartVC(_ sender: UIButton) {
-//        let cartVC = CartViewController()
-//        navigationController?.pushViewController(cartVC, animated: true)
-//    }
     // MARK: - Badge method2
     @IBAction func toCartVC(_ sender: UIBarButtonItem) {
         let cartVC = CartViewController()
@@ -214,18 +183,34 @@ class TopPageViewController: UIViewController {
     }
 }
 // MARK: - UICollectionViewDelegate
-extension TopPageViewController: UICollectionViewDelegate {
+extension TopPageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        switch collectionView {
+        case hostelCollectionView:
+            let store = stores[indexPath.item]
+            let hostelDetailVC = HostelDetailViewController()
+            hostelDetailVC.store = store
+            navigationController?.pushViewController(hostelDetailVC, animated: true)
+        case ticketCollectionView:
+            let package = packages[indexPath.item]
+            let packageInfoVC = PackageInfoViewController()
+            packageInfoVC.package = package
+            navigationController?.pushViewController(packageInfoVC, animated: true)
+        default:
+            break
+        }
         
-//        let controller = ShopViewController()
-//        let controller = ShopLocationTableViewController()
-        let controller = ProductDetailViewController()
-        navigationController?.pushViewController(controller, animated: true)
-//        let package = packages[indexPath.item]
-//        let packageDetailVC = PackageDetailViewController()
-//        packageDetailVC.package = package
-//        navigationController?.pushViewController(packageDetailVC, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return stores.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HostelCollectionViewCell.reuseIdentifier, for: indexPath) as! HostelCollectionViewCell
+        let store = stores[indexPath.item]
+        cell.configure(with: store)
+        return cell
     }
 }
 // MARK: - DataSource/Snapshot/CompositionalLayout
@@ -235,7 +220,6 @@ extension TopPageViewController {
         let dataSource = DataSource(collectionView: ticketCollectionView) { collectionView, indexPath, package -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageShopCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageShopCollectionViewCell
             cell.configure(with: package)
-//            cell.imageView.image = UIImage(named: imageName)
             
             return cell
         }
@@ -265,10 +249,3 @@ extension TopPageViewController {
         return layout
     }
 }
-
-//extension TopPageViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let sideSize = (traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular) ? 80.0 : 128.0
-//        return CGSize(width: sideSize, height: sideSize)
-//    }
-//}

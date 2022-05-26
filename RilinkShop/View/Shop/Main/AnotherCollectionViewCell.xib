@@ -22,19 +22,21 @@
                         <rect key="frame" x="10" y="10" width="96" height="30"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzh-nj-mkr">
-                                <rect key="frame" x="27.5" y="5" width="41.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="0.0" y="0.0" width="96" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="0.30980392156862746" green="0.51764705882352935" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Uzh-nj-mkr" firstAttribute="centerX" secondItem="jvX-AY-Qea" secondAttribute="centerX" id="Ke1-lw-Sap"/>
-                            <constraint firstItem="Uzh-nj-mkr" firstAttribute="centerY" secondItem="jvX-AY-Qea" secondAttribute="centerY" id="U97-Fp-nz8"/>
+                            <constraint firstItem="Uzh-nj-mkr" firstAttribute="leading" secondItem="jvX-AY-Qea" secondAttribute="leading" id="3Ev-jv-D2t"/>
+                            <constraint firstAttribute="bottom" secondItem="Uzh-nj-mkr" secondAttribute="bottom" id="CGa-CX-B0I"/>
+                            <constraint firstAttribute="trailing" secondItem="Uzh-nj-mkr" secondAttribute="trailing" id="X7N-zy-62k"/>
+                            <constraint firstItem="Uzh-nj-mkr" firstAttribute="top" secondItem="jvX-AY-Qea" secondAttribute="top" id="hBT-C2-7u8"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwG-SQ-d1b">
-                        <rect key="frame" x="33" y="38.5" width="50" height="1"/>
+                        <rect key="frame" x="33" y="43" width="50" height="1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="5H6-f1-cE5"/>

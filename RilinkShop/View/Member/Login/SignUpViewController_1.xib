@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignUpViewController_1" customModule="RilinkShop" customModuleProvider="target">
+            <connections>
+                <outlet property="accountTextField" destination="JR5-nR-Z67" id="T4R-1D-XUG"/>
+                <outlet property="agreeButton" destination="6jH-EW-p2B" id="ooS-LK-EMH"/>
+                <outlet property="submitButton" destination="WbG-mF-lPI" id="x7r-ox-ezL"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qm7-Q6-sKg">
+                    <rect key="frame" x="16" y="315.66666666666669" width="343" height="181"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DyJ-MO-4zh">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="72"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="註冊需要驗證手機號碼" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6tZ-Zu-cSR">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入會員手機號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JR5-nR-Z67">
+                                    <rect key="frame" x="0.0" y="27" width="343" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="mJ8-1D-v5q"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwc-5r-04n">
+                            <rect key="frame" x="0.0" y="92" width="343" height="24"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jH-EW-p2B">
+                                    <rect key="frame" x="50" y="0.0" width="24" height="24"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="24" id="HtV-XR-jeV"/>
+                                        <constraint firstAttribute="height" constant="24" id="gDy-gV-uA5"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" image="checkmark.circle" catalog="system">
+                                        <color key="titleColor" red="0.30980392159999998" green="0.51764705879999995" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="agreeAction:" destination="-1" eventType="touchUpInside" id="RNu-BA-c3b"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我同意以此資料註冊會員，並同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vd8-rx-972">
+                                    <rect key="frame" x="74" y="4.6666666666666297" width="184" height="14.333333333333336"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f95-oE-bDD">
+                                    <rect key="frame" x="258" y="-1.6666666666666856" width="74" height="27"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="會員使用條款"/>
+                                    <connections>
+                                        <action selector="toRulePageAction:" destination="-1" eventType="touchUpInside" id="HF5-hx-ccv"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="f95-oE-bDD" firstAttribute="leading" secondItem="vd8-rx-972" secondAttribute="trailing" id="ALH-q2-tnY"/>
+                                <constraint firstItem="vd8-rx-972" firstAttribute="centerY" secondItem="6jH-EW-p2B" secondAttribute="centerY" id="K36-F0-aQx"/>
+                                <constraint firstAttribute="height" constant="24" id="MS1-kv-Ual"/>
+                                <constraint firstItem="6jH-EW-p2B" firstAttribute="leading" secondItem="gwc-5r-04n" secondAttribute="leading" constant="50" id="bEe-hN-fBu"/>
+                                <constraint firstItem="f95-oE-bDD" firstAttribute="centerY" secondItem="6jH-EW-p2B" secondAttribute="centerY" id="d5M-Q2-DsQ"/>
+                                <constraint firstItem="6jH-EW-p2B" firstAttribute="centerY" secondItem="gwc-5r-04n" secondAttribute="centerY" id="pkg-sK-z9x"/>
+                                <constraint firstItem="vd8-rx-972" firstAttribute="leading" secondItem="6jH-EW-p2B" secondAttribute="trailing" id="u6b-AC-Fth"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbG-mF-lPI">
+                            <rect key="frame" x="0.0" y="136" width="343" height="45"/>
+                            <color key="backgroundColor" red="0.039215686270000001" green="0.62745098040000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="Lfy-Wb-KXi"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="送出"/>
+                            <connections>
+                                <action selector="submitButtonTapped:" destination="-1" eventType="touchUpInside" id="reX-oS-Gfh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qm7-Q6-sKg" secondAttribute="trailing" constant="16" id="2zL-EK-bLA"/>
+                <constraint firstItem="qm7-Q6-sKg" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="fKQ-f7-5Nd"/>
+                <constraint firstItem="qm7-Q6-sKg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gT7-Ah-mB4"/>
+                <constraint firstItem="qm7-Q6-sKg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="yTE-nq-K0B"/>
+            </constraints>
+            <point key="canvasLocation" x="47.826086956521742" y="91.741071428571431"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

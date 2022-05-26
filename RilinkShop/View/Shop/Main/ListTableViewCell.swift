@@ -53,4 +53,28 @@ class ListTableViewCell: UITableViewCell {
         }
     }
     
+    func configure(with model: Item) {
+        switch model {
+        case .product(let product):
+            nameLabel.text = product.product_name
+            costLabel.text = "$\(product.product_price)"
+            
+            if let imageURL = URL(string: TEST_ROOT_URL + product.product_picture) {
+                itemImageView.isHidden = false
+                itemImageView.kf.setImage(with: imageURL)
+            } else {
+                itemImageView.isHidden = true
+            }
+        case .package(let package):
+            nameLabel.text = package.productName
+            costLabel.text = "$\(package.productPrice)"
+            
+            if let imageURL = URL(string: TEST_ROOT_URL + package.productPicture) {
+                itemImageView.isHidden = false
+                itemImageView.kf.setImage(with: imageURL)
+            } else {
+                itemImageView.isHidden = true
+            }
+        }
+    }
 }

@@ -44,6 +44,24 @@ struct Product: Codable {
     var total_amount        = ""
     var did                 = ""
     var product_spec        = ""
-    var channel_price       = ""
-    var group_price         = ""
+    
+////    var did: String? = ""
+//    var orderNo: String? = ""
+//    var memberID: String? = ""
+//    // 商品為package
+//    var pkglistID: String? = ""
+//    // 商品為product
+//    var productNo: String? = ""
+//    var productSpec: String? = ""
+//    
+//    var productPrice: String? = ""
+//    var orderQty: String? = ""
+//    var totalAmount: String? = ""
+//    var orderStatus: String? = ""
+//    var cartCreatedAt: String? = ""
+//    var productName: String? = ""
+//    var producttypeName: String? = ""
+//    var productPicture: String? = ""
 }
+
+extension Product: Hashable {}

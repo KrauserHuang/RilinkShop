@@ -30,3 +30,33 @@ struct Package: Codable {
 }
 
 extension Package: Hashable {}
+
+typealias PackageInfoList = PackageInfo
+
+struct PackageInfo: Codable {
+    var rid: String = ""
+    var productNo: String = ""
+    var productName: String = ""
+    var pid: String = ""
+    var productDescription: String = ""
+    var productPrice: String = ""
+    var productStock: String = ""
+    var productPicture: String = ""
+    var productStatus: String = ""
+    var storeID: String = ""
+    var qrcode: String = ""
+    
+    enum CodingKeys: String, CodingKey {
+            case rid
+            case productNo = "product_no"
+            case productName = "product_name"
+            case pid
+            case productDescription = "product_description"
+            case productPrice = "product_price"
+            case productStock = "product_stock"
+            case productPicture = "product_picture"
+            case productStatus = "product_status"
+            case storeID = "store_id"
+            case qrcode
+        }
+}

@@ -10,6 +10,7 @@ import MBProgressHUD
 
 class CheckoutViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bonusPointLabel: UILabel!
@@ -34,13 +35,13 @@ class CheckoutViewController: UIViewController {
             }
         }
     }
+    let account = MyKeyChain.getAccount() ?? ""
+    let password = MyKeyChain.getPassword() ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        cartTableView.rowHeight = UITableView.automaticDimension
-        cartTableView.estimatedRowHeight = 170
         loadInCartItems()
         configureTableView()
         configureView()
@@ -53,33 +54,28 @@ class CheckoutViewController: UIViewController {
         loadInCartItems()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        tableViewHeightConstraint.constant = cartTableView.contentSize.height
-    }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        viewWillLayoutSubviews()
-    }
-    
     func loadInCartItems() {
         let indicator = MBProgressHUD.showAdded(to: self.view, animated: true)
         indicator.isUserInteractionEnabled = false
         indicator.show(animated: true)
         cartTableView.isHidden = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            ProductService.shared.loadShoppingCartList(id: "0910619306", pwd: "a12345678") { items in
+            ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { items in
                 self.inCartItems = items
                 self.cartTableView.isHidden = false
+                // 85: Fixed cart cell height
+                self.tableViewHeightConstraint.constant = CGFloat(items.count * 85)
                 indicator.hide(animated: true)
             }
         }
     }
     
     func configureTableView() {
-//        cartTableView.rowHeight = UITableView.automaticDimension
-//        cartTableView.estimatedRowHeight = 44
+        cartTableView.rowHeight = UITableView.automaticDimension
         cartTableView.dataSource = self
         cartTableView.register(UINib(nibName: CheckoutTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CheckoutTableViewCell.reuseIdentifier)
+        cartTableView.isScrollEnabled = false
+        cartTableView.allowsSelection = false
     }
     
     func configureView() {
@@ -104,9 +100,23 @@ class CheckoutViewController: UIViewController {
         bonusPointTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    @objc func keyboardWillHide(_ notification: Notification) {
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
     }
 
     @IBAction func backButtonTapped(_ sender: UIButton) {
@@ -116,17 +126,24 @@ class CheckoutViewController: UIViewController {
         guard let orderAmount = orderAmountLabel.text,
               let discountAmount = discountAmountLabel.text,
               let orderPay = orderPayLabel.text else { return }
-        OrderService.shared.addECOrder(id: "0910619306",
-                                       pwd: "a12345678",
+        OrderService.shared.addECOrder(id: account,
+                                       pwd: password,
                                        orderAmount: orderAmount,
                                        discountAmount: discountAmount,
                                        orderPay: orderPay) { response in
-            let alertController = UIAlertController(title: "準備結帳", message: "！", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "準備結帳", message: "", preferredStyle: .alert)
             let checkoutAction = UIAlertAction(title: "付款去", style: .default) { action in
-//                let wkWebViewController
-                print("敬請期待")
+                let wkWebVC = WKWebViewController()
+                wkWebVC.delegate = self
+                wkWebVC.urlStr = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid=\(response.responseMessage)"
+                wkWebVC.orderNo = response.responseMessage
+                self.navigationController?.pushViewController(wkWebVC, animated: true)
+            }
+            let backToShopAction = UIAlertAction(title: "回首頁", style: .default) { action in
+                self.navigationController?.popToRootViewController(animated: true)
             }
             alertController.addAction(checkoutAction)
+            alertController.addAction(backToShopAction)
             self.present(alertController, animated: true, completion: nil)
         }
     }
@@ -151,5 +168,11 @@ extension CheckoutViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+// MARK: - WKWebViewControllerDelegate
+extension CheckoutViewController: WKWebViewControllerDelegate {
+    func backAction(_ viewController: WKWebViewController) {
+        navigationController?.popToRootViewController(animated: true)
     }
 }

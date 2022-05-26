@@ -31,20 +31,6 @@ class ProductService {
             completion(category)
         }
     }
-    // 備著，等學會使用responseDecodable時再轉換
-//    func getProductList(id: String, pwd: String, completion: @escaping ([Product]) -> Void) {
-//        let url = OFFICIAL_API_URL + URL_PRODUCTLIST
-//        let parameters = [
-//            "member_id": id,
-//            "member_pwd": pwd
-//        ]
-//        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [Product].self) { response in
-////            print("-----------------")
-////            print("\(response.value)")
-//            guard let product = response.value else { return }
-//            completion(product)
-//        }
-//    }
     
     // 載入商品列表
     func loadProductList(id: String, pwd: String, completion: @escaping ([Product]) -> Void) {
@@ -67,14 +53,10 @@ class ProductService {
                     product.product_price    = "\(result["product_price"])"
                     product.product_status   = "\(result["product_status"])"
                     product.product_picture  = "\(result["product_picture"])"
-                    product.channel_price    = "\(result["channel_price"])"
-                    product.group_price      = "\(result["group_price"])"
                     productList.append(product)
                 }
                 completion(productList)
                 self.productList = productList
-//                print("---------------------")
-//                print("\(productList)")
             } else {
                 print("Get ProductList Fail.")
             }
@@ -87,7 +69,6 @@ class ProductService {
         let parameters = ["member_id": id, "member_pwd": pw, "product_no": no]
 
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-            print(response)
             let json = JSON(response.value ?? "")
             if let results = json.array {
                 var product = Product()
@@ -114,24 +95,24 @@ class ProductService {
             "member_pwd": pwd
         ]
         
-        AF.request(url, method: .post, parameters: parameters).validate().responseDecodable(of: [Package].self) { response in
-            print(response)
+        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [Package].self) { response in
+//            print(response)
             guard let packages = response.value else { return }
-            print("-----")
-            print("\(packages)")
+//            print("-----")
+//            print("\(packages)")
             completion(packages)
         }
     }
     
-    func loadPackageInfo(id: String, pwd: String, no: String, completion: @escaping ([Product]) -> Void) {
+    func loadPackageInfo(id: String, pwd: String, no: String, completion: @escaping ([PackageInfo]) -> Void) {
         let url = TEST_API_URL + URL_PACKAGEINFO // 測試機
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
-            "product_no": no
+            "package_no": no
         ]
         
-        AF.request(url, method: .post, parameters: parameters).validate().responseDecodable(of: [Product].self) { response in
+        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [PackageInfo].self) { response in
             guard let products = response.value else { return }
             completion(products)
         }
@@ -151,11 +132,56 @@ class ProductService {
             "total_amount": total
         ]
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+            print("---")
+            print(response.response)
+            print(response.value)
             let isSuccess: Bool = response.response == nil ? false : response.response!.statusCode == 200
             NotificationCenter.default.post(name: ProductService.didUpdateInCartItems, object: nil, userInfo: ["ifHasItem": isSuccess])
             print("新增項目成功！")
             // dosomething for error or whatever
 
+        }
+    }
+    
+    func addShoppingCartItem(id: String, pwd: String, no: String, spec: String, price: String, qty: String, total: String, completed: @escaping Completion) {
+        let url = TEST_API_URL + URL_ADDSHOPPINGCART
+        let parameters = [
+            "member_id": id,
+            "member_pwd": pwd,
+            "product_no": no,
+            "product_spec": spec,
+            "product_price": price,
+            "order_qty": qty,
+            "total_amount": total
+        ]
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+        
+        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+            
+            guard response.value != nil else {
+                let errorMsg = "伺服器連線失敗"
+                completed(false, errorMsg as AnyObject)
+                return
+            }
+            
+            let value = JSON(response.value!)
+            print(#function)
+            print(value)
+            
+            switch response.result {
+            case .success:
+                guard value["code"].stringValue == returnCode else {
+                    let errorMsg = value["responseMessage"].stringValue
+                    completed(false, errorMsg as AnyObject)
+                    return
+                }
+                
+                let message = value["responseMessage"].stringValue
+                completed(true, message as AnyObject)
+            case .failure:
+                let errorMsg = value["responseMessage"].stringValue
+                completed(false, errorMsg as AnyObject)
+            }
         }
     }
     // get shopping cart list(取得購物車目前列表)
@@ -227,9 +253,9 @@ class ProductService {
             "order_qty": "\(qty)"
         ]
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-            guard response.response?.statusCode == 200 else {
-                fatalError()
-            }
+//            guard response.response?.statusCode == 200 else {
+//                fatalError()
+//            }
         }
         
     }

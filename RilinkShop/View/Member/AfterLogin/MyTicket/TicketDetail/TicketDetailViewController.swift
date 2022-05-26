@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreImage.CIFilterBuiltins
 
 class TicketDetailViewController: UIViewController {
 
@@ -14,19 +15,25 @@ class TicketDetailViewController: UIViewController {
     @IBOutlet weak var buyDateLabel: UILabel!
     @IBOutlet weak var orderNoLabel: UILabel!
     
+    var ticket = UNQRCode()
+    var product = PackageProduct()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        let QRImage = generateQRCode(from: "Hello, world!")
-        qrImageView.image = QRImage
+        
+        if product.qrconfirm!.count == 0 {
+            setView()
+        } else {
+            setView1()
+        }
+        
     }
-    @IBAction func scanAction(_ sender: UIButton) {
-        let controller = QRCodeViewController()
-        controller.modalPresentationStyle = .fullScreen
-//        controller.delegate = self
-        present(controller, animated: true, completion: nil)
-    }
+//    @IBAction func scanAction(_ sender: UIButton) {
+//        let controller = QRCodeViewController()
+//        controller.modalPresentationStyle = .fullScreen
+////        controller.delegate = self
+//        present(controller, animated: true, completion: nil)
+//    }
     
     func generateQRCode(from string: String) -> UIImage? {
         let data = string.data(using: String.Encoding.ascii)
@@ -39,15 +46,28 @@ class TicketDetailViewController: UIViewController {
         }
         return nil
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func setView() {
+        if let ticketProductName = ticket.productName {
+            nameLabel.text = ticketProductName
+        } else if let ticketPackageName = ticket.packageName {
+            nameLabel.text = ticketPackageName
+        }
+        buyDateLabel.text = "購買日期：\(ticket.orderDate)"
+        orderNoLabel.text = "訂單編號：\(ticket.orderNo)"
+        if let ticketQRConfirm = ticket.qrconfirm {
+            print(#function)
+            print(ticket.qrconfirm)
+            qrImageView.image = generateQRCode(from: ticketQRConfirm)
+        }
     }
-    */
-
+    
+    func setView1() {
+        print(#function)
+        print(product.qrconfirm)
+        nameLabel.text = product.productName
+        buyDateLabel.text = "購買日期：\(ticket.orderDate)"
+        orderNoLabel.text = "訂單編號：\(ticket.orderNo)"
+        qrImageView.image = generateQRCode(from: product.qrconfirm!)
+    }
 }

@@ -29,7 +29,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入您的手機號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wN0-zh-ZYL">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0910619306" borderStyle="roundedRect" placeholder="請輸入您的手機號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wN0-zh-ZYL">
                                 <rect key="frame" x="16" y="113" width="382" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="lTe-6G-Jky"/>
@@ -37,7 +37,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入您的密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cSB-0a-dWJ">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="a12345678" borderStyle="roundedRect" placeholder="請輸入您的密碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cSB-0a-dWJ">
                                 <rect key="frame" x="16" y="201" width="382" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="R9v-rk-cDi"/>
@@ -110,7 +110,7 @@
                                     <constraint firstAttribute="height" constant="24" id="hrz-rc-zSx"/>
                                 </constraints>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button" image="eye"/>
+                                <state key="normal" title="Button" image="eyeSlash"/>
                                 <connections>
                                     <action selector="visibleAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="30q-KX-Sx5"/>
                                 </connections>
@@ -185,7 +185,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="eye" width="170.5" height="170.5"/>
+        <image name="eyeSlash" width="1365" height="1365"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

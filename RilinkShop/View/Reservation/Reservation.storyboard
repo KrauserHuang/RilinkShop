@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,6 +37,64 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rSy-pw-cUM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1563.768115942029" y="-14.0625"/>
+        </scene>
+        <!--Hostel View Controller-->
+        <scene sceneID="6tM-FL-B0U">
+            <objects>
+                <viewController id="MR6-aM-NMK" customClass="HostelViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yiY-Ax-0VD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kek-bM-uUA">
+                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fff-WO-2jI"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="15" minimumInteritemSpacing="10" id="Rks-0p-b03">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="SIL-AS-DLp">
+                                        <rect key="frame" x="10" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JTi-1S-dOc">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="83N-zB-dfw">
+                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QID-f7-g0d"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QID-f7-g0d" firstAttribute="trailing" secondItem="Kek-bM-uUA" secondAttribute="trailing" id="5JO-hM-quz"/>
+                            <constraint firstItem="Kek-bM-uUA" firstAttribute="top" secondItem="QID-f7-g0d" secondAttribute="top" id="95Z-Jj-33k"/>
+                            <constraint firstItem="QID-f7-g0d" firstAttribute="trailing" secondItem="83N-zB-dfw" secondAttribute="trailing" id="Hgh-8C-1a2"/>
+                            <constraint firstItem="83N-zB-dfw" firstAttribute="top" secondItem="Kek-bM-uUA" secondAttribute="bottom" id="jrv-Ci-nuh"/>
+                            <constraint firstItem="QID-f7-g0d" firstAttribute="bottom" secondItem="83N-zB-dfw" secondAttribute="bottom" id="kfT-PO-cz3"/>
+                            <constraint firstItem="Kek-bM-uUA" firstAttribute="leading" secondItem="QID-f7-g0d" secondAttribute="leading" id="lCI-qa-6xU"/>
+                            <constraint firstItem="83N-zB-dfw" firstAttribute="leading" secondItem="QID-f7-g0d" secondAttribute="leading" id="unY-vT-EI6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4EP-Kx-SKr"/>
+                    <connections>
+                        <outlet property="hostelCollectionView" destination="Kek-bM-uUA" id="tBH-DE-unk"/>
+                        <outlet property="hostelTableView" destination="83N-zB-dfw" id="4Cb-po-B6w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sp4-97-phs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="654" y="767"/>
         </scene>
         <!--Shop Location Table View Controller-->
         <scene sceneID="t9G-Cy-ZBn">
@@ -121,7 +180,7 @@
         <scene sceneID="1QY-ZG-UOz">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gCi-hg-jbU" customClass="ReservationNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="商家據點" image="calendar2" id="bA1-iF-qIi"/>
+                    <tabBarItem key="tabBarItem" title="商家據點" image="calendar" catalog="system" id="bA1-iF-qIi"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="h3M-uq-qFn">
@@ -130,7 +189,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="D7q-98-MMW" kind="relationship" relationship="rootViewController" id="XTH-JX-ceS"/>
+                        <segue destination="MR6-aM-NMK" kind="relationship" relationship="rootViewController" id="DpM-wt-kph"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lcg-xP-2ci" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -140,7 +199,7 @@
     </scenes>
     <resources>
         <image name="bell" catalog="system" width="128" height="124"/>
-        <image name="calendar2" width="24" height="24"/>
+        <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="cart" catalog="system" width="128" height="102"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
