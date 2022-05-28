@@ -22,9 +22,12 @@ let API_URL = "https://rilink.jotangi.com.tw:11074/api/v1"
 
 //後台會員註冊
 let MALL_REGISTER    = "https://ks-api.jotangi.net/api/auth/register"
-
 //會員密碼變更
 let MALL_REWRITE_PWD = "https://ks-api.jotangi.net/api/auth/rewritepwd"
+//使用者圖像
+public let MEMBER_IMAGE_URL = API_URL + "/personimages/"
+//上傳使用者圖像
+let UPLOAD_IMAGE     = "/account/uploadimage"
 
 // MARK: - BOSS RELATED
 //商店ID列表

@@ -15,10 +15,6 @@ public class Global {
     static var ACCOUNT_PASSWORD = ""
     static var ACCESS_TOKEN     = ""
 //    for 店長
-//    static var OWNER_STORE_ID   = ""
-//    static var OWNER_STORE_LIST = [String]()
-    
-//    static var personalData:PersonalData?
     static var personalData: User?
 }
 
@@ -133,4 +129,14 @@ enum finishLoginViewWith {
 //    case ReFillData //TODO:
 }
 
-
+public func getSavedImage(named: String) -> UIImage? {
+    
+    if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+        
+        let url = URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path
+        
+        return UIImage(contentsOfFile: url)
+        
+    }
+    return nil
+}

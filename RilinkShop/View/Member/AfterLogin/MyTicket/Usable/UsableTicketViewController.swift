@@ -102,6 +102,12 @@ extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource
             controller.ticket = ticket
             if let ticketProduct = ticket.product {
                 let ticketProductWithQR = ticketProduct.filter { $0.qrconfirm != nil }
+                print(#function)
+                print(ticket)
+                print("====================")
+                print(ticketProduct)
+                print("====================")
+                print(ticketProductWithQR)
                 controller.products = ticketProductWithQR
             } else {
                 print("ticket.product is nil!")

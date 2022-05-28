@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol MemberCenterTableViewControllerDelegate: AnyObject {
     func memberInfo(_ viewController: MemberCenterTableViewController)
@@ -15,7 +16,7 @@ protocol MemberCenterTableViewControllerDelegate: AnyObject {
     func privateRule(_ viewController: MemberCenterTableViewController)
     func question(_ viewController: MemberCenterTableViewController)
     func logout(_ viewController: MemberCenterTableViewController)
-    func toStoreAcc(_ viewController: MemberCenterTableViewController)
+    func memberInfoDidUpdate(_ viewController: MemberCenterTableViewController)
 }
 
 class MemberCenterTableViewController: UITableViewController {
@@ -25,6 +26,7 @@ class MemberCenterTableViewController: UITableViewController {
     @IBOutlet weak var camera: UIButton!
     
     weak var delegate: MemberCenterTableViewControllerDelegate?
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +42,42 @@ class MemberCenterTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        if Global.personalData?.cmdImageFile == nil || Global.personalData?.cmdImageFile == "" {
+            return
+        }
+        if let personalCMDImageFile = Global.personalData?.cmdImageFile {
+            self.userImage?.setImage(imageURL: MEMBER_IMAGE_URL + personalCMDImageFile)
+        }
     }
     
+    func uploadImage() {
+        if let image = userImage.image {
+            
+//            let resizeImage = image.imageResized(to: <#T##CGSize#>)
+            HUD.showLoadingHUD(inView: self.view, text: "")
+            UserService.shared.uploadImage(imgtitle: Global.ACCOUNT, cmdImageFile: image) { success, response in
+                DispatchQueue.global(qos: .userInitiated).async {
+                    URLCache.shared.removeAllCachedResponses()
+                    DispatchQueue.main.sync {
+                        HUD.hideLoadingHUD(inView: self.view)
+                        
+                        guard success else {
+                            if let errorMsg = response as? String {
+                                Alert.showMessage(title: "", msg: errorMsg, vc: self)
+                            }
+                            return
+                        }
+                        
+                        Alert.showMessage(title: "", msg: "修改成功", vc: self) {
+                            self.dismiss(animated: true) {
+                                self.delegate?.memberInfoDidUpdate(self)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     @IBAction func cameraAction(_ sender: UIButton) {
         let alert = UIAlertController(title: "請選擇照片來源", message: "", preferredStyle: .actionSheet)
@@ -105,8 +141,6 @@ class MemberCenterTableViewController: UITableViewController {
             delegate?.question(self)
         case 6:
             delegate?.logout(self)
-//        case 7:
-//            delegate?.toStoreAcc(self)
         default:
             break
         }
@@ -139,10 +173,13 @@ class MemberCenterTableViewController: UITableViewController {
 extension MemberCenterTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = (info[.editedImage] as? UIImage)?.imageResized(to: userImage.frame.size) {
-            userImage.backgroundColor = .clear
-            userImage.image = image
+            dismiss(animated: true) {
+                self.userImage.backgroundColor = .clear
+                self.userImage.image = image
+                self.uploadImage()
+            }
+            
 //            delegate?.headImageAction(self, image: image)
         }
-        dismiss(animated: true, completion: nil)
     }
 }

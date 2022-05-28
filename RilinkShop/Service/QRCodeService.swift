@@ -117,8 +117,8 @@ class QRCodeService {
                 return
             }
 //            print("+++++")
-            print(#function)
-            print(response.value)
+//            print(#function)
+//            print(response.value)
             
             switch response.result {
             case .success:

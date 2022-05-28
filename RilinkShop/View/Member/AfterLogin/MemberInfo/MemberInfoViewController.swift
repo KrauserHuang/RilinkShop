@@ -79,7 +79,7 @@ class MemberInfoViewController: UIViewController {
 //        saveEditButton.我要接著改變文字變粗體
 //        saveEditButton.layer.cornerRadius = saveEditButton.frame.size.height / 2
 //        saveEditButton.layer.cornerRadius = saveEditButton.bounds.height / 2
-        saveEditButton.layer.cornerRadius = 20
+        saveEditButton.layer.cornerRadius = saveEditButton.frame.height / 2
         saveEditButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             saveEditButton.heightAnchor.constraint(equalToConstant: 40)
@@ -119,7 +119,7 @@ class MemberInfoViewController: UIViewController {
         numberTF.delegate = self
         emailTF.delegate = self
         
-        let tapGes = UIGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tapGes = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGes)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)

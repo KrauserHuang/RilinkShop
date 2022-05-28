@@ -28,9 +28,11 @@ class UserService {
                 self.renewUser?()
                 return
             }
-            let user = response as? User
-            
-            self.user = user
+//            let user = response as? User
+//            self.user = user
+            Global.personalData = response as? User
+            self.user = Global.personalData
+
             self.didLogin = true
             self.renewUser?()
         }
@@ -56,7 +58,6 @@ class UserService {
             print(#function)
             print(value)
             
-            
             switch response.result {
             case .success:
                 guard value["code"].stringValue == returnCode else {
@@ -72,8 +73,10 @@ class UserService {
                         self.renewUser?()
                         return
                     }
-                    let user = response as? User
-                    self.user = user
+                    Global.personalData = response as? User
+                    self.user = Global.personalData
+//                    let user = response as? User
+//                    self.user = user
                     self.didLogin = true
                     self.renewUser = { completed(true, "" as AnyObject) }
                 }
@@ -242,6 +245,43 @@ class UserService {
             case .failure:
                 let message = value["errorMsg"].stringValue
                 completed(false, message as AnyObject)
+            }
+        }
+    }
+    // 上傳照片
+    func uploadImage(imgtitle: String, cmdImageFile: UIImage, completed: @escaping Completion) {
+        let url = API_URL + UPLOAD_IMAGE
+        let returnCode = ReturnCode.RETURN_SUCCESS.0
+        let imgData = cmdImageFile.jpegData(compressionQuality: 0.75)!
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(imgData, withName: "cmdImageFile", fileName: "image.jpg", mimeType: "image/jpg")
+            multipartFormData.append(Base64(string: Global.ACCOUNT).data(using: .utf8)!, withName: "account")
+            multipartFormData.append(Base64(string: Global.ACCOUNT_PASSWORD).data(using: .utf8)!, withName: "pw")
+            multipartFormData.append(Base64(string: Global.ACCOUNT_TYPE).data(using: .utf8)!, withName: "accountType")
+            multipartFormData.append(Base64(string: imgtitle).data(using: .utf8)!, withName: "imgtitle")
+        }, to: url).responseJSON { response in
+            guard response.value != nil else {
+                let errorMsg = "伺服器連線失敗"
+                completed(false, errorMsg as AnyObject)
+                return
+            }
+            
+            let value = JSON(response.value!)
+            print(#function)
+            print(value)
+            
+            switch response.result {
+            case .success:
+                guard value["returnCode"].intValue == returnCode else {
+                    let errorMsg = value["errorMsg"].stringValue
+                    completed(false, errorMsg as AnyObject)
+                    return
+                }
+                completed(true, "" as AnyObject)
+            case .failure:
+                let errorMsg = value["errorMsg"].stringValue
+                completed(false, errorMsg as AnyObject)
             }
         }
     }

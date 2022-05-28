@@ -125,14 +125,15 @@ extension MemberNavigationViewController: MemberCenterTableViewControllerDelegat
     func memberInfo(_ viewController: MemberCenterTableViewController) {
         let vc = MemberInfoViewController_1()
         vc.user = Global.personalData
-//        let vc = SignUpViewController()
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
     func myTicket(_ viewController: MemberCenterTableViewController) {
-        let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
+        let vc = SignUpViewController()
+        viewController.navigationController?.pushViewController(vc, animated: true)
         
-        viewController.navigationController?.pushViewController(controller, animated: true)
+//        let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
+//        viewController.navigationController?.pushViewController(controller, animated: true)
     }
     
     func coupon(_ viewController: MemberCenterTableViewController) {
@@ -156,10 +157,9 @@ extension MemberNavigationViewController: MemberCenterTableViewControllerDelegat
         MyKeyChain.logout()
         showLogIn()
     }
-//
-    func toStoreAcc(_ viewController: MemberCenterTableViewController) {
-        let controller = StoreAppViewController()
-        viewController.navigationController?.pushViewController(controller, animated: true)
+    
+    func memberInfoDidUpdate(_ viewController: MemberCenterTableViewController) {
+        loadUserData()
     }
 }
 // MARK: - SignUp1 Delegate(進入第二頁面填寫認證碼、密碼)

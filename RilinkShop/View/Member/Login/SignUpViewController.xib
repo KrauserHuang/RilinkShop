@@ -14,9 +14,9 @@
                 <outlet property="accountLabel" destination="MQN-oJ-xfk" id="Vd2-2z-nIZ"/>
                 <outlet property="birthdayTF" destination="ggC-U8-5Ee" id="WPp-SS-a01"/>
                 <outlet property="emailTF" destination="q2Z-cF-6xr" id="9wq-TI-Np6"/>
-                <outlet property="femaleButton" destination="La9-Ue-KLJ" id="KBi-UB-Y8g"/>
+                <outlet property="femaleButton" destination="La9-Ue-KLJ" id="cOV-YB-b9G"/>
                 <outlet property="invitationCodeTF" destination="xdX-hY-Qgm" id="XoV-B8-S8R"/>
-                <outlet property="maleButton" destination="pG5-Yb-Dh1" id="dM7-XQ-N7C"/>
+                <outlet property="maleButton" destination="pG5-Yb-Dh1" id="Wnv-c4-OJi"/>
                 <outlet property="nameTF" destination="LbW-qv-7Ew" id="DXD-cD-cdn"/>
                 <outlet property="scrollView" destination="wA1-CX-JsP" id="Ly2-MN-3Ii"/>
                 <outlet property="signUpButton" destination="0Qq-jN-1fv" id="jhx-oz-AHU"/>
@@ -149,7 +149,7 @@
                                                 <color key="titleColor" red="0.30980392159999998" green="0.51764705879999995" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </state>
                                             <connections>
-                                                <action selector="genderSwitchAction:" destination="-1" eventType="touchUpInside" id="gE4-94-c69"/>
+                                                <action selector="genderSwitchAction:" destination="-1" eventType="touchUpInside" id="BJN-y9-d4A"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La9-Ue-KLJ">
@@ -166,7 +166,7 @@
                                                 <color key="titleColor" red="0.30980392159999998" green="0.51764705879999995" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </state>
                                             <connections>
-                                                <action selector="genderSwitchAction:" destination="-1" eventType="touchUpInside" id="oti-a4-lly"/>
+                                                <action selector="genderSwitchAction:" destination="-1" eventType="touchUpInside" id="6Dj-gP-Pcg"/>
                                             </connections>
                                         </button>
                                     </subviews>

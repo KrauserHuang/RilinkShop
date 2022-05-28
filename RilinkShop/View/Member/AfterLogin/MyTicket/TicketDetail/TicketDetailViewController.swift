@@ -21,19 +21,13 @@ class TicketDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if product.qrconfirm!.count == 0 {
+        if product.qrconfirm!.count == 0 { // 代表是單獨商品
             setView()
         } else {
             setView1()
         }
         
     }
-//    @IBAction func scanAction(_ sender: UIButton) {
-//        let controller = QRCodeViewController()
-//        controller.modalPresentationStyle = .fullScreen
-////        controller.delegate = self
-//        present(controller, animated: true, completion: nil)
-//    }
     
     func generateQRCode(from string: String) -> UIImage? {
         let data = string.data(using: String.Encoding.ascii)

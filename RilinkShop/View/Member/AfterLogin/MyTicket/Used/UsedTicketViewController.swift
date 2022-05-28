@@ -46,19 +46,6 @@ class UsedTicketViewController: UIViewController {
 //                print(self.tickets)
             }
         }
-        
-//        QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "",
-//                                         pwd: MyKeyChain.getPassword() ?? "",
-//                                         ispackage: "0") { success, response in
-//            guard success else {
-//                let errorMsg = response as! String
-//                Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
-//                return
-//            }
-//            self.tickets = (response as? [QRCode])!
-//            print(#function)
-//            print(self.tickets)
-//        }
     }
     
     @objc func refreshList() {
@@ -75,18 +62,6 @@ class UsedTicketViewController: UIViewController {
                 }
             }
         }
-        
-//        QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "",
-//                                         pwd: MyKeyChain.getPassword() ?? "",
-//                                         ispackage: "0") { success, response in
-//            guard success else {
-//                let errorMsg = response as! String
-//                Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
-//                return
-//            }
-//
-//            print(response)
-//        }
     }
 }
 

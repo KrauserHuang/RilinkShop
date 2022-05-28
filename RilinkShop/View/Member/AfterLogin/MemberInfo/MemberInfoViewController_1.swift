@@ -90,7 +90,8 @@ class MemberInfoViewController_1: UIViewController {
         phoneTextField.delegate = self
         emailTextField.delegate = self
         
-        let tap = UIGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+//        view.addGestureRecognizer(tap)
         view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -98,6 +99,7 @@ class MemberInfoViewController_1: UIViewController {
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
     }
+    
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
@@ -134,6 +136,11 @@ class MemberInfoViewController_1: UIViewController {
             self.scrollView.scrollRectToVisible(sender.frame, animated: true)
         }
     }
+    
+//    @IBAction func tapView(_ sender: Any) {
+//        self.view.endEditing(true)
+//    }
+    
     // MARK: - GenderSwitch
     @IBAction func genderSwitch(_ sender: UIButton) {
         if sender == maleButton {
@@ -143,8 +150,12 @@ class MemberInfoViewController_1: UIViewController {
         }
         sender.isSelected = true
     }
+    @IBAction func show(_ sender: UIButton) {
+        print("---------")
+    }
     
     @IBAction func saveEditButtonTapped(_ sender: UIButton) {
+        print("+++++++++")
     }
     
 }

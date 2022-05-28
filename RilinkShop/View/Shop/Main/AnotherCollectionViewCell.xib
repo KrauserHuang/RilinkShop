@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,14 +34,6 @@
                             <constraint firstItem="Uzh-nj-mkr" firstAttribute="top" secondItem="jvX-AY-Qea" secondAttribute="top" id="hBT-C2-7u8"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwG-SQ-d1b">
-                        <rect key="frame" x="33" y="43" width="50" height="1"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="50" id="5H6-f1-cE5"/>
-                            <constraint firstAttribute="height" constant="1" id="zUV-Oy-MBV"/>
-                        </constraints>
-                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -50,24 +41,16 @@
                 <constraint firstItem="jvX-AY-Qea" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Bwx-d8-VPB"/>
                 <constraint firstItem="jvX-AY-Qea" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Dpt-Ab-3hy"/>
                 <constraint firstItem="jvX-AY-Qea" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="MQE-nq-x9M"/>
-                <constraint firstItem="hwG-SQ-d1b" firstAttribute="centerX" secondItem="Uzh-nj-mkr" secondAttribute="centerX" id="NvZ-TQ-jp3"/>
                 <constraint firstAttribute="bottom" secondItem="jvX-AY-Qea" secondAttribute="bottom" constant="10" id="W9T-KY-Ts5"/>
-                <constraint firstItem="hwG-SQ-d1b" firstAttribute="top" secondItem="Uzh-nj-mkr" secondAttribute="bottom" constant="3" id="dey-qL-ahE"/>
                 <constraint firstAttribute="trailing" secondItem="jvX-AY-Qea" secondAttribute="trailing" constant="10" id="odA-3N-3yO"/>
                 <constraint firstItem="jvX-AY-Qea" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="vsQ-Eg-x1Z"/>
             </constraints>
             <size key="customSize" width="116" height="50"/>
             <connections>
-                <outlet property="indicatorLine" destination="hwG-SQ-d1b" id="gqD-4v-b41"/>
                 <outlet property="label" destination="Uzh-nj-mkr" id="hGh-H1-HFa"/>
                 <outlet property="outerView" destination="jvX-AY-Qea" id="UDp-Eh-AHi"/>
             </connections>
-            <point key="canvasLocation" x="185.50724637681162" y="109.82142857142857"/>
+            <point key="canvasLocation" x="-46" y="131"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

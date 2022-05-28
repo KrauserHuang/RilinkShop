@@ -42,10 +42,6 @@ class AnotherCollectionViewCell: UICollectionViewCell {
 //        return CGSize(width: label.sizeThatFits(size).width + 32, height: 32)
 //    }
     
-    func configure() {
-        label.text = "我是測試～～～"
-    }
-    
     func configure(with cellModel: CategoryCellModel) {
         label.text = cellModel.category.productTypeName
     }

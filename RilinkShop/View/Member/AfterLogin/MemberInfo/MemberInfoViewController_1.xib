@@ -159,7 +159,7 @@
                                                 <color key="titleColor" red="0.30980392159999998" green="0.51764705879999995" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </state>
                                             <connections>
-                                                <action selector="genderSwitch:" destination="-1" eventType="touchUpInside" id="JUx-cv-EWr"/>
+                                                <action selector="genderSwitch:" destination="-1" eventType="touchUpInside" id="rfZ-uE-Z5N"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -200,8 +200,18 @@
                                     <color key="textColor" systemColor="systemRedColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H5L-3m-vrH">
+                                    <rect key="frame" x="173" y="532" width="67" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    <connections>
+                                        <action selector="show:" destination="-1" eventType="touchUpInside" id="Wnl-f9-OLf"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstItem="sG3-UB-VC2" firstAttribute="leading" secondItem="FNm-Gq-N6f" secondAttribute="leading" id="1gt-uL-pW3"/>
                                 <constraint firstItem="jQ4-QP-fUx" firstAttribute="top" secondItem="CFK-es-mmH" secondAttribute="top" constant="40" id="2gI-vg-qcd"/>
@@ -272,6 +282,7 @@
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="85.714285714285708"/>
         </view>
+        <tapGestureRecognizer id="1JC-XF-fnK"/>
     </objects>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
