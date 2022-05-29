@@ -251,28 +251,6 @@ class MemberInfoViewController: UIViewController {
                 }
             }
         }
-        
-//        user.name = nameTF.text ?? ""
-//        user.birthday = birthdayTF.text ?? ""
-//        user.tel = numberTF.text ?? ""
-//        user.email = emailTF.text ?? ""
-//        user.sex = gender
-//        user.address = addressTF.text ?? ""
-        
-//        self.user?.name = "frank"
-//        self.user?.birthday = "1911-01-01"
-//        self.user?.tel = Global.ACCOUNT
-//        self.user?.email = "frank.lin@jotangi.com"
-//        self.user?.sex = "0"
-//        self.user?.address = "taipei"
-//        UserService.shared.editUser(id: Global.ACCOUNT, pwd: Global.ACCOUNT_PASSWORD, name: user!.name, gender: String(user!.sex), email: user!.email, birthday: user!.birthday, address: user!.address, phone: user!.tel) { response in
-//            let alertController = UIAlertController(title: "", message: response.responseMessage, preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: .default) { action in
-//                self.navigationController?.popViewController(animated: true)
-//            }
-//            alertController.addAction(okAction)
-//            self.present(alertController, animated: true)
-//        }
     }
 }
 // MARK: - UITextFieldDelegate

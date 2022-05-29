@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+protocol MemberInfoViewController_1_Delegate: AnyObject {
+    func memberInfoDidUpdate(_ viewController: MemberInfoViewController_1)
+}
+
 class MemberInfoViewController_1: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
@@ -19,6 +23,7 @@ class MemberInfoViewController_1: UIViewController {
     @IBOutlet weak var femaleButton: UIButton!
     @IBOutlet weak var saveEditButton: UIButton!
     
+    weak var delegate: MemberInfoViewController_1_Delegate?
     var edittingTextField: UITextField?
     var user: User?
     let dateFormatter: DateFormatter = {
@@ -52,7 +57,8 @@ class MemberInfoViewController_1: UIViewController {
         saveEditButton.backgroundColor = UIColor(hex: "4F846C")
         saveEditButton.setTitle("儲存變更", for: .normal)
         saveEditButton.setTitleColor(.white, for: .normal)
-        saveEditButton.layer.cornerRadius = 20
+//        saveEditButton.layer.cornerRadius = 20
+        saveEditButton.layer.cornerRadius = saveEditButton.frame.height / 2
         saveEditButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -137,10 +143,6 @@ class MemberInfoViewController_1: UIViewController {
         }
     }
     
-//    @IBAction func tapView(_ sender: Any) {
-//        self.view.endEditing(true)
-//    }
-    
     // MARK: - GenderSwitch
     @IBAction func genderSwitch(_ sender: UIButton) {
         if sender == maleButton {
@@ -150,12 +152,81 @@ class MemberInfoViewController_1: UIViewController {
         }
         sender.isSelected = true
     }
-    @IBAction func show(_ sender: UIButton) {
-        print("---------")
-    }
     
     @IBAction func saveEditButtonTapped(_ sender: UIButton) {
-        print("+++++++++")
+        let accountType = "0"
+        guard let tel = phoneTextField.text else {
+            return
+        }
+        
+        guard let name = nameTextField.text,
+              name != "" else {
+                  let message = "請輸入姓名"
+                  Alert.showMessage(title: "", msg: message, vc: self) {
+                      self.nameTextField.becomeFirstResponder()
+                  }
+                  return
+              }
+        
+        guard let email = emailTextField.text,
+              email != "" else {
+                  let message = "請輸入電子郵件"
+                  Alert.showMessage(title: "", msg: message, vc: self) {
+                      self.emailTextField.becomeFirstResponder()
+                  }
+                  return
+              }
+        
+        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
+        let predicate  = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+
+        guard predicate.evaluate(with: email) else {
+            let message = "輸入電子郵件格式錯誤"
+            Alert.showMessage(title: "", msg: message, vc: self) {
+                self.emailTextField.becomeFirstResponder()
+            }
+            return
+        }
+        
+        guard let birthday = birthdayTextField.text,
+              birthday != "" else {
+                  let message = "請輸入生日"
+                  Alert.showMessage(title: "", msg: message, vc: self) {
+                      self.birthdayTextField.becomeFirstResponder()
+                  }
+                  return
+              }
+        
+        var sex = ""
+        if maleButton.isSelected {
+            sex = "0"
+        } else {
+            sex = "1"
+        }
+        
+        let city = ""
+        let region = ""
+        let address = ""
+        
+        HUD.showLoadingHUD(inView: self.view, text: "")
+        UserService.shared.modifyPersonalData(account: Global.ACCOUNT, pw: Global.ACCOUNT_PASSWORD, accountType: accountType, name: name, tel: tel, birthday: birthday, email: email, sex: sex, city: city, region: region, address: address) { success, response in
+            DispatchQueue.global(qos: .userInitiated).async {
+                URLCache.shared.removeAllCachedResponses()
+                DispatchQueue.main.sync {
+                    HUD.hideLoadingHUD(inView: self.view)
+                    guard success else {
+                        let message = response as! String
+                        Alert.showMessage(title: "", msg: message, vc: self, handler: nil)
+                        return
+                    }
+                    
+                    Alert.showMessage(title: "", msg: "修改成功", vc: self) {
+                        self.navigationController?.popViewController(animated: true)
+                        self.delegate?.memberInfoDidUpdate(self)
+                    }
+                }
+            }
+        }
     }
     
 }

@@ -125,15 +125,16 @@ extension MemberNavigationViewController: MemberCenterTableViewControllerDelegat
     func memberInfo(_ viewController: MemberCenterTableViewController) {
         let vc = MemberInfoViewController_1()
         vc.user = Global.personalData
+        vc.delegate = self
         viewController.navigationController?.pushViewController(vc, animated: true)
     }
     
     func myTicket(_ viewController: MemberCenterTableViewController) {
-        let vc = SignUpViewController()
-        viewController.navigationController?.pushViewController(vc, animated: true)
+//        let vc = SignUpViewController()
+//        viewController.navigationController?.pushViewController(vc, animated: true)
         
-//        let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
-//        viewController.navigationController?.pushViewController(controller, animated: true)
+        let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
+        viewController.navigationController?.pushViewController(controller, animated: true)
     }
     
     func coupon(_ viewController: MemberCenterTableViewController) {
@@ -255,6 +256,12 @@ extension MemberNavigationViewController: StoreAppViewControllerDelegate {
     func backToLogin(_ viewController: StoreAppViewController) {
         let vc = LoginViewController_1()
         setViewControllers([vc], animated: true)
+    }
+}
+
+extension MemberNavigationViewController: MemberInfoViewController_1_Delegate {
+    func memberInfoDidUpdate(_ viewController: MemberInfoViewController_1) {
+        loadUserData()
     }
 }
 
