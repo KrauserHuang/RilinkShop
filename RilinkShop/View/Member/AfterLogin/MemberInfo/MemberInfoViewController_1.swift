@@ -32,6 +32,10 @@ class MemberInfoViewController_1: UIViewController {
         return formatter
     }()
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -40,10 +40,19 @@ class UsedTicketViewController: UIViewController {
     func getTicket() {
         QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
             QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
-//                self.tickets = productResponse
+                
+//                let packageWithoutQRConfirm = packageResponse.filter {
+//                    $0.product?.forEach({ product in
+//                        product.qrconfirm == nil
+//
+//                    })
+//                    $0.product?.filter({ product in
+//                        return product.qrconfirm == nil
+//                    })
+//                    $0.product?.compactMap({ $0.qrconfirm == nil })
+//                }
+                
                 self.tickets = productResponse + packageResponse
-//                print(#function)
-//                print(self.tickets)
             }
         }
     }

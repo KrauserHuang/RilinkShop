@@ -506,8 +506,8 @@ class UserService {
             }
             
             let value = JSON(response.value!)
-            print(#function)
-            print(value)
+//            print(#function)
+//            print(value)
             
             switch response.result {
             case .success:
