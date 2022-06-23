@@ -12,7 +12,7 @@ class OrderService {
     static let shared = OrderService()
     
     func addECOrder(id: String, pwd: String, orderAmount: String, discountAmount: String, orderPay: String, completion: @escaping (Response) -> Void) {
-        let url = TEST_API_URL + URL_ADDECORDER
+        let url = SHOP_API_URL + URL_ADDECORDER
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -31,7 +31,7 @@ class OrderService {
     }
     
     func getECOrderList(id: String, pwd: String, completion: @escaping ([Order]) -> Void) {
-        let url = TEST_API_URL + URL_ECORDERLIST
+        let url = SHOP_API_URL + URL_ECORDERLIST
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
@@ -46,7 +46,7 @@ class OrderService {
     }
     
     func getECOrderInfo(id: String, pwd: String, no: String, completion: @escaping ([OrderInfo]) -> Void) {
-        let url = TEST_API_URL + URL_ECORDERINFO
+        let url = SHOP_API_URL + URL_ECORDERINFO
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -62,7 +62,7 @@ class OrderService {
     }
     
 //    func getECOrderInfo(id: String, pwd: String, no: String, completion: @escaping ([List]) -> Void) {
-//        let url = TEST_API_URL + URL_ECORDERINFO
+//        let url = SHOP_API_URL + URL_ECORDERINFO
 //        let parameters = [
 //            "member_id": id,
 //            "member_pwd": pwd,

@@ -39,7 +39,7 @@ class UserService {
     }
     // MARK: - 使用者登入Login
     func userLogin(id: String, pwd: String, completed: @escaping Completion) {
-        let url = TEST_API_URL + URL_USERLOGIN
+        let url = SHOP_API_URL + URL_USERLOGIN
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
@@ -47,7 +47,8 @@ class UserService {
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
         
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-            
+            print("------------------------")
+            print(response)
             guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
@@ -90,7 +91,7 @@ class UserService {
     }
     // 取得使用者資料MemberInfoViewController
     func getUserData(id: String, pwd: String, completion: @escaping (UserResponse) -> Void) {
-        let url = TEST_API_URL + URL_USERGETDATA
+        let url = SHOP_API_URL + URL_USERGETDATA
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
@@ -116,7 +117,7 @@ class UserService {
     }
     // 編輯使用者資料MemberInfoViewController
     func editUser(id: String, pwd: String, name: String, gender: String, email: String, birthday: String, address: String, phone: String, completion: @escaping (Output) -> Void) {
-        let url = TEST_API_URL + URL_USEREDIT
+        let url = SHOP_API_URL + URL_USEREDIT
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -531,7 +532,7 @@ class UserService {
     }
     // MARK: - 店長對應店家list
     func getStoreIDList(storeAcc: String, storePwd: String, completed: @escaping Completion) {
-        let url = TEST_API_URL + URL_STOREIDLIST
+        let url = SHOP_API_URL + URL_STOREIDLIST
         let parameters = [
             "store_acc": storeAcc,
             "store_pwd": storePwd
@@ -577,7 +578,7 @@ class UserService {
         }
     }
 //    func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping Completion) {
-//        let url = TEST_API_URL + URL_STOREADMINLOGIN
+//        let url = SHOP_API_URL + URL_STOREADMINLOGIN
 //        let parameters = [
 //            "store_acc": storeAcc,
 //            "store_pwd": storePwd,
@@ -601,7 +602,7 @@ class UserService {
 //    }
     
     func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping (StoreAdminLogin) -> Void) {
-        let url = TEST_API_URL + URL_STOREADMINLOGIN
+        let url = SHOP_API_URL + URL_STOREADMINLOGIN
         let parameters = [
             "store_acc": storeAcc,
             "store_pwd": storePwd,

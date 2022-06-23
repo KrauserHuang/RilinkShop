@@ -36,12 +36,19 @@
 		4F0A29DD282A3FCA0000FFB6 /* MyKeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A29DC282A3FCA0000FFB6 /* MyKeyChain.swift */; };
 		4F0A29DF282A68050000FFB6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A29DE282A68040000FFB6 /* Store.swift */; };
 		4F0A29E1282A698B0000FFB6 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A29E0282A698B0000FFB6 /* StoreService.swift */; };
+		4F0F5801285B2F22001EBE9F /* ReservationInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0F57FF285B2F22001EBE9F /* ReservationInputViewController.swift */; };
+		4F0F5802285B2F22001EBE9F /* ReservationInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F0F5800285B2F22001EBE9F /* ReservationInputViewController.xib */; };
 		4F1669D7282CEBE90031E37C /* StoreAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1669D5282CEBE90031E37C /* StoreAppViewController.swift */; };
 		4F1669D8282CEBE90031E37C /* StoreAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1669D6282CEBE90031E37C /* StoreAppViewController.xib */; };
 		4F1669DB282CF2C80031E37C /* DidReimbursementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1669D9282CF2C80031E37C /* DidReimbursementViewController.swift */; };
 		4F1669DC282CF2C80031E37C /* DidReimbursementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1669DA282CF2C80031E37C /* DidReimbursementViewController.xib */; };
 		4F2C080A2822510300E56AC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C08092822510300E56AC1 /* User.swift */; };
 		4F2C080C2822529700E56AC1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C080B2822529700E56AC1 /* UserService.swift */; };
+		4F34779C285C6F8B005E676F /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F34779A285C6F8B005E676F /* CalendarTableViewCell.swift */; };
+		4F34779D285C6F8B005E676F /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F34779B285C6F8B005E676F /* CalendarTableViewCell.xib */; };
+		4F34779F285C70EF005E676F /* UITableViewCell + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F34779E285C70EF005E676F /* UITableViewCell + Ext.swift */; };
+		4F3477A3285C7380005E676F /* HostelCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3477A1285C7380005E676F /* HostelCheckoutViewController.swift */; };
+		4F3477A4285C7380005E676F /* HostelCheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F3477A2285C7380005E676F /* HostelCheckoutViewController.xib */; };
 		4F521D482817C1CD00391292 /* HostelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F521D462817C1CD00391292 /* HostelCollectionViewCell.swift */; };
 		4F521D492817C1CD00391292 /* HostelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F521D472817C1CD00391292 /* HostelCollectionViewCell.xib */; };
 		4F521D5B2817D82100391292 /* ShopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F521D592817D82100391292 /* ShopTableViewCell.swift */; };
@@ -88,6 +95,7 @@
 		4F8DA88D28321B6F001CD3BD /* PackageProductDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8DA88B28321B6F001CD3BD /* PackageProductDetailTableViewController.xib */; };
 		4F8DA89028321BA8001CD3BD /* PackageProductDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8DA88E28321BA8001CD3BD /* PackageProductDetailTableViewCell.swift */; };
 		4F8DA89128321BA8001CD3BD /* PackageProductDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8DA88F28321BA8001CD3BD /* PackageProductDetailTableViewCell.xib */; };
+		4F93F30C2863F81800336A0F /* PointService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F93F30B2863F81800336A0F /* PointService.swift */; };
 		4FA0E7D8282610BB0082021B /* PackageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA0E7D7282610BB0082021B /* PackageDetailViewController.swift */; };
 		4FA0E7DA2826152F0082021B /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA0E7D92826152F0082021B /* Package.swift */; };
 		4FA0E7DC282616CE0082021B /* PackageDetailNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA0E7DB282616CE0082021B /* PackageDetailNameCell.swift */; };
@@ -107,6 +115,9 @@
 		4FB43BF628338700008F06FF /* SignUpViewController_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB43BF428338700008F06FF /* SignUpViewController_2.swift */; };
 		4FB43BF728338700008F06FF /* SignUpViewController_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FB43BF528338700008F06FF /* SignUpViewController_2.xib */; };
 		4FC5371A2817E1A3005807DA /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC537192817E1A3005807DA /* UIColor + Ext.swift */; };
+		4FC95F4928634C9C00633594 /* FixMotor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC95F4828634C9C00633594 /* FixMotor.swift */; };
+		4FC95F4B28634CB700633594 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC95F4A28634CB700633594 /* Point.swift */; };
+		4FC95F4D28634FD500633594 /* FixMotorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC95F4C28634FD500633594 /* FixMotorService.swift */; };
 		4FCD048C2824CA7F00E30C3E /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCD048B2824CA7F00E30C3E /* Order.swift */; };
 		4FCD048E2824CC5B00E30C3E /* OrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCD048D2824CC5B00E30C3E /* OrderService.swift */; };
 		4FCD04912824D13200E30C3E /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCD048F2824D13200E30C3E /* WKWebViewController.swift */; };
@@ -226,12 +237,19 @@
 		4F0A29DC282A3FCA0000FFB6 /* MyKeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKeyChain.swift; sourceTree = "<group>"; };
 		4F0A29DE282A68040000FFB6 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		4F0A29E0282A698B0000FFB6 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
+		4F0F57FF285B2F22001EBE9F /* ReservationInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationInputViewController.swift; sourceTree = "<group>"; };
+		4F0F5800285B2F22001EBE9F /* ReservationInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservationInputViewController.xib; sourceTree = "<group>"; };
 		4F1669D5282CEBE90031E37C /* StoreAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAppViewController.swift; sourceTree = "<group>"; };
 		4F1669D6282CEBE90031E37C /* StoreAppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreAppViewController.xib; sourceTree = "<group>"; };
 		4F1669D9282CF2C80031E37C /* DidReimbursementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidReimbursementViewController.swift; sourceTree = "<group>"; };
 		4F1669DA282CF2C80031E37C /* DidReimbursementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DidReimbursementViewController.xib; sourceTree = "<group>"; };
 		4F2C08092822510300E56AC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4F2C080B2822529700E56AC1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		4F34779A285C6F8B005E676F /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
+		4F34779B285C6F8B005E676F /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
+		4F34779E285C70EF005E676F /* UITableViewCell + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Ext.swift"; sourceTree = "<group>"; };
+		4F3477A1285C7380005E676F /* HostelCheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostelCheckoutViewController.swift; sourceTree = "<group>"; };
+		4F3477A2285C7380005E676F /* HostelCheckoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostelCheckoutViewController.xib; sourceTree = "<group>"; };
 		4F521D462817C1CD00391292 /* HostelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostelCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F521D472817C1CD00391292 /* HostelCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HostelCollectionViewCell.xib; sourceTree = "<group>"; };
 		4F521D592817D82100391292 /* ShopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTableViewCell.swift; sourceTree = "<group>"; };
@@ -278,6 +296,7 @@
 		4F8DA88B28321B6F001CD3BD /* PackageProductDetailTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackageProductDetailTableViewController.xib; sourceTree = "<group>"; };
 		4F8DA88E28321BA8001CD3BD /* PackageProductDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageProductDetailTableViewCell.swift; sourceTree = "<group>"; };
 		4F8DA88F28321BA8001CD3BD /* PackageProductDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackageProductDetailTableViewCell.xib; sourceTree = "<group>"; };
+		4F93F30B2863F81800336A0F /* PointService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointService.swift; sourceTree = "<group>"; };
 		4FA0E7D7282610BB0082021B /* PackageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageDetailViewController.swift; sourceTree = "<group>"; };
 		4FA0E7D92826152F0082021B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		4FA0E7DB282616CE0082021B /* PackageDetailNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageDetailNameCell.swift; sourceTree = "<group>"; };
@@ -297,6 +316,9 @@
 		4FB43BF428338700008F06FF /* SignUpViewController_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController_2.swift; sourceTree = "<group>"; };
 		4FB43BF528338700008F06FF /* SignUpViewController_2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController_2.xib; sourceTree = "<group>"; };
 		4FC537192817E1A3005807DA /* UIColor + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
+		4FC95F4828634C9C00633594 /* FixMotor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixMotor.swift; sourceTree = "<group>"; };
+		4FC95F4A28634CB700633594 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		4FC95F4C28634FD500633594 /* FixMotorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixMotorService.swift; sourceTree = "<group>"; };
 		4FCD048B2824CA7F00E30C3E /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		4FCD048D2824CC5B00E30C3E /* OrderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderService.swift; sourceTree = "<group>"; };
 		4FCD048F2824D13200E30C3E /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
@@ -459,6 +481,62 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4F0F57FC285B2AF1001EBE9F /* Reserved */ = {
+			isa = PBXGroup;
+			children = (
+				4F0F57FD285B2D69001EBE9F /* CollectInTable */,
+				571A9A482786BB5D00E8440D /* ReservationTableViewController.swift */,
+				57ADBD1F27869F9C009C1C4E /* TimeCollectionViewCell.swift */,
+				57ADBD2027869F9C009C1C4E /* TimeCollectionViewCell.xib */,
+				57ADBD1727868D86009C1C4E /* ReservationTableViewCell.swift */,
+				57ADBD1827868D86009C1C4E /* ReservationTableViewCell.xib */,
+			);
+			path = Reserved;
+			sourceTree = "<group>";
+		};
+		4F0F57FD285B2D69001EBE9F /* CollectInTable */ = {
+			isa = PBXGroup;
+			children = (
+				4F74528F2817A577006D6E93 /* ShopLocationTableViewController.swift */,
+				4F521D592817D82100391292 /* ShopTableViewCell.swift */,
+				4F521D5A2817D82100391292 /* ShopTableViewCell.xib */,
+				4FFE3BB52818F98C00F09CFE /* ShopTypeTableViewCell.swift */,
+				4FFE3BB62818F98C00F09CFE /* ShopTypeTableViewCell.xib */,
+				4FFE3BB12818EF4F00F09CFE /* ShopTypeCollectionViewCell.swift */,
+				4FFE3BB22818EF4F00F09CFE /* ShopTypeCollectionViewCell.xib */,
+			);
+			path = CollectInTable;
+			sourceTree = "<group>";
+		};
+		4F0F57FE285B2ED6001EBE9F /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				4F0F57FF285B2F22001EBE9F /* ReservationInputViewController.swift */,
+				4F0F5800285B2F22001EBE9F /* ReservationInputViewController.xib */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		4F16EFE2285C6B8200175E65 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				57ADBD1B2786910B009C1C4E /* CalendarViewController.swift */,
+				57ADBD1C2786910B009C1C4E /* CalendarViewController.xib */,
+				4F34779A285C6F8B005E676F /* CalendarTableViewCell.swift */,
+				4F34779B285C6F8B005E676F /* CalendarTableViewCell.xib */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		4F3477A0285C7323005E676F /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				4F3477A1285C7380005E676F /* HostelCheckoutViewController.swift */,
+				4F3477A2285C7380005E676F /* HostelCheckoutViewController.xib */,
+			);
+			path = Checkout;
+			sourceTree = "<group>";
+		};
 		4F521D4A2817C87600391292 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,9 +601,6 @@
 		4F6D1708281695D300772FF3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				571A9A312786B4B900E8440D /* ShopNavigationViewController.swift */,
-				571A9A3B2786B8DE00E8440D /* ShopViewController.swift */,
-				57A5ECEA27856E9600245DB0 /* Shop.storyboard */,
 				4F6D16E5281671B700772FF3 /* ListTableViewCell.swift */,
 				4F6D16E6281671B700772FF3 /* ListTableViewCell.xib */,
 				4F6D16E9281675F100772FF3 /* CategoryCollectionViewCell.swift */,
@@ -559,6 +634,8 @@
 				4FCD048F2824D13200E30C3E /* WKWebViewController.swift */,
 				4FCD04902824D13200E30C3E /* WKWebViewController.xib */,
 				4F89742A2826778400B63997 /* ShoppingCart.swift */,
+				4FC95F4C28634FD500633594 /* FixMotorService.swift */,
+				4F93F30B2863F81800336A0F /* PointService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -574,6 +651,8 @@
 				4F0A29DE282A68040000FFB6 /* Store.swift */,
 				4FCD048B2824CA7F00E30C3E /* Order.swift */,
 				4FA96137282BAF5C00BB22EB /* UNQRCode.swift */,
+				4FC95F4828634C9C00633594 /* FixMotor.swift */,
+				4FC95F4A28634CB700633594 /* Point.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -650,6 +729,7 @@
 				4F71957A2822143500B2A63A /* NSCollectionLayoutSize + Ext.swift */,
 				4FEEEBD52824A25900A8F3B2 /* UIImageView + Ext.swift */,
 				4F6CF9DF282CD982000F66BA /* UIImage + Ext.swift */,
+				4F34779E285C70EF005E676F /* UITableViewCell + Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -682,12 +762,6 @@
 		4FFE3BB02818EF1400F09CFE /* TopPage */ = {
 			isa = PBXGroup;
 			children = (
-				4F521D592817D82100391292 /* ShopTableViewCell.swift */,
-				4F521D5A2817D82100391292 /* ShopTableViewCell.xib */,
-				4FFE3BB52818F98C00F09CFE /* ShopTypeTableViewCell.swift */,
-				4FFE3BB62818F98C00F09CFE /* ShopTypeTableViewCell.xib */,
-				4FFE3BB12818EF4F00F09CFE /* ShopTypeCollectionViewCell.swift */,
-				4FFE3BB22818EF4F00F09CFE /* ShopTypeCollectionViewCell.xib */,
 				4F8A253B28290FBA00B21E7D /* HostelTableViewCell.swift */,
 				4F8A253C28290FBA00B21E7D /* HostelTableViewCell.xib */,
 				4F8B0D26282912A400F361C3 /* HostelTypeCollectionViewCell.swift */,
@@ -744,19 +818,15 @@
 		572A1F76278686D400D368D2 /* Reservation */ = {
 			isa = PBXGroup;
 			children = (
-				4FFE3BB02818EF1400F09CFE /* TopPage */,
 				571A9A332786B4D200E8440D /* ReservationNavigationViewController.swift */,
-				571A9A482786BB5D00E8440D /* ReservationTableViewController.swift */,
-				57ADBD1527868D28009C1C4E /* Reservation.storyboard */,
-				57ADBD1F27869F9C009C1C4E /* TimeCollectionViewCell.swift */,
-				57ADBD2027869F9C009C1C4E /* TimeCollectionViewCell.xib */,
-				57ADBD1727868D86009C1C4E /* ReservationTableViewCell.swift */,
-				57ADBD1827868D86009C1C4E /* ReservationTableViewCell.xib */,
-				57ADBD1B2786910B009C1C4E /* CalendarViewController.swift */,
-				57ADBD1C2786910B009C1C4E /* CalendarViewController.xib */,
-				4F74528F2817A577006D6E93 /* ShopLocationTableViewController.swift */,
 				4F8A25392829077300B21E7D /* HostelViewController.swift */,
+				57ADBD1527868D28009C1C4E /* Reservation.storyboard */,
+				4FFE3BB02818EF1400F09CFE /* TopPage */,
 				4F521D5E2817DD1200391292 /* HostelDetail */,
+				4F0F57FE285B2ED6001EBE9F /* Input */,
+				4F16EFE2285C6B8200175E65 /* Calendar */,
+				4F3477A0285C7323005E676F /* Checkout */,
+				4F0F57FC285B2AF1001EBE9F /* Reserved */,
 				450ED64A2790069600CDF731 /* CustomAlert */,
 			);
 			path = Reservation;
@@ -927,6 +997,9 @@
 		57A5ECE7278424E900245DB0 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				571A9A312786B4B900E8440D /* ShopNavigationViewController.swift */,
+				571A9A3B2786B8DE00E8440D /* ShopViewController.swift */,
+				57A5ECEA27856E9600245DB0 /* Shop.storyboard */,
 				4F6D1708281695D300772FF3 /* Main */,
 				4F6D16ED281679E900772FF3 /* TicketDetail */,
 				4F6D16F22816819900772FF3 /* Cart */,
@@ -1031,6 +1104,7 @@
 				4F6D170728168A2B00772FF3 /* CheckoutTableViewCell.xib in Resources */,
 				571A9A5A2787E3CB00E8440D /* PointViewController.xib in Resources */,
 				4FFE3BB82818F98C00F09CFE /* ShopTypeTableViewCell.xib in Resources */,
+				4F34779D285C6F8B005E676F /* CalendarTableViewCell.xib in Resources */,
 				4F6D16F128167A3300772FF3 /* ProductDetailViewController.xib in Resources */,
 				45F016E1278D2DA400F03BC2 /* MyOrder.storyboard in Resources */,
 				4FF26C8828386AC700CA3665 /* StoreIDSelectViewController.xib in Resources */,
@@ -1047,6 +1121,7 @@
 				4F74528C28179053006D6E93 /* ShopRuleViewController.xib in Resources */,
 				571A9A622787EBAD00E8440D /* QuestionViewController.xib in Resources */,
 				4F8DA88D28321B6F001CD3BD /* PackageProductDetailTableViewController.xib in Resources */,
+				4F3477A4285C7380005E676F /* HostelCheckoutViewController.xib in Resources */,
 				4FB43BF728338700008F06FF /* SignUpViewController_2.xib in Resources */,
 				4F521D492817C1CD00391292 /* HostelCollectionViewCell.xib in Resources */,
 				571A9A6A27880D7D00E8440D /* SignUpViewController.xib in Resources */,
@@ -1076,6 +1151,7 @@
 				57ADBD1E2786910B009C1C4E /* CalendarViewController.xib in Resources */,
 				4FF26C8C2838715200CA3665 /* StoreIDSelectTableViewCell.xib in Resources */,
 				4FFE3BBF28192C0E00F09CFE /* TicketDetailViewController.xib in Resources */,
+				4F0F5802285B2F22001EBE9F /* ReservationInputViewController.xib in Resources */,
 				571A9A452786B94B00E8440D /* Login.storyboard in Resources */,
 				5789AE6E278C0B4700B15225 /* Ticket.storyboard in Resources */,
 				571A9A7227882EE400E8440D /* MemberInfoViewController.xib in Resources */,
@@ -1152,8 +1228,10 @@
 				5789AE8A278C24F900B15225 /* ExpiredViewController.swift in Sources */,
 				4F7452902817A577006D6E93 /* ShopLocationTableViewController.swift in Sources */,
 				571A9A6927880D7D00E8440D /* SignUpViewController.swift in Sources */,
+				4FC95F4D28634FD500633594 /* FixMotorService.swift in Sources */,
 				450389FE27950891000091F1 /* MyCollectionViewController.swift in Sources */,
 				4F6D170628168A2B00772FF3 /* CheckoutTableViewCell.swift in Sources */,
+				4FC95F4B28634CB700633594 /* Point.swift in Sources */,
 				4FCD048E2824CC5B00E30C3E /* OrderService.swift in Sources */,
 				4F8DA88C28321B6F001CD3BD /* PackageProductDetailTableViewController.swift in Sources */,
 				4FA96135282B62AB00BB22EB /* ProductInfoCell.swift in Sources */,
@@ -1174,9 +1252,11 @@
 				5789AE8D278C252800B15225 /* ConvertibleTableViewCell.swift in Sources */,
 				571A9A472786B95800E8440D /* LoginViewController.swift in Sources */,
 				4FA0E7E0282618B60082021B /* PackageDetailDescriptionCell.swift in Sources */,
+				4F34779C285C6F8B005E676F /* CalendarTableViewCell.swift in Sources */,
 				571A9A6D27880D9300E8440D /* PrivateRuleViewController.swift in Sources */,
 				571A9A302786B48B00E8440D /* TopPageNavigationViewController.swift in Sources */,
 				4FA96131282B629100BB22EB /* OrderStatusCell.swift in Sources */,
+				4F34779F285C70EF005E676F /* UITableViewCell + Ext.swift in Sources */,
 				4FA9613A282BB0AD00BB22EB /* QRCodeService.swift in Sources */,
 				5789AE70278C0CCC00B15225 /* UsableTicketViewController.swift in Sources */,
 				4FA0E7DE2826180D0082021B /* PackageDetailCostCell.swift in Sources */,
@@ -1187,6 +1267,7 @@
 				571A9A612787EBAD00E8440D /* QuestionViewController.swift in Sources */,
 				571A9A382786B72500E8440D /* MainTabBarController.swift in Sources */,
 				4FCD04912824D13200E30C3E /* WKWebViewController.swift in Sources */,
+				4F3477A3285C7380005E676F /* HostelCheckoutViewController.swift in Sources */,
 				4FAE563E283DB90C004EA6B8 /* MemberInfoViewController_1.swift in Sources */,
 				4FDA27C228337540003CCA3D /* Global.swift in Sources */,
 				4F2C080C2822529700E56AC1 /* UserService.swift in Sources */,
@@ -1205,6 +1286,8 @@
 				4F74528728178087006D6E93 /* URLPath.swift in Sources */,
 				4FFE3BC228192C9200F09CFE /* QRCodeViewController.swift in Sources */,
 				4FFE3BB72818F98C00F09CFE /* ShopTypeTableViewCell.swift in Sources */,
+				4FC95F4928634C9C00633594 /* FixMotor.swift in Sources */,
+				4F0F5801285B2F22001EBE9F /* ReservationInputViewController.swift in Sources */,
 				4FB038FB2838DD0C00A69875 /* StorePicker.swift in Sources */,
 				4F025B572834CD5200DC0101 /* LoginViewController_1.swift in Sources */,
 				571A9A592787E3CB00E8440D /* PointViewController.swift in Sources */,
@@ -1223,6 +1306,7 @@
 				57ADBD2127869F9C009C1C4E /* TimeCollectionViewCell.swift in Sources */,
 				57A5ECCD278422E000245DB0 /* AppDelegate.swift in Sources */,
 				5789AE95278C254800B15225 /* ExpiredTableViewCell.swift in Sources */,
+				4F93F30C2863F81800336A0F /* PointService.swift in Sources */,
 				4FF26C8728386AC700CA3665 /* StoreIDSelectViewController.swift in Sources */,
 				4FDA27C428337689003CCA3D /* Structure.swift in Sources */,
 				4FA9612E282B5FF000BB22EB /* OrderDetailFooterView.swift in Sources */,
@@ -1408,7 +1492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.22;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1417,7 +1501,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -1426,12 +1510,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jotanji.RilinkShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1442,7 +1526,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.22;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1451,7 +1535,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiresFullScreen = NO;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -1460,12 +1544,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jotanji.RilinkShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

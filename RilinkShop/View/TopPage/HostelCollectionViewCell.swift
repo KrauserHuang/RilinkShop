@@ -19,7 +19,7 @@ class HostelCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with model: Store) {
-        let imageURLString = TEST_ROOT_URL + model.storePicture
+        let imageURLString = SHOP_ROOT_URL + model.storePicture
         hostelImageView.setImage(imageURL: imageURLString)
     }
 }

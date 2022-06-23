@@ -36,23 +36,38 @@ class UsedTicketViewController: UIViewController {
         
         getTicket()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getTicket()
+    }
 
     func getTicket() {
         QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
             QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
                 
-//                let packageWithoutQRConfirm = packageResponse.filter {
-//                    $0.product?.forEach({ product in
+                let packageWithoutQRConfirm = packageResponse.filter { package in
+                    package.product?.allSatisfy({ $0.qrconfirm == nil }) as! Bool
+                }
+//                var packageWithQR = [QRCode]()
+//                var packages = [QRCode]()
+//                packageResponse.forEach { package in
+//                    let hasNotQRConfirm = package.product?.filter({ product in
 //                        product.qrconfirm == nil
-//
-//                    })
-//                    $0.product?.filter({ product in
-//                        return product.qrconfirm == nil
-//                    })
-//                    $0.product?.compactMap({ $0.qrconfirm == nil })
+//                    }).isEmpty
+//                    print(hasNotQRConfirm)
+//                    if hasNotQRConfirm! {
+//                        packages.append(package)
+//                    } else {
+//                        packageWithQR.append(package)
+//                    }
 //                }
-                
-                self.tickets = productResponse + packageResponse
+            
+                print(#function)
+                print(packageWithoutQRConfirm)
+                self.tickets = productResponse + packageWithoutQRConfirm
+//                print(packages)
+//                self.tickets = productResponse + packages
             }
         }
     }
@@ -61,7 +76,10 @@ class UsedTicketViewController: UIViewController {
         self.refreshControl.beginRefreshing()
         QRCodeService.shared.confirmList(id: account, pwd: password, ispackage: "0") { productResponse in
             QRCodeService.shared.confirmList(id: self.account, pwd: self.password, ispackage: "1") { packageResponse in
-                self.tickets = productResponse + packageResponse
+                let packageWithoutQRConfirm = packageResponse.filter { package in
+                    package.product?.allSatisfy({ $0.qrconfirm == nil }) as! Bool
+                }
+                self.tickets = productResponse + packageWithoutQRConfirm
                 if self.tickets.count != 0 {
                     self.refreshControl.endRefreshing()
                     self.tableViiew.reloadData()

@@ -45,7 +45,7 @@ class ListTableViewCell: UITableViewCell {
         nameLabel.text = model.product_name
         costLabel.text = "$\(model.product_price)"
         
-        if let imageURL = URL(string: TEST_ROOT_URL + model.product_picture) {
+        if let imageURL = URL(string: SHOP_ROOT_URL + model.product_picture) {
             itemImageView.isHidden = false
             itemImageView.kf.setImage(with: imageURL)
         } else {
@@ -59,7 +59,7 @@ class ListTableViewCell: UITableViewCell {
             nameLabel.text = product.product_name
             costLabel.text = "$\(product.product_price)"
             
-            if let imageURL = URL(string: TEST_ROOT_URL + product.product_picture) {
+            if let imageURL = URL(string: SHOP_ROOT_URL + product.product_picture) {
                 itemImageView.isHidden = false
                 itemImageView.kf.setImage(with: imageURL)
             } else {
@@ -69,7 +69,7 @@ class ListTableViewCell: UITableViewCell {
             nameLabel.text = package.productName
             costLabel.text = "$\(package.productPrice)"
             
-            if let imageURL = URL(string: TEST_ROOT_URL + package.productPicture) {
+            if let imageURL = URL(string: SHOP_ROOT_URL + package.productPicture) {
                 itemImageView.isHidden = false
                 itemImageView.kf.setImage(with: imageURL)
             } else {

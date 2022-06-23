@@ -104,7 +104,7 @@ class ProductDetailViewController: UIViewController {
                 self.costLabel.text = "$\(productResponse.product_price)"
                 self.descriptionLabel.text = productResponse.product_description
 
-                if let imageURL = URL(string: TEST_ROOT_URL + productResponse.product_picture) { // test
+                if let imageURL = URL(string: SHOP_ROOT_URL + productResponse.product_picture) { // test
                     self.ticketImageView.isHidden = false
                     self.ticketImageView.kf.setImage(with: imageURL)
                 } else {
@@ -128,7 +128,7 @@ class ProductDetailViewController: UIViewController {
                 self.costLabel.text = "$\(package.productPrice)"
                 self.descriptionLabel.text = package.productDescription
                 
-                let imageURLString = TEST_ROOT_URL + package.productPicture
+                let imageURLString = SHOP_ROOT_URL + package.productPicture
                 self.ticketImageView.setImage(imageURL: imageURLString)
                 
                 if self.stock == 0 {

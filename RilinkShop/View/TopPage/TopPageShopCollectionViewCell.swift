@@ -19,7 +19,7 @@ class TopPageShopCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with model: Package) {
-        let imageURLString = TEST_ROOT_URL + model.productPicture
+        let imageURLString = SHOP_ROOT_URL + model.productPicture
         imageView.setImage(imageURL: imageURLString)
     }
 }

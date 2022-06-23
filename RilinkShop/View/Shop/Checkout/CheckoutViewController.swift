@@ -135,7 +135,8 @@ class CheckoutViewController: UIViewController {
             let checkoutAction = UIAlertAction(title: "付款去", style: .default) { action in
                 let wkWebVC = WKWebViewController()
                 wkWebVC.delegate = self
-                wkWebVC.urlStr = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid=\(response.responseMessage)"
+                wkWebVC.urlStr = PAYMENT_API_URL + "\(response.responseMessage)"
+//                "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid=\(response.responseMessage)"
                 wkWebVC.orderNo = response.responseMessage
                 self.navigationController?.pushViewController(wkWebVC, animated: true)
             }

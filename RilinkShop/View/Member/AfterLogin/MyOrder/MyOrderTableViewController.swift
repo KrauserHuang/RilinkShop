@@ -87,7 +87,8 @@ extension MyOrderTableViewController: MyOrderTableViewCellDelegate {
         let controller = WKWebViewController()
         controller.delegate = self
         controller.title = "行動支付"
-        controller.urlStr = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid=\(orderNo)"
+        controller.urlStr = PAYMENT_API_URL + "\(orderNo)"
+//        "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid=\(orderNo)"
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }

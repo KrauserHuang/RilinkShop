@@ -15,6 +15,7 @@
                 <outlet property="hostelImageView" destination="cQc-dl-Sue" id="lEH-Dk-k2X"/>
                 <outlet property="openTimeLabel" destination="QFl-UI-Tve" id="lYi-Jf-dRV"/>
                 <outlet property="phoneNoLabel" destination="5Qr-A4-8ZG" id="BCH-s3-bjE"/>
+                <outlet property="reservationButton" destination="09M-SS-7lc" id="ocg-Ad-DoW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gRq-3D-9N0">
-                    <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="674"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFH-p5-7J5">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="420.33333333333331"/>
@@ -77,10 +78,10 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="AQa-jz-NkK" secondAttribute="bottom" id="9RO-Sb-Ze6"/>
                                 <constraint firstItem="AQa-jz-NkK" firstAttribute="top" secondItem="OFH-p5-7J5" secondAttribute="top" id="BbC-gb-c08"/>
                                 <constraint firstAttribute="trailing" secondItem="AQa-jz-NkK" secondAttribute="trailing" constant="30" id="b6G-NC-Ucu"/>
                                 <constraint firstItem="AQa-jz-NkK" firstAttribute="leading" secondItem="OFH-p5-7J5" secondAttribute="leading" constant="30" id="hJ9-5w-NAa"/>
+                                <constraint firstAttribute="bottom" secondItem="AQa-jz-NkK" secondAttribute="bottom" id="kjy-iq-dGE"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -94,14 +95,28 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="iWY-Xd-lVF"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="AE2-Ja-VdK"/>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09M-SS-7lc">
+                    <rect key="frame" x="30" y="728" width="315" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="4Fi-lv-7Bc"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <connections>
+                        <action selector="reservationButtonTapped:" destination="-1" eventType="touchUpInside" id="eiP-2d-CUf"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="09M-SS-7lc" secondAttribute="trailing" constant="30" id="9Hy-P9-3rr"/>
+                <constraint firstItem="09M-SS-7lc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="FEh-NU-5DO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gRq-3D-9N0" secondAttribute="trailing" id="HOI-Ve-vI5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="09M-SS-7lc" secondAttribute="bottom" constant="10" id="Oht-sH-zuL"/>
                 <constraint firstItem="gRq-3D-9N0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="TRP-po-N9h"/>
                 <constraint firstItem="gRq-3D-9N0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sgb-Bt-Fuf"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="gRq-3D-9N0" secondAttribute="bottom" id="yXI-hX-PKd"/>
+                <constraint firstItem="09M-SS-7lc" firstAttribute="top" secondItem="gRq-3D-9N0" secondAttribute="bottom" constant="10" id="yXI-hX-PKd"/>
             </constraints>
             <point key="canvasLocation" x="-47" y="222"/>
         </view>

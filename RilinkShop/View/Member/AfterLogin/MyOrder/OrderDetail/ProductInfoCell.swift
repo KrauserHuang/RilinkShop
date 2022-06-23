@@ -29,7 +29,7 @@ class ProductInfoCell: UITableViewCell {
     }
     
     func configure(with model: List) {
-        productImageView.setImage(imageURL: TEST_ROOT_URL + model.productPicture)
+        productImageView.setImage(imageURL: SHOP_ROOT_URL + model.productPicture)
         nameLabel.text = model.productName
         priceLabel.text = "NT$\(model.productPrice)"
         qtyLabel.text = "X\(model.orderQty)"
@@ -37,7 +37,7 @@ class ProductInfoCell: UITableViewCell {
     }
     
 //    func configure(with model: Product) {
-//        productImageView.setImage(imageURL: TEST_ROOT_URL + model.product_picture)
+//        productImageView.setImage(imageURL: SHOP_ROOT_URL + model.product_picture)
 //        nameLabel.text = model.product_name
 //        priceLabel.text = "NT$\(model.product_price)"
 //        qtyLabel.text = "X\(model.order_qty)"

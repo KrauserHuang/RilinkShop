@@ -8,14 +8,22 @@
 import Foundation
 
 // MARK: - MAIN
-//let OFFICIAL_API_URL = "https://medicalec.jotangi.net/medicalec/api/"
-//let OFFICIAL_ROOT_URL = "https://medicalec.jotangi.net/medicalec/"
-let TEST_API_URL = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
-let TEST_ROOT_URL = "https://rilink.jotangi.com.tw:11074/ticketec/"
+//綠悠游商城正式
+let SHOP_API_URL = "https://rilink.com.tw/ticketec/api/"
+let SHOP_ROOT_URL = "https://rilink.com.tw/ticketec/"
+//綠悠游商城測試
+//let SHOP_API_URL = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
+//let SHOP_ROOT_URL = "https://rilink.jotangi.com.tw:11074/ticketec/"
+
+//Web串接購買金流正式
+let PAYMENT_API_URL = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="
+//Web串接購買金流測試
+//let PAYMENT_API_URL = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid="
+
 //綠悠游正式
-//let API_URL = "https://rilink.com.tw/api/v1"
+let API_URL = "https://rilink.com.tw/api/v1"
 //綠悠游測試
-let API_URL = "https://rilink.jotangi.com.tw:11074/api/v1"
+//let API_URL = "https://rilink.jotangi.com.tw:11074/api/v1"
 /**
  綠悠遊商城串接
  */
@@ -97,3 +105,11 @@ let URL_QRUNCONFIRMLIST = "qr_unconfirm_list.php"
 let URL_QRCONFIRMLIST = "qr_confirm_list.php"
 //店家核銷商品/套票
 let URL_STOREAPPQRCONFIRM = "storeapp_qrconfirm.php"
+
+// MARK: - FIX MOTOR RELATED
+//商店可預約服務列表
+let URL_FIXMOTORINFO = "fixmotor_info.php"
+//客戶開始預約
+let URL_BOOKINGFIXMOTOR = "booking_fixmotor.php"
+//取得紅利點數歷史紀錄
+let URL_FETCHPOINTHISTORY = "fetch_pointhistory.php"

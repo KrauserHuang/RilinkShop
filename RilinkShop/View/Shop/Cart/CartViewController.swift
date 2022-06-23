@@ -59,6 +59,8 @@ class CartViewController: UIViewController {
             ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { items in
                 self.inCartItems = items
                 self.cartTableView.isHidden = false
+                print(#function)
+                print(items)
                 indicator.hide(animated: true)
     //            self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
             }
@@ -173,6 +175,72 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 }
 // MARK: - Cell Delegate
 extension CartViewController: CartTableViewCellDelegate {
+    func didAddQty(_ cell: CartTableViewCell) {
+        guard let indexPath = cartTableView.indexPath(for: cell) else { return }
+        let no = inCartItems[indexPath.row].product_no
+        var qty = Int(inCartItems[indexPath.row].order_qty)!
+        print(#function)
+        print(inCartItems[indexPath.row].product_stock)
+        let stock = Int(inCartItems[indexPath.row].product_stock)!
+        if qty < stock {
+            qty += 1
+            HUD.showLoadingHUD(inView: self.view, text: "")
+            ProductService.shared.editShoppingCartItem(id: account, pwd: password, no: no, qty: qty) { (success, response) in
+                DispatchQueue.global(qos: .userInitiated).async {
+                    URLCache.shared.removeAllCachedResponses()
+                    DispatchQueue.main.sync {
+                        
+                        guard success else {
+                            HUD.hideLoadingHUD(inView: self.view)
+                            let errmsg = response as! String
+                            Alert.showMessage(title: "", msg: errmsg, vc: self) {
+                                
+                            }
+                            return
+                        }
+                        
+                        HUD.hideLoadingHUD(inView: self.view)
+                        ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { products in
+                            let item = products[indexPath.row]
+                            cell.configure(with: item)
+                            self.viewDidLayoutSubviews()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func didSubstractQty(_ cell: CartTableViewCell) {
+        guard let indexPath = cartTableView.indexPath(for: cell) else { return }
+        let no = inCartItems[indexPath.row].product_no
+        let qty = Int(inCartItems[indexPath.row].order_qty)!
+        HUD.showLoadingHUD(inView: cell.contentView, text: "")
+        ProductService.shared.editShoppingCartItem(id: account, pwd: password, no: no, qty: qty) { (success, response) in
+            DispatchQueue.global(qos: .userInitiated).async {
+                URLCache.shared.removeAllCachedResponses()
+                DispatchQueue.main.sync {
+                    
+                    guard success else {
+                        HUD.hideLoadingHUD(inView: cell.contentView)
+                        let errmsg = response as! String
+                        Alert.showMessage(title: "", msg: errmsg, vc: self) {
+                            
+                        }
+                        return
+                    }
+                    
+                    HUD.hideLoadingHUD(inView: self.view)
+                    ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { products in
+                        let item = products[indexPath.row]
+                        cell.configure(with: item)
+                        self.viewDidLayoutSubviews()
+                    }
+                }
+            }
+        }
+    }
+    
     func removeItem(_ cell: CartTableViewCell) {
         guard let indexPath = cartTableView.indexPath(for: cell) else { return }
         

@@ -32,7 +32,7 @@ class PackageDetailViewController: UIViewController {
         ProductService.shared.loadPackageInfo(id: account, pwd: password, no: package.packageNo) { packagesResponse in
 //            self.products = packagesResponse
             
-            self.headerView.headerImageView.setImage(imageURL: TEST_ROOT_URL + self.package.productPicture)
+            self.headerView.headerImageView.setImage(imageURL: SHOP_ROOT_URL + self.package.productPicture)
             
         }
     }

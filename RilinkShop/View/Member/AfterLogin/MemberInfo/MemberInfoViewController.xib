@@ -241,7 +241,6 @@
                             <rect key="frame" x="16" y="490" width="382" height="40"/>
                             <color key="backgroundColor" red="0.30980392156862746" green="0.51764705882352935" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="X3u-IX-AQZ"/>
                                 <constraint firstAttribute="height" constant="40" id="da7-jY-ic3"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>

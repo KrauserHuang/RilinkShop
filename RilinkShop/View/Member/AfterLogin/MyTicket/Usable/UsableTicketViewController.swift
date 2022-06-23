@@ -37,6 +37,11 @@ class UsableTicketViewController: UIViewController {
         getTicket()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getTicket()
+    }
+    
     func getTicket() {
         QRCodeService.shared.unconfirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
             QRCodeService.shared.unconfirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in

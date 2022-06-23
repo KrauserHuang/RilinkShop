@@ -12,7 +12,7 @@ class StoreService {
     static let shared = StoreService()
     
     func getStoreType(id: String, pwd: String, completion: @escaping ([StoreType]) -> Void) {
-        let url = TEST_API_URL + URL_STORETYPE
+        let url = SHOP_API_URL + URL_STORETYPE
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
@@ -26,7 +26,7 @@ class StoreService {
     }
     
 //    func getStoreList(id: String, pwd: String, type: String, completion: @escaping ([Store]) -> Void) {
-//        let url = TEST_API_URL + URL_STORELIST
+//        let url = SHOP_API_URL + URL_STORELIST
 //        let parameters = [
 //            "member_id": id,
 //            "member_pwd": pwd,
@@ -40,7 +40,7 @@ class StoreService {
 //    }
     
     func getStoreList(id: String, pwd: String, completion: @escaping ([Store]) -> Void) {
-        let url = TEST_API_URL + URL_STORELIST
+        let url = SHOP_API_URL + URL_STORELIST
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,

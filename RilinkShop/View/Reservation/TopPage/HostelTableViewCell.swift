@@ -28,7 +28,7 @@ class HostelTableViewCell: UITableViewCell {
     }
     
     func configure(with model: Store) {
-        hostelImageView.setImage(imageURL: TEST_ROOT_URL + model.storePicture)
+        hostelImageView.setImage(imageURL: SHOP_ROOT_URL + model.storePicture)
         nameLabel.text = model.storeName
         addressLabel.text = model.storeAddress
     }

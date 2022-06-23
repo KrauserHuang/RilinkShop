@@ -20,8 +20,7 @@ class ProductService {
     private(set) var productList = [Product]()
     // MARK: - Product/Package Related
     func getProductType(id: String, pwd: String, completion: @escaping ([Category]) -> Void) {
-        let url = TEST_API_URL + URL_PRODUCTTYPE // 測試機
-//        let url = OFFICIAL_API_URL + URL_PRODUCTTYPE // 正式機
+        let url = SHOP_API_URL + URL_PRODUCTTYPE // 測試機
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
@@ -34,8 +33,7 @@ class ProductService {
     
     // 載入商品列表
     func loadProductList(id: String, pwd: String, completion: @escaping ([Product]) -> Void) {
-        let url = TEST_API_URL + URL_PRODUCTLIST // 測試機
-//        let url = OFFICIAL_API_URL + URL_PRODUCTLIST // 正式機
+        let url = SHOP_API_URL + URL_PRODUCTLIST // 測試機
         let parameters = ["member_id": id,
                           "member_pwd": pwd]
         
@@ -64,8 +62,7 @@ class ProductService {
     }
     // 載入商品資訊
     func loadProductInfo(id: String, pw: String, no: String, completion: @escaping (Product) -> Void) {
-        let url = TEST_API_URL + URL_PRODUCTINFO // test
-//        let url = OFFICIAL_API_URL + URL_PRODUCTINFO // official
+        let url = SHOP_API_URL + URL_PRODUCTINFO // test
         let parameters = ["member_id": id, "member_pwd": pw, "product_no": no]
 
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
@@ -89,7 +86,7 @@ class ProductService {
     }
     
     func loadPackageList(id: String, pwd: String, completion: @escaping ([Package]) -> Void) {
-        let url = TEST_API_URL + URL_PACKAGELIST // 測試機
+        let url = SHOP_API_URL + URL_PACKAGELIST // 測試機
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
@@ -105,7 +102,7 @@ class ProductService {
     }
     
     func loadPackageInfo(id: String, pwd: String, no: String, completion: @escaping ([PackageInfo]) -> Void) {
-        let url = TEST_API_URL + URL_PACKAGEINFO // 測試機
+        let url = SHOP_API_URL + URL_PACKAGEINFO // 測試機
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -120,8 +117,7 @@ class ProductService {
     // MARK: - Shoppingcart Related
     // Add item to shopping cart(新增商品至購物車)
     func addShoppingCartItem(id: String, pwd: String, no: String, spec: String, price: String, qty: String, total: String, completion: @escaping (Product) -> Void) {
-        let url = TEST_API_URL + URL_ADDSHOPPINGCART // test
-//        let url = OFFICIAL_API_URL + URL_ADDSHOPPINGCART // official
+        let url = SHOP_API_URL + URL_ADDSHOPPINGCART // test
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -144,7 +140,7 @@ class ProductService {
     }
     
     func addShoppingCartItem(id: String, pwd: String, no: String, spec: String, price: String, qty: String, total: String, completed: @escaping Completion) {
-        let url = TEST_API_URL + URL_ADDSHOPPINGCART
+        let url = SHOP_API_URL + URL_ADDSHOPPINGCART
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -186,8 +182,7 @@ class ProductService {
     }
     // get shopping cart list(取得購物車目前列表)
     func loadShoppingCartList(id: String, pwd: String, completion: @escaping ([Product]) -> Void) {
-        let url = TEST_API_URL + URL_SHOPPINGCARTLIST // test
-//        let url = OFFICIAL_API_URL + URL_SHOPPINGCARTLIST // official
+        let url = SHOP_API_URL + URL_SHOPPINGCARTLIST // test
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
@@ -219,8 +214,7 @@ class ProductService {
     }
     // get shopping cart item count(取得購物商品種類數)
     func getShoppingCartCount(id: String, pwd: String, completion: @escaping (Response) -> Void) {
-        let url = TEST_API_URL + URL_SHOPPINGCARTCOUNT // test
-//        let url = OFFICIAL_API_URL + URL_SHOPPINGCARTCOUNT // official
+        let url = SHOP_API_URL + URL_SHOPPINGCARTCOUNT // test
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
@@ -243,26 +237,44 @@ class ProductService {
         }
     }
     // edit shopping cart(修改商品的數量，直到數字變零則執行removeShoppingCartItem)
-    func editShoppingCartItem(id: String, pwd: String, no: String, qty: Int, completion: @escaping ([Product]) -> Void) {
-        let url = TEST_API_URL + URL_EDITSHOPPINGCART // test
-//        let url = OFFICIAL_API_URL + URL_EDITSHOPPINGCART // official
+    func editShoppingCartItem(id: String, pwd: String, no: String, qty: Int, completion: @escaping Completion) {
+        let url = SHOP_API_URL + URL_EDITSHOPPINGCART // test
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
             "product_no": no,
             "order_qty": "\(qty)"
         ]
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+        
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-//            guard response.response?.statusCode == 200 else {
-//                fatalError()
-//            }
+            guard response.error == nil else {
+                return
+            }
+            
+            let value = JSON(response.value)
+            print(#function)
+            print(value)
+            
+            switch response.result {
+            case .success:
+                guard value["code"].stringValue == returnCode else {
+                    let errorMsg = value["responseMessage"].stringValue
+                    completion(false, errorMsg as AnyObject)
+                    return
+                }
+                let successMsg = value["responseMessage"].stringValue
+                completion(true, successMsg as AnyObject)
+            case .failure:
+                let errorMsg = value["responseMessage"].stringValue
+                completion(false, errorMsg as AnyObject)
+            }
         }
         
     }
     // delete item from shopping cart(刪掉對應商品)
     func removeShoppingCartItem(id: String, pwd: String, no: String, completion: @escaping (Product) -> Void) {
-        let url = TEST_API_URL + URL_DELETESHOPPINGCART // test
-//        let url = OFFICIAL_API_URL + URL_DELETESHOPPINGCART // official
+        let url = SHOP_API_URL + URL_DELETESHOPPINGCART // test
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -276,8 +288,7 @@ class ProductService {
     }
     // delete all items from shopping cart(刪掉所有的商品)
     func clearShoppingCartItem(id: String, pwd: String, completion: @escaping (Product) -> Void) {
-        let url = TEST_API_URL + URL_CLEARSHOPPINGCART // test
-//        let url = OFFICIAL_API_URL + URL_CLEARSHOPPINGCART // official
+        let url = SHOP_API_URL + URL_CLEARSHOPPINGCART // test
         let parameters = [
             "member_id": id,
             "member_pwd": pwd

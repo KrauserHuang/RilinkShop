@@ -37,12 +37,6 @@ class ShopLocationTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-//        if section == 0 {
-//            return 1
-//        } else {
-//            return 2
-//        }
         return 3
     }
 

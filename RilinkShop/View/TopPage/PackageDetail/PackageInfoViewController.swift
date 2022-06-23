@@ -91,7 +91,7 @@ class PackageInfoViewController: UIViewController {
         ProductService.shared.loadPackageInfo(id: account, pwd: password, no: package.packageNo) { packagesResponse in
             self.products = packagesResponse
         }
-        let imageURLString = TEST_ROOT_URL + package.productPicture
+        let imageURLString = SHOP_ROOT_URL + package.productPicture
         packageImageView.setImage(imageURL: imageURLString)
         packageNameLabel.text = package.productName
         packageCostLabel.text = package.productPrice

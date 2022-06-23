@@ -19,7 +19,7 @@ class QRCodeService {
     var theqrcodes = [String]()
     // 會員未核銷商品/套票
     func unconfirmList(id: String, pwd: String, ispackage: String, completion: @escaping ([UNQRCode]) -> Void) {
-        let url = TEST_API_URL + URL_QRUNCONFIRMLIST
+        let url = SHOP_API_URL + URL_QRUNCONFIRMLIST
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -47,7 +47,7 @@ class QRCodeService {
         }
     }
 //    func unconfirmList(id: String, pwd: String, ispackage: String, completed: @escaping Completion) {
-//        let url = TEST_API_URL + URL_QRUNCONFIRMLIST
+//        let url = SHOP_API_URL + URL_QRUNCONFIRMLIST
 //        let parameters = [
 //            "member_id": id,
 //            "member_pwd": pwd,
@@ -101,7 +101,7 @@ class QRCodeService {
 //    }
     // 會員已核銷商品/套票
     func confirmList(id: String, pwd: String, ispackage: String, completion: @escaping ([QRCode]) -> Void) {
-        let url = TEST_API_URL + URL_QRCONFIRMLIST
+        let url = SHOP_API_URL + URL_QRCONFIRMLIST
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -130,7 +130,7 @@ class QRCodeService {
         }
     }
     func confirmList(id: String, pwd: String, ispackage: String, completed: @escaping Completion) {
-        let url = TEST_API_URL + URL_QRCONFIRMLIST
+        let url = SHOP_API_URL + URL_QRCONFIRMLIST
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
@@ -174,7 +174,6 @@ class QRCodeService {
                                         product: data["product"].arrayValue as? [PackageProduct])
                     qrcodes.append(qrcode)
                 }
-                print("")
                 print(qrcodes)
                 completed(true, qrcodes as AnyObject)
             case .failure:
@@ -185,7 +184,7 @@ class QRCodeService {
     }
     // 店家核銷商品/套票
     func storeConfirm(storeAcc: String, storePwd: String, qrcode: String, completion: @escaping (Output) -> Void) {
-        let url = TEST_API_URL + URL_STOREAPPQRCONFIRM
+        let url = SHOP_API_URL + URL_STOREAPPQRCONFIRM
         let parameters = [
             "store_acc": storeAcc,
             "store_pwd": storePwd,
@@ -207,7 +206,7 @@ class QRCodeService {
         }
     }
     func storeConfirm(storeAcc: String, storePwd: String, qrcode: String, completed: @escaping Completion) {
-        let url = TEST_API_URL + URL_STOREAPPQRCONFIRM
+        let url = SHOP_API_URL + URL_STOREAPPQRCONFIRM
         let parameters = [
             "store_acc": storeAcc,
             "store_pwd": storePwd,
