@@ -36,8 +36,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udu-bu-ovs">
-                    <rect key="frame" x="239" y="143" width="15" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R-point" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udu-bu-ovs">
+                    <rect key="frame" x="239" y="143" width="48.5" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -49,12 +49,6 @@
                         <constraint firstAttribute="height" constant="60" id="FJg-W0-X36"/>
                     </constraints>
                 </imageView>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021-12-31即將到期0點" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daw-Ty-tey">
-                    <rect key="frame" x="129.5" y="229" width="155" height="17"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8R-xh-xnz">
                     <rect key="frame" x="16" y="270" width="382" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -63,27 +57,48 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點數紀錄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hr-u1-6zi">
-                    <rect key="frame" x="174" y="295" width="66" height="20"/>
+                    <rect key="frame" x="174.5" y="295" width="65.5" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gNV-JK-pNl">
-                    <rect key="frame" x="0.0" y="339" width="414" height="482"/>
+                    <rect key="frame" x="0.0" y="338.5" width="414" height="483"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最多顯示一年之內的資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtj-a4-Wjm">
-                    <rect key="frame" x="111.5" y="831" width="191" height="21"/>
+                    <rect key="frame" x="111.5" y="831.5" width="191" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ymU-OS-9yB">
+                    <rect key="frame" x="56.5" y="219" width="301.5" height="34"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rilink消費滿100元就可累積1點，每點可折抵5元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daw-Ty-tey" userLabel="Rilink消費滿100元就可累積1點，每點可折抵5元">
+                            <rect key="frame" x="0.0" y="0.0" width="301.5" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="bWZ-CH-WbP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shop消費滿100元就可累積1點，每點可折抵2元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKo-qh-wbk" userLabel="Shop消費滿100元就可累積1點，每點可折抵2元">
+                            <rect key="frame" x="0.0" y="17" width="301.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="daw-Ty-tey" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3fh-NB-O9j"/>
+                <constraint firstItem="ymU-OS-9yB" firstAttribute="top" secondItem="z4a-08-oxa" secondAttribute="bottom" constant="40" id="0iy-cs-Apt"/>
                 <constraint firstItem="t2M-3z-Yvo" firstAttribute="centerY" secondItem="0sv-OS-E7o" secondAttribute="centerY" id="4q7-Bf-ggj"/>
+                <constraint firstItem="ymU-OS-9yB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7cK-Eb-RHK"/>
                 <constraint firstAttribute="trailing" secondItem="X8R-xh-xnz" secondAttribute="trailing" constant="16" id="9zN-ZB-Vy4"/>
                 <constraint firstItem="gNV-JK-pNl" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="DXY-hl-8gC"/>
                 <constraint firstItem="wtj-a4-Wjm" firstAttribute="top" secondItem="gNV-JK-pNl" secondAttribute="bottom" constant="10" id="GHU-gk-xqz"/>
@@ -101,8 +116,7 @@
                 <constraint firstItem="t2M-3z-Yvo" firstAttribute="leading" secondItem="0sv-OS-E7o" secondAttribute="trailing" constant="5" id="jLa-6u-Dc6"/>
                 <constraint firstItem="0sv-OS-E7o" firstAttribute="leading" secondItem="z4a-08-oxa" secondAttribute="trailing" constant="5" id="nta-qV-LzX"/>
                 <constraint firstItem="0sv-OS-E7o" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sJ8-H1-Ply"/>
-                <constraint firstItem="X8R-xh-xnz" firstAttribute="top" secondItem="daw-Ty-tey" secondAttribute="bottom" constant="24" id="sue-I1-2gf"/>
-                <constraint firstItem="daw-Ty-tey" firstAttribute="top" secondItem="z4a-08-oxa" secondAttribute="bottom" constant="50" id="xRe-xi-hJt"/>
+                <constraint firstItem="X8R-xh-xnz" firstAttribute="top" secondItem="ymU-OS-9yB" secondAttribute="bottom" constant="17" id="sXu-zB-uCj"/>
                 <constraint firstItem="gNV-JK-pNl" firstAttribute="top" secondItem="1hr-u1-6zi" secondAttribute="bottom" constant="24" id="zEt-3C-IfZ"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="109.82142857142857"/>

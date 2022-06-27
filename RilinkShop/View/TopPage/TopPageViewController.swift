@@ -38,6 +38,8 @@ class TopPageViewController: UIViewController {
     let badgeTag = 123456
     let account = MyKeyChain.getAccount() ?? ""
     let password = MyKeyChain.getPassword() ?? ""
+    var currentIndex = 1
+    var timer: Timer?
     var packages = [Package]() {
         didSet {
             DispatchQueue.main.async {
@@ -52,6 +54,14 @@ class TopPageViewController: UIViewController {
             }
         }
     }
+    var sortedStores = [Store]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.hostelCollectionView.reloadData()
+            }
+        }
+    }
+    
     
     // 購物車按鈕
     lazy var cartButton: UIButton =  {
@@ -114,6 +124,11 @@ class TopPageViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        timer?.invalidate()
+        currentIndex = 0
+    }
+    
     func addShoppingCart() {
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cart"), style: .plain, target: self, action: #selector(toCartTVC))
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cartButton)
@@ -157,6 +172,24 @@ class TopPageViewController: UIViewController {
             let width = UIScreen.main.bounds.width
             layout.itemSize = CGSize(width: width, height: 263)
         }
+        /*
+         取出第一個與最後一個store，並將其放入另一個array
+         sortedStores = lastStore + stores + firstStore
+         */
+        guard let firstStore = stores.first,
+              let lastStore = stores.last else { return }
+        sortedStores.append(lastStore)
+        sortedStores += stores
+//        sortedStores.append(firstStore)
+        
+        print(#function)
+        print("sorted:\(sortedStores.count)")
+        hostelCollectionView.reloadData()
+        hostelCollectionView.layoutIfNeeded()
+        hostelCollectionView.setContentOffset(CGPoint(x: CGFloat(UIScreen.main.bounds.width - 32),
+                                                      y: 0), animated: true)
+        hostelCollectionView.isPagingEnabled = true
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(hostelCollectionViewDidScroll), userInfo: nil, repeats: true)
     }
     
     func loadPackage() {
@@ -181,6 +214,40 @@ class TopPageViewController: UIViewController {
         let cartVC = CartViewController()
         navigationController?.pushViewController(cartVC, animated: true)
     }
+    
+    // MARK: - 計時器到就執行，更新 hostelCollectionView 的 contentOffset(移到下一個x座標)
+    @objc private func hostelCollectionViewDidScroll() {
+       // 當前頁數 +1
+//        hostelCollectionView.setContentOffset(CGPoint(x: CGFloat(Int(UIScreen.main.bounds.width - 32) * (currentIndex + 1)),
+//                                                      y: 0), animated: true)
+        currentIndex += 1
+        var indexPath: IndexPath = IndexPath(item: currentIndex, section: 0)
+        if currentIndex < sortedStores.count {
+            hostelCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        } else if currentIndex == sortedStores.count {
+            currentIndex = 0
+            indexPath = IndexPath(item: currentIndex, section: 0)
+            hostelCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            hostelCollectionViewDidScroll()
+        }
+    }
+    @objc private func setCurrentIndex(scrollToPage: Int) {
+        switch scrollToPage {
+        case 0:
+            // 滑到第一筆資料時(index == 0), 把 index 改成倒數第二筆
+            hostelCollectionView.setContentOffset(CGPoint(x: CGFloat(Int(UIScreen.main.bounds.width) * (sortedStores.count - 2)),
+                                                          y: 0), animated: false)
+        case sortedStores.count - 1:
+            // 滑到最後一筆資料時(index == last), 把 index 改成第二筆(index == 1)
+            hostelCollectionView.setContentOffset(CGPoint(x: UIScreen.main.bounds.width,
+                                                          y: 0), animated: false)
+        default:
+            // 其餘 index 不做任何動作
+            break
+        }
+        let setIndex = Int(hostelCollectionView.contentOffset.x / UIScreen.main.bounds.width) + 1
+        currentIndex = setIndex
+    }
 }
 // MARK: - UICollectionViewDelegate
 extension TopPageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -188,9 +255,29 @@ extension TopPageViewController: UICollectionViewDelegate, UICollectionViewDataS
 //        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         switch collectionView {
         case hostelCollectionView:
-            let store = stores[indexPath.item]
+            let store = sortedStores[indexPath.item]
+            
+//            guard let tabBarController = self.tabBarController else { return }
+//            tabBarController.selectedIndex = 2
+            
+//            let reservationNavigationController = tabBarController.viewControllers?.filter { $0 is ReservationNavigationViewController }.first as? ReservationNavigationViewController
+//            reservationNavigationController?.popToRootViewController(animated: false)
+            
+//            DispatchQueue.main.async {
+//                print("--------------------------")
+//                print(reservationNavigationController?.viewControllers.count)
+//                let hostelDetailViewController = reservationNavigationController?.viewControllers.filter { $0 is HostelDetailViewController }.first as? HostelDetailViewController
+//                hostelDetailViewController?.store = store
+//                reservationNavigationController?.pushViewController(hostelDetailViewController!, animated: true)
+//            }
+            
+//            if let hostelDetailVC = reservationNavigationController?.viewControllers.compactMap { $0 is HostelDetailViewController }.first as? HostelDetailViewController {
+//                hostelDetailVC.store = store
+//                reservationNavigationController?.pushViewController(hostelDetailVC, animated: true)
+//            }
             let hostelDetailVC = HostelDetailViewController()
             hostelDetailVC.store = store
+            hostelDetailVC.fixmotor = store.fixmotor
             navigationController?.pushViewController(hostelDetailVC, animated: true)
         case ticketCollectionView:
             let package = packages[indexPath.item]
@@ -200,18 +287,33 @@ extension TopPageViewController: UICollectionViewDelegate, UICollectionViewDataS
         default:
             break
         }
-        
     }
     
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        // 原始資料
+//        let pageFloat = (hostelCollectionView.contentOffset.x / hostelCollectionView.frame.size.width)
+//        // 無條件捨去
+//        let pageInt = Int(pageFloat)
+//        // 無條件進位
+//        let pageCeil = Int(ceil(pageFloat))
+//        switch pageInt {
+//        case 0:
+//            setCurrentIndex(scrollToPage: pageCeil)
+//        default:
+//            setCurrentIndex(scrollToPage: pageInt)
+//        }
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stores.count
+        return sortedStores.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HostelCollectionViewCell.reuseIdentifier, for: indexPath) as! HostelCollectionViewCell
-        let store = stores[indexPath.item]
+        let store = sortedStores[indexPath.item]
         cell.configure(with: store)
         return cell
     }
+    
 }
 // MARK: - DataSource/Snapshot/CompositionalLayout
 extension TopPageViewController {

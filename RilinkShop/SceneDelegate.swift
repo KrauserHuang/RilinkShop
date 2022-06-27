@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var tabbarController: UITabBarController?
 
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,6 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        tabbarController = window?.rootViewController as? UITabBarController
+        
+        if let url = connectionOptions.urlContexts.first?.url {
+            handleURL(url)
+        }
     }
 
     @available(iOS 13.0, *)
@@ -57,13 +62,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("URLContexts:\(URLContexts)")
         guard let url = URLContexts.first?.url else { return }
-        urlScheme(url.absoluteString)
+        handleURL(url)
     }
     // MARK: - What's UIApplication.shared.windows
-    func urlScheme(_ urlStr: String) {
+    func handleURL(_ url: URL) {
+        guard url.scheme == "rilinkshop" && url.host == "rilink.com.tw" else { return }
         let root = UIApplication.shared.windows.first?.rootViewController as? MainTabBarController
         let navC = root?.selectedViewController as? UINavigationController
-        navC?.popToRootViewController(animated: true)
+        navC?.popToRootViewController(animated: false)
+        switch url.path {
+        case "/shop":
+            tabbarController?.selectedIndex = 2
+        case "/ticket":
+            guard let tabbarController = tabbarController else {
+                return
+            }
+
+            tabbarController.selectedIndex = 3
+            let navigationController = tabbarController.viewControllers?.filter { $0 is MemberNavigationViewController
+            }.first as? MemberNavigationViewController
+            navigationController?.popToRootViewController(animated: false)
+            DispatchQueue.main.async {
+                navigationController?.toTicketViewController()
+            }
+        default:
+            return
+        }
+        
     }
 }
 

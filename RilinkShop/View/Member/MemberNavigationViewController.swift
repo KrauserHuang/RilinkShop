@@ -119,6 +119,11 @@ class MemberNavigationViewController: UINavigationController {
             }
         }
     }
+    
+    func toTicketViewController() {
+        let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
+        pushViewController(controller, animated: true)
+    }
 }
 // MARK: - MemberCenterTVC Delegate
 extension MemberNavigationViewController: MemberCenterTableViewControllerDelegate{
@@ -133,8 +138,7 @@ extension MemberNavigationViewController: MemberCenterTableViewControllerDelegat
 //        let vc = SignUpViewController()
 //        viewController.navigationController?.pushViewController(vc, animated: true)
         
-        let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
-        viewController.navigationController?.pushViewController(controller, animated: true)
+        toTicketViewController()
     }
     
     func coupon(_ viewController: MemberCenterTableViewController) {

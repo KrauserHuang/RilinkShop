@@ -27,6 +27,7 @@ struct Order: Codable {
     var payStatus: String = ""
     var bonusPoint: String = ""
     var orderStatus: String = ""
+    
 //    var productList: [List]? = []
 //    var packageList: [List]? = []
 //    var productList: [ProductList]? = []
@@ -46,6 +47,7 @@ struct Order: Codable {
         case payStatus = "pay_status"
         case bonusPoint = "bonus_point"
         case orderStatus = "order_status"
+        
 //        case productList = "product_list"
 //        case packageList = "package_list"
     }
@@ -67,6 +69,7 @@ struct OrderInfo: Codable {
     var orderStatus: String = ""
     var productList: [List] = []
     var packageList: [List] = []
+    var assigntype: String = ""
     
     enum CodingKeys: String, CodingKey {
         case oid
@@ -84,6 +87,7 @@ struct OrderInfo: Codable {
         case orderStatus = "order_status"
         case productList = "product_list"
         case packageList = "package_list"
+        case assigntype
     }
 }
 

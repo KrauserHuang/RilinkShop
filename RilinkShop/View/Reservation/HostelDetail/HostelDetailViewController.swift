@@ -16,6 +16,7 @@ class HostelDetailViewController: UIViewController {
     @IBOutlet weak var reservationButton: UIButton!
     
     var store = Store()
+    var fixmotor: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +36,17 @@ class HostelDetailViewController: UIViewController {
         reservationButton.backgroundColor = UIColor(hex: "#4F846C")
         reservationButton.tintColor = .white
         reservationButton.layer.cornerRadius = 10
+        
+        if fixmotor == "0" {
+            reservationButton.isHidden = true
+        } else if fixmotor == "1" {
+            reservationButton.isHidden = false
+        }
     }
     
     @IBAction func reservationButtonTapped(_ sender: UIButton) {
         let vc = ReservationInputViewController()
+        vc.store = store
         navigationController?.pushViewController(vc, animated: true)
     }
 }

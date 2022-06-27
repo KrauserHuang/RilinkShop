@@ -9,11 +9,13 @@ import Foundation
 
 // MARK: - MAIN
 //綠悠游商城正式
-let SHOP_API_URL = "https://rilink.com.tw/ticketec/api/"
+//let SHOP_API_URL = "https://rilink.com.tw/ticketec/api/"
+let SHOP_API_URL = "http://211.20.181.125:11073/ticketec/api/"
 let SHOP_ROOT_URL = "https://rilink.com.tw/ticketec/"
 //綠悠游商城測試
 //let SHOP_API_URL = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
 //let SHOP_ROOT_URL = "https://rilink.jotangi.com.tw:11074/ticketec/"
+
 
 //Web串接購買金流正式
 let PAYMENT_API_URL = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="

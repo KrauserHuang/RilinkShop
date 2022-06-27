@@ -17,10 +17,25 @@ class FixMotorService {
         let parameters = [
             "member_id": id,
             "member_pwd": pwd,
-            "store_id": storeId
+            "store_id": storeId//"628af4f39ceff"//storeId
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
-        
+
+//            AF.upload(multipartFormData: { (multiFormData) in
+//                for (key, value) in parameters {
+//                    multiFormData.append(Data(value.utf8), withName: key)
+//                }
+//            }, to: url, requestModifier: { request in
+//                print("\(request)")
+//            }).responseJSON { response in
+//                switch response.result {
+//                case .success(let JSON):
+//                    print("response is :\(response)")
+//
+//                case .failure(_):
+//                    print("fail")
+//                }
+//            }
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             
             guard response.error == nil else {
@@ -30,6 +45,9 @@ class FixMotorService {
             }
             
             let value = JSON(response.value)
+            print(response.value)
+            print(response)
+            print(value)
             
             switch response.result {
             case .success:
@@ -40,8 +58,17 @@ class FixMotorService {
                     return
                 }
                 
-                let successMsg = value["data"].arrayValue
-                completion(true, successMsg as AnyObject)
+                let datas = value["data"].arrayValue
+                var bookingTimes = [FixMotor]()
+                for data in datas {
+                    let bookingTime = FixMotor(bookingdate: data["bookingdate"].stringValue,
+                                               duration: data["duration"].stringValue,
+                                               quota: data["quota"].stringValue,
+                                               used: data["used"].stringValue)
+                    bookingTimes.append(bookingTime)
+                }
+                print(bookingTimes)
+                completion(true, bookingTimes as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue
                 completion(false, errorMsg as AnyObject)
@@ -84,7 +111,7 @@ class FixMotorService {
                     return
                 }
                 
-                let successMsg = value["responseMessage"].arrayValue
+                let successMsg = value["responseMessage"].stringValue
                 completion(true, successMsg as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue

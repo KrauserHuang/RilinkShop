@@ -201,6 +201,7 @@ class ProductService {
                     product.product_name     = "\(result["product_name"])"
                     product.producttype_name = "\(result["producttype_name"])"
                     product.product_picture  = "\(result["product_picture"])"
+                    product.product_stock    = "\(result["product_stock"])"
                     shoppingCartList.append(product)
                     self.inCartItems = shoppingCartList
                 }
@@ -249,6 +250,8 @@ class ProductService {
         
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             guard response.error == nil else {
+                let errorMsg = "伺服器連線失敗"
+                completion(false, errorMsg as AnyObject)
                 return
             }
             

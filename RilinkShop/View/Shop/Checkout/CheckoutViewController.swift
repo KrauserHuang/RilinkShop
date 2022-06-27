@@ -7,6 +7,7 @@
 
 import UIKit
 import MBProgressHUD
+import SwiftUI
 
 class CheckoutViewController: UIViewController {
     
@@ -22,6 +23,7 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var checkoutButton: UIButton!
     
     var orderAmount = 0
+    var point = 0
     var discount = 0
     var orderPay = 0 {
         didSet {
@@ -47,6 +49,7 @@ class CheckoutViewController: UIViewController {
         configureView()
         showInfo()
         configureKeyboard()
+        setPointView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +71,51 @@ class CheckoutViewController: UIViewController {
                 indicator.hide(animated: true)
             }
         }
+    }
+    
+    func setPointView() {
+        let textDone = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(inputDone))
+        let tool = UIToolbar()
+        tool.sizeToFit()
+        tool.items = [textDone]
+        bonusPointTextField.inputAccessoryView = tool
+    }
+    @objc func inputDone(){
+        guard let pointInt = Int(bonusPointTextField.text!) else {
+            bonusPointTextField.text = "0"
+            return
+        }
+        let priceInt = orderPay
+        let pointNow = point
+        if pointInt < pointNow { // 檢查輸入點數小於現有點數
+            let check = priceInt - pointInt * 2 // 應付金額扣除(輸入點數*2)
+            if check > 0 {
+                orderPayLabel.text = String(check)
+            } else {
+                var pointuse = priceInt / 2 // 點數使用 = 應付金額 / 2
+                if priceInt == pointuse * 2 { // ??????
+                    pointuse -= 1
+                }
+                bonusPointTextField.text = String(pointuse)
+                orderPayLabel.text = String(priceInt - pointuse * 2)
+            }
+            
+        } else { // 若輸入點數大於現有點數
+            let check = priceInt - pointNow * 2 // 應付金額直接扣除(現有點數*2)
+            if check > 0 {
+                orderPayLabel.text = String(check)
+                bonusPointTextField.text = "\(point)"
+            } else {
+                var pointuse = priceInt / 2
+                if priceInt == pointuse * 2 {
+                    pointuse -= 1
+                }
+                bonusPointTextField.text = String(pointuse)
+                orderPayLabel.text = String(priceInt - pointuse * 2)
+            }
+        }
+        point = pointNow
+        self.view.endEditing(true)
     }
     
     func configureTableView() {
@@ -94,6 +142,24 @@ class CheckoutViewController: UIViewController {
         discountAmountLabel.text = "\(discount)"
         orderPay = orderAmount - discount
         orderPayLabel.text = "\(orderPay)"
+        
+        let accountType = "0"
+        UserService.shared.getPersonalData(account: account, pw: password, accountType: accountType) { success, response in
+            DispatchQueue.global(qos: .userInitiated).async {
+                URLCache.shared.removeAllCachedResponses()
+                DispatchQueue.main.async {
+                    
+                    guard success else {
+                        let errorMsg = response as! String
+                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+                        return
+                    }
+                    if let user = response as? User {
+                        self.bonusPointLabel.text = user.point
+                    }
+                }
+            }
+        }
     }
     
     func configureKeyboard() {
@@ -123,13 +189,15 @@ class CheckoutViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func checkoutButtonTapped(_ sender: UIButton) {
+        
         guard let orderAmount = orderAmountLabel.text,
               let discountAmount = discountAmountLabel.text,
               let orderPay = orderPayLabel.text else { return }
+        let discount = Int(discountAmount)! * 5
         OrderService.shared.addECOrder(id: account,
                                        pwd: password,
                                        orderAmount: orderAmount,
-                                       discountAmount: discountAmount,
+                                       discountAmount: "\(discount)",
                                        orderPay: orderPay) { response in
             let alertController = UIAlertController(title: "準備結帳", message: "", preferredStyle: .alert)
             let checkoutAction = UIAlertAction(title: "付款去", style: .default) { action in
@@ -170,6 +238,11 @@ extension CheckoutViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        let bonusPoint = bonusPointTextField.text ?? "0"
+//        let discount = Int(bonusPoint)! * 2
+//        discountAmountLabel.text = "\(discount)"
+//    }
 }
 // MARK: - WKWebViewControllerDelegate
 extension CheckoutViewController: WKWebViewControllerDelegate {

@@ -29,15 +29,18 @@ class PointService {
             }
             
             let value = JSON(response.value)
+            print(#function)
+//            print(value)
+            print(response.result)
             
             switch response.result {
             case .success:
                 
-                guard value["code"].stringValue == returnCode else {
-                    let errorMsg = value["responseMessage"].stringValue
-                    completion(false, errorMsg as AnyObject)
-                    return
-                }
+//                guard value["code"].stringValue == returnCode else {
+//                    let errorMsg = value["responseMessage"].stringValue
+//                    completion(false, errorMsg as AnyObject)
+//                    return
+//                }
                 
                 let datas = value["data"].arrayValue
                 var points: [Point] = []
@@ -50,6 +53,7 @@ class PointService {
                                       accountType: data["accountType"].stringValue)
                     points.append(point)
                 }
+                print("----------")
                 print(points)
                 completion(true, points as AnyObject)
             case .failure:

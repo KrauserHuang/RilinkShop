@@ -27,8 +27,8 @@ class OrderStatusCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    func configure(with model: Order) {
+//    func configure(with model: Order) {
+    func configure(with model: OrderInfo) {
         orderNoLabel.text = "訂單編號：\(model.orderNo)"
         orderDateLabel.text = "訂單日期：\(model.orderDate)"
         orderAmountLabel.text = "訂單金額：\(model.orderAmount)"
@@ -52,7 +52,12 @@ class OrderStatusCell: UITableViewCell {
         case "-1":
             payStatusLabel.text = "付款狀態：付款中"
         case "1":
-            payStatusLabel.text = "付款狀態：付款完成"
+            if model.assigntype == "0" {
+                payStatusLabel.text = "付款狀態：付款完成"
+            } else {
+                payStatusLabel.text = "店家派發"
+            }
+//            payStatusLabel.text = "付款狀態：付款完成"
         default:
             payStatusLabel.text = "付款狀態：處理中"
         }

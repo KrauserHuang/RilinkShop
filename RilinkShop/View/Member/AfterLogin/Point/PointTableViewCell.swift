@@ -11,7 +11,8 @@ class PointTableViewCell: UITableViewCell {
 
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var pointLabel: UILabel!
+    @IBOutlet weak var eachPointLabel: UILabel!
+    @IBOutlet weak var totalPointLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +23,12 @@ class PointTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func configure(with model: Point) {
+        stateLabel.text = model.msg
+        dateLabel.text = model.time
+        eachPointLabel.text = model.point
     }
     
 }

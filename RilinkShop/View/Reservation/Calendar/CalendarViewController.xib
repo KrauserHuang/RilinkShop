@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CalendarViewController" customModule="RilinkShop" customModuleProvider="target">
             <connections>
+                <outlet property="calendarPicker" destination="4Xk-dM-jAQ" id="dz8-KZ-7mT"/>
+                <outlet property="emptyView" destination="hIX-Zz-2Ir" id="Q5P-dW-qlL"/>
                 <outlet property="tableView" destination="F09-2h-2K3" id="yjT-ow-bzL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,6 +34,10 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="300" id="Ra0-H4-RDJ"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="JL0-im-A9g"/>
+                                        <outlet property="delegate" destination="-1" id="VlR-PL-sBy"/>
+                                    </connections>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTu-3T-BgS">
                                     <rect key="frame" x="16" y="300" width="382" height="1"/>
@@ -44,17 +50,48 @@
                                     <rect key="frame" x="0.0" y="301" width="414" height="599"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </tableView>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIX-Zz-2Ir">
+                                    <rect key="frame" x="16" y="370.5" width="382" height="159"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="data-searching" translatesAutoresizingMaskIntoConstraints="NO" id="mVS-sx-oNv">
+                                            <rect key="frame" x="141" y="8" width="100" height="101"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="101" id="D3G-f0-zd6"/>
+                                                <constraint firstAttribute="width" constant="100" id="ilH-vL-pvm"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暫無可預約時段" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fO6-la-Fvz">
+                                            <rect key="frame" x="16" y="125" width="350" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="mVS-sx-oNv" firstAttribute="top" secondItem="hIX-Zz-2Ir" secondAttribute="top" constant="8" id="8bB-jc-EP3"/>
+                                        <constraint firstItem="fO6-la-Fvz" firstAttribute="leading" secondItem="hIX-Zz-2Ir" secondAttribute="leading" constant="16" id="XhE-wy-oah"/>
+                                        <constraint firstAttribute="bottom" secondItem="fO6-la-Fvz" secondAttribute="bottom" constant="16" id="aTB-TW-zpt"/>
+                                        <constraint firstAttribute="trailing" secondItem="fO6-la-Fvz" secondAttribute="trailing" constant="16" id="c6n-KT-eAe"/>
+                                        <constraint firstItem="mVS-sx-oNv" firstAttribute="centerX" secondItem="hIX-Zz-2Ir" secondAttribute="centerX" id="lwc-YX-8oW"/>
+                                        <constraint firstItem="fO6-la-Fvz" firstAttribute="top" secondItem="mVS-sx-oNv" secondAttribute="bottom" constant="16" id="pYa-6p-CCj"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
+                                <constraint firstItem="hIX-Zz-2Ir" firstAttribute="centerY" secondItem="oOM-38-7jZ" secondAttribute="centerY" id="3Rc-PE-MJX"/>
                                 <constraint firstItem="4Xk-dM-jAQ" firstAttribute="top" secondItem="oOM-38-7jZ" secondAttribute="top" id="6Ih-Vs-h4s"/>
                                 <constraint firstAttribute="height" constant="900" id="6KC-GG-1Gg"/>
+                                <constraint firstItem="hIX-Zz-2Ir" firstAttribute="leading" secondItem="oOM-38-7jZ" secondAttribute="leading" constant="16" id="7Pf-vE-BvV"/>
+                                <constraint firstItem="hIX-Zz-2Ir" firstAttribute="centerX" secondItem="oOM-38-7jZ" secondAttribute="centerX" id="BMZ-9T-K3Z"/>
                                 <constraint firstItem="4Xk-dM-jAQ" firstAttribute="leading" secondItem="oOM-38-7jZ" secondAttribute="leading" id="Cht-Yf-A6i"/>
                                 <constraint firstAttribute="trailing" secondItem="F09-2h-2K3" secondAttribute="trailing" id="E1g-sr-8Oq"/>
                                 <constraint firstAttribute="bottom" secondItem="F09-2h-2K3" secondAttribute="bottom" id="IHA-XV-B8A"/>
                                 <constraint firstItem="CTu-3T-BgS" firstAttribute="top" secondItem="4Xk-dM-jAQ" secondAttribute="bottom" id="Wdv-cd-1nb"/>
                                 <constraint firstAttribute="trailing" secondItem="4Xk-dM-jAQ" secondAttribute="trailing" id="g9t-to-lsv"/>
                                 <constraint firstItem="F09-2h-2K3" firstAttribute="top" secondItem="CTu-3T-BgS" secondAttribute="bottom" id="nvh-pW-yrU"/>
+                                <constraint firstAttribute="trailing" secondItem="hIX-Zz-2Ir" secondAttribute="trailing" constant="16" id="o7H-EG-ED8"/>
                                 <constraint firstAttribute="trailing" secondItem="CTu-3T-BgS" secondAttribute="trailing" constant="16" id="urD-gD-i8g"/>
                                 <constraint firstItem="CTu-3T-BgS" firstAttribute="leading" secondItem="oOM-38-7jZ" secondAttribute="leading" constant="16" id="vyy-62-xkW"/>
                                 <constraint firstItem="F09-2h-2K3" firstAttribute="leading" secondItem="oOM-38-7jZ" secondAttribute="leading" id="zPu-qP-JxH"/>
@@ -82,6 +119,7 @@
         </view>
     </objects>
     <resources>
+        <image name="data-searching" width="100" height="100.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

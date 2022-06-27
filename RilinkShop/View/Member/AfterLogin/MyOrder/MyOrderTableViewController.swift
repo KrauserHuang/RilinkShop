@@ -34,6 +34,15 @@ class MyOrderTableViewController: UITableViewController {
         OrderService.shared.getECOrderList(id: account, pwd: password) { ordersResponse in
             self.orders = ordersResponse
         }
+        
+//        OrderService.shared.getECOrderList(id: account, pwd: password) { success, response in
+//            guard success else {
+//                let errorMsg = response as! String
+//                Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+//                return
+//            }
+//            print(response)
+//        }
     }
 
     // MARK: - Table view data source
@@ -69,8 +78,7 @@ class MyOrderTableViewController: UITableViewController {
         cell.closure = {
             let orderDetailVC = OrderDetailViewController()
             orderDetailVC.order = order
-            print("+_+_+_+")
-            print(order)
+            orderDetailVC.orderNo = order.orderNo
             self.navigationController?.pushViewController(orderDetailVC, animated: true)
         }
         return cell
@@ -81,14 +89,10 @@ extension MyOrderTableViewController: MyOrderTableViewCellDelegate {
     func payImmediate(_ cell: MyOrderTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let orderNo = self.orders[indexPath.row].orderNo
-        print("++++++++++++++")
-        print("\(orderNo)")
-        print("++++++++++++++")
         let controller = WKWebViewController()
         controller.delegate = self
         controller.title = "行動支付"
         controller.urlStr = PAYMENT_API_URL + "\(orderNo)"
-//        "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid=\(orderNo)"
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }

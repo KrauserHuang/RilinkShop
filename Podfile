@@ -13,5 +13,6 @@ target 'RilinkShop' do
   pod 'BadgeHub'
   pod 'MBProgressHUD', '~> 1.2.0'
   pod 'SnapKit', '~> 5.6.0'
+  pod 'DropDown'
 
 end

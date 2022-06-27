@@ -39,7 +39,6 @@ class SuccessAlert: UIViewController{
         return label
     }()
     
-    
     let confirmButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 10/255, green: 160/255, blue: 110/255, alpha: 1)
@@ -70,23 +69,13 @@ class SuccessAlert: UIViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    @objc func cancelButtonAction(){
-    
-            let popupVC = PopupViewController(contentController: AlternateAlert(), popupWidth: self.view.frame.width, popupHeight: self.view.frame.height)
-            popupVC.cornerRadius = 20
-        
-        self.present(popupVC, animated: false){
-            self.dismiss(animated: false){
-                self.present(popupVC, animated: true, completion: nil)
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        let objectArray: [ UIView] = [ okImageView, datelabel, successReservationLabel, confirmButton, addMoreReservationButton, cancelButton]
+//        let objectArray: [UIView] = [okImageView, datelabel, successReservationLabel, confirmButton, addMoreReservationButton, cancelButton]
+        let objectArray: [UIView] = [okImageView, datelabel, successReservationLabel, confirmButton]
         
         for obj in objectArray{
             self.view.addSubview(obj)
@@ -96,10 +85,37 @@ class SuccessAlert: UIViewController{
         setLabel()
         setButton()
         
-        cancelButton.addTarget(self,
-                         action: #selector(cancelButtonAction),
-                         for: .touchUpInside)
+        confirmButton.addTarget(self, action: #selector(confirmButtonAction(_:)), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(cancelButtonAction(_:)), for: .touchUpInside)
+    }
+    @objc func confirmButtonAction(_ sender: UIButton) {
+        dismiss(animated: true) {
+//            self.navigationController?.popToRootViewController(animated: true)
+            if let controllers = self.navigationController?.viewControllers {
+                for controller in controllers {
+                    switch controller {
+                    case is ShopViewController:
+                        self.navigationController?.popToViewController(controller, animated: true)
+                    case is TopPageViewController:
+                        self.navigationController?.popToViewController(controller, animated: true)
+                    case is MemberCenterTableViewController:
+                        self.navigationController?.popToViewController(controller, animated: true)
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    @objc func cancelButtonAction(_ sender: UIButton){
+        let popupVC = PopupViewController(contentController: AlternateAlert(), popupWidth: self.view.frame.width, popupHeight: self.view.frame.height)
+        popupVC.cornerRadius = 20
         
+        self.present(popupVC, animated: false){
+            self.dismiss(animated: false){
+                self.present(popupVC, animated: true, completion: nil)
+            }
+        }
     }
     func setImageView() {
         okImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
@@ -124,15 +140,15 @@ class SuccessAlert: UIViewController{
         confirmButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         confirmButton.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
 //        addMoreReservationButton
-        addMoreReservationButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        addMoreReservationButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        addMoreReservationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        addMoreReservationButton.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -90).isActive = true
+//        addMoreReservationButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+//        addMoreReservationButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+//        addMoreReservationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        addMoreReservationButton.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -90).isActive = true
 //        cancelButton
-        cancelButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        cancelButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        cancelButton.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
+//        cancelButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+//        cancelButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+//        cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        cancelButton.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
     }
     
 }

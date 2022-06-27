@@ -15,6 +15,8 @@ class OrderDetailViewController: UIViewController {
     let account = Global.ACCOUNT
     let password = Global.ACCOUNT_PASSWORD
     var order = Order()
+    var orderInfos = [OrderInfo]()
+    var orderNo: String?
     var products = [List]() {
         didSet {
             DispatchQueue.main.async {
@@ -54,16 +56,21 @@ class OrderDetailViewController: UIViewController {
         getList()
         configureTableView()
         configureFooterView()
+//        print("--------------------")
+//        print("orderNo:\(orderNo)")
     }
     
     func getList() {
         OrderService.shared.getECOrderInfo(id: account, pwd: password, no: order.orderNo) { listResponse in
-            print("=====測試======")
-            print(listResponse)
+            
+            
             if let products = listResponse.first?.productList,
                let packages = listResponse.first?.packageList {
                 self.products = products + packages
             }
+            self.orderInfos = listResponse
+            print("=====測試======")
+            print("orderInfos:\(self.orderInfos)")
         }
     }
     
@@ -100,7 +107,8 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: OrderStatusCell.reuseIdentifier, for: indexPath) as! OrderStatusCell
             
-            cell.configure(with: order)
+            guard let orderInfo = orderInfos.first else { return UITableViewCell() }
+            cell.configure(with: orderInfo)
             
             return cell
         case 1:

@@ -103,7 +103,7 @@ class CartViewController: UIViewController {
     }
     
     @IBAction func clearAllButtonTapped(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "是否清除全部", message: "There's no turnig back!", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "是否清除全部", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "清除", style: .destructive) { action in
             ProductService.shared.clearShoppingCartItem(id: self.account, pwd: self.password) { product in }
             self.inCartItems.removeAll()
@@ -177,11 +177,13 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 extension CartViewController: CartTableViewCellDelegate {
     func didAddQty(_ cell: CartTableViewCell) {
         guard let indexPath = cartTableView.indexPath(for: cell) else { return }
+        
         let no = inCartItems[indexPath.row].product_no
         var qty = Int(inCartItems[indexPath.row].order_qty)!
         print(#function)
         print(inCartItems[indexPath.row].product_stock)
         let stock = Int(inCartItems[indexPath.row].product_stock)!
+        
         if qty < stock {
             qty += 1
             HUD.showLoadingHUD(inView: self.view, text: "")
@@ -193,48 +195,60 @@ extension CartViewController: CartTableViewCellDelegate {
                         guard success else {
                             HUD.hideLoadingHUD(inView: self.view)
                             let errmsg = response as! String
-                            Alert.showMessage(title: "", msg: errmsg, vc: self) {
-                                
-                            }
+                            Alert.showMessage(title: "", msg: errmsg, vc: self)
                             return
                         }
                         
                         HUD.hideLoadingHUD(inView: self.view)
                         ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { products in
-                            let item = products[indexPath.row]
+                            self.inCartItems = products
+//                            let item = products[indexPath.row]
+                            let item = self.inCartItems[indexPath.row]
                             cell.configure(with: item)
                             self.viewDidLayoutSubviews()
                         }
                     }
                 }
             }
+        } else {
+            Alert.showMessage(title: "超過庫存數量", msg: "", vc: self)
         }
     }
     
     func didSubstractQty(_ cell: CartTableViewCell) {
         guard let indexPath = cartTableView.indexPath(for: cell) else { return }
+        
         let no = inCartItems[indexPath.row].product_no
-        let qty = Int(inCartItems[indexPath.row].order_qty)!
-        HUD.showLoadingHUD(inView: cell.contentView, text: "")
-        ProductService.shared.editShoppingCartItem(id: account, pwd: password, no: no, qty: qty) { (success, response) in
-            DispatchQueue.global(qos: .userInitiated).async {
-                URLCache.shared.removeAllCachedResponses()
-                DispatchQueue.main.sync {
-                    
-                    guard success else {
-                        HUD.hideLoadingHUD(inView: cell.contentView)
-                        let errmsg = response as! String
-                        Alert.showMessage(title: "", msg: errmsg, vc: self) {
-                            
+        var qty = Int(inCartItems[indexPath.row].order_qty)!
+        print(#function)
+        print(inCartItems[indexPath.row].product_stock)
+        let stock = Int(inCartItems[indexPath.row].product_stock)!
+        
+        if qty == 1 {
+            removeItem(cell)
+        } else if qty != 0 {
+            qty -= 1
+            HUD.showLoadingHUD(inView: self.view, text: "")
+            ProductService.shared.editShoppingCartItem(id: account, pwd: password, no: no, qty: qty) { (success, response) in
+                DispatchQueue.global(qos: .userInitiated).async {
+                    URLCache.shared.removeAllCachedResponses()
+                    DispatchQueue.main.sync {
+                        
+                        guard success else {
+                            HUD.hideLoadingHUD(inView: self.view)
+                            let errmsg = response as! String
+                            Alert.showMessage(title: "", msg: errmsg, vc: self)
+                            return
                         }
-                        return
-                    }
-                    
-                    HUD.hideLoadingHUD(inView: self.view)
-                    ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { products in
-                        let item = products[indexPath.row]
-                        cell.configure(with: item)
-                        self.viewDidLayoutSubviews()
+                        
+                        HUD.hideLoadingHUD(inView: self.view)
+                        ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { products in
+                            self.inCartItems = products
+//                            let item = products[indexPath.row]
+                            let item = self.inCartItems[indexPath.row]
+                            cell.configure(with: item)
+                            self.viewDidLayoutSubviews()
+                        }
                     }
                 }
             }

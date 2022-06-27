@@ -32,6 +32,7 @@ class HostelViewController: UIViewController {
             }
         }
     }
+    var fixmotor: String?
     
     let account = MyKeyChain.getAccount() ?? ""
     let password = MyKeyChain.getPassword() ?? ""
@@ -132,6 +133,7 @@ extension HostelViewController: UITableViewDelegate, UITableViewDataSource {
         let controller = HostelDetailViewController()
         let store = filteredStores[indexPath.row]
         controller.store = store
+        controller.fixmotor = store.fixmotor
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }

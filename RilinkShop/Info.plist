@@ -15,6 +15,7 @@
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>rilink</string>
 		<string>line</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

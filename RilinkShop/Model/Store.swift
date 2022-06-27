@@ -24,6 +24,7 @@ struct Store: Codable, Hashable {
     var storeDescript: String = ""
     var storeOpentime: String = ""
     var storePicture: String = ""
+    var fixmotor: String = ""
     
     enum CodingKeys: String, CodingKey {
         case storeID = "store_id"
@@ -37,5 +38,6 @@ struct Store: Codable, Hashable {
         case storeDescript = "store_descript"
         case storeOpentime = "store_opentime"
         case storePicture = "store_picture"
+        case fixmotor
     }
 }

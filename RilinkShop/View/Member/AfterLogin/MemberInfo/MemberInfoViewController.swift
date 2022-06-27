@@ -87,7 +87,7 @@ class MemberInfoViewController: UIViewController {
     }
     func getUserData() {
         let accountType = "0"
-        sleep(1)
+//        sleep(1)
 //        HUD.showLoadingHUD(inView: self.view, text: "")
         UserService.shared.getPersonalData(account: account, pw: password, accountType: accountType) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
