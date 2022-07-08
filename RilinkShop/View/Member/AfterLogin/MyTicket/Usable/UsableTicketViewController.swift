@@ -10,8 +10,16 @@ import UIKit
 class UsableTicketViewController: UIViewController {
 
     @IBOutlet weak var tableViiew: UITableView!
+    @IBOutlet weak var emptyView: UIView!
     
-    var tickets = [UNQRCode]() {
+    var tickets = [QRCode]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableViiew.reloadData()
+            }
+        }
+    }
+    var sortedTickets = [QRCode]() {
         didSet {
             DispatchQueue.main.async {
                 self.tableViiew.reloadData()
@@ -25,7 +33,7 @@ class UsableTicketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViiew.rowHeight = 101
+        tableViiew.rowHeight = 124
         tableViiew.register(UINib(nibName: "UsableTableViewCell", bundle: nil), forCellReuseIdentifier: "UsableTableViewCell")
         tableViiew.delegate = self
         tableViiew.dataSource = self
@@ -54,6 +62,17 @@ class UsableTicketViewController: UIViewController {
 //                }
                 
                 self.tickets = productResponse + packageResponse
+                self.sortedTickets = self.tickets.sorted(by: { ticket1, ticket2 in
+                    ticket1.orderDate > ticket2.orderDate
+                })
+//                print(#function)
+//                print("----------------------")
+//                print("ticket:\(self.tickets)")
+//                print("----------------------")
+//                print("sortedticket:\(self.sortedTickets)")
+//                print("----------------------")
+//                self.emptyView.isHidden = self.tickets.count != 0
+                self.emptyView.isHidden = self.sortedTickets.count != 0
             }
         }
     }
@@ -63,7 +82,10 @@ class UsableTicketViewController: UIViewController {
         QRCodeService.shared.unconfirmList(id: account, pwd: password, ispackage: "0") { productResponse in
             QRCodeService.shared.unconfirmList(id: self.account, pwd: self.password, ispackage: "1") { packageResponse in
                 self.tickets = productResponse + packageResponse
-                if self.tickets.count != 0 {
+                self.sortedTickets = self.tickets.sorted(by: { ticket1, ticket2 in
+                    ticket1.orderDate > ticket2.orderDate
+                })
+                if self.sortedTickets.count != 0 {
                     self.refreshControl.endRefreshing()
                     self.tableViiew.reloadData()
                 } else {
@@ -77,13 +99,15 @@ class UsableTicketViewController: UIViewController {
 
 extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tickets.count
+        return sortedTickets.count
+//        return tickets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UsableTableViewCell",for: indexPath) as! UsableTableViewCell
         
-        let ticket = tickets[indexPath.row]
+//        let ticket = tickets[indexPath.row]
+        let ticket = sortedTickets[indexPath.row]
         cell.configure(with: ticket)
         
         return cell
@@ -93,7 +117,8 @@ extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
         
         
-        let ticket = tickets[indexPath.row]
+//        let ticket = tickets[indexPath.row]
+        let ticket = sortedTickets[indexPath.row]
         if ticket.storeID != nil {
             // 如果有storeID則已經是商品，可直接進去可核銷QRCode頁面
             let controller = TicketDetailViewController()

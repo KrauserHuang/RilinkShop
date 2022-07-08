@@ -21,13 +21,14 @@ class OrderService {
             "discount_amount": discountAmount,
             "order_pay": orderPay
         ]
+        print("parameters:\(parameters)")
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: Response.self) { response in
 //            print("------")
 //            print(response)
             guard let response = response.value else { return }
             completion(response)
-//            print("-----------")
-//            print("\(response)")
+            print("-----------")
+            print("\(response)")
         }
     }
     

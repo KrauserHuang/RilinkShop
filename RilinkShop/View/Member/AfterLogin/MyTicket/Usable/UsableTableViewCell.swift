@@ -13,6 +13,7 @@ class UsableTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var buyDay: UILabel!
     @IBOutlet weak var orderNo: UILabel!
+    @IBOutlet weak var qtyLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +26,7 @@ class UsableTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(with model: UNQRCode) {
+    func configure(with model: QRCode) {
         if let modelProductPicture = model.productPicture {
             ticketImage.setImage(imageURL: SHOP_ROOT_URL + modelProductPicture)
         } else if let modelPackagePicture = model.packagePicture {
@@ -39,6 +40,8 @@ class UsableTableViewCell: UITableViewCell {
         
         buyDay.text = "購買日期：\(model.orderDate)"
         orderNo.text = "訂單編號：\(model.orderNo)"
+        if let modelOrderQty = model.orderQty {
+            qtyLabel.text = "數量：\(modelOrderQty)"
+        }
     }
-    
 }

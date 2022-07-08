@@ -151,9 +151,11 @@ class ProductService {
             "total_amount": total
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+        print("parameters:\(parameters)")
         
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-            
+            print(#function)
+            print(response)
             guard response.value != nil else {
                 let errorMsg = "伺服器連線失敗"
                 completed(false, errorMsg as AnyObject)
@@ -161,7 +163,8 @@ class ProductService {
             }
             
             let value = JSON(response.value!)
-            print(#function)
+//            print(#function)
+//            print(response)
             print(value)
             
             switch response.result {

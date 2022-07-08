@@ -64,23 +64,25 @@ class HostelCheckoutViewController: UIViewController {
 //        present(popupVC, animated: true)
         guard let appointment = appointment,
             let duration = duration,
+            let name = name,
             let mobile = mobile,
             let license = license,
             let carType = carType,
             let repairType = repairType,
             let carDescription = carDescription else { return }
-
+        HUD.showLoadingHUD(inView: self.view, text: "預約中")
         FixMotorService.shared.bookingFixMotor(id: account,
                                                pwd: password,
                                                storeId: store.storeID,
                                                bookingdate: appointment,
                                                duration: duration,
-                                               name: store.storeName,
+                                               name: name,
                                                phone: mobile,
                                                motorNo: license,
                                                motorType: carType,
                                                fixType: repairType,
                                                description: carDescription) { success, response in
+            HUD.hideLoadingHUD(inView: self.view)
             guard success else {
                 let errorMsg = response as! String
                 Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)

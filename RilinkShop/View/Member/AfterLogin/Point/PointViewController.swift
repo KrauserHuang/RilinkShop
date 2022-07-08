@@ -12,6 +12,7 @@ class PointViewController: UIViewController {
     @IBOutlet weak var point: UILabel!
     @IBOutlet weak var remindLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyView: UIView!
     
     var account = Global.ACCOUNT
     var password = Global.ACCOUNT_PASSWORD
@@ -45,8 +46,11 @@ class PointViewController: UIViewController {
                 DispatchQueue.main.async {
                     
                     guard success else {
+                        let errorMsg = response as! String
+                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
                         return
                     }
+                    
                     if let user = response as? User {
                         self.point.text = user.point
                     }
@@ -55,13 +59,14 @@ class PointViewController: UIViewController {
         }
         PointService.shared.fetchPointHistory(id: account, pwd: password) { success, response in
             guard success else {
+                let errorMsg = response as! String
+                Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
                 return
             }
             
             let points = response as! [Point]
             self.points = points
-            print(#function)
-            print(points)
+            self.emptyView.isHidden = self.points.count != 0
         }
     }
 

@@ -15,7 +15,7 @@ class TicketDetailViewController: UIViewController {
     @IBOutlet weak var buyDateLabel: UILabel!
     @IBOutlet weak var orderNoLabel: UILabel!
     
-    var ticket = UNQRCode()
+    var ticket = QRCode()
     var product = PackageProduct()
     
     override func viewDidLoad() {
@@ -26,7 +26,24 @@ class TicketDetailViewController: UIViewController {
         } else {
             setView1()
         }
+        // 偵測使用者是否擷取圖片或是錄影(訂閱截圖及錄影通知)
+        NotificationCenter.default.addObserver(self, selector: #selector(screenshotTaken), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(screenshotTaken), name: UIScreen.capturedDidChangeNotification, object: nil)
         
+        let screen = UIScreen.main
+        if screen.isCaptured {
+            screenshotTaken()
+        }
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //取消訂閱通知(此vc所有訂閱者)
+        NotificationCenter.default.removeObserver(self)
+    }
+    @objc func screenshotTaken() {
+        Alert.showMessage(title: "安全提醒", msg: "QR Code可供他人使用，請小心留存", vc: self, handler: nil)
     }
     
     func generateQRCode(from string: String) -> UIImage? {
@@ -42,26 +59,29 @@ class TicketDetailViewController: UIViewController {
     }
     
     func setView() {
+        buyDateLabel.text = "購買日期：\(ticket.orderDate)"
+        orderNoLabel.text = "訂單編號：\(ticket.orderNo)"
+        
         if let ticketProductName = ticket.productName {
             nameLabel.text = ticketProductName
         } else if let ticketPackageName = ticket.packageName {
             nameLabel.text = ticketPackageName
         }
-        buyDateLabel.text = "購買日期：\(ticket.orderDate)"
-        orderNoLabel.text = "訂單編號：\(ticket.orderNo)"
+        
         if let ticketQRConfirm = ticket.qrconfirm {
-            print(#function)
-            print(ticket.qrconfirm)
             qrImageView.image = generateQRCode(from: ticketQRConfirm)
         }
     }
     
     func setView1() {
-        print(#function)
-        print(product.qrconfirm)
-        nameLabel.text = product.productName
         buyDateLabel.text = "購買日期：\(ticket.orderDate)"
         orderNoLabel.text = "訂單編號：\(ticket.orderNo)"
-        qrImageView.image = generateQRCode(from: product.qrconfirm!)
+        if let ticketQRConfirm = ticket.qrconfirm {
+            qrImageView.image = generateQRCode(from: ticketQRConfirm)
+        }
+        
+        nameLabel.text = product.productName
+        
+        
     }
 }

@@ -88,8 +88,12 @@ class FixMotorService {
             "phone": phone,
             "motor_no": motorNo,
             "motor_type": motorType,
-            "fixtype": fixType
+            "fixtype": fixType,
+            "description": description
         ]
+        
+        print(#function)
+        print("parameters:\(parameters)")
         
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
         

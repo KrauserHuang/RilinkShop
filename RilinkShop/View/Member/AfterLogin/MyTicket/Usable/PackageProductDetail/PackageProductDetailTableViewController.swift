@@ -10,7 +10,8 @@ import UIKit
 class PackageProductDetailTableViewController: UITableViewController {
     
     var products = [PackageProduct]()
-    var ticket = UNQRCode()
+//    var ticket = UNQRCode()
+    var ticket = QRCode()
         
     override func viewDidLoad() {
         super.viewDidLoad()

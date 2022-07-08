@@ -16,53 +16,5 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2D8C7F70-1E9F-4C68-824C-F61F036C9C28"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Pods/Alamofire/Source/Session.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "958"
-            endingLineNumber = "958"
-            landmarkName = "upload(multipartFormData:with:usingThreshold:interceptor:fileManager:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2D8C7F70-1E9F-4C68-824C-F61F036C9C28 - e1db230148c0de11"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Alamofire.Session.upload(multipartFormData: Alamofire.MultipartFormData, with: Alamofire.URLRequestConvertible, usingThreshold: Swift.UInt64, interceptor: Swift.Optional&lt;Alamofire.RequestInterceptor&gt;, fileManager: __C.NSFileManager) -&gt; Alamofire.UploadRequest"
-                  moduleName = "Alamofire"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/krauser/Desktop/Learning/Krauser/Work/Rilink%20Mall/Pods/Alamofire/Source/Session.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "958"
-                  endingLineNumber = "958"
-                  offsetFromSymbolStart = "236">
-               </Location>
-               <Location
-                  uuid = "2D8C7F70-1E9F-4C68-824C-F61F036C9C28 - e1db230148c0de11"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Alamofire.Session.upload(multipartFormData: Alamofire.MultipartFormData, with: Alamofire.URLRequestConvertible, usingThreshold: Swift.UInt64, interceptor: Swift.Optional&lt;Alamofire.RequestInterceptor&gt;, fileManager: __C.NSFileManager) -&gt; Alamofire.UploadRequest"
-                  moduleName = "Alamofire"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/krauser/Desktop/Learning/Krauser/Work/Rilink%20Mall/Pods/Alamofire/Source/Session.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "958"
-                  endingLineNumber = "958"
-                  offsetFromSymbolStart = "160">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

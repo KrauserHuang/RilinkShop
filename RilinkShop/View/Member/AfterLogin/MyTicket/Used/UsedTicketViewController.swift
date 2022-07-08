@@ -10,8 +10,16 @@ import UIKit
 class UsedTicketViewController: UIViewController {
 
     @IBOutlet weak var tableViiew: UITableView!
+    @IBOutlet weak var emptyView: UIView!
     
     var tickets = [QRCode]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableViiew.reloadData()
+            }
+        }
+    }
+    var sortedTickets = [QRCode]() {
         didSet {
             DispatchQueue.main.async {
                 self.tableViiew.reloadData()
@@ -62,12 +70,11 @@ class UsedTicketViewController: UIViewController {
 //                        packageWithQR.append(package)
 //                    }
 //                }
-            
-                print(#function)
-                print(packageWithoutQRConfirm)
                 self.tickets = productResponse + packageWithoutQRConfirm
-//                print(packages)
-//                self.tickets = productResponse + packages
+                self.sortedTickets = self.tickets.sorted(by: { ticket1, ticket2 in
+                    ticket1.orderDate > ticket2.orderDate
+                })
+                self.emptyView.isHidden = self.sortedTickets.count != 0
             }
         }
     }
@@ -80,7 +87,10 @@ class UsedTicketViewController: UIViewController {
                     package.product?.allSatisfy({ $0.qrconfirm == nil }) as! Bool
                 }
                 self.tickets = productResponse + packageWithoutQRConfirm
-                if self.tickets.count != 0 {
+                self.sortedTickets = self.tickets.sorted(by: { ticket1, ticket2 in
+                    ticket1.orderDate > ticket2.orderDate
+                })
+                if self.sortedTickets.count != 0 {
                     self.refreshControl.endRefreshing()
                     self.tableViiew.reloadData()
                 } else {
@@ -94,13 +104,13 @@ class UsedTicketViewController: UIViewController {
 
 extension UsedTicketViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tickets.count
+        return sortedTickets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UsedTableViewCell") as! UsedTableViewCell
         
-        let ticket = tickets[indexPath.row]
+        let ticket = sortedTickets[indexPath.row]
         cell.configure(with: ticket)
         
         return cell

@@ -38,29 +38,6 @@ class MyOrderTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-//    func configure(with model: Order) {
-//        orderNo.text = "訂單編號：\(model.orderNo)"
-//        orderDate.text = "訂單日期：\(model.orderDate)"
-//        orderMoney.text = "訂單金額：\(model.orderAmount)"
-////        orderState.text = "訂單狀態：\(model.orderStatus)"
-////        orderState.text = "付款狀態：\(model.payStatus)"
-//        // 付款狀態
-//        switch model.payStatus {
-//        case "0":
-//            orderState.text = "付款狀態：init" // 未付款
-//            payImmediateButton.isHidden = false
-//        case "-1":
-//            orderState.text = "付款狀態：付款中"
-//        case "1":
-//            orderState.text = "付款狀態：付款完成"
-//            payImmediateButton.alpha = 0
-//            payImmediateButton.isUserInteractionEnabled = false
-//        default:
-//            orderState.text = "付款狀態：處理中"
-//            payImmediateButton.isHidden = false
-//        }
-//    }
-    
     func configure(with model: Order) {
         orderNo.text = "訂單編號：\(model.orderNo)"
         orderDate.text = "訂單日期：\(model.orderDate)"
@@ -70,7 +47,7 @@ class MyOrderTableViewCell: UITableViewCell {
         // 付款狀態
         switch model.payStatus {
         case "0":
-            orderState.text = "付款狀態：init" // 未付款
+            orderState.text = "付款狀態：未付款" // 未付款
             payImmediateButton.isHidden = false
         case "-1":
             orderState.text = "付款狀態：付款中"
@@ -83,5 +60,4 @@ class MyOrderTableViewCell: UITableViewCell {
             payImmediateButton.isHidden = false
         }
     }
-    
 }

@@ -15,7 +15,7 @@ struct Package: Codable {
     var productDescription: String = ""
 //    let productStatus: String
     // for packageInfo
-    var productStock: String? = ""
+    var productStock: String = ""
     
     
     enum CodingKeys: String, CodingKey {

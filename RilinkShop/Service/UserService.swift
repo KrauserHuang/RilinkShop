@@ -262,6 +262,7 @@ class UserService {
             multipartFormData.append(Base64(string: Global.ACCOUNT_TYPE).data(using: .utf8)!, withName: "accountType")
             multipartFormData.append(Base64(string: imgtitle).data(using: .utf8)!, withName: "imgtitle")
         }, to: url).responseJSON { response in
+            
             guard response.value != nil else {
                 let errorMsg = "伺服器連線失敗"
                 completed(false, errorMsg as AnyObject)
@@ -577,29 +578,52 @@ class UserService {
             }
         }
     }
-//    func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping Completion) {
-//        let url = SHOP_API_URL + URL_STOREADMINLOGIN
-//        let parameters = [
-//            "store_acc": storeAcc,
-//            "store_pwd": storePwd,
-//            "store_id": storeID
-//        ]
-//
-//        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-//
-//            guard response.value != nil else {
-//                let message = "伺服器連線失敗"
-//                completed(false, message as AnyObject)
-//                return
-//            }
-//
-//            let value = JSON(response.value!)
-//            print(#function)
+    
+    func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping Completion) {
+        let url = SHOP_API_URL + URL_STOREADMINLOGIN
+        let parameters = [
+            "store_acc": storeAcc,
+            "store_pwd": storePwd,
+            "store_id": storeID
+        ]
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+        
+        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+
+            guard response.value != nil else {
+                let message = "伺服器連線失敗"
+                completed(false, message as AnyObject)
+                return
+            }
+
+            let value = JSON(response.value!)
+            print(#function)
 //            print(value)
-//
-//
-//        }
-//    }
+            
+            switch response.result {
+            case .success:
+                
+                guard value["code"].stringValue == returnCode else {
+                    let errorMsg = value["responseMessage"].stringValue
+                    completed(false, errorMsg as AnyObject)
+                    return
+                }
+                
+                let info = StoreInfo(storeName: value["store_name"].stringValue,
+                                     storeAddress: value["store_address"].stringValue,
+                                     storePhone: value["store_phone"].stringValue,
+                                     storeEmail: value["store_email"].stringValue,
+                                     storeDescript: value["store_descript"].stringValue,
+                                     storeOpentime: value["store_opentime"].stringValue,
+                                     storePicture: value["store_picture"].stringValue)
+                print("info:\(info)")
+                completed(true, info as AnyObject)
+            case .failure:
+                let errorMsg = value["responseMessage"].stringValue
+                completed(false, errorMsg as AnyObject)
+            }
+        }
+    }
     
     func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping (StoreAdminLogin) -> Void) {
         let url = SHOP_API_URL + URL_STOREADMINLOGIN

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,16 +10,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PackageInfoViewController" customModule="RilinkShop" customModuleProvider="target">
             <connections>
+                <outlet property="addButton" destination="UyW-Py-Jl4" id="qya-tX-mDp"/>
                 <outlet property="addToCartButton" destination="KOn-f3-qpw" id="CTP-Er-Rci"/>
                 <outlet property="buyNowButton" destination="FuR-rM-FoP" id="9DV-rh-rSZ"/>
                 <outlet property="descriptionLabel" destination="WEa-GS-dp2" id="s3J-6c-rig"/>
                 <outlet property="itemNumberLabel" destination="oHn-YH-Y1h" id="vCD-7B-Aaw"/>
-                <outlet property="minusButton" destination="OLd-vy-Bdu" id="gil-ad-d1M"/>
                 <outlet property="packageCostLabel" destination="HYS-5J-wt3" id="WDs-7k-lb3"/>
                 <outlet property="packageImageView" destination="382-uL-XUe" id="Uee-nW-RBg"/>
                 <outlet property="packageNameLabel" destination="iwg-Xv-3Ey" id="MCQ-fq-VbY"/>
-                <outlet property="plusButton" destination="UyW-Py-Jl4" id="qya-tX-mDp"/>
                 <outlet property="stepperOuterView" destination="9Cc-eo-TL9" id="OUS-Ia-bza"/>
+                <outlet property="substractButton" destination="OLd-vy-Bdu" id="gil-ad-d1M"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmK-i7-mPW">
-                    <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="836"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4CW-7v-Cpi">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="634"/>
@@ -154,7 +152,7 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="u35-ld-Zge"/>
                 </scrollView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QSH-dd-S6P">
-                    <rect key="frame" x="30" y="812" width="354" height="40"/>
+                    <rect key="frame" x="30" y="846" width="354" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOn-f3-qpw">
                             <rect key="frame" x="0.0" y="0.0" width="167" height="40"/>

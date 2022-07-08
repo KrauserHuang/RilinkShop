@@ -89,9 +89,7 @@ class CalendarViewController: UIViewController {
                     guard success else {
                         HUD.hideLoadingHUD(inView: self.view)
                         let errmsg = response as! String
-                        Alert.showMessage(title: "", msg: errmsg, vc: self) {
-                            
-                        }
+                        Alert.showMessage(title: "", msg: errmsg, vc: self)
                         return
                     }
                     

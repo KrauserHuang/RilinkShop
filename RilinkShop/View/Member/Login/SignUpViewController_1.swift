@@ -113,7 +113,8 @@ class SignUpViewController_1: UIViewController {
                         let message = "帳號已存在\n請前往登入"
                         Alert.showMessage(title: "", msg: message , vc: self) {
                             self.dismiss(animated: true) {
-                                self.delegate?.finishSignup1WithSubmitCode(self, resultType: 2)
+//                                self.delegate?.finishSignup1WithSubmitCode(self, resultType: 2)
+//                                self.dismiss(animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
                             }
                         }
                     }

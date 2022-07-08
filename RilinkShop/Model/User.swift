@@ -57,13 +57,13 @@ struct StoreAdminLogin: Codable {
 }
 
 struct StoreInfo: Codable {
-    let storeName: String
-    let storeAddress: String
-    let storePhone: String
-    let storeEmail: String
-    let storeDescript: String
-    let storeOpentime: String
-    let storePicture: String
+    var storeName: String = ""
+    var storeAddress: String = ""
+    var storePhone: String = ""
+    var storeEmail: String = ""
+    var storeDescript: String = ""
+    var storeOpentime: String = ""
+    var storePicture: String = ""
     
     enum CodingKeys: String, CodingKey {
         case storeName = "store_name"

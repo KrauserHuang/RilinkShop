@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PointViewController" customModule="RilinkShop" customModuleProvider="target">
             <connections>
+                <outlet property="emptyView" destination="f7u-Yg-hA8" id="Qy8-hH-P0p"/>
                 <outlet property="point" destination="t2M-3z-Yvo" id="Ho0-gk-a1y"/>
                 <outlet property="remindLabel" destination="daw-Ty-tey" id="GM4-Op-JUc"/>
                 <outlet property="tableView" destination="gNV-JK-pNl" id="Okn-zg-Qos"/>
@@ -66,7 +67,34 @@
                     <rect key="frame" x="0.0" y="338.5" width="414" height="483"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最多顯示一年之內的資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtj-a4-Wjm">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7u-Yg-hA8">
+                    <rect key="frame" x="16" y="500.5" width="382" height="159"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="data-searching" translatesAutoresizingMaskIntoConstraints="NO" id="Mtz-cF-l2T">
+                            <rect key="frame" x="141" y="8" width="100" height="101"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="VUM-xm-uxd"/>
+                                <constraint firstAttribute="height" constant="101" id="YBm-6u-KUd"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暫無點數紀錄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNj-2A-VAn">
+                            <rect key="frame" x="16" y="125" width="350" height="18"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="vNj-2A-VAn" firstAttribute="leading" secondItem="f7u-Yg-hA8" secondAttribute="leading" constant="16" id="OXb-Db-dTs"/>
+                        <constraint firstItem="vNj-2A-VAn" firstAttribute="top" secondItem="Mtz-cF-l2T" secondAttribute="bottom" constant="16" id="U1Q-ue-76I"/>
+                        <constraint firstItem="Mtz-cF-l2T" firstAttribute="centerX" secondItem="f7u-Yg-hA8" secondAttribute="centerX" id="liv-fx-iso"/>
+                        <constraint firstItem="Mtz-cF-l2T" firstAttribute="top" secondItem="f7u-Yg-hA8" secondAttribute="top" constant="8" id="nvO-Vy-um5"/>
+                        <constraint firstAttribute="trailing" secondItem="vNj-2A-VAn" secondAttribute="trailing" constant="16" id="sKU-ip-Dyj"/>
+                        <constraint firstAttribute="bottom" secondItem="vNj-2A-VAn" secondAttribute="bottom" constant="16" id="xKf-Wg-WDK"/>
+                    </constraints>
+                </view>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最多顯示一年之內的資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtj-a4-Wjm">
                     <rect key="frame" x="111.5" y="831.5" width="191" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,6 +125,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="ymU-OS-9yB" firstAttribute="top" secondItem="z4a-08-oxa" secondAttribute="bottom" constant="40" id="0iy-cs-Apt"/>
+                <constraint firstItem="f7u-Yg-hA8" firstAttribute="centerY" secondItem="gNV-JK-pNl" secondAttribute="centerY" id="1nO-il-tEx"/>
                 <constraint firstItem="t2M-3z-Yvo" firstAttribute="centerY" secondItem="0sv-OS-E7o" secondAttribute="centerY" id="4q7-Bf-ggj"/>
                 <constraint firstItem="ymU-OS-9yB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7cK-Eb-RHK"/>
                 <constraint firstAttribute="trailing" secondItem="X8R-xh-xnz" secondAttribute="trailing" constant="16" id="9zN-ZB-Vy4"/>
@@ -114,15 +143,19 @@
                 <constraint firstItem="1hr-u1-6zi" firstAttribute="top" secondItem="X8R-xh-xnz" secondAttribute="bottom" constant="24" id="fRU-1n-KuJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="wtj-a4-Wjm" secondAttribute="bottom" constant="10" id="hWc-K6-BDa"/>
                 <constraint firstItem="t2M-3z-Yvo" firstAttribute="leading" secondItem="0sv-OS-E7o" secondAttribute="trailing" constant="5" id="jLa-6u-Dc6"/>
+                <constraint firstItem="f7u-Yg-hA8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kFS-G6-LQA"/>
                 <constraint firstItem="0sv-OS-E7o" firstAttribute="leading" secondItem="z4a-08-oxa" secondAttribute="trailing" constant="5" id="nta-qV-LzX"/>
                 <constraint firstItem="0sv-OS-E7o" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="sJ8-H1-Ply"/>
                 <constraint firstItem="X8R-xh-xnz" firstAttribute="top" secondItem="ymU-OS-9yB" secondAttribute="bottom" constant="17" id="sXu-zB-uCj"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="f7u-Yg-hA8" secondAttribute="trailing" constant="16" id="v1Z-4V-foI"/>
                 <constraint firstItem="gNV-JK-pNl" firstAttribute="top" secondItem="1hr-u1-6zi" secondAttribute="bottom" constant="24" id="zEt-3C-IfZ"/>
+                <constraint firstItem="f7u-Yg-hA8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="zZc-Vf-zHH"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="109.82142857142857"/>
         </view>
     </objects>
     <resources>
+        <image name="data-searching" width="100" height="100.5"/>
         <image name="point2" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

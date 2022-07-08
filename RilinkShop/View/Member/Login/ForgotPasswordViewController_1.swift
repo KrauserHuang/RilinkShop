@@ -39,7 +39,7 @@ class ForgotPasswordViewController_1: UIViewController {
     }
     
     @IBAction func submitButtonPressed(_ sender: UIButton) {
-        let account = phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let account = phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
         
         guard account != "" else {
             Alert.showMessage(title: "", msg: "請先輸入10碼手機號碼", vc: self) {
@@ -48,7 +48,7 @@ class ForgotPasswordViewController_1: UIViewController {
             return
         }
         
-        guard account?.count == 10 else {
+        guard account.count == 10 else {
             Alert.showMessage(title: "", msg: "輸入格式錯誤,請輸入10碼手機號碼", vc: self) {
                 self.phoneTextField.becomeFirstResponder()
             }
@@ -59,7 +59,7 @@ class ForgotPasswordViewController_1: UIViewController {
         let action = "1" //0:註冊重送  1:忘記密碼
         
         HUD.showLoadingHUD(inView: self.view, text: "處理中")
-        UserService.shared.reSendCode(account: account!, accountType: accountType, action: action) { (success, response) in
+        UserService.shared.reSendCode(account: account, accountType: accountType, action: action) { (success, response) in
             
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
@@ -78,7 +78,9 @@ class ForgotPasswordViewController_1: UIViewController {
                     }
                     
                     self.dismiss(animated: true) {
-                        self.delegate?.finishViewWith(tempAccount: account!)
+                        print(#function)
+                        print("account:\(account)")
+                        self.delegate?.finishViewWith(tempAccount: account)
                     }
                 }
             }

@@ -231,6 +231,7 @@ extension MemberNavigationViewController: ForgotPasswordViewController_1_Delegat
     func finishViewWith(tempAccount: String) {
         let vc = ForgotPasswordViewController_2()
         vc.delegate = self
+        vc.tempAccount = tempAccount
         present(vc, animated: true, completion: nil)
     }
 }

@@ -66,29 +66,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     // MARK: - What's UIApplication.shared.windows
     func handleURL(_ url: URL) {
-        guard url.scheme == "rilinkshop" && url.host == "rilink.com.tw" else { return }
+//        guard url.scheme == "rilinkshop" && url.host == "rilink.com.tw" else { return }
+        guard url.scheme == "rilinkshop" else { return }
+        
         let root = UIApplication.shared.windows.first?.rootViewController as? MainTabBarController
         let navC = root?.selectedViewController as? UINavigationController
-        navC?.popToRootViewController(animated: false)
-        switch url.path {
-        case "/shop":
-            tabbarController?.selectedIndex = 2
-        case "/ticket":
-            guard let tabbarController = tabbarController else {
+        
+        
+        if url.host == "rilink.com.tw" {
+            navC?.popToRootViewController(animated: false)
+            switch url.path {
+            case "/shop":
+                tabbarController?.selectedIndex = 2
+            case "/ticket":
+                guard let tabbarController = tabbarController else {
+                    return
+                }
+
+                tabbarController.selectedIndex = 3
+                let navigationController = tabbarController.viewControllers?.filter { $0 is MemberNavigationViewController
+                }.first as? MemberNavigationViewController
+                navigationController?.popToRootViewController(animated: false)
+                DispatchQueue.main.async {
+                    navigationController?.toTicketViewController()
+                }
+                
+            default:
                 return
             }
-
-            tabbarController.selectedIndex = 3
-            let navigationController = tabbarController.viewControllers?.filter { $0 is MemberNavigationViewController
-            }.first as? MemberNavigationViewController
-            navigationController?.popToRootViewController(animated: false)
-            DispatchQueue.main.async {
-                navigationController?.toTicketViewController()
-            }
-        default:
-            return
+        } else {
+            navC?.popToRootViewController(animated: false)
         }
-        
     }
 }
 

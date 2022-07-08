@@ -10,7 +10,8 @@ import MBProgressHUD
 
 class CartViewController: UIViewController {
 
-    @IBOutlet weak var noItemView: UIView! {
+    @IBOutlet weak var noItemView: UIView!
+    {
         didSet {
             noItemView.isHidden = true
         }
@@ -51,18 +52,22 @@ class CartViewController: UIViewController {
     }
     // 載入購物車資料
     func loadInCartItems() {
-        let indicator = MBProgressHUD.showAdded(to: self.view, animated: true)
-        indicator.isUserInteractionEnabled = false
-        indicator.show(animated: true)
-        cartTableView.isHidden = true
+//        let indicator = MBProgressHUD.showAdded(to: self.view, animated: true)
+//        indicator.isUserInteractionEnabled = false
+//        indicator.show(animated: true)
+//        cartTableView.isHidden = true
+        HUD.showLoadingHUD(inView: self.view, text: "")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { items in
+                HUD.hideLoadingHUD(inView: self.view)
                 self.inCartItems = items
-                self.cartTableView.isHidden = false
-                print(#function)
-                print(items)
-                indicator.hide(animated: true)
-    //            self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
+//                self.cartTableView.isHidden = false
+//                print(#function)
+//                print(items)
+//                indicator.hide(animated: true)
+                
+//                self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
+                self.noItemView.isHidden = self.inCartItems.count != 0
             }
             ProductService.shared.getShoppingCartCount(id: self.account, pwd: self.password) { response in
                 self.noItemView.isHidden = response.responseMessage == "0" ? false : true
@@ -101,7 +106,7 @@ class CartViewController: UIViewController {
         let controller = ShopRuleViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
-    
+    // 清除
     @IBAction func clearAllButtonTapped(_ sender: UIButton) {
         let alertController = UIAlertController(title: "是否清除全部", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "清除", style: .destructive) { action in
@@ -190,8 +195,7 @@ extension CartViewController: CartTableViewCellDelegate {
             ProductService.shared.editShoppingCartItem(id: account, pwd: password, no: no, qty: qty) { (success, response) in
                 DispatchQueue.global(qos: .userInitiated).async {
                     URLCache.shared.removeAllCachedResponses()
-                    DispatchQueue.main.sync {
-                        
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         guard success else {
                             HUD.hideLoadingHUD(inView: self.view)
                             let errmsg = response as! String
@@ -202,7 +206,6 @@ extension CartViewController: CartTableViewCellDelegate {
                         HUD.hideLoadingHUD(inView: self.view)
                         ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { products in
                             self.inCartItems = products
-//                            let item = products[indexPath.row]
                             let item = self.inCartItems[indexPath.row]
                             cell.configure(with: item)
                             self.viewDidLayoutSubviews()
@@ -220,19 +223,17 @@ extension CartViewController: CartTableViewCellDelegate {
         
         let no = inCartItems[indexPath.row].product_no
         var qty = Int(inCartItems[indexPath.row].order_qty)!
-        print(#function)
-        print(inCartItems[indexPath.row].product_stock)
-        let stock = Int(inCartItems[indexPath.row].product_stock)!
         
         if qty == 1 {
             removeItem(cell)
-        } else if qty != 0 {
+        } else if qty > 1 {
             qty -= 1
+            
             HUD.showLoadingHUD(inView: self.view, text: "")
             ProductService.shared.editShoppingCartItem(id: account, pwd: password, no: no, qty: qty) { (success, response) in
                 DispatchQueue.global(qos: .userInitiated).async {
                     URLCache.shared.removeAllCachedResponses()
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         
                         guard success else {
                             HUD.hideLoadingHUD(inView: self.view)
@@ -244,7 +245,6 @@ extension CartViewController: CartTableViewCellDelegate {
                         HUD.hideLoadingHUD(inView: self.view)
                         ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { products in
                             self.inCartItems = products
-//                            let item = products[indexPath.row]
                             let item = self.inCartItems[indexPath.row]
                             cell.configure(with: item)
                             self.viewDidLayoutSubviews()

@@ -18,7 +18,7 @@ class PointService {
             "member_id": id,
             "member_pwd": pwd
         ]
-        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+//        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
         
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             
@@ -28,7 +28,7 @@ class PointService {
                 return
             }
             
-            let value = JSON(response.value)
+            let value = JSON(response.value!)
             print(#function)
 //            print(value)
             print(response.result)

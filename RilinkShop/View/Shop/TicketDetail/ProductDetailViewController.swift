@@ -29,9 +29,8 @@ class ProductDetailViewController: UIViewController {
 //            cartButton.setBadge()
         }
     }
-//    var itemInfo = Product()
     var itemInfo: Item?
-    var products = [PackageInfo]()
+    var products = [PackageInfo]() // 由於有些資訊取用package有些取用package內的product(ex: stock)
     var itemNumber = 1 {
         didSet {
             itemNumberLabel.text = String(itemNumber)
@@ -121,12 +120,21 @@ class ProductDetailViewController: UIViewController {
         case .package(let package):
             ProductService.shared.loadPackageInfo(id: account, pwd: password, no: package.packageNo) { packageResponse in
                 self.products = packageResponse
-                let productStock = self.products.map { $0.productStock }
-                self.productStockMin = productStock.sorted { $0 < $1 }.first!
-                self.stock = Int(self.productStockMin)!
+                //設定庫存，將package內的product的stock取出，並重整將stock最少的product擺在前面取出，最後變數stock將取出的最少庫存數量存入
+//                let productStock = self.products.map { $0.productStock }
+//                self.productStockMin = productStock.sorted { $0 < $1 }.first!
+//                self.stock = Int(self.productStockMin)!
+                
+                self.stock = Int(package.productStock)!
                 self.nameLabel.text = package.productName
                 self.costLabel.text = "$\(package.productPrice)"
                 self.descriptionLabel.text = package.productDescription
+                
+                print(#function)
+                print("stock:\(self.stock)")
+                print("name:\(self.nameLabel.text)")
+                print("cost:\(self.costLabel.text)")
+                print("descriptionLabel:\(self.descriptionLabel.text)")
                 
                 let imageURLString = SHOP_ROOT_URL + package.productPicture
                 self.ticketImageView.setImage(imageURL: imageURLString)
@@ -136,12 +144,14 @@ class ProductDetailViewController: UIViewController {
                     self.buyNowButton.setTitle("備貨中", for: .normal)
                     self.buyNowButton.backgroundColor = .lightGray
                     self.buyNowButton.isUserInteractionEnabled = false
+                } else {
+                    //有庫存，沒事的
+                    print("stock:\(self.stock)")
                 }
             }
         case .none:
             break
         }
-        
     }
     
     @IBAction func itemNumberStepper(_ sender: UIButton) {
@@ -150,11 +160,22 @@ class ProductDetailViewController: UIViewController {
                 itemNumber -= stepValue
             }
         } else if sender.tag == 1 { // 點plus
+            print(#function)
+            print("stock:\(stock)")
             if itemNumber < stock {
                 itemNumber += stepValue
             }
+            else {
+                Alert.showMessage(title: "超過庫存數量", msg: "", vc: self) {
+//                    self.addToCartButton.isHidden = true
+//                    self.buyNowButton.setTitle("備貨中", for: .normal)
+//                    self.buyNowButton.backgroundColor = .lightGray
+//                    self.buyNowButton.isUserInteractionEnabled = false
+                }
+            }
         }
     }
+    // MARK: - 純新增至購物車
     @IBAction func addToCartButtonTapped(_ sender: UIButton) {
         HUD.showLoadingHUD(inView: self.view, text: "新增中")
         switch self.itemInfo {
@@ -169,10 +190,11 @@ class ProductDetailViewController: UIViewController {
         case .none:
             break
         }
-        let qty = self.itemNumberLabel.text
+        // 數量
+        let qty = itemNumberLabel.text
         if let qty = qty,
            let qtyInt = Int(qty),
-           let priceInt = Int(self.producrPrice) {
+           let priceInt = Int(producrPrice) {
             let total = priceInt * qtyInt
             ProductService.shared.addShoppingCartItem(id: self.account,
                                                       pwd: self.password,
@@ -200,7 +222,7 @@ class ProductDetailViewController: UIViewController {
             }
         }
     }
-    
+    // MARK: - 新增至購物車兼換頁至購物車頁面
     @IBAction func buyNowButtonTapped(_ sender: UIButton) {
         HUD.showLoadingHUD(inView: self.view, text: "新增中")
         switch self.itemInfo {
@@ -246,7 +268,6 @@ class ProductDetailViewController: UIViewController {
                         }
                     }
                 }
-                
             }
         }
     }

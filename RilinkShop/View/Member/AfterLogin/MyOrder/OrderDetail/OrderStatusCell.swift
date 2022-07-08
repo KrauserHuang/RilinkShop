@@ -31,7 +31,7 @@ class OrderStatusCell: UITableViewCell {
     func configure(with model: OrderInfo) {
         orderNoLabel.text = "訂單編號：\(model.orderNo)"
         orderDateLabel.text = "訂單日期：\(model.orderDate)"
-        orderAmountLabel.text = "訂單金額：\(model.orderAmount)"
+        orderAmountLabel.text = "訂單金額：\(model.orderAmount)" //顯示應付 -> 再改回商品合計
 //        orderStatusLabel.text = "訂單狀態：\(model.orderStatus)"
         payStatusLabel.text = "付款狀態：\(model.payStatus)"
         // 訂單狀態
@@ -48,14 +48,14 @@ class OrderStatusCell: UITableViewCell {
         // 付款狀態
         switch model.payStatus {
         case "0":
-            payStatusLabel.text = "付款狀態：init" // 未付款
+            payStatusLabel.text = "付款狀態：未付款" // 未付款
         case "-1":
             payStatusLabel.text = "付款狀態：付款中"
         case "1":
             if model.assigntype == "0" {
                 payStatusLabel.text = "付款狀態：付款完成"
             } else {
-                payStatusLabel.text = "店家派發"
+                payStatusLabel.text = "付款狀態：店家派發"
             }
 //            payStatusLabel.text = "付款狀態：付款完成"
         default:

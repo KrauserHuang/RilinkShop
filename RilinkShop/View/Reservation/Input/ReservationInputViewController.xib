@@ -56,7 +56,7 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa" borderStyle="roundedRect" placeholder="請輸入您的姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9rd-2t-kcg">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa" borderStyle="roundedRect" placeholder="請輸入您的姓名或暱稱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9rd-2t-kcg">
                                                     <rect key="frame" x="0.0" y="27" width="343" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="SIx-rN-jZi"/>

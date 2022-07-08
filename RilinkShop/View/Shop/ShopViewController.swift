@@ -21,7 +21,7 @@ struct ItemCellModel: Hashable {
     let package: Package
 }
 
-enum Item {
+enum Item: Hashable {
     case product(product: Product)
     case package(package: Package)
 }
@@ -32,7 +32,7 @@ class ShopViewController: UIViewController {
         case all
     }
     
-    @IBOutlet weak var cartButton: UIBarButtonItem!
+    @IBOutlet weak var cartButton: BadgeBarButtonItem!
     @IBOutlet weak var anotherCategoryCollectionView: UICollectionView!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var listTableView: UITableView!

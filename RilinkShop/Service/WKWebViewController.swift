@@ -100,12 +100,39 @@ extension WKWebViewController: WKNavigationDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if webView.canGoBack {
-            setLeftItem()
+//            if let navC = navigationController,
+//               let lastOne = navC.viewControllers.last {
+//                lastOne.navigationItem.leftBarButtonItem = nil
+//                print("you don't have back button!")
+//            } else {
+//                setLeftItem()
+//            }
+            if webView.url?.absoluteString == "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/payments/epospay/eposOrderResult.php" {
+                navigationItem.leftBarButtonItem = nil
+                print("you are on the last page, no button for you!")
+            } else {
+                setLeftItem()
+                print("you got a custom arrow!")
+            }
+            
+            
         } else if let navC = navigationController,
                   navC.viewControllers.count > 1 {
-            navigationItem.leftBarButtonItem = navigationItem.backBarButtonItem
+            if let lastPage = navC.viewControllers.last {
+                lastPage.navigationItem.leftBarButtonItem = nil
+                print("you are on the last page, no button for you!")
+            } else {
+                navigationItem.leftBarButtonItem = navigationItem.backBarButtonItem
+                print("you got a back arrow button!")
+            }
+//            if let lastOne = navC.viewControllers.last {
+//                lastOne.navigationItem.leftBarButtonItem = nil
+//            } else {
+//                navigationItem.leftBarButtonItem = navigationItem.backBarButtonItem
+//            }
         } else {
             navigationItem.leftBarButtonItem = nil
+            print("you have nothing!")
         }
     }
     

@@ -18,7 +18,7 @@ class QRCodeService {
     static let shared = QRCodeService()
     var theqrcodes = [String]()
     // 會員未核銷商品/套票
-    func unconfirmList(id: String, pwd: String, ispackage: String, completion: @escaping ([UNQRCode]) -> Void) {
+    func unconfirmList(id: String, pwd: String, ispackage: String, completion: @escaping ([QRCode]) -> Void) {
         let url = SHOP_API_URL + URL_QRUNCONFIRMLIST
         let parameters = [
             "member_id": id,
@@ -26,10 +26,12 @@ class QRCodeService {
             "ispackage": ispackage
         ]
         
-        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [UNQRCode].self) { response in
-//            print(response)
+        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [QRCode].self) { response in
+
+            print(#function)
+            print(response)
+            
             guard response.value != nil else {
-                print(#function)
                 print("伺服器連線失敗")
                 return
             }

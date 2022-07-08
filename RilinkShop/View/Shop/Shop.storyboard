@@ -59,7 +59,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5eY-1B-3eD">
-                        <barButtonItem key="rightBarButtonItem" image="cart" catalog="system" id="CXx-gT-Uo9">
+                        <barButtonItem key="rightBarButtonItem" image="cart" catalog="system" id="CXx-gT-Uo9" customClass="BadgeBarButtonItem" customModule="RilinkShop" customModuleProvider="target">
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="toCartVC:" destination="Y6W-OH-hqX" id="ppG-SL-65M"/>
@@ -68,7 +68,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="anotherCategoryCollectionView" destination="XSg-pa-A1Q" id="caT-pf-Iqc"/>
-                        <outlet property="cartButton" destination="CXx-gT-Uo9" id="P0q-vd-K9x"/>
+                        <outlet property="cartButton" destination="CXx-gT-Uo9" id="4Gq-WQ-tPP"/>
                         <outlet property="listTableView" destination="0br-Mj-3Sy" id="flx-vr-9cN"/>
                     </connections>
                 </viewController>

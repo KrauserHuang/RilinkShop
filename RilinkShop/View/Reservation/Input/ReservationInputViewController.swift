@@ -113,11 +113,21 @@ class ReservationInputViewController: UIViewController {
             }
             return
         }
+        
+        let phoneRegEx = "(09)+[0-9]{8}"
+        let phonePredicate  = NSPredicate(format: "SELF MATCHES %@", phoneRegEx)
+        guard phonePredicate.evaluate(with: mobile) else {
+            let message = "輸入手機格式錯誤"
+            Alert.showMessage(title: "", msg: message, vc: self) {
+                self.mobileTextField.becomeFirstResponder()
+            }
+            return
+        }
 //
         guard license != "" else {
             let msg = "請輸入你的車牌"
             Alert.showMessage(title: "", msg: msg, vc: self) {
-                self.mobileTextField.becomeFirstResponder()
+                self.licenseTextField.becomeFirstResponder()
             }
             return
         }
@@ -125,7 +135,7 @@ class ReservationInputViewController: UIViewController {
         guard carType != "" else {
             let msg = "請輸入你的車款與車型"
             Alert.showMessage(title: "", msg: msg, vc: self) {
-                self.mobileTextField.becomeFirstResponder()
+                self.carTypeTextField.becomeFirstResponder()
             }
             return
         }
@@ -133,7 +143,7 @@ class ReservationInputViewController: UIViewController {
         guard repairType != "" else {
             let msg = "請輸入你的維修類型"
             Alert.showMessage(title: "", msg: msg, vc: self) {
-                self.mobileTextField.becomeFirstResponder()
+                self.repairTypeTextField.becomeFirstResponder()
             }
             return
         }

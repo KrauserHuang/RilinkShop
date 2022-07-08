@@ -20,8 +20,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage" translatesAutoresizingMaskIntoConstraints="NO" id="Ps9-03-U82">
                         <rect key="frame" x="0.0" y="0.0" width="382" height="263"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="263" id="5L4-A7-U9R"/>
-                            <constraint firstAttribute="width" constant="382" id="czY-2D-McS"/>
+                            <constraint firstAttribute="height" constant="263" id="Uyx-b8-YwC"/>
                         </constraints>
                     </imageView>
                 </subviews>

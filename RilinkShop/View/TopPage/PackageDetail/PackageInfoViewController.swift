@@ -19,8 +19,8 @@ class PackageInfoViewController: UIViewController {
     @IBOutlet weak var packageNameLabel: UILabel!
     @IBOutlet weak var packageCostLabel: UILabel!
     @IBOutlet weak var itemNumberLabel: UILabel!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var substractButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var stepperOuterView: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var addToCartButton: UIButton!
@@ -33,7 +33,8 @@ class PackageInfoViewController: UIViewController {
 //            cartButton.setBadge()
         }
     }
-    
+    var package = Package()
+    var products = [PackageInfo]()
     var itemNumber = 1 {
         didSet {
             itemNumberLabel.text = String(itemNumber)
@@ -42,13 +43,13 @@ class PackageInfoViewController: UIViewController {
     let maxValue = 10
     let minValue = 1
     let stepValue = 1
-    
-    var package = Package()
-    var products = [PackageInfo]()
+    var stock = Int()
     let account = MyKeyChain.getAccount() ?? ""
     let password = MyKeyChain.getPassword() ?? ""
-    
     var spec = PackageOrProduct.package
+    var productNo = String()
+    var producrPrice = String()
+    var productStockMin = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,16 +66,16 @@ class PackageInfoViewController: UIViewController {
         stepperOuterView.backgroundColor = .systemGray6
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
         // 加減
-        plusButton.tintColor = UIColor(hex: "#4F846C")
-        plusButton.backgroundColor = UIColor(hex: "#D6E5E2")
-        plusButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
-        plusButton.layer.borderWidth = 1
-        plusButton.layer.cornerRadius = plusButton.frame.height / 2
-        minusButton.tintColor = UIColor(hex: "#4F846C")
-        minusButton.backgroundColor = UIColor(hex: "#D6E5E2")
-        minusButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
-        minusButton.layer.borderWidth = 1
-        minusButton.layer.cornerRadius = minusButton.frame.height / 2
+        addButton.tintColor = UIColor(hex: "#4F846C")
+        addButton.backgroundColor = UIColor(hex: "#D6E5E2")
+        addButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
+        addButton.layer.borderWidth = 1
+        addButton.layer.cornerRadius = addButton.frame.height / 2
+        substractButton.tintColor = UIColor(hex: "#4F846C")
+        substractButton.backgroundColor = UIColor(hex: "#D6E5E2")
+        substractButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
+        substractButton.layer.borderWidth = 1
+        substractButton.layer.cornerRadius = substractButton.frame.height / 2
         // 中間的數字
         itemNumberLabel.backgroundColor = .clear
         // 下面兩個button
@@ -90,12 +91,37 @@ class PackageInfoViewController: UIViewController {
     func showItemInfo() {
         ProductService.shared.loadPackageInfo(id: account, pwd: password, no: package.packageNo) { packagesResponse in
             self.products = packagesResponse
+            //設定庫存，將package內的product的stock取出，並重整將stock最少的product擺在前面取出，最後變數stock將取出的最少庫存數量存入
+//            let productStock = self.products.map { $0.productStock }
+//            self.productStockMin = productStock.sorted { $0 < $1 }.first!
+//            self.stock = Int(self.productStockMin)!
+            
+//            if self.stock == 0 {
+//                self.addToCartButton.isHidden = true
+//                self.buyNowButton.setTitle("備貨中", for: .normal)
+//                self.buyNowButton.backgroundColor = .lightGray
+//                self.buyNowButton.isUserInteractionEnabled = false
+//            } else {
+//                //有庫存，沒事的
+//                print("stock:\(self.stock)")
+//            }
         }
         let imageURLString = SHOP_ROOT_URL + package.productPicture
         packageImageView.setImage(imageURL: imageURLString)
+        stock = Int(package.productStock)!
         packageNameLabel.text = package.productName
         packageCostLabel.text = package.productPrice
         descriptionLabel.text = package.productDescription
+        
+        if self.stock == 0 {
+            self.addToCartButton.isHidden = true
+            self.buyNowButton.setTitle("備貨中", for: .normal)
+            self.buyNowButton.backgroundColor = .lightGray
+            self.buyNowButton.isUserInteractionEnabled = false
+        } else {
+            //有庫存，沒事的
+            print("stock:\(self.stock)")
+        }
     }
     
     @objc func cartButtonAction(_ sender: UIBarButtonItem) {
@@ -108,17 +134,24 @@ class PackageInfoViewController: UIViewController {
                 itemNumber -= stepValue
             }
         } else if sender.tag == 1 {
-            if itemNumber < maxValue {
+            print(#function)
+            print("stock:\(stock)")
+            if itemNumber < stock {
                 itemNumber += stepValue
+            }
+            else {
+                Alert.showMessage(title: "超過庫存數量", msg: "", vc: self) {
+                    //
+                }
             }
         }
     }
     // MARK: - 純新增至購物車
     @IBAction func addToCartButtonTapped(_ sender: UIButton) {
         HUD.showLoadingHUD(inView: self.view, text: "新增中")
-        let no = self.package.packageNo
-        let qty = self.itemNumberLabel.text
-        let price = self.package.productPrice
+        let no = package.packageNo
+        let price = package.productPrice
+        let qty = itemNumberLabel.text
         if let qty = qty,
            let qtyInt = Int(qty),
            let priceInt = Int(price) {
@@ -182,6 +215,7 @@ class PackageInfoViewController: UIViewController {
                         Alert.showMessage(title: "", msg: message, vc: self) {
                             let vc = CartViewController()
                             self.navigationController?.pushViewController(vc, animated: true)
+                            
                         }
                     }
                 }

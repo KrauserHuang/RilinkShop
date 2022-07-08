@@ -13,21 +13,49 @@ protocol ForgotPasswordViewController_2_Delegate: AnyObject {
 
 class ForgotPasswordViewController_2: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var verifyCodeTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordAgainTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
     weak var delegate: ForgotPasswordViewController_2_Delegate?
+    let tool = Tool()
     var edittingTextField: UITextField?
     var tempAccount: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureKeyboard()
+        
+        tool.makeRoundedCornersButton(button: submitButton)
+        submitButton.backgroundColor = tool.customGreen
+    }
+    
+    func configureKeyboard() {
         verifyCodeTextField.delegate = self
         passwordTextField.delegate = self
         passwordAgainTextField.delegate = self
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    @objc func keyboardWillHide(_ notification: Notification) {
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
@@ -73,7 +101,12 @@ class ForgotPasswordViewController_2: UIViewController {
 //        MyKeyChain.setPassword(pw1!)
         
         HUD.showLoadingHUD(inView: self.view, text: "驗證中")
-        UserService.shared.verifyCode(action: action, account: account!, accountType: accountType, registeCode: verifyCode!, pw: pw1!, pw2: pw2!) { (success, response) in
+        UserService.shared.verifyCode(action: action,
+                                      account: account!,
+                                      accountType: accountType,
+                                      registeCode: verifyCode!,
+                                      pw: pw1!,
+                                      pw2: pw2!) { (success, response) in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
@@ -89,8 +122,8 @@ class ForgotPasswordViewController_2: UIViewController {
                     
                     HUD.hideLoadingHUD(inView: self.view)
                     Global.ACCOUNT_PASSWORD = pw1!
+                    MyKeyChain.setPassword(pw1!)
                     
-//                    self.updateMallPassword(mobile: self.tempAccount, password: pw1!)
                     let message = "密碼已修改，請以新密碼重新登入。"
                     Alert.showMessage(title: "", msg: message, vc: self) {
                         
@@ -101,10 +134,6 @@ class ForgotPasswordViewController_2: UIViewController {
                 }
             }
         }
-        
-        HUD.hideLoadingHUD(inView: self.view)
-//        跳回首頁
-        self.dismiss(animated: true, completion: nil)
     }
     
     func updateMallPassword(mobile: String, password: String) {
@@ -119,7 +148,7 @@ class ForgotPasswordViewController_2: UIViewController {
     }
     
 }
-
+// MARK: - UITextFieldDelegate
 extension ForgotPasswordViewController_2: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         self.edittingTextField = textField

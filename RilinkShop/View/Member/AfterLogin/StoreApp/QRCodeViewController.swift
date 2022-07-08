@@ -151,29 +151,14 @@ extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             captureSession.stopRunning()
             
             let qrcode = str
-//            QRCodeService.shared.storeConfirm(storeAcc: Global.ACCOUNT, storePwd: Global.ACCOUNT_PASSWORD, qrcode: qrcode) { output in
-//                print(output)
-//                if output.code == "0x0200" {
-//                    print(output.responseMessage)
-//                    Alert.showMessage(title: "核銷完畢", msg: "", vc: self) {
-//                        self.dismiss(animated: true, completion: nil)
-//                    }
-////                    self.dismiss(animated: true) {
-//////                        let controller = DidReimbursementViewController()
-//////                        controller.modalPresentationStyle = .fullScreen
-//////                        self.present(controller, animated: true, completion: nil)
-////                        self.delegate?.didFinishScan(self)
-////                    }
-//                }
-//            }
             
             QRCodeService.shared.storeConfirm(storeAcc: Global.ACCOUNT, storePwd: Global.ACCOUNT_PASSWORD, qrcode: qrcode) { success, response in
+                
                 guard success else {
                     let errorMsg = response as! String
                     Alert.showMessage(title: "", msg: errorMsg, vc: self) {
                         self.dismiss(animated: true, completion: nil)
                     }
-                    
                     return
                 }
                 
