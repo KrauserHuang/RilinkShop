@@ -40,8 +40,13 @@ class UsableTableViewCell: UITableViewCell {
         
         buyDay.text = "購買日期：\(model.orderDate)"
         orderNo.text = "訂單編號：\(model.orderNo)"
+        
         if let modelOrderQty = model.orderQty {
-            qtyLabel.text = "數量：\(modelOrderQty)"
+            if model.storeID == nil {
+                qtyLabel.text = "套票數量：\(modelOrderQty)"
+            } else {
+                qtyLabel.text = "數量：\(modelOrderQty)"
+            }
         }
     }
 }

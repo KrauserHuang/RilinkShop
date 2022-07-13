@@ -28,8 +28,8 @@ class QRCodeService {
         
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [QRCode].self) { response in
 
-            print(#function)
-            print(response)
+//            print(#function)
+//            print(response)
             
             guard response.value != nil else {
                 print("伺服器連線失敗")

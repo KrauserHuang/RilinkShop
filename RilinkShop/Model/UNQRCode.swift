@@ -41,6 +41,7 @@ struct PackageProduct: Codable {
     var productPicture: String? = ""
     var storeName: String? = ""
     var qrconfirm: String? = ""
+    var orderQty: String? = ""
     
     enum CodingKeys: String, CodingKey {
         case productName = "product_name"
@@ -48,6 +49,7 @@ struct PackageProduct: Codable {
         case productPicture = "product_picture"
         case storeName = "store_name"
         case qrconfirm
+        case orderQty = "order_qty"
     }
 }
 

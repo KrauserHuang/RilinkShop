@@ -47,10 +47,10 @@ class StoreService {
         ]
         
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [Store].self) { response in
-            print(#function)
+//            print(#function)
 //            print(response)
             guard let storeList = response.value else { return }
-            print(storeList)
+//            print(storeList)
             completion(storeList)
         }
     }

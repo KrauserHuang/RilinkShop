@@ -12,6 +12,7 @@ class PackageProductDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var storeNameLabel: UILabel!
+    @IBOutlet weak var orderQtyLabel: UILabel!
     
     static let reuseIdentifier = "PackageProductDetailTableViewCell"
     
@@ -43,6 +44,12 @@ class PackageProductDetailTableViewCell: UITableViewCell {
             storeNameLabel.text = "店家名稱：\(modelStoreName)"
         } else {
             print("model.storeName is nil!")
+        }
+        
+        if let modelOrderQty = model.orderQty {
+            orderQtyLabel.text = "商品數量：\(modelOrderQty)"
+        } else {
+            print("model.orderQty is nil!")
         }
     }
 }

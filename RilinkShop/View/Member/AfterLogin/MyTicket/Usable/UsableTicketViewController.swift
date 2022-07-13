@@ -124,7 +124,7 @@ extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource
             let controller = TicketDetailViewController()
 //            let ticketWithQR = ticket.product?.filter({ $0.qrconfirm != nil })
 //            controller.ticket = ticketWithQR
-            controller.ticket = ticket
+            controller.ticket = ticket //這裡的ticket變成商品資訊
             navigationController?.pushViewController(controller, animated: true)
         } else {
             // 如果沒有storeID代表他是套票，應該先跳轉套票所涵蓋商品內容
@@ -132,12 +132,12 @@ extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource
             controller.ticket = ticket
             if let ticketProduct = ticket.product {
                 let ticketProductWithQR = ticketProduct.filter { $0.qrconfirm != nil }
-                print(#function)
-                print(ticket)
-                print("====================")
-                print(ticketProduct)
-                print("====================")
-                print(ticketProductWithQR)
+//                print(#function)
+//                print(ticket)
+//                print("====================")
+//                print(ticketProduct)
+//                print("====================")
+//                print(ticketProductWithQR)
                 controller.products = ticketProductWithQR
             } else {
                 print("ticket.product is nil!")

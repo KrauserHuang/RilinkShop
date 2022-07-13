@@ -9,9 +9,8 @@ import UIKit
 
 class PackageProductDetailTableViewController: UITableViewController {
     
-    var products = [PackageProduct]()
-//    var ticket = UNQRCode()
-    var ticket = QRCode()
+    var products = [PackageProduct]() //為了取用商品資訊(商品名稱、qrCode字串)
+    var ticket = QRCode() //為了顯示部分套票的資訊(購買日期、訂單號碼)
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +42,8 @@ class PackageProductDetailTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let product = products[indexPath.row]
         let controller = TicketDetailViewController()
-        controller.product = product
-        controller.ticket = ticket
+        controller.product = product //傳商品資訊
+        controller.ticket = ticket //傳套票資訊
         navigationController?.pushViewController(controller, animated: true)
     }
 }

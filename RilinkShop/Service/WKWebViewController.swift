@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import SwiftUI
 
 protocol WKWebViewControllerDelegate: AnyObject {
     func backAction(_ viewController: WKWebViewController)
@@ -19,6 +20,7 @@ class WKWebViewController: UIViewController {
     weak var delegate: WKWebViewControllerDelegate?
     var urlStr = ""
     var orderNo = ""
+//    var rootVC = 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,27 +47,35 @@ class WKWebViewController: UIViewController {
     }
     
     func toOrderList() {
-        tabBarController?.selectedIndex = 3
-        self.navigationController?.popToRootViewController(animated: false)
-        let memberNVC = self.tabBarController?.selectedViewController as? MemberNavigationViewController
-        memberNVC?.popToRootViewController(animated: false)
-        
-        if let myOderTVC = memberNVC?.viewControllers.compactMap({ $0 as? MyOrderTableViewController}).first {
-            print("To MyOrderTVC")
-            memberNVC?.pushViewController(myOderTVC, animated: true)
-        }
-//        self.tabBarController?.selectedIndex = 1
-//        let shopNavigationController = self.tabBarController?.selectedViewController as? ShopNavigationController
-//        shopNavigationController?.popToRootViewController(animated: false)
-////        if let shopListViewController = shopNavigationController?.topViewController as? ShopListViewController {
-//        if let shopListViewController = shopNavigationController?.viewControllers.compactMap({ $0 as? ShopListViewController }).first {
-//            // do property to change
-////            shopListViewController.removeFromParent()
-////            shopListViewController.channelPrice = channelPrice
-//            shopListViewController.channelPrice = "1" // 強迫進去折抵商城，不管sid回傳的channel_price
-//            shopListViewController.sid = sid
-////            shopNavigationController?.pushViewController(shopListViewController, animated: false)
+//        dismiss(animated: true) {
+//            self.tabBarController?.selectedIndex = 3
+////            self.navigationController?.popToRootViewController(animated: false)
+//            let memberNVC = self.tabBarController?.selectedViewController as? MemberNavigationViewController
+//            memberNVC?.popToRootViewController(animated: false)
+//
+//            if let myOderTVC = memberNVC?.viewControllers.compactMap({ $0 as? MyOrderTableViewController}).first {
+//                print("To MyOrderTVC")
+//                memberNVC?.pushViewController(myOderTVC, animated: true)
+//            }
 //        }
+       
+        Alert.showMessage(title: "訂單已完成", msg: "請去\n會員中心  ➡  我的訂單\n查看", vc: self) {
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: {
+                self.tabBarController?.selectedIndex = 3
+                let memberNVC = self.tabBarController?.selectedViewController as? MemberNavigationViewController
+                memberNVC?.popToRootViewController(animated: false)
+                
+                if let myOderTVC = memberNVC?.viewControllers.compactMap({ $0 as? MyOrderTableViewController}).first {
+                    print("To MyOrderTVC")
+                    memberNVC?.pushViewController(myOderTVC, animated: true)
+                }
+            })
+        }
+    }
+    @IBAction func closeButtonPressed(_ sender: UIButton) {
+        Alert.showMessage(title: "訂單已完成", msg: "請去\n會員中心  ➡  我的訂單\n查看", vc: self) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
@@ -149,22 +159,24 @@ extension WKWebViewController: WKNavigationDelegate, WKUIDelegate {
 }
 
 extension WKWebViewController: WKScriptMessageHandler {
+    // 載入中，畫面慢慢出現
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         print("Start to load.")
     }
-    
+    // 載入失敗
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print(error.localizedDescription)
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("didReceiveMessage: \(message.name)")
-        switch message.name {
-        case "AppFunc":
-            print("AppFunc")
-            self.toOrderList()
-        default:
-            break
-        }
+//        switch message.name {
+//        case "AppFunc":
+//            print("AppFunc")
+//            self.toOrderList()
+//        default:
+//            break
+//        }
+        self.toOrderList()
     }
 }

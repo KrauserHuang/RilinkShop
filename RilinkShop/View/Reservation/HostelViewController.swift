@@ -49,7 +49,9 @@ class HostelViewController: UIViewController {
     func loadProductType() {
         StoreService.shared.getStoreType(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "") { responseTypes in
             var isFirstType = true
-            self.types = responseTypes.map {
+            let sortedTypes = responseTypes.sorted { $0.updateTime > $1.updateTime }
+            print("sortedTypes:\(sortedTypes)")
+            self.types = sortedTypes.map {
                 if isFirstType {
                     isFirstType = false
                     return StoreTypeCellModel(type: $0, isSelected: true)
@@ -57,6 +59,9 @@ class HostelViewController: UIViewController {
                     return StoreTypeCellModel(type: $0)
                 }
             }
+            print(#function)
+            print("responseTypes:\(responseTypes)")
+            print("types:\(self.types)")
             StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "") { responseStores in
                 self.stores = responseStores
                 self.filteredStores = self.stores.filter { store in

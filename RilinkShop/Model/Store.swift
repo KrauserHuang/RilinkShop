@@ -10,6 +10,7 @@ import Foundation
 struct StoreType: Codable, Hashable {
     var id: String
     var name: String
+    var updateTime: String
 }
 
 struct Store: Codable, Hashable {

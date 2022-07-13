@@ -8,6 +8,7 @@
 import UIKit
 import MBProgressHUD
 import SwiftUI
+import EzPopup
 
 class CheckoutViewController: UIViewController {
     
@@ -64,17 +65,28 @@ class CheckoutViewController: UIViewController {
     }
     
     func loadInCartItems() {
-        let indicator = MBProgressHUD.showAdded(to: self.view, animated: true)
-        indicator.isUserInteractionEnabled = false
-        indicator.show(animated: true)
-        cartTableView.isHidden = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { items in
-                self.inCartItems = items
-                self.cartTableView.isHidden = false
-                // 85: Fixed cart cell height
-                self.tableViewHeightConstraint.constant = CGFloat(items.count * 85)
-                indicator.hide(animated: true)
+//        let indicator = MBProgressHUD.showAdded(to: self.view, animated: true)
+//        indicator.isUserInteractionEnabled = false
+//        indicator.show(animated: true)
+//        cartTableView.isHidden = true
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { items in
+//                self.inCartItems = items
+//                self.cartTableView.isHidden = false
+//                // 85: Fixed cart cell height
+//                self.tableViewHeightConstraint.constant = CGFloat(items.count * 85)
+//                indicator.hide(animated: true)
+//            }
+//        }
+        HUD.showLoadingHUD(inView: self.view, text: "載入中")
+        ProductService.shared.loadShoppingCartList(id: account, pwd: password) { items in
+            DispatchQueue.global(qos: .userInitiated).async {
+                URLCache.shared.removeAllCachedResponses()
+                DispatchQueue.main.sync {
+                    HUD.hideLoadingHUD(inView: self.view)
+                    self.inCartItems = items
+                    self.tableViewHeightConstraint.constant = CGFloat(items.count * 85)
+                }
             }
         }
     }
@@ -229,7 +241,21 @@ class CheckoutViewController: UIViewController {
                 wkWebVC.urlStr = PAYMENT_API_URL + "\(response.responseMessage)"
 //                "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid=\(response.responseMessage)"
                 wkWebVC.orderNo = response.responseMessage
-                self.navigationController?.pushViewController(wkWebVC, animated: true)
+//                self.navigationController?.pushViewController(wkWebVC, animated: true)
+                let popVC = PopupViewController(contentController: wkWebVC,
+                                                popupWidth: self.view.bounds.width - 40,
+                                                popupHeight: self.view.bounds.height - 100)
+                
+                popVC.cornerRadius  = 10
+                popVC.backgroundColor = .black
+                popVC.backgroundAlpha = 1
+                popVC.shadowEnabled = true
+                popVC.canTapOutsideToDismiss = false
+                
+                self.present(popVC, animated: true) {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+//                self.present(popVC, animated: true, completion: nil)
             }
             let backToShopAction = UIAlertAction(title: "回首頁", style: .default) { action in
                 self.navigationController?.popToRootViewController(animated: true)

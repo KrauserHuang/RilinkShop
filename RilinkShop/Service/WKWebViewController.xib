@@ -28,19 +28,38 @@
                         <wkPreferences key="preferences"/>
                     </wkWebViewConfiguration>
                 </wkWebView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uim-Ds-BAt">
+                    <rect key="frame" x="327" y="60" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="uim-Ds-BAt" secondAttribute="height" multiplier="1:1" id="5q4-8R-InN"/>
+                        <constraint firstAttribute="width" constant="44" id="UIU-tQ-NOq"/>
+                    </constraints>
+                    <color key="tintColor" systemColor="labelColor"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" image="xmark" catalog="system"/>
+                    <connections>
+                        <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="aej-Fj-mhW"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qxG-pu-Cnk" secondAttribute="bottom" id="acU-sQ-D5U"/>
                 <constraint firstItem="qxG-pu-Cnk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eRV-18-RzN"/>
+                <constraint firstItem="uim-Ds-BAt" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="nNs-W2-es9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qxG-pu-Cnk" secondAttribute="trailing" id="onw-SQ-z7c"/>
                 <constraint firstItem="qxG-pu-Cnk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="y6I-Vw-ei8"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uim-Ds-BAt" secondAttribute="trailing" constant="4" id="yoi-KH-lXf"/>
             </constraints>
             <point key="canvasLocation" x="133" y="110"/>
         </view>
     </objects>
     <resources>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

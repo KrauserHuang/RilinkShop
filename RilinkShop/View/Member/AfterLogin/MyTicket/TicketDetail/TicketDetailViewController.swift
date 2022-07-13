@@ -15,16 +15,19 @@ class TicketDetailViewController: UIViewController {
     @IBOutlet weak var buyDateLabel: UILabel!
     @IBOutlet weak var orderNoLabel: UILabel!
     
-    var ticket = QRCode()
-    var product = PackageProduct()
+    var ticket = QRCode() //套票資訊
+    var product = PackageProduct() //商品資訊
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(#function)
+        print("prodcut:\(product)")
+        
         if product.qrconfirm!.count == 0 { // 代表是單獨商品
-            setView()
+            setProductView()
         } else {
-            setView1()
+            setPackageView()
         }
         // 偵測使用者是否擷取圖片或是錄影(訂閱截圖及錄影通知)
         NotificationCenter.default.addObserver(self, selector: #selector(screenshotTaken), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
@@ -58,7 +61,11 @@ class TicketDetailViewController: UIViewController {
         return nil
     }
     
-    func setView() {
+    func setProductView() {
+        
+        print(#function)
+        print("qrCode:\(ticket.qrconfirm)")
+        
         buyDateLabel.text = "購買日期：\(ticket.orderDate)"
         orderNoLabel.text = "訂單編號：\(ticket.orderNo)"
         
@@ -73,10 +80,15 @@ class TicketDetailViewController: UIViewController {
         }
     }
     
-    func setView1() {
+    func setPackageView() {
+        
+        print(#function)
+        print("qrCode:\(product.qrconfirm)")
+        
         buyDateLabel.text = "購買日期：\(ticket.orderDate)"
         orderNoLabel.text = "訂單編號：\(ticket.orderNo)"
-        if let ticketQRConfirm = ticket.qrconfirm {
+        
+        if let ticketQRConfirm = product.qrconfirm {
             qrImageView.image = generateQRCode(from: ticketQRConfirm)
         }
         
