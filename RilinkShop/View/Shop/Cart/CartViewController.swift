@@ -18,6 +18,7 @@ class CartViewController: UIViewController {
     }
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var agreeButton: UIButton!
+    @IBOutlet weak var ruleButton: UIButton!
     @IBOutlet weak var clearAllButton: UIButton!
     @IBOutlet weak var keepBuyButton: UIButton!
     @IBOutlet weak var checkoutButton: UIButton!
@@ -83,16 +84,18 @@ class CartViewController: UIViewController {
     }
     // 其餘view設定
     func configureView() {
-        clearAllButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
+        agreeButton.tintColor = Theme.customOrange
+        ruleButton.titleLabel?.tintColor = Theme.customOrange
+        clearAllButton.layer.borderColor = Theme.customOrange.cgColor
         clearAllButton.layer.borderWidth = 1
         clearAllButton.layer.cornerRadius = 10
-        clearAllButton.tintColor = UIColor(hex: "#4F846C")
-        keepBuyButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
+        clearAllButton.tintColor = Theme.customOrange
+        keepBuyButton.layer.borderColor = Theme.customOrange.cgColor
         keepBuyButton.layer.borderWidth = 1
         keepBuyButton.layer.cornerRadius = 10
-        keepBuyButton.tintColor = UIColor(hex: "#4F846C")
+        keepBuyButton.tintColor = Theme.customOrange
         checkoutButton.layer.cornerRadius = 10
-        checkoutButton.backgroundColor = UIColor(hex: "#4F846C")
+        checkoutButton.backgroundColor = Theme.customOrange
         checkoutButton.tintColor = .white
     }
     

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XSg-pa-A1Q">
-                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="gXb-CO-Jht"/>
@@ -42,7 +42,7 @@
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0br-Mj-3Sy">
-                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -80,7 +80,7 @@
         <scene sceneID="eY5-76-UpT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8em-zY-mNx" customClass="ShopNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="點數商店" image="bag" catalog="system" id="UcA-BY-d6I"/>
+                    <tabBarItem key="tabBarItem" title="點數商店" image="資產 4.png" id="UcA-BY-d6I"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2td-IY-Ikx">
@@ -89,7 +89,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="iNK-WK-bdK"/>
+                        <segue destination="qTH-m4-zGr" kind="relationship" relationship="rootViewController" id="uQi-2y-ch9"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gt-DE-dOq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -124,12 +124,112 @@
             </objects>
             <point key="canvasLocation" x="35" y="878"/>
         </scene>
+        <!--購物商城-->
+        <scene sceneID="jUD-zH-hZx">
+            <objects>
+                <viewController id="qTH-m4-zGr" customClass="ShopMainViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DsM-FZ-Hps">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2R-ei-Ecl">
+                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="T33-ZR-qln">
+                                        <rect key="frame" x="30" y="10" width="354" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="服務類型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vq2-o7-kEx">
+                                                <rect key="frame" x="0.0" y="0.0" width="69.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <color key="textColor" red="0.80046349760000002" green="0.48583424089999999" blue="0.21951380370000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPw-D1-jPn">
+                                                <rect key="frame" x="84.5" y="0.0" width="100" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="AmM-KJ-IFy"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="機車租賃"/>
+                                                <connections>
+                                                    <action selector="shopTypeButtonTapped:" destination="qTH-m4-zGr" eventType="touchUpInside" id="uMK-sH-0Wb"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cRD-NY-Ppc">
+                                                <rect key="frame" x="199.5" y="0.0" width="154.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="tintColor" red="0.80046349760000002" green="0.48583424089999999" blue="0.21951380370000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="T33-ZR-qln" secondAttribute="trailing" constant="30" id="RpW-zq-Rdf"/>
+                                    <constraint firstItem="T33-ZR-qln" firstAttribute="top" secondItem="d2R-ei-Ecl" secondAttribute="top" constant="10" id="mZs-El-nlG"/>
+                                    <constraint firstItem="T33-ZR-qln" firstAttribute="leading" secondItem="d2R-ei-Ecl" secondAttribute="leading" constant="30" id="tcR-dW-Z7k"/>
+                                    <constraint firstAttribute="height" constant="50" id="vgK-NQ-WJP"/>
+                                    <constraint firstAttribute="bottom" secondItem="T33-ZR-qln" secondAttribute="bottom" constant="10" id="zYP-Ht-u70"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kcF-ss-t4n">
+                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IPa-Y1-nju">
+                                    <size key="itemSize" width="94" height="84"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="IU6-Ts-bWJ" customClass="ShopCollectionViewCell" customModule="RilinkShop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="94" height="84"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Bww-lT-KU0">
+                                            <rect key="frame" x="0.0" y="0.0" width="94" height="84"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="94" height="84"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pBx-yj-XNL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="d2R-ei-Ecl" firstAttribute="top" secondItem="pBx-yj-XNL" secondAttribute="top" id="0Ax-H5-TLF"/>
+                            <constraint firstItem="kcF-ss-t4n" firstAttribute="leading" secondItem="pBx-yj-XNL" secondAttribute="leading" id="CJx-hd-f0b"/>
+                            <constraint firstItem="kcF-ss-t4n" firstAttribute="top" secondItem="d2R-ei-Ecl" secondAttribute="bottom" id="PLo-CT-QBy"/>
+                            <constraint firstItem="pBx-yj-XNL" firstAttribute="bottom" secondItem="kcF-ss-t4n" secondAttribute="bottom" id="bI4-cZ-f4f"/>
+                            <constraint firstItem="pBx-yj-XNL" firstAttribute="trailing" secondItem="kcF-ss-t4n" secondAttribute="trailing" id="j4Q-k8-og9"/>
+                            <constraint firstItem="pBx-yj-XNL" firstAttribute="trailing" secondItem="d2R-ei-Ecl" secondAttribute="trailing" id="nqd-3x-vNF"/>
+                            <constraint firstItem="d2R-ei-Ecl" firstAttribute="leading" secondItem="pBx-yj-XNL" secondAttribute="leading" id="uAb-9m-iLJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="購物商城" id="mac-CD-Hag"/>
+                    <connections>
+                        <outlet property="collectionView" destination="kcF-ss-t4n" id="AeQ-Fc-Pfk"/>
+                        <outlet property="searchBarTextField" destination="cRD-NY-Ppc" id="Lkn-0y-Vxs"/>
+                        <outlet property="shopTypeButton" destination="pPw-D1-jPn" id="w1J-In-B9P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q1W-Br-hto" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="944.92753623188412" y="877.90178571428567"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="bag" catalog="system" width="128" height="128"/>
         <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="資產 4.png" width="29" height="33"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

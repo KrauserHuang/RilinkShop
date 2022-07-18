@@ -135,7 +135,8 @@ extension HostelViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let controller = HostelDetailViewController()
+        let controller = StoreDetailViewController()
+//        let controller = HostelDetailViewController()
         let store = filteredStores[indexPath.row]
         controller.store = store
         controller.fixmotor = store.fixmotor

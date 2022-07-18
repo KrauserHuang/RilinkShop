@@ -200,8 +200,22 @@
                                     <color key="textColor" systemColor="systemRedColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TpF-vv-YIi">
+                                    <rect key="frame" x="366" y="16" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="TpF-vv-YIi" secondAttribute="height" multiplier="1:1" id="AaX-X8-7y5"/>
+                                        <constraint firstAttribute="height" constant="44" id="B8i-uk-Ff8"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <color key="tintColor" systemColor="labelColor"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="xmark" catalog="system"/>
+                                    <connections>
+                                        <action selector="xmarkTapped:" destination="-1" eventType="touchUpInside" id="EbQ-wa-I1M"/>
+                                    </connections>
+                                </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" systemColor="systemGray6Color"/>
                             <gestureRecognizers/>
                             <constraints>
                                 <constraint firstItem="sG3-UB-VC2" firstAttribute="leading" secondItem="FNm-Gq-N6f" secondAttribute="leading" id="1gt-uL-pW3"/>
@@ -211,6 +225,7 @@
                                 <constraint firstItem="0wn-AT-gFs" firstAttribute="top" secondItem="QqL-ZP-Aga" secondAttribute="top" id="53H-Pa-8zt"/>
                                 <constraint firstAttribute="trailing" secondItem="FCA-9K-Rws" secondAttribute="trailing" constant="16" id="7Le-Ta-0Vl"/>
                                 <constraint firstItem="0wn-AT-gFs" firstAttribute="trailing" secondItem="QqL-ZP-Aga" secondAttribute="trailing" id="8QP-ed-12P"/>
+                                <constraint firstAttribute="trailing" secondItem="TpF-vv-YIi" secondAttribute="trailing" constant="4" id="8dT-S5-k6r"/>
                                 <constraint firstItem="M8Y-jE-xkz" firstAttribute="leading" secondItem="FNm-Gq-N6f" secondAttribute="leading" id="9cQ-63-boz"/>
                                 <constraint firstItem="QqL-ZP-Aga" firstAttribute="top" secondItem="M8Y-jE-xkz" secondAttribute="bottom" constant="10" id="CFx-4y-PGe"/>
                                 <constraint firstAttribute="trailing" secondItem="3Of-qv-KEY" secondAttribute="trailing" constant="16" id="CYx-j7-Wwo"/>
@@ -246,12 +261,14 @@
                                 <constraint firstItem="vSk-tD-mPg" firstAttribute="leading" secondItem="jzl-MH-Ttl" secondAttribute="trailing" id="lTZ-5C-J4i"/>
                                 <constraint firstItem="7t8-gu-9eh" firstAttribute="top" secondItem="HXO-l5-Okh" secondAttribute="bottom" constant="10" id="m4y-HB-nDB"/>
                                 <constraint firstItem="IJp-NZ-6EI" firstAttribute="centerY" secondItem="sG3-UB-VC2" secondAttribute="centerY" id="ptC-Ee-Ldm"/>
+                                <constraint firstItem="TpF-vv-YIi" firstAttribute="top" secondItem="CFK-es-mmH" secondAttribute="top" constant="16" id="vDb-jS-7ud"/>
                                 <constraint firstItem="FCA-9K-Rws" firstAttribute="leading" secondItem="CFK-es-mmH" secondAttribute="leading" constant="16" id="xCd-uE-Sgt"/>
                                 <constraint firstItem="7t8-gu-9eh" firstAttribute="leading" secondItem="HXO-l5-Okh" secondAttribute="leading" id="xXq-Wy-ZYt"/>
                                 <constraint firstItem="Vg6-ZZ-aXo" firstAttribute="leading" secondItem="CFK-es-mmH" secondAttribute="leading" constant="16" id="ya8-Sd-Sam"/>
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="CFK-es-mmH" firstAttribute="bottom" secondItem="xR9-l9-SIs" secondAttribute="bottom" id="EnJ-Xq-4Ad"/>
                         <constraint firstItem="CFK-es-mmH" firstAttribute="trailing" secondItem="xR9-l9-SIs" secondAttribute="trailing" id="Gbu-xr-lAo"/>
@@ -277,11 +294,15 @@
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

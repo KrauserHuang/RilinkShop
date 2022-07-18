@@ -11,7 +11,7 @@
         <scene sceneID="R7a-xb-IGe">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1Rh-ed-G1O" customClass="MemberNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="會員中心" image="person" catalog="system" id="mRf-Rz-cU7"/>
+                    <tabBarItem key="tabBarItem" title="會員中心" image="資產6.png" id="mRf-Rz-cU7"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vSc-yy-qij">
@@ -26,6 +26,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="person" catalog="system" width="128" height="117"/>
+        <image name="資產6.png" width="30" height="32"/>
     </resources>
 </document>

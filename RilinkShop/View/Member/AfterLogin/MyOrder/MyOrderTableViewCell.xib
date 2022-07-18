@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -43,7 +41,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6q-V4-UQz">
-                        <rect key="frame" x="240" y="71" width="96" height="40"/>
+                        <rect key="frame" x="244" y="71" width="96" height="40"/>
                         <color key="backgroundColor" red="0.6148123741" green="0.1017967239" blue="0.1002308354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="96" id="MQ5-gV-ulV"/>
@@ -65,7 +63,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDo-oV-aTq">
-                        <rect key="frame" x="240" y="19" width="96" height="40"/>
+                        <rect key="frame" x="244" y="19" width="96" height="40"/>
                         <color key="backgroundColor" red="0.6148123741" green="0.1017967239" blue="0.1002308354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="YW6-YX-yjF"/>
@@ -102,8 +100,8 @@
                 <outlet property="orderDate" destination="5ZG-hk-t0V" id="FzS-wn-Clz"/>
                 <outlet property="orderMoney" destination="4At-IG-btU" id="dGG-fe-TQZ"/>
                 <outlet property="orderNo" destination="MYS-1L-m8x" id="Ka1-VH-Szr"/>
-                <outlet property="orderState" destination="ks1-vI-8jr" id="Rv3-Y3-Z2j"/>
                 <outlet property="payImmediateButton" destination="IDo-oV-aTq" id="MjW-ZD-GP5"/>
+                <outlet property="payStatusLabel" destination="ks1-vI-8jr" id="Rv3-Y3-Z2j"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="105.80357142857143"/>
         </tableViewCell>

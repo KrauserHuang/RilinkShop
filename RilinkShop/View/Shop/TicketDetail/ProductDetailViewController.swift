@@ -18,6 +18,7 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var substractButton: UIButton!
     @IBOutlet weak var stepperOuterView: UIView!
+    @IBOutlet weak var descriptionView: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var buyNowButton: UIButton!
@@ -72,26 +73,26 @@ class ProductDetailViewController: UIViewController {
         stepperOuterView.backgroundColor = .systemGray6
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
         // 加減
-        addButton.tintColor = UIColor(hex: "#4F846C")
-        addButton.backgroundColor = UIColor(hex: "#D6E5E2")
-        addButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
-        addButton.layer.borderWidth = 1
+        addButton.tintColor = .white
+        addButton.backgroundColor = Theme.customOrange
         addButton.layer.cornerRadius = addButton.frame.height / 2
-        substractButton.tintColor = UIColor(hex: "#4F846C")
-        substractButton.backgroundColor = UIColor(hex: "#D6E5E2")
-        substractButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
-        substractButton.layer.borderWidth = 1
+        substractButton.tintColor = .white
+        substractButton.backgroundColor = Theme.customOrange
         substractButton.layer.cornerRadius = substractButton.frame.height / 2
         // 中間的數字
         itemNumberLabel.backgroundColor = .clear
+        // 商品敘述View
+        descriptionView.layer.shadowColor = UIColor.black.cgColor
+        descriptionView.layer.shadowOpacity = 0.2
+        descriptionView.layer.shadowOffset = CGSize(width: 2, height: -2)
         // 下面兩個button
         addToCartButton.layer.cornerRadius = 10
         addToCartButton.layer.borderWidth = 1
-        addToCartButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
-        addToCartButton.tintColor = UIColor(hex: "#4F846C")
+        addToCartButton.layer.borderColor = Theme.customOrange.cgColor
+        addToCartButton.tintColor = Theme.customOrange
         buyNowButton.layer.cornerRadius = 10
         buyNowButton.tintColor = .white
-        buyNowButton.backgroundColor = UIColor(hex: "#4F846C")
+        buyNowButton.backgroundColor = Theme.customOrange
     }
     
     func showItemInfo() {
@@ -129,12 +130,6 @@ class ProductDetailViewController: UIViewController {
                 self.nameLabel.text = package.productName
                 self.costLabel.text = "$\(package.productPrice)"
                 self.descriptionLabel.text = package.productDescription
-                
-                print(#function)
-                print("stock:\(self.stock)")
-                print("name:\(self.nameLabel.text)")
-                print("cost:\(self.costLabel.text)")
-                print("descriptionLabel:\(self.descriptionLabel.text)")
                 
                 let imageURLString = SHOP_ROOT_URL + package.productPicture
                 self.ticketImageView.setImage(imageURL: imageURLString)

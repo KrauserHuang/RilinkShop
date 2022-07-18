@@ -19,3 +19,7 @@ class Tool{
     let customGreen = UIColor(hex: "4F846C")
     
 }
+
+class Theme {
+    static let customOrange = UIColor(red: 222/255, green: 119/255, blue: 58/255, alpha: 1)
+}

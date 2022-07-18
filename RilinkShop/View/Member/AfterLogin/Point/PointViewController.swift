@@ -38,26 +38,32 @@ class PointViewController: UIViewController {
     }
     
     func getPoint() {
-        let accountType = "0"
-//        sleep(1)
-        UserService.shared.getPersonalData(account: account, pw: password, accountType: accountType) { success, response in
-            DispatchQueue.global(qos: .userInitiated).async {
-                URLCache.shared.removeAllCachedResponses()
-                DispatchQueue.main.async {
-                    
-                    guard success else {
-                        let errorMsg = response as! String
-                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
-                        return
-                    }
-                    
-                    if let user = response as? User {
-                        self.point.text = user.point
-                    }
-                }
-            }
-        }
+        point.text = Global.personalData?.point ?? "0"
+//        let accountType = "0"
+        HUD.showLoadingHUD(inView: self.view, text: "載入點數紀錄中")
+//        UserService.shared.getPersonalData(account: account, pw: password, accountType: accountType) { success, response in
+//            DispatchQueue.global(qos: .userInitiated).async {
+//                URLCache.shared.removeAllCachedResponses()
+//                DispatchQueue.main.async {
+//
+//                    HUD.hideLoadingHUD(inView: self.view)
+//
+//                    guard success else {
+//                        let errorMsg = response as! String
+//                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+//                        return
+//                    }
+//
+//                    if let user = response as? User {
+//                        self.point.text = user.point
+//                    }
+//                }
+//            }
+//        }
         PointService.shared.fetchPointHistory(id: account, pwd: password) { success, response in
+            
+            HUD.hideLoadingHUD(inView: self.view)
+            
             guard success else {
                 let errorMsg = response as! String
                 Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
@@ -69,9 +75,12 @@ class PointViewController: UIViewController {
             self.emptyView.isHidden = self.points.count != 0
         }
     }
-
+    @IBAction func xmarkButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
 }
-
+// MARK: - UITableViewDelegate/DataSource
 extension PointViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return points.count

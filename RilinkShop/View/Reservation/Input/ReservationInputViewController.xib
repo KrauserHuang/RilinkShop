@@ -56,7 +56,7 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa" borderStyle="roundedRect" placeholder="請輸入您的姓名或暱稱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9rd-2t-kcg">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入您的姓名或暱稱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9rd-2t-kcg">
                                                     <rect key="frame" x="0.0" y="27" width="343" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="SIx-rN-jZi"/>
@@ -86,13 +86,13 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa" borderStyle="roundedRect" placeholder="請輸入您的手機號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-Lv-Lxk">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入您的手機號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3uo-Lv-Lxk">
                                                     <rect key="frame" x="0.0" y="27" width="343" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="8Kx-VR-Vka"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                         </stackView>
@@ -116,7 +116,7 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa" borderStyle="roundedRect" placeholder="請輸入您的車牌號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nro-q7-4hs">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入您的車牌號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nro-q7-4hs">
                                                     <rect key="frame" x="0.0" y="27" width="343" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="XB1-dS-flx"/>
@@ -146,7 +146,7 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa" borderStyle="roundedRect" placeholder="請輸入您的車款與車型(例:SYM Jet、gogoro S1...)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D46-Bl-a5D">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入您的車款與車型(例:SYM Jet、gogoro S1...)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D46-Bl-a5D">
                                                     <rect key="frame" x="0.0" y="27" width="343" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="Kru-VO-DfZ"/>
@@ -219,7 +219,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaa" borderStyle="roundedRect" placeholder="請說明車況，以利維修作業進行" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DCd-0g-FZS">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請說明車況，以利維修作業進行" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DCd-0g-FZS">
                                                     <rect key="frame" x="0.0" y="27" width="343" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="RsG-1Q-XkS"/>

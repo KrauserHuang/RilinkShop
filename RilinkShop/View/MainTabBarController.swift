@@ -16,7 +16,8 @@ class MainTabBarController: UITabBarController {
 //        MyKeyChain.setPassword("simon07801")
         
         delegate = self
-        self.tabBar.tintColor = UIColor(hex: "4F846C")
+//        self.tabBar.tintColor = UIColor(hex: "4F846C")
+        tabBar.tintColor = Theme.customOrange
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +81,7 @@ class MainTabBarController: UITabBarController {
     }
     // MARK: - 跳會員首頁(MemberCenterTableViewController)
     func showRoot(animated: Bool) {
-        guard let memberCenterTVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterTableViewController") as? MemberCenterTableViewController else {
+        guard let memberCenterTVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as? MemberCenterViewController else {
             print("showRoot失敗")
             return
         }
@@ -96,7 +97,7 @@ class MainTabBarController: UITabBarController {
 //            let memberNavC = self.selectedViewController as? MemberNavigationViewController
 //            memberNavC?.popToRootViewController(animated: false)
 //            if let memberCenterTVC =
-//            viewControllers = [memberCenterTVC]
+            viewControllers = [memberCenterTVC]
         }
     }
 }

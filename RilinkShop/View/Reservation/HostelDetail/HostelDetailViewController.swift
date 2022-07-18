@@ -33,9 +33,10 @@ class HostelDetailViewController: UIViewController {
     
     func configureView() {
         reservationButton.setTitle("預約維修", for: .normal)
-        reservationButton.backgroundColor = UIColor(hex: "#4F846C")
+        reservationButton.backgroundColor = Theme.customOrange
         reservationButton.tintColor = .white
         reservationButton.layer.cornerRadius = 10
+        hostelImageView.layer.cornerRadius = 10
         
         if fixmotor == "0" {
             reservationButton.isHidden = true

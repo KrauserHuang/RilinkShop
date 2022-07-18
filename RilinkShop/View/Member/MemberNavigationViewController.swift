@@ -58,7 +58,12 @@ class MemberNavigationViewController: UINavigationController {
     // MARK: - 跳會員首頁(MemberCenterTableViewController)
     func showRoot(animated: Bool) {
         
-        guard let memberCenterTVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterTableViewController") as? MemberCenterTableViewController else {
+//        guard let memberCenterTVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterTableViewController") as? MemberCenterTableViewController else {
+//            print("showRoot失敗")
+//            return
+//        }
+        //取得Storyboard MemberCenterTableViewController其下面的ViewController(MemberCenterViewController)
+        guard let memberCenterVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as? MemberCenterViewController else {
             print("showRoot失敗")
             return
         }
@@ -67,9 +72,9 @@ class MemberNavigationViewController: UINavigationController {
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         } else {
-            memberCenterTVC.delegate = self
+//            memberCenterVC.delegate = self
 //            pushViewController(memberCenterTVC, animated: animated)
-            viewControllers = [memberCenterTVC]
+            viewControllers = [memberCenterVC]
         }
     }
     // MARK: - 跳登入首頁(LoginViewController_1)
@@ -109,6 +114,8 @@ class MemberNavigationViewController: UINavigationController {
                     Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
                     Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
                     
+                    MemberCenterViewController.newRPoint = Global.personalData?.point ?? "0"
+                    
                     if Global.personalData?.cmdImageFile == nil || Global.personalData?.cmdImageFile == "" {
                         return
                     }
@@ -135,9 +142,6 @@ extension MemberNavigationViewController: MemberCenterTableViewControllerDelegat
     }
     
     func myTicket(_ viewController: MemberCenterTableViewController) {
-//        let vc = SignUpViewController()
-//        viewController.navigationController?.pushViewController(vc, animated: true)
-        
         toTicketViewController()
     }
     

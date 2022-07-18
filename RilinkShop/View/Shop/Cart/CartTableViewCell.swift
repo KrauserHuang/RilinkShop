@@ -39,7 +39,7 @@ class CartTableViewCell: UITableViewCell {
         contentView.layer.borderColor = UIColor.systemGray.cgColor
         contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 10
-        configureView()
+        initCell()
     }
     
     override func layoutSubviews() {
@@ -54,31 +54,28 @@ class CartTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureView() {
+    func initCell() {
+        totalCostLabel.textColor = Theme.customOrange
         // stepper外圍
         stepperOuterView.backgroundColor = .systemGray6
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
         // 加減
-        addButton.tintColor = UIColor(hex: "#4F846C")
-        addButton.backgroundColor = UIColor(hex: "#D6E5E2")
-        addButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
-        addButton.layer.borderWidth = 1
+//        addButton.tintColor = UIColor(hex: "#4F846C")
+        addButton.tintColor = .white
+//        addButton.backgroundColor = UIColor(hex: "#D6E5E2")
+        addButton.backgroundColor = Theme.customOrange
+//        addButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
+//        addButton.layer.borderWidth = 1
         addButton.layer.cornerRadius = addButton.frame.height / 2
-        substractButton.tintColor = UIColor(hex: "#4F846C")
-        substractButton.backgroundColor = UIColor(hex: "#D6E5E2")
-        substractButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
-        substractButton.layer.borderWidth = 1
+//        substractButton.tintColor = UIColor(hex: "#4F846C")
+        substractButton.tintColor = .white
+//        substractButton.backgroundColor = UIColor(hex: "#D6E5E2")
+        substractButton.backgroundColor = Theme.customOrange
+//        substractButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
+//        substractButton.layer.borderWidth = 1
         substractButton.layer.cornerRadius = substractButton.frame.height / 2
         // 中間的數字
         itemNumberLabel.backgroundColor = .clear
-    }
-    
-    func configure() {
-        productImageView.image = UIImage(named: "nft")
-        nameLabel.text = "商品名稱：阿姆斯特朗旋風噴射阿姆斯特朗砲"
-        costLabel.text = "售價：1000"
-        numberLabel.text = "X 1"
-        totalCostLabel.text = "小記：$29,980"
     }
     
     func configure(with model: Product) {
@@ -97,16 +94,9 @@ class CartTableViewCell: UITableViewCell {
     }
     @IBAction func itemNumberStepper(_ sender: UIButton) {
         if sender.tag == 0 { // 點minus
-//            if itemNumber > minValue {
-//                itemNumber -= stepValue
-//            }
             delegate?.didSubstractQty(self)
         } else if sender.tag == 1 { // 點plus
-//            if itemNumber < stock {
-//                itemNumber += stepValue
-//            }
             delegate?.didAddQty(self)
         }
     }
-    
 }

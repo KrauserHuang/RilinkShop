@@ -44,7 +44,7 @@ class HostelCheckoutViewController: UIViewController {
     
     func configureView() {
         appointmentCheckoutButton.setTitle("預約確認", for: .normal)
-        appointmentCheckoutButton.backgroundColor = UIColor(hex: "#4F846C")
+        appointmentCheckoutButton.backgroundColor = Theme.customOrange
         appointmentCheckoutButton.tintColor = .white
         appointmentCheckoutButton.layer.cornerRadius = 10
         

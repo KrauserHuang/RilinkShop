@@ -278,7 +278,6 @@ extension TopPageViewController: UICollectionViewDelegate, UICollectionViewDataS
         case ticketCollectionView:
             let package = packages[indexPath.item]
             let packageInfoVC = PackageInfoViewController()
-//            let packa
             packageInfoVC.package = package
             navigationController?.pushViewController(packageInfoVC, animated: true)
         default:

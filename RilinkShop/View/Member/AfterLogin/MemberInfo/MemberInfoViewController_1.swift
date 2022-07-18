@@ -39,7 +39,7 @@ class MemberInfoViewController_1: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureView()
+        initUI()
         configureKeyboard()
         getUserDate()
     }
@@ -57,11 +57,15 @@ class MemberInfoViewController_1: UIViewController {
             maleButton.isSelected = true
         }
     }
-    func configureView() {
-        saveEditButton.backgroundColor = UIColor(hex: "4F846C")
+    func initUI() {
+//        saveEditButton.backgroundColor = UIColor(hex: "4F846C")
+        saveEditButton.backgroundColor = .white
         saveEditButton.setTitle("儲存變更", for: .normal)
-        saveEditButton.setTitleColor(.white, for: .normal)
+//        saveEditButton.setTitleColor(.white, for: .normal)
+        saveEditButton.setTitleColor(.black, for: .normal)
 //        saveEditButton.layer.cornerRadius = 20
+        saveEditButton.layer.borderWidth = 1
+        saveEditButton.layer.borderColor = Theme.customOrange.cgColor
         saveEditButton.layer.cornerRadius = saveEditButton.frame.height / 2
         saveEditButton.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -120,6 +124,10 @@ class MemberInfoViewController_1: UIViewController {
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
+    }
+    // MARK: - Close the controller
+    @IBAction func xmarkTapped(_ sender: UIButton) {
+        dismiss(animated: true)
     }
     // MARK: - BirthdayTextField上覆蓋一個button來觸發DatePicker
     @IBAction func showDatePicker(_ sender: UIButton) {
@@ -225,7 +233,7 @@ class MemberInfoViewController_1: UIViewController {
                     }
                     
                     Alert.showMessage(title: "", msg: "修改成功", vc: self) {
-                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true, completion: nil)
                         self.delegate?.memberInfoDidUpdate(self)
                     }
                 }

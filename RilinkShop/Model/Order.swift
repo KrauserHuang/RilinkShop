@@ -27,6 +27,7 @@ struct Order: Codable {
     var payStatus: String = ""
     var bonusPoint: String = ""
     var orderStatus: String = ""
+    var assigntype: String = ""
     
 //    var productList: [List]? = []
 //    var packageList: [List]? = []
@@ -47,7 +48,7 @@ struct Order: Codable {
         case payStatus = "pay_status"
         case bonusPoint = "bonus_point"
         case orderStatus = "order_status"
-        
+        case assigntype
 //        case productList = "product_list"
 //        case packageList = "package_list"
     }

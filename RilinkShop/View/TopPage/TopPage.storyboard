@@ -12,6 +12,165 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Top Page Main View Controller-->
+        <scene sceneID="1rJ-Vk-ONT">
+            <objects>
+                <viewController id="gRt-zq-V0D" customClass="TopPageMainViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cub-6p-la2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sRk-mE-3a5">
+                                <rect key="frame" x="16" y="88" width="382" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活動資訊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwF-1r-ZzS">
+                                        <rect key="frame" x="0.0" y="0.0" width="65.5" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="SVW-zl-xXX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iqA-vC-0wM">
+                                        <rect key="frame" x="75.5" y="19.5" width="306.5" height="1"/>
+                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Tmz-kU-HUl"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OOO-Ap-ed7">
+                                <rect key="frame" x="0.0" y="128" width="414" height="263"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="263" id="WB7-0V-K0Q"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cLQ-eR-TUq">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CeI-QK-BqB" customClass="HostelCollectionViewCell" customModule="RilinkShop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="67.5" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FmI-xz-iIU">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="910-KS-u3f">
+                                <rect key="frame" x="0.0" y="391" width="414" height="120"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HEq-6l-jjh">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TyI-R4-cMR">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="yNE-9R-RfC">
+                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zqq-bR-swy">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </collectionViewCellContentView>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="HEq-6l-jjh" firstAttribute="leading" secondItem="910-KS-u3f" secondAttribute="leading" id="1KR-4h-3mI"/>
+                                    <constraint firstAttribute="height" constant="120" id="Aal-Ke-pDJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="HEq-6l-jjh" secondAttribute="trailing" id="XmY-Rg-fIH"/>
+                                    <constraint firstItem="HEq-6l-jjh" firstAttribute="top" secondItem="910-KS-u3f" secondAttribute="top" id="mPQ-1w-9NA"/>
+                                    <constraint firstAttribute="bottom" secondItem="HEq-6l-jjh" secondAttribute="bottom" id="pnE-MA-cC9"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4yw-bZ-cX2">
+                                <rect key="frame" x="0.0" y="551" width="414" height="262"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5wv-DV-egy">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="7eB-y2-DxV">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Bso-AQ-Id0">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qFO-fN-n1a">
+                                <rect key="frame" x="16" y="511" width="382" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="優惠方案" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fye-0C-CiE">
+                                        <rect key="frame" x="0.0" y="0.0" width="65.5" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="ZiC-cB-vCo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXU-VD-m86">
+                                        <rect key="frame" x="75.5" y="19.5" width="306.5" height="1"/>
+                                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="JLu-oU-aiW"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="192-4Z-J93"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstItem="OOO-Ap-ed7" firstAttribute="leading" secondItem="192-4Z-J93" secondAttribute="leading" id="81d-D5-l5f"/>
+                            <constraint firstItem="192-4Z-J93" firstAttribute="trailing" secondItem="OOO-Ap-ed7" secondAttribute="trailing" id="DZv-DD-2bN"/>
+                            <constraint firstItem="sRk-mE-3a5" firstAttribute="leading" secondItem="192-4Z-J93" secondAttribute="leading" constant="16" id="ErM-nN-RnP"/>
+                            <constraint firstItem="qFO-fN-n1a" firstAttribute="leading" secondItem="192-4Z-J93" secondAttribute="leading" constant="16" id="GZT-z8-1Hj"/>
+                            <constraint firstItem="qFO-fN-n1a" firstAttribute="top" secondItem="910-KS-u3f" secondAttribute="bottom" id="GeC-g5-ahI"/>
+                            <constraint firstItem="OOO-Ap-ed7" firstAttribute="top" secondItem="sRk-mE-3a5" secondAttribute="bottom" id="I4D-5j-Zef"/>
+                            <constraint firstItem="192-4Z-J93" firstAttribute="trailing" secondItem="4yw-bZ-cX2" secondAttribute="trailing" id="Jr0-np-jgx"/>
+                            <constraint firstItem="sRk-mE-3a5" firstAttribute="top" secondItem="192-4Z-J93" secondAttribute="top" id="MOx-Ne-4iu"/>
+                            <constraint firstItem="910-KS-u3f" firstAttribute="top" secondItem="OOO-Ap-ed7" secondAttribute="bottom" id="QPe-z4-7G5"/>
+                            <constraint firstItem="192-4Z-J93" firstAttribute="trailing" secondItem="sRk-mE-3a5" secondAttribute="trailing" constant="16" id="RIg-g5-J3o"/>
+                            <constraint firstItem="192-4Z-J93" firstAttribute="bottom" secondItem="4yw-bZ-cX2" secondAttribute="bottom" id="SWG-xm-mF0"/>
+                            <constraint firstItem="4yw-bZ-cX2" firstAttribute="leading" secondItem="192-4Z-J93" secondAttribute="leading" id="ark-LV-7So"/>
+                            <constraint firstItem="4yw-bZ-cX2" firstAttribute="top" secondItem="qFO-fN-n1a" secondAttribute="bottom" id="cIq-2B-NJh"/>
+                            <constraint firstItem="192-4Z-J93" firstAttribute="trailing" secondItem="910-KS-u3f" secondAttribute="trailing" id="lYE-f5-6M3"/>
+                            <constraint firstItem="192-4Z-J93" firstAttribute="trailing" secondItem="qFO-fN-n1a" secondAttribute="trailing" constant="16" id="oBS-u3-Adr"/>
+                            <constraint firstItem="910-KS-u3f" firstAttribute="leading" secondItem="192-4Z-J93" secondAttribute="leading" id="wro-6m-pLv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vTZ-gK-awn"/>
+                    <connections>
+                        <outlet property="optionCollectionView" destination="HEq-6l-jjh" id="iw6-M1-vLi"/>
+                        <outlet property="packageCollectionView" destination="4yw-bZ-cX2" id="nZ0-b1-vgj"/>
+                        <outlet property="storeCollectionView" destination="OOO-Ap-ed7" id="dfi-v6-I5f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sGg-ly-KZJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="936" y="-622"/>
+        </scene>
         <!--首頁-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -21,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJu-Wi-81H">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFL-oF-Tj9">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="720"/>
@@ -414,101 +573,11 @@
             </objects>
             <point key="canvasLocation" x="1657.9710144927537" y="93.75"/>
         </scene>
-        <!--Main Page View Controller-->
-        <scene sceneID="SM6-fg-VYQ">
-            <objects>
-                <viewController id="lq0-Yh-2T4" customClass="MainPageViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="MIZ-YU-ZiY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMu-ys-LaX" customClass="HostelView" customModule="RilinkShop" customModuleProvider="target">
-                                <rect key="frame" x="16" y="119" width="382" height="263"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage" translatesAutoresizingMaskIntoConstraints="NO" id="Elb-fK-bEO">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="263"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="382" id="EzD-Is-ptU"/>
-                                            <constraint firstAttribute="height" constant="263" id="PI7-AM-PPM"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Elb-fK-bEO" secondAttribute="bottom" id="52y-Ur-tbu"/>
-                                    <constraint firstItem="Elb-fK-bEO" firstAttribute="leading" secondItem="mMu-ys-LaX" secondAttribute="leading" id="CuA-bq-vWk"/>
-                                    <constraint firstItem="Elb-fK-bEO" firstAttribute="top" secondItem="mMu-ys-LaX" secondAttribute="top" id="Ddb-Rt-Kc6"/>
-                                    <constraint firstAttribute="trailing" secondItem="Elb-fK-bEO" secondAttribute="trailing" id="ddk-wB-HDa"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="hostelViewTapped:" destination="lq0-Yh-2T4" eventType="valueChanged" id="a0c-40-RZf"/>
-                                </connections>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wYM-ZH-oKd">
-                                <rect key="frame" x="16" y="432" width="382" height="70"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="98" translatesAutoresizingMaskIntoConstraints="NO" id="lyw-BH-Ckx">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="31"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOT-hG-ond">
-                                                <rect key="frame" x="0.0" y="0.0" width="142" height="31"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="減碳套票"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2us-6c-er4">
-                                                <rect key="frame" x="240" y="0.0" width="142" height="31"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="減碳套票"/>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="98" translatesAutoresizingMaskIntoConstraints="NO" id="M34-3R-B0l">
-                                        <rect key="frame" x="0.0" y="39" width="382" height="31"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s82-vi-LYL">
-                                                <rect key="frame" x="0.0" y="0.0" width="142" height="31"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="減碳套票"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAq-lE-0oj">
-                                                <rect key="frame" x="240" y="0.0" width="142" height="31"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="減碳套票"/>
-                                                <connections>
-                                                    <action selector="lowCarbTicketButtonTapped:" destination="lq0-Yh-2T4" eventType="touchUpInside" id="UAk-aQ-bhL"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6R3-Yv-YNg"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="mMu-ys-LaX" firstAttribute="centerX" secondItem="MIZ-YU-ZiY" secondAttribute="centerX" id="9HQ-Md-nNs"/>
-                            <constraint firstItem="wYM-ZH-oKd" firstAttribute="top" secondItem="mMu-ys-LaX" secondAttribute="bottom" constant="50" id="JtH-45-B9J"/>
-                            <constraint firstItem="wYM-ZH-oKd" firstAttribute="leading" secondItem="mMu-ys-LaX" secondAttribute="leading" id="X7i-Io-99K"/>
-                            <constraint firstItem="wYM-ZH-oKd" firstAttribute="trailing" secondItem="mMu-ys-LaX" secondAttribute="trailing" id="n8g-Dg-gUU"/>
-                            <constraint firstItem="mMu-ys-LaX" firstAttribute="top" secondItem="6R3-Yv-YNg" secondAttribute="top" constant="75" id="sjW-J3-u3c"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="osj-iQ-OiR"/>
-                    <connections>
-                        <outlet property="hostelImageView" destination="Elb-fK-bEO" id="T6k-SL-DPh"/>
-                        <outlet property="hostelView" destination="mMu-ys-LaX" id="jzV-AK-UBb"/>
-                        <outlet property="lowCarbTicket" destination="sAq-lE-0oj" id="CqD-oW-n87"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dRy-0O-1Y1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="937" y="786"/>
-        </scene>
         <!--首頁-->
         <scene sceneID="jgP-64-iqG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oXc-rP-wDQ" customClass="TopPageNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首頁" image="house" catalog="system" id="Yne-BY-giq"/>
+                    <tabBarItem key="tabBarItem" title="首頁" image="資產 3.png" id="Yne-BY-giq"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ejl-tU-ig4">
@@ -517,7 +586,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="ziR-p8-sdY"/>
+                        <segue destination="gRt-zq-V0D" kind="relationship" relationship="rootViewController" id="66V-5T-lBc"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DrF-DU-exc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -527,13 +596,18 @@
     </scenes>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
-        <image name="house" catalog="system" width="128" height="106"/>
         <image name="minus" catalog="system" width="128" height="24"/>
         <image name="nft" width="1037" height="1046"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="testImage" width="2864" height="1778"/>
+        <image name="資產 3.png" width="34" height="33"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

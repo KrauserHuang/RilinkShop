@@ -231,8 +231,8 @@ public struct BlendImageProcessor: ImageProcessor {
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> KFCrossPlatformImage? {
         switch item {
-        case .image(let image):
-            return image.kf.scaled(to: options.scaleFactor)
+        case .image(let imageView):
+            return imageView.kf.scaled(to: options.scaleFactor)
                         .kf.image(withBlendMode: blendMode, alpha: alpha, backgroundColor: backgroundColor)
         case .data:
             return (DefaultImageProcessor.default |> self).process(item: item, options: options)

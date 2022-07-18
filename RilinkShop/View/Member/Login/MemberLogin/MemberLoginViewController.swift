@@ -28,9 +28,9 @@ class MemberLoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         tool.makeRoundedCornersButton(button: loginButton)
-        loginButton.backgroundColor = tool.customGreen
+        loginButton.backgroundColor = Theme.customOrange
         tool.makeRoundedCornersButton(button: signupButton)
-        signupButton.backgroundColor = tool.customGreen
+        signupButton.backgroundColor = Theme.customOrange
         
         hideKeyBoard()
         configureTextField()

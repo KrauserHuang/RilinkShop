@@ -16,7 +16,7 @@ class MyOrderTableViewCell: UITableViewCell {
     @IBOutlet weak var orderNo: UILabel!
     @IBOutlet weak var orderDate: UILabel!
     @IBOutlet weak var orderMoney: UILabel!
-    @IBOutlet weak var orderState: UILabel!
+    @IBOutlet weak var payStatusLabel: UILabel!
     @IBOutlet weak var detailButton: UIButton!
     @IBOutlet weak var payImmediateButton: UIButton!
     @IBAction func detailAction(_ sender: UIButton) {
@@ -42,21 +42,26 @@ class MyOrderTableViewCell: UITableViewCell {
         orderNo.text = "訂單編號：\(model.orderNo)"
         orderDate.text = "訂單日期：\(model.orderDate)"
         orderMoney.text = "訂單金額：\(model.orderAmount)"
-//        orderState.text = "訂單狀態：\(model.orderStatus)"
-//        orderState.text = "付款狀態：\(model.payStatus)"
+//        payStatusLabel.text = "訂單狀態：\(model.orderStatus)"
+//        payStatusLabel.text = "付款狀態：\(model.payStatus)"
         // 付款狀態
         switch model.payStatus {
         case "0":
-            orderState.text = "付款狀態：未付款" // 未付款
+            payStatusLabel.text = "付款狀態：未付款" // 未付款
             payImmediateButton.isHidden = false
         case "-1":
-            orderState.text = "付款狀態：付款中"
+            payStatusLabel.text = "付款狀態：付款中"
         case "1":
-            orderState.text = "付款狀態：付款完成"
+            if model.assigntype == "0" {
+                payStatusLabel.text = "付款狀態：付款完成"
+            } else {
+                payStatusLabel.text = "付款狀態：店家派發"
+            }
+            payStatusLabel.text = "付款狀態：付款完成"
             payImmediateButton.alpha = 0
             payImmediateButton.isUserInteractionEnabled = false
         default:
-            orderState.text = "付款狀態：處理中"
+            payStatusLabel.text = "付款狀態：處理中"
             payImmediateButton.isHidden = false
         }
     }

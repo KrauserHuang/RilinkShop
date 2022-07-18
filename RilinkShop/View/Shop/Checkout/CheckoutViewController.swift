@@ -65,19 +65,6 @@ class CheckoutViewController: UIViewController {
     }
     
     func loadInCartItems() {
-//        let indicator = MBProgressHUD.showAdded(to: self.view, animated: true)
-//        indicator.isUserInteractionEnabled = false
-//        indicator.show(animated: true)
-//        cartTableView.isHidden = true
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { items in
-//                self.inCartItems = items
-//                self.cartTableView.isHidden = false
-//                // 85: Fixed cart cell height
-//                self.tableViewHeightConstraint.constant = CGFloat(items.count * 85)
-//                indicator.hide(animated: true)
-//            }
-//        }
         HUD.showLoadingHUD(inView: self.view, text: "載入中")
         ProductService.shared.loadShoppingCartList(id: account, pwd: password) { items in
             DispatchQueue.global(qos: .userInitiated).async {
@@ -157,11 +144,11 @@ class CheckoutViewController: UIViewController {
     
     func configureView() {
         backButton.layer.borderWidth = 1
-        backButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
+        backButton.layer.borderColor = Theme.customOrange.cgColor
         backButton.layer.cornerRadius = 10
-        backButton.tintColor = UIColor(hex: "#4F846C")
+        backButton.tintColor = Theme.customOrange
         
-        checkoutButton.backgroundColor = UIColor(hex: "#4F846C")
+        checkoutButton.backgroundColor = Theme.customOrange
         checkoutButton.tintColor = .white
         checkoutButton.layer.cornerRadius = 10
     }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="StoreCollectionViewCell" customModule="RilinkShop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="298" height="379"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="298" height="379"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4jk-Y2-aIU">
+                        <rect key="frame" x="10" y="293" width="278" height="76"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Gogoro嘉義興業東" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qa0-g2-DGn">
+                                <rect key="frame" x="0.0" y="0.0" width="278" height="25.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地址：嘉義市東區" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBX-pL-FgQ">
+                                <rect key="frame" x="0.0" y="25.5" width="278" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="電話：05-216-8222" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-P5-4nl">
+                                <rect key="frame" x="0.0" y="50.5" width="278" height="25.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.80046349760000002" green="0.48583424089999999" blue="0.21951380370000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testImage" translatesAutoresizingMaskIntoConstraints="NO" id="JUN-Ac-DtQ">
+                        <rect key="frame" x="10" y="10" width="278" height="278"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="JUN-Ac-DtQ" secondAttribute="height" multiplier="1:1" id="fxN-Yv-56m"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="JUN-Ac-DtQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="92V-mC-IoC"/>
+                <constraint firstItem="4jk-Y2-aIU" firstAttribute="trailing" secondItem="JUN-Ac-DtQ" secondAttribute="trailing" id="OFp-hr-LdI"/>
+                <constraint firstAttribute="trailing" secondItem="JUN-Ac-DtQ" secondAttribute="trailing" constant="10" id="PAX-Ye-S4z"/>
+                <constraint firstItem="JUN-Ac-DtQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="Rc6-Cd-JJA"/>
+                <constraint firstItem="4jk-Y2-aIU" firstAttribute="top" secondItem="JUN-Ac-DtQ" secondAttribute="bottom" constant="5" id="bDm-1E-MOS"/>
+                <constraint firstItem="4jk-Y2-aIU" firstAttribute="leading" secondItem="JUN-Ac-DtQ" secondAttribute="leading" id="bEW-VF-J5T"/>
+                <constraint firstItem="JUN-Ac-DtQ" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="eqP-tw-Rhb"/>
+                <constraint firstAttribute="bottom" secondItem="4jk-Y2-aIU" secondAttribute="bottom" constant="10" id="zj3-hT-NCg"/>
+            </constraints>
+            <size key="customSize" width="298" height="379"/>
+            <connections>
+                <outlet property="imageView" destination="JUN-Ac-DtQ" id="zgC-Sg-bXn"/>
+                <outlet property="locationLabel" destination="JBX-pL-FgQ" id="Z6R-PL-tqY"/>
+                <outlet property="nameLabel" destination="Qa0-g2-DGn" id="BVc-y3-qgj"/>
+                <outlet property="phoneLabel" destination="kFD-P5-4nl" id="un4-lI-ici"/>
+            </connections>
+            <point key="canvasLocation" x="317.39130434782612" y="202.56696428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="testImage" width="2864" height="1778"/>
+    </resources>
+</document>

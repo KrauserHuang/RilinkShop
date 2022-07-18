@@ -18,9 +18,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fgK-Xt-y1i">
-                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="41"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="sUI-jj-BwI"/>
+                                    <constraint firstAttribute="height" constant="40" id="sUI-jj-BwI"/>
                                 </constraints>
                                 <segments>
                                     <segment title="可使用"/>
@@ -31,17 +31,30 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1O-S0-d3k" userLabel="Container View[0]">
-                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                                 <connections>
                                     <segue destination="fgM-tb-Ulq" kind="embed" id="UDj-ZT-6mA"/>
                                 </connections>
                             </containerView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4h-kb-wc4" userLabel="Container View[1]">
-                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                                 <connections>
                                     <segue destination="oeo-dd-JmU" kind="embed" id="zD9-KL-Q53"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjL-Mu-Gsn">
+                                <rect key="frame" x="366" y="60" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="CjL-Mu-Gsn" secondAttribute="height" multiplier="1:1" id="OKs-6d-MUX"/>
+                                    <constraint firstAttribute="height" constant="44" id="pJ7-CZ-ZWV"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="xmarkButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Eud-6V-Eda"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -50,11 +63,13 @@
                             <constraint firstItem="L1O-S0-d3k" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="2yA-do-j2V"/>
                             <constraint firstItem="fgK-Xt-y1i" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="KCk-A2-bMF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="R4h-kb-wc4" secondAttribute="trailing" id="KnR-ZJ-0RF"/>
+                            <constraint firstItem="CjL-Mu-Gsn" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="L4A-Yt-dys"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CjL-Mu-Gsn" secondAttribute="trailing" constant="4" id="OQT-p9-m6G"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="L1O-S0-d3k" secondAttribute="trailing" id="Och-t0-TuY"/>
                             <constraint firstItem="L1O-S0-d3k" firstAttribute="top" secondItem="fgK-Xt-y1i" secondAttribute="bottom" id="Sqd-G8-avg"/>
                             <constraint firstItem="R4h-kb-wc4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="anf-mH-JyW"/>
+                            <constraint firstItem="fgK-Xt-y1i" firstAttribute="top" secondItem="CjL-Mu-Gsn" secondAttribute="bottom" id="gwj-Z6-qXH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="L1O-S0-d3k" secondAttribute="bottom" id="idK-kb-HVN"/>
-                            <constraint firstItem="fgK-Xt-y1i" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="s6Y-af-jBn"/>
                             <constraint firstItem="R4h-kb-wc4" firstAttribute="top" secondItem="fgK-Xt-y1i" secondAttribute="bottom" id="usT-r3-SNz"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="R4h-kb-wc4" secondAttribute="bottom" id="vIp-zI-chU"/>
                         </constraints>
@@ -75,11 +90,11 @@
             <objects>
                 <viewController id="fgM-tb-Ulq" customClass="UsableTicketViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AuA-3Y-bXA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="718"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="124" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KrW-ro-FMy">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <sections/>
                             </tableView>
@@ -138,11 +153,11 @@
             <objects>
                 <viewController id="oeo-dd-JmU" customClass="UsedTicketViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tPL-rZ-vV5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="718"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SAL-E6-Kpa">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <sections/>
                             </tableView>
@@ -198,6 +213,10 @@
     </scenes>
     <resources>
         <image name="data-searching" width="100" height="100.5"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

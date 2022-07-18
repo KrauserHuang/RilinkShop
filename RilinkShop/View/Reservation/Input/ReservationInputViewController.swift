@@ -37,7 +37,7 @@ class ReservationInputViewController: UIViewController {
     
     func configureView() {
         nextStepButton.setTitle("下一步", for: .normal)
-        nextStepButton.backgroundColor = UIColor(hex: "#4F846C")
+        nextStepButton.backgroundColor = Theme.customOrange
         nextStepButton.tintColor = .white
         nextStepButton.layer.cornerRadius = 10
     }

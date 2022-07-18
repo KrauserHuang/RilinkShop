@@ -120,6 +120,20 @@
                         </label>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdK-KS-A4g">
+                    <rect key="frame" x="366" y="60" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="R2a-hh-8Mm"/>
+                        <constraint firstAttribute="width" secondItem="QdK-KS-A4g" secondAttribute="height" multiplier="1:1" id="mVI-g9-j8Y"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="tintColor" systemColor="labelColor"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" image="xmark" catalog="system"/>
+                    <connections>
+                        <action selector="xmarkButtonTapped:" destination="-1" eventType="touchUpInside" id="aml-T4-5oy"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -133,12 +147,14 @@
                 <constraint firstItem="wtj-a4-Wjm" firstAttribute="top" secondItem="gNV-JK-pNl" secondAttribute="bottom" constant="10" id="GHU-gk-xqz"/>
                 <constraint firstItem="wtj-a4-Wjm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Gnc-Ha-zsP"/>
                 <constraint firstItem="gNV-JK-pNl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="GzG-bd-Woj"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QdK-KS-A4g" secondAttribute="trailing" constant="4" id="MIg-6B-GBf"/>
                 <constraint firstItem="t2M-3z-Yvo" firstAttribute="leading" secondItem="0sv-OS-E7o" secondAttribute="trailing" constant="5" id="OPg-9H-GJ0"/>
                 <constraint firstItem="0sv-OS-E7o" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="Pj8-WX-YVO"/>
                 <constraint firstItem="X8R-xh-xnz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="QmB-XY-l1Y"/>
                 <constraint firstItem="udu-bu-ovs" firstAttribute="bottom" secondItem="t2M-3z-Yvo" secondAttribute="bottom" constant="-4" id="WM3-nH-iAs"/>
                 <constraint firstItem="1hr-u1-6zi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WgC-R0-qus"/>
                 <constraint firstItem="z4a-08-oxa" firstAttribute="centerY" secondItem="0sv-OS-E7o" secondAttribute="centerY" id="aUL-KG-Li6"/>
+                <constraint firstItem="QdK-KS-A4g" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="abU-yw-9Jk"/>
                 <constraint firstItem="udu-bu-ovs" firstAttribute="leading" secondItem="t2M-3z-Yvo" secondAttribute="trailing" constant="5" id="eCk-Nr-xAd"/>
                 <constraint firstItem="1hr-u1-6zi" firstAttribute="top" secondItem="X8R-xh-xnz" secondAttribute="bottom" constant="24" id="fRU-1n-KuJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="wtj-a4-Wjm" secondAttribute="bottom" constant="10" id="hWc-K6-BDa"/>
@@ -157,6 +173,10 @@
     <resources>
         <image name="data-searching" width="100" height="100.5"/>
         <image name="point2" width="24" height="24"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

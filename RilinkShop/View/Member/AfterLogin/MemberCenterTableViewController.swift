@@ -52,8 +52,6 @@ class MemberCenterTableViewController: UITableViewController {
     
     func uploadImage() {
         if let image = userImage.image {
-            
-//            let resizeImage = image.imageResized(to: <#T##CGSize#>)
             HUD.showLoadingHUD(inView: self.view, text: "")
             UserService.shared.uploadImage(imgtitle: Global.ACCOUNT, cmdImageFile: image) { success, response in
                 DispatchQueue.global(qos: .userInitiated).async {

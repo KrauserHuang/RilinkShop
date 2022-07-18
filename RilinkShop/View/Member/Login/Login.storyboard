@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="Ybb-q1-uUg">
             <objects>
-                <viewController id="daT-08-Ja5" customClass="LoginViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="daT-08-Ja5" customClass="LoginViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hY4-WV-oui">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,7 +92,7 @@
                                                     <constraint firstAttribute="height" constant="45" id="ITI-34-qFI"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密碼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMD-Kq-G7F">
                                                 <rect key="frame" x="32" y="108" width="29" height="17"/>

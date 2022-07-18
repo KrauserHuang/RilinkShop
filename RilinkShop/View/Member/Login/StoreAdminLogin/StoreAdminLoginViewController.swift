@@ -35,7 +35,7 @@ class StoreAdminLoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         tool.makeRoundedCornersButton(button: loginButton)
-        loginButton.backgroundColor = tool.customGreen
+        loginButton.backgroundColor = Theme.customOrange
         
         storePicker.toolBarDelegate = self
         storePicker.delegate = self
