@@ -71,8 +71,7 @@ class ShopMainViewController: UIViewController {
         navigationItems()
         configureCollectionView()
         loadProductType()
-        
-//        searchBar.delegate = self
+        configureKeyboard()
     }
     
     func navigationItems() {
@@ -85,6 +84,15 @@ class ShopMainViewController: UIViewController {
     @objc private func toCartViewController() {
         let vc = CartViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func configureKeyboard() {
+        searchBarTextField.delegate = self
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func configureCollectionView() {
@@ -252,7 +260,7 @@ extension ShopMainViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(280.0))
+                                               heightDimension: .absolute(260.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         
         let section = NSCollectionLayoutSection(group: group)
@@ -262,8 +270,9 @@ extension ShopMainViewController {
     }
 }
 
-extension ShopMainViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+extension ShopMainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

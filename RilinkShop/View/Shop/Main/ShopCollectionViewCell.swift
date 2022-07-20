@@ -30,7 +30,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
         switch model {
         case .product(let product):
             nameLabel.text = product.product_name
-            costLabel.text = "$\(product.product_price)"
+            costLabel.text = "NT$：\(product.product_price)"
             
             if let imageURL = URL(string: SHOP_ROOT_URL + product.product_picture) {
                 imageView.isHidden = false
@@ -41,7 +41,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
             }
         case .package(let package):
             nameLabel.text = package.productName
-            costLabel.text = "$\(package.productPrice)"
+            costLabel.text = "NT$：\(package.productPrice)"
             
             if let imageURL = URL(string: SHOP_ROOT_URL + package.productPicture) {
                 imageView.isHidden = false

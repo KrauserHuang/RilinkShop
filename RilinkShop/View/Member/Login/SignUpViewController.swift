@@ -40,7 +40,7 @@ class SignUpViewController: UIViewController {
         configureKeyboard()
         
         tool.makeRoundedCornersButton(button: signUpButton)
-        signUpButton.backgroundColor = tool.customGreen
+        signUpButton.backgroundColor = Theme.customOrange
         
         accountLabel.text = Global.ACCOUNT
     }

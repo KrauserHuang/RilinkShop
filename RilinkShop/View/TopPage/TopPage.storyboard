@@ -65,10 +65,10 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="910-KS-u3f">
-                                <rect key="frame" x="0.0" y="391" width="414" height="120"/>
+                                <rect key="frame" x="0.0" y="391" width="414" height="100"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HEq-6l-jjh">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TyI-R4-cMR">
                                             <size key="itemSize" width="128" height="128"/>
@@ -91,15 +91,15 @@
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstItem="HEq-6l-jjh" firstAttribute="leading" secondItem="910-KS-u3f" secondAttribute="leading" id="1KR-4h-3mI"/>
-                                    <constraint firstAttribute="height" constant="120" id="Aal-Ke-pDJ"/>
+                                    <constraint firstAttribute="height" constant="100" id="Aal-Ke-pDJ"/>
                                     <constraint firstAttribute="trailing" secondItem="HEq-6l-jjh" secondAttribute="trailing" id="XmY-Rg-fIH"/>
                                     <constraint firstItem="HEq-6l-jjh" firstAttribute="top" secondItem="910-KS-u3f" secondAttribute="top" id="mPQ-1w-9NA"/>
                                     <constraint firstAttribute="bottom" secondItem="HEq-6l-jjh" secondAttribute="bottom" id="pnE-MA-cC9"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4yw-bZ-cX2">
-                                <rect key="frame" x="0.0" y="551" width="414" height="262"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="531" width="414" height="282"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5wv-DV-egy">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -118,7 +118,7 @@
                                 </cells>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qFO-fN-n1a">
-                                <rect key="frame" x="16" y="511" width="382" height="40"/>
+                                <rect key="frame" x="16" y="491" width="382" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="優惠方案" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fye-0C-CiE">
                                         <rect key="frame" x="0.0" y="0.0" width="65.5" height="40"/>
@@ -577,7 +577,7 @@
         <scene sceneID="jgP-64-iqG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oXc-rP-wDQ" customClass="TopPageNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首頁" image="資產 3.png" id="Yne-BY-giq"/>
+                    <tabBarItem key="tabBarItem" title="首頁" image="資產 63.png" id="Yne-BY-giq"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ejl-tU-ig4">
@@ -599,7 +599,7 @@
         <image name="minus" catalog="system" width="128" height="24"/>
         <image name="nft" width="1037" height="1046"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="資產 3.png" width="34" height="33"/>
+        <image name="資產 63.png" width="72" height="69"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

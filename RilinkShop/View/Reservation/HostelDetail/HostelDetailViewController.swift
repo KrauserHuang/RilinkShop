@@ -10,10 +10,17 @@ import UIKit
 class HostelDetailViewController: UIViewController {
     
     @IBOutlet weak var hostelImageView: UIImageView!
+    @IBOutlet weak var nameView: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var openTimeView: UIView!
+    @IBOutlet weak var openTimeBGView: UIView!
     @IBOutlet weak var openTimeLabel: UILabel!
     @IBOutlet weak var phoneNoLabel: UILabel!
+    @IBOutlet weak var descriptionView: UIView!
+    @IBOutlet weak var descriptionBGView: UIView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var reservationButton: UIButton!
+
     
     var store = Store()
     var fixmotor: String?
@@ -26,17 +33,41 @@ class HostelDetailViewController: UIViewController {
     
     func showStoreInfo() {
         hostelImageView.setImage(imageURL: SHOP_ROOT_URL + store.storePicture)
+        nameLabel.text = store.storeName
         openTimeLabel.text = "營業時間：\(store.storeOpentime)"
         phoneNoLabel.text = "電話：\(store.storePhone)"
         descriptionLabel.text = store.storeDescript
     }
     
     func configureView() {
+        
+        nameView.layer.cornerRadius = 10
+        nameView.layer.shadowColor = UIColor.black.cgColor
+        nameView.layer.shadowOpacity = 0.2
+        nameView.layer.shadowOffset = CGSize(width: 2, height: -2)
+        
+//        openTimeView.layer.cornerRadius = 10
+//        openTimeView.layer.shadowColor = UIColor.black.cgColor
+//        openTimeView.layer.shadowOpacity = 0.2
+//        openTimeView.layer.shadowOffset = CGSize(width: 2, height: -2)
+        
+        descriptionView.layer.cornerRadius = 10
+        descriptionView.layer.shadowColor = UIColor.black.cgColor
+        descriptionView.layer.shadowOpacity = 0.2
+        descriptionView.layer.shadowOffset = CGSize(width: 2, height: -2)
+        
         reservationButton.setTitle("預約維修", for: .normal)
         reservationButton.backgroundColor = Theme.customOrange
         reservationButton.tintColor = .white
         reservationButton.layer.cornerRadius = 10
-        hostelImageView.layer.cornerRadius = 10
+        
+        openTimeBGView.clipsToBounds = true
+        openTimeBGView.layer.cornerRadius = 10
+        openTimeBGView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        
+        descriptionBGView.clipsToBounds = true
+        descriptionBGView.layer.cornerRadius = 10
+        descriptionBGView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         
         if fixmotor == "0" {
             reservationButton.isHidden = true

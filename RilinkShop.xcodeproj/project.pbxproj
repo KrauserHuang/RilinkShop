@@ -122,6 +122,12 @@
 		4FA96136282B62AB00BB22EB /* ProductInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FA96134282B62AB00BB22EB /* ProductInfoCell.xib */; };
 		4FA96138282BAF5C00BB22EB /* UNQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA96137282BAF5C00BB22EB /* UNQRCode.swift */; };
 		4FA9613A282BB0AD00BB22EB /* QRCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA96139282BB0AD00BB22EB /* QRCodeService.swift */; };
+		4FA9CBA528868EF2008849B9 /* messageImage_1657175213247.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4FA9CBA028868EF2008849B9 /* messageImage_1657175213247.jpeg */; };
+		4FA9CBA628868EF2008849B9 /* 資產 63.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FA9CBA128868EF2008849B9 /* 資產 63.png */; };
+		4FA9CBA728868EF2008849B9 /* 資產 65.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FA9CBA228868EF2008849B9 /* 資產 65.png */; };
+		4FA9CBA828868EF2008849B9 /* 資產 69.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FA9CBA328868EF2008849B9 /* 資產 69.png */; };
+		4FA9CBA928868EF2008849B9 /* 資產 67.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FA9CBA428868EF2008849B9 /* 資產 67.png */; };
+		4FA9CBAB2886A419008849B9 /* 店家說明&營業時間.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FA9CBAA2886A419008849B9 /* 店家說明&營業時間.png */; };
 		4FAE563E283DB90C004EA6B8 /* MemberInfoViewController_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAE563C283DB90B004EA6B8 /* MemberInfoViewController_1.swift */; };
 		4FAE563F283DB90C004EA6B8 /* MemberInfoViewController_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FAE563D283DB90C004EA6B8 /* MemberInfoViewController_1.xib */; };
 		4FB038F92838C59A00A69875 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB038F82838C59A00A69875 /* DatePicker.swift */; };
@@ -483,6 +489,12 @@
 		4FA96134282B62AB00BB22EB /* ProductInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductInfoCell.xib; sourceTree = "<group>"; };
 		4FA96137282BAF5C00BB22EB /* UNQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNQRCode.swift; sourceTree = "<group>"; };
 		4FA96139282BB0AD00BB22EB /* QRCodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeService.swift; sourceTree = "<group>"; };
+		4FA9CBA028868EF2008849B9 /* messageImage_1657175213247.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = messageImage_1657175213247.jpeg; sourceTree = "<group>"; };
+		4FA9CBA128868EF2008849B9 /* 資產 63.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "資產 63.png"; sourceTree = "<group>"; };
+		4FA9CBA228868EF2008849B9 /* 資產 65.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "資產 65.png"; sourceTree = "<group>"; };
+		4FA9CBA328868EF2008849B9 /* 資產 69.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "資產 69.png"; sourceTree = "<group>"; };
+		4FA9CBA428868EF2008849B9 /* 資產 67.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "資產 67.png"; sourceTree = "<group>"; };
+		4FA9CBAA2886A419008849B9 /* 店家說明&營業時間.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "店家說明&營業時間.png"; sourceTree = "<group>"; };
 		4FAE563C283DB90B004EA6B8 /* MemberInfoViewController_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoViewController_1.swift; sourceTree = "<group>"; };
 		4FAE563D283DB90C004EA6B8 /* MemberInfoViewController_1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberInfoViewController_1.xib; sourceTree = "<group>"; };
 		4FB038F82838C59A00A69875 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
@@ -1100,6 +1112,12 @@
 		4FE12D8A287FFF41001230FE /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4FA9CBAA2886A419008849B9 /* 店家說明&營業時間.png */,
+				4FA9CBA028868EF2008849B9 /* messageImage_1657175213247.jpeg */,
+				4FA9CBA128868EF2008849B9 /* 資產 63.png */,
+				4FA9CBA228868EF2008849B9 /* 資產 65.png */,
+				4FA9CBA428868EF2008849B9 /* 資產 67.png */,
+				4FA9CBA328868EF2008849B9 /* 資產 69.png */,
 				4FB18F7E288433BD001DE6ED /* search.png */,
 				4FB8BB6D2881412E00A8DE3E /* LOGO.png */,
 				4FB8BB6228813AFE00A8DE3E /* 維修保養.png */,
@@ -1686,6 +1704,7 @@
 				4FE12E71287FFF42001230FE /* taiwan_pay_logo 2.png in Resources */,
 				4FE12E0C287FFF41001230FE /* jko_pay_logo 2.png in Resources */,
 				4FE12E5E287FFF42001230FE /* jko_logo 2.png in Resources */,
+				4FA9CBA628868EF2008849B9 /* 資產 63.png in Resources */,
 				4FE12E47287FFF42001230FE /* small_logo.png in Resources */,
 				4F0A29DB282A13B00000FFB6 /* PackageInfoViewController.xib in Resources */,
 				57A5ECF1278572BF00245DB0 /* MemberCenterTableViewController.storyboard in Resources */,
@@ -1696,6 +1715,8 @@
 				4FE12E4E287FFF42001230FE /* ccard_logo.png in Resources */,
 				4FE12E73287FFF42001230FE /* test_img_002 2.jpg in Resources */,
 				4FE12E70287FFF42001230FE /* 02 2.png in Resources */,
+				4FA9CBAB2886A419008849B9 /* 店家說明&營業時間.png in Resources */,
+				4FA9CBA728868EF2008849B9 /* 資產 65.png in Resources */,
 				4FE12E38287FFF42001230FE /* ic_positioning_back.png in Resources */,
 				4FE12E44287FFF42001230FE /* img_t01 2.png in Resources */,
 				571A9A622787EBAD00E8440D /* QuestionViewController.xib in Resources */,
@@ -1735,6 +1756,7 @@
 				4FE12E67287FFF42001230FE /* 01_code 2.png in Resources */,
 				4FE12E7C287FFF42001230FE /* 04 2.png in Resources */,
 				4FE12E33287FFF41001230FE /* r_point.png in Resources */,
+				4FA9CBA828868EF2008849B9 /* 資產 69.png in Resources */,
 				5789AE78278C0D8500B15225 /* UsableTableViewCell.xib in Resources */,
 				4FE12E51287FFF42001230FE /* ic_positioning 2.png in Resources */,
 				571A9A4E2786BD7800E8440D /* Nearby.storyboard in Resources */,
@@ -1754,6 +1776,7 @@
 				4FE12E1B287FFF41001230FE /* test_img_004.jpg in Resources */,
 				4FE12E31287FFF41001230FE /* btn_ft03.png in Resources */,
 				4F025B602834DFFA00DC0101 /* ForgotPasswordViewController_2.xib in Resources */,
+				4FA9CBA528868EF2008849B9 /* messageImage_1657175213247.jpeg in Resources */,
 				4FA96136282B62AB00BB22EB /* ProductInfoCell.xib in Resources */,
 				4FE12E2B287FFF41001230FE /* icon_logo.png in Resources */,
 				5789AE7F278C23F200B15225 /* Coupon.storyboard in Resources */,
@@ -1789,6 +1812,7 @@
 				4FB4E6A4287FBA9E00DBA71E /* TopPageStoreCollectionViewCell.xib in Resources */,
 				4FE12E80287FFF42001230FE /* btn_ft02 2.png in Resources */,
 				4FE12E62287FFF42001230FE /* btn_couponget 2.png in Resources */,
+				4FA9CBA928868EF2008849B9 /* 資產 67.png in Resources */,
 				4F6D17032816896A00772FF3 /* CheckoutViewController.xib in Resources */,
 				4FE12E2F287FFF41001230FE /* btn_increase.png in Resources */,
 				57A5ECD4278422E000245DB0 /* Main.storyboard in Resources */,
@@ -2172,7 +2196,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -2206,7 +2230,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;

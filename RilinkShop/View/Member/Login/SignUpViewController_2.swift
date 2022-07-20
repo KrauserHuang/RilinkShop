@@ -29,9 +29,9 @@ class SignUpViewController_2: UIViewController {
         
         configureKeyboard()
         tool.makeRoundedCornersButton(button: submitButton)
-        submitButton.backgroundColor = tool.customGreen
+        submitButton.backgroundColor = Theme.customOrange
         tool.makeRoundedCornersButton(button: resendButton)
-        resendButton.backgroundColor = tool.customGreen
+        resendButton.backgroundColor = Theme.customOrange
         passwordTextField.isSecureTextEntry = true
         passwordAgainTextField.isSecureTextEntry = true
     }

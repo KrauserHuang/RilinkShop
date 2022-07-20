@@ -18,7 +18,7 @@ class ForgotPasswordViewController: UIViewController {
         getVertify.backgroundColor = .white
         getVertify.layer.borderWidth = 2
         getVertify.layer.borderColor = tool.customOrange.cgColor
-        getVertify.tintColor = tool.customOrange
+        getVertify.tintColor = Theme.customOrange
     }
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var passwordTF2: UITextField!
@@ -62,9 +62,9 @@ class ForgotPasswordViewController: UIViewController {
 
         hidekeyboard()
         tool.makeRoundedCornersButton(button: getVertify)
-        getVertify.backgroundColor = tool.customOrange
+        getVertify.backgroundColor = Theme.customOrange
         tool.makeRoundedCornersButton(button: sendButton)
-        sendButton.backgroundColor = tool.customOrange
+        sendButton.backgroundColor = Theme.customOrange
         sendButton.tintColor = .white
         
     }

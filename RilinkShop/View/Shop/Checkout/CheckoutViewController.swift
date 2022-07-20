@@ -55,8 +55,6 @@ class CheckoutViewController: UIViewController {
         showInfo()
         configureKeyboard()
         setPointView()
-//        print(#function)
-//        print("point1:\(point)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +78,7 @@ class CheckoutViewController: UIViewController {
     // MARK: - 設定填寫使用點數的textField accessoryView，還有判斷式
     func setPointView() {
         let textDone = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(inputDone))
+//        textDone.tintColor = .black
         let tool = UIToolbar()
         tool.sizeToFit()
         tool.items = [textDone]

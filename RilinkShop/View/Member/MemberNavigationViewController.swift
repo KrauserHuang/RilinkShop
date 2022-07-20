@@ -79,12 +79,11 @@ class MemberNavigationViewController: UINavigationController {
     }
     // MARK: - 跳登入首頁(LoginViewController_1)
     func showLogIn(){
+//        let vc = MemberCenterViewController()
         let controller = LoginViewController_1()
         controller.delegate = self
         setViewControllers([controller], animated: false)
-        
-//        controller.modalPresentationStyle = .fullScreen
-//        present(controller, animated: true, completion: nil)
+//        setViewControllers([vc], animated: false)
         user = User()
     }
     // MARK: - 進會員首頁前要載會員資料
@@ -98,7 +97,9 @@ class MemberNavigationViewController: UINavigationController {
         
         let accountType = "0"
         sleep(1)
-        UserService.shared.getPersonalData(account: Global.ACCOUNT, pw: Global.ACCOUNT_PASSWORD, accountType: accountType) { success, response in
+        UserService.shared.getPersonalData(account: Global.ACCOUNT,
+                                           pw: Global.ACCOUNT_PASSWORD,
+                                           accountType: accountType) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
@@ -108,8 +109,8 @@ class MemberNavigationViewController: UINavigationController {
                     }
                     
                     Global.personalData = response as? User
-                    print(#function)
-                    print(Global.personalData)
+//                    print(#function)
+//                    print(Global.personalData)
                     
                     Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
                     Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""

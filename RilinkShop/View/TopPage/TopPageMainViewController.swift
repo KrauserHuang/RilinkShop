@@ -56,6 +56,9 @@ class TopPageMainViewController: UIViewController {
                                      selector: #selector(storeCollectionViewAutoScroll),
                                      userInfo: nil,
                                      repeats: true)
+        updateStoreSnapshot()
+        updatePackageSnapshot()
+        updateOptionSnapshot()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,9 +84,6 @@ class TopPageMainViewController: UIViewController {
         let leftNavigationItem = UIBarButtonItem(customView: imageView)
         navigationItem.leftBarButtonItem = leftNavigationItem
         
-//        let cartImageView = UIImageView()
-//        cartImageView.image = UIImage(systemName: "cart")
-//        cartImageView.contentMode = .scaleAspectFit
         let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
                                                  style: .plain,
                                                  target: self,
@@ -219,7 +219,7 @@ extension TopPageMainViewController {
         
         return layout
     }
-    // MARK: - Option
+    // MARK: - Option DiffableDataSource/Snapshot/Compositional Layout
     func configureOptionDataSource() -> OptionDataSource {
         let dataSource = OptionDataSource(collectionView: optionCollectionView) { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageOptionCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageOptionCollectionViewCell
@@ -242,14 +242,13 @@ extension TopPageMainViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
         
         let section = NSCollectionLayoutSection(group: group)
-//        section.orthogonalScrollingBehavior = .continuous
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout

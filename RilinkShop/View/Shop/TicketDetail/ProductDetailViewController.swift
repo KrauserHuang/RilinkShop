@@ -69,6 +69,7 @@ class ProductDetailViewController: UIViewController {
     }
     
     func configureView() {
+        ticketImageView.layer.cornerRadius = 10
         // stepper外圍
         stepperOuterView.backgroundColor = .systemGray6
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
@@ -101,7 +102,7 @@ class ProductDetailViewController: UIViewController {
             ProductService.shared.loadProductInfo(id: account, pw: password, no: product.product_no) { productResponse in
                 self.stock = Int(productResponse.product_stock)!
                 self.nameLabel.text = productResponse.product_name
-                self.costLabel.text = "$\(productResponse.product_price)"
+                self.costLabel.text = "NT$：\(productResponse.product_price)"
                 self.descriptionLabel.text = productResponse.product_description
 
                 if let imageURL = URL(string: SHOP_ROOT_URL + productResponse.product_picture) { // test
@@ -128,7 +129,7 @@ class ProductDetailViewController: UIViewController {
                 
                 self.stock = Int(package.productStock)!
                 self.nameLabel.text = package.productName
-                self.costLabel.text = "$\(package.productPrice)"
+                self.costLabel.text = "NT$：\(package.productPrice)"
                 self.descriptionLabel.text = package.productDescription
                 
                 let imageURLString = SHOP_ROOT_URL + package.productPicture

@@ -51,11 +51,11 @@ class LoginViewController_1: UIViewController {
         hideKeyBoard()
         getStoreID()
         tool.makeRoundedCornersButton(button: storeIDButton)
-        storeIDButton.backgroundColor = tool.customGreen
+        storeIDButton.backgroundColor = Theme.customOrange
         tool.makeRoundedCornersButton(button: loginButton)
-        loginButton.backgroundColor = tool.customGreen
+        loginButton.backgroundColor = Theme.customOrange
         tool.makeRoundedCornersButton(button: signupButton)
-        signupButton.backgroundColor = tool.customGreen
+        signupButton.backgroundColor = Theme.customOrange
         
         accountTextField.delegate = self
         passwordTextField.delegate = self

@@ -26,7 +26,7 @@ class ForgotPasswordViewController_1: UIViewController {
         configureKeyboard()
         
         tool.makeRoundedCornersButton(button: submitButton)
-        submitButton.backgroundColor = tool.customGreen
+        submitButton.backgroundColor = Theme.customOrange
     }
     // MARK: - Keyboard
     func configureKeyboard() {

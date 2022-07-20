@@ -28,7 +28,7 @@ class SignUpViewController_1: UIViewController {
     
     func configureView() {
         submitButton.layer.cornerRadius = submitButton.bounds.size.height / 2
-        submitButton.backgroundColor = tool.customGreen
+        submitButton.backgroundColor = Theme.customOrange
     }
     // MARK: - Agree Button切換
     @IBAction func agreeAction(_ sender: UIButton) {

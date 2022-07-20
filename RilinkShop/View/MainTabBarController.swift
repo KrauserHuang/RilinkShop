@@ -6,41 +6,34 @@
 //
 
 import UIKit
+import SwiftUI
 
 class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        MyKeyChain.setAccount("0911838460")
-//        MyKeyChain.setPassword("simon07801")
-        
         delegate = self
-//        self.tabBar.tintColor = UIColor(hex: "4F846C")
         tabBar.tintColor = Theme.customOrange
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        MyKeyChain.setAccount("0911838460")
-//        MyKeyChain.setPassword("simon07801")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         print(#function)
-        print(UserService.shared.didLogin)
-        print(MyKeyChain.getAccount())
-        print(MyKeyChain.getBossAccount())
+        print("didLogin:\(UserService.shared.didLogin)")
+        print("userAccount:\(MyKeyChain.getAccount())")
+        print("adminAccount:\(MyKeyChain.getBossAccount())")
         
         if UserService.shared.didLogin {
             tryLogIn()
         } else {
-//            HUD.showLoadingHUD(inView: self.view, text: "")
             UserService.shared.renewUser = {
-//                HUD.hideLoadingHUD(inView: self.view)
                 self.tryLogIn()
             }
         }
@@ -56,27 +49,13 @@ class MainTabBarController: UITabBarController {
         } else if MyKeyChain.getBossAccount() == nil,
                   MyKeyChain.getAccount() != nil {
             // 登入使用者頁面
-            print("跑來這裡")
             selectedIndex = 0
             Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
             Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
         }
         else if MyKeyChain.getAccount() == nil,
                   MyKeyChain.getBossAccount() == nil {
-//            let vc = LoginViewController_1()
             self.selectedIndex = 3
-//            let memberNavC = self.selectedViewController as? MemberNavigationViewController
-//            memberNavC?.popToRootViewController(animated: true)
-//            if let vc = memberNavC?.viewControllers.compactMap({ $0 as? LoginViewController_1
-//            }).first {
-//                vc.delegate = self
-//                memberNavC?.setViewControllers([vc], animated: true)
-////                vc.modalPresentationStyle = .fullScreen
-////                present(vc, animated: true, completion: nil)
-//            }
-//            vc.delegate = self
-//            vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true, completion: nil)
         }
     }
     // MARK: - 跳會員首頁(MemberCenterTableViewController)
@@ -105,6 +84,16 @@ class MainTabBarController: UITabBarController {
 extension MainTabBarController:  UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         tryLogIn()
+//        if Global.ACCOUNT == "" {
+//            Alert.showMessage(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
+//            return
+//        }
+        guard Global.ACCOUNT != "" else {
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self) {
+                tabBar.isUserInteractionEnabled = false
+            }
+            return
+        }
         guard let MainTabViewControllers = self.viewControllers else {
             print("no valid viewControllers in MainTabBarController.")
             return

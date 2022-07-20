@@ -111,7 +111,7 @@ class PackageInfoViewController: UIViewController {
         packageImageView.setImage(imageURL: imageURLString)
         stock = Int(package.productStock)!
         packageNameLabel.text = package.productName
-        packageCostLabel.text = package.productPrice
+        packageCostLabel.text = "NT$：\(package.productPrice)"
         descriptionLabel.text = package.productDescription
         
         if self.stock == 0 {
