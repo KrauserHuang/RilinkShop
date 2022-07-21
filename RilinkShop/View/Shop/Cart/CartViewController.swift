@@ -128,11 +128,11 @@ class CartViewController: UIViewController {
         if let controllers = navigationController?.viewControllers {
             for controller in controllers {
                 switch controller {
-                case is ShopViewController:
+                case is ShopMainViewController:
                     navigationController?.popToViewController(controller, animated: true)
-                case is TopPageViewController:
+                case is TopPageMainViewController:
                     navigationController?.popToViewController(controller, animated: true)
-                case is MemberCenterTableViewController:
+                case is MemberCenterViewController:
                     navigationController?.popToViewController(controller, animated: true)
                 default:
                     break

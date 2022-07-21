@@ -8,6 +8,16 @@
 import UIKit
 import DropDown
 
+enum Item: Hashable {
+    case product(Product)
+    case package(Package)
+}
+
+struct CategoryCellModel {
+    var category: Category
+    var isSelected: Bool = false
+}
+
 class ShopMainViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -63,8 +73,12 @@ class ShopMainViewController: UIViewController {
         
         tabBarController?.hidesBottomBarWhenPushed = false
         tabBarController?.tabBar.isHidden = false
-        collectionView.contentInsetAdjustmentBehavior = .automatic
+//        collectionView.contentInsetAdjustmentBehavior = .automatic
 //        initUI()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissKeyboard()
     }
     
     func initUI() {
@@ -89,6 +103,8 @@ class ShopMainViewController: UIViewController {
     func configureKeyboard() {
         searchBarTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        tap.delegate = self
         view.addGestureRecognizer(tap)
     }
     @objc func dismissKeyboard() {
@@ -119,6 +135,9 @@ class ShopMainViewController: UIViewController {
                     return CategoryCellModel(category: $0)
                 }
             }
+            if let firstType = self.categories.first {
+                self.shopTypeButton.setTitle(firstType.category.productTypeName, for: .normal)
+            }
             self.loadProductList()
         }
     }
@@ -130,30 +149,19 @@ class ShopMainViewController: UIViewController {
             HUD.hideLoadingHUD(inView: self.view)
             let wholeProducts = responseProducts
             self.products = wholeProducts
-            print(#function)
-//            print("------------------------------------")
-//            print("products:\(wholeProducts)")
-//            print("productsCount:\(wholeProducts.count)")
-//            print("------------------------------------")
+            
             ProductService.shared.loadPackageList(id: self.account,
                                                   pwd: self.password) { packagesResponse in
                 let wholePackages = packagesResponse
                 self.packages = wholePackages
-//                print("------------------------------------")
-//                print("packages:\(wholePackages)")
-//                print("packagesCount:\(wholePackages.count)")
-//                print("------------------------------------")
+                
                 self.items.removeAll()
                 for product in self.products {
-                    self.items.append(Item.product(product: product))
+                    self.items.append(Item.product(product))
                 }
                 for package in self.packages {
-                    self.items.append(Item.package(package: package))
+                    self.items.append(Item.package(package))
                 }
-//                print("------------------------------------")
-//                print("items:\(self.items)")
-//                print("itemsCount:\(self.items.count)")
-//                print("------------------------------------")
                 
                 self.filteredItems = self.items.filter {
                     switch $0 {
@@ -172,10 +180,6 @@ class ShopMainViewController: UIViewController {
                         }
                     }
                 }
-                print("------------------------------------")
-                print("filteredItems:\(self.filteredItems)")
-                print("filteredItemsCount:\(self.filteredItems.count)")
-                print("------------------------------------")
                 self.updateSnapshot()
             }
         }
@@ -184,7 +188,6 @@ class ShopMainViewController: UIViewController {
         var typeNames = [String]()
         for category in categories {
             typeNames.append(category.category.productTypeName)
-//            typeNames.append(category)
         }
         dropDown.dataSource = typeNames
         dropDown.anchorView = sender
@@ -193,7 +196,7 @@ class ShopMainViewController: UIViewController {
         dropDown.selectionAction = { [weak self] (index: Int, item: String) in
             guard let self = self else { return }
             self.shopTypeButton.setTitle(item, for: .normal)
-            print("item=\(item)")
+            
             self.filteredItems.removeAll()
             for singleItem in self.items {
                 switch singleItem {
@@ -201,13 +204,13 @@ class ShopMainViewController: UIViewController {
                     if product.producttype_name == item {
                         self.filteredItems.append(singleItem)
                     } else {
-                        print("append product失敗！")
+//                        print("append product失敗！")
                     }
-                case .package(let package):
+                case .package:
                     if item == "套票" {
                         self.filteredItems.append(singleItem)
                     } else {
-                        print("append package失敗！")
+//                        print("append package失敗！")
                     }
                 }
             }
@@ -269,10 +272,23 @@ extension ShopMainViewController {
         return layout
     }
 }
-
+// MARK: - UITextFieldDelegate
 extension ShopMainViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+// MARK: - UIGestureRecognizerDelegate
+extension ShopMainViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        print("shouldReceive")
+        if touch.view == collectionView {
+            print("tap點擊有效")
+            return true
+        } else {
+            print("tap點擊失效")
+            return false
+        }
     }
 }

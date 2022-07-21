@@ -60,6 +60,7 @@ class CheckoutViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadInCartItems()
+        setPointView()
     }
     
     func loadInCartItems() {
@@ -77,17 +78,17 @@ class CheckoutViewController: UIViewController {
     }
     // MARK: - 設定填寫使用點數的textField accessoryView，還有判斷式
     func setPointView() {
-        let textDone = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(inputDone))
-//        textDone.tintColor = .black
         let tool = UIToolbar()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let textDone = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(inputDone))
+        tool.items = [flexibleSpace, textDone]
         tool.sizeToFit()
-        tool.items = [textDone]
         bonusPointTextField.inputAccessoryView = tool
     }
     @objc func inputDone(){
-        print(#function)
-        print("vcPoint:\(point)")
-        print("point:\(bonusPointTextField.text ?? "no point")")
+//        print(#function)
+//        print("vcPoint:\(point)")
+//        print("point:\(bonusPointTextField.text ?? "no point")")
         // pointInt = 使用點數textField輸入的文字
         guard let pointInt = Int(bonusPointTextField.text!) else {
             bonusPointTextField.text = "0"
@@ -212,9 +213,9 @@ class CheckoutViewController: UIViewController {
               let discountAmount = discountAmountLabel.text,
               let orderPay = orderPayLabel.text else { return }
         print(#function)
-        print("orderAmount:\(orderAmount)")
-        print("discount:\(discountAmount)")
-        print("orderPay:\(orderPay)")
+//        print("orderAmount:\(orderAmount)")
+//        print("discount:\(discountAmount)")
+//        print("orderPay:\(orderPay)")
         OrderService.shared.addECOrder(id: account,
                                        pwd: password,
                                        orderAmount: orderAmount,
@@ -225,9 +226,7 @@ class CheckoutViewController: UIViewController {
                 let wkWebVC = WKWebViewController()
                 wkWebVC.delegate = self
                 wkWebVC.urlStr = PAYMENT_API_URL + "\(response.responseMessage)"
-//                "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid=\(response.responseMessage)"
                 wkWebVC.orderNo = response.responseMessage
-//                self.navigationController?.pushViewController(wkWebVC, animated: true)
                 let popVC = PopupViewController(contentController: wkWebVC,
                                                 popupWidth: self.view.bounds.width - 40,
                                                 popupHeight: self.view.bounds.height - 100)

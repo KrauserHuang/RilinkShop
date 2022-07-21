@@ -94,11 +94,11 @@ class SuccessAlert: UIViewController{
             if let controllers = self.navigationController?.viewControllers {
                 for controller in controllers {
                     switch controller {
-                    case is ShopViewController:
+                    case is ShopMainViewController:
                         self.navigationController?.popToViewController(controller, animated: true)
-                    case is TopPageViewController:
+                    case is TopPageMainViewController:
                         self.navigationController?.popToViewController(controller, animated: true)
-                    case is MemberCenterTableViewController:
+                    case is MemberCenterViewController:
                         self.navigationController?.popToViewController(controller, animated: true)
                     default:
                         break

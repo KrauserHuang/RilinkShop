@@ -33,10 +33,10 @@
                     <rect key="frame" x="0.0" y="44" width="375" height="674"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqx-xe-f6G">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="681.33333333333337"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="610.33333333333337"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="L38-3A-tUm">
-                                    <rect key="frame" x="10" y="0.0" width="355" height="681.33333333333337"/>
+                                    <rect key="frame" x="10" y="0.0" width="355" height="610.33333333333337"/>
                                     <subviews>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FoN-Gb-VvH">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="340"/>
@@ -83,24 +83,24 @@
                                                 </stackView>
                                             </subviews>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-mB-k9Y">
-                                            <rect key="frame" x="0.0" y="432.33333333333331" width="355" height="56"/>
+                                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-mB-k9Y">
+                                            <rect key="frame" x="0.0" y="425" width="355" height="8"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="配送開立發票方" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHw-EY-yf1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="0.0"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oja-ZP-OLg">
-                                                    <rect key="frame" x="0.0" y="25" width="110" height="31"/>
+                                                    <rect key="frame" x="0.0" y="8" width="110" height="0.0"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="個人電子發票"/>
                                                 </button>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tRI-pF-Ag3">
-                                            <rect key="frame" x="0.0" y="503.33333333333337" width="355" height="86"/>
+                                            <rect key="frame" x="0.0" y="432.33333333333331" width="355" height="85.999999999999943"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發票資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcw-Ot-J7s">
                                                     <rect key="frame" x="0.0" y="0.0" width="57.333333333333336" height="17"/>
@@ -117,7 +117,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Jv5-mK-WiK">
-                                            <rect key="frame" x="0.0" y="604.33333333333337" width="355" height="77"/>
+                                            <rect key="frame" x="0.0" y="533.33333333333337" width="355" height="77"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHK-bP-vJs">
                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="20.333333333333332"/>

@@ -19,6 +19,7 @@ class CheckoutTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        productImageView.layer.cornerRadius = 10
     }
     
     override func layoutSubviews() {

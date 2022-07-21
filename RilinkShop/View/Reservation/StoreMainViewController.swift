@@ -9,6 +9,11 @@ import UIKit
 import DropDown
 import SnapKit
 
+struct StoreTypeCellModel: Hashable {
+    let type: StoreType
+    var isSelected: Bool = false
+}
+
 class StoreMainViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -25,7 +30,6 @@ class StoreMainViewController: UIViewController {
     let typePicker = StorePicker()
     let toolBar = UIToolbar()
     var types = [StoreTypeCellModel]()
-//    var types = [StoreType]()
     var stores = [Store]() {
         didSet {
             DispatchQueue.main.async {
@@ -160,47 +164,6 @@ class StoreMainViewController: UIViewController {
             }
             self.updateSnapshot()
         }
-        
-        //另一作法
-//        typePicker.backgroundColor = .white
-//        view.addSubview(typePicker)
-//
-//        toolBar.barStyle = .default
-//        toolBar.isTranslucent = true
-//        toolBar.tintColor = .black
-//        toolBar.sizeToFit()
-//
-//        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped(_:)))
-//        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        toolBar.setItems([spaceButton, doneButton], animated: false)
-//        toolBar.isUserInteractionEnabled = true
-//        view.addSubview(toolBar)
-//
-//        typePicker.snp.makeConstraints { make in
-//            make.leading.trailing.bottom.equalTo(self.view)
-//        }
-//        toolBar.snp.makeConstraints { make in
-//            make.leading.trailing.equalTo(typePicker)
-//            make.bottom.equalTo(typePicker.snp.top)
-//        }
-//
-//        var typePickerTopConstraint: Constraint?
-//        var typePickerBottomConstraint: Constraint?
-//        typePicker.snp.makeConstraints { make in
-//            make.leading.trailing.equalTo(view)
-//            typePickerTopConstraint = make.top.equalTo(view.snp.bottom).constraint
-//            typePickerBottomConstraint = make.bottom.equalToSuperview().constraint
-//            typePickerTopConstraint?.isActive = true
-//            typePickerBottomConstraint?.isActive = false
-//        }
-//
-//        self.view.layoutIfNeeded()
-//        UIView.animate(withDuration: 0.25) {
-//            typePickerTopConstraint?.isActive = false
-//            typePickerBottomConstraint?.isActive = true
-//            self.view.layoutIfNeeded()
-//        }
-        
     }
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
         typePicker.snp.remakeConstraints { make in

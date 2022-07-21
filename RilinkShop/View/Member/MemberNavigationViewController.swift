@@ -55,13 +55,8 @@ class MemberNavigationViewController: UINavigationController {
             self.initAction = nil
         }
     }
-    // MARK: - 跳會員首頁(MemberCenterTableViewController)
+    // MARK: - 跳會員首頁(MemberCenterViewController)
     func showRoot(animated: Bool) {
-        
-//        guard let memberCenterTVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterTableViewController") as? MemberCenterTableViewController else {
-//            print("showRoot失敗")
-//            return
-//        }
         //取得Storyboard MemberCenterTableViewController其下面的ViewController(MemberCenterViewController)
         guard let memberCenterVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as? MemberCenterViewController else {
             print("showRoot失敗")
@@ -131,45 +126,6 @@ class MemberNavigationViewController: UINavigationController {
     func toTicketViewController() {
         let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
         pushViewController(controller, animated: true)
-    }
-}
-// MARK: - MemberCenterTVC Delegate
-extension MemberNavigationViewController: MemberCenterTableViewControllerDelegate{
-    func memberInfo(_ viewController: MemberCenterTableViewController) {
-        let vc = MemberInfoViewController_1()
-        vc.user = Global.personalData
-        vc.delegate = self
-        viewController.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func myTicket(_ viewController: MemberCenterTableViewController) {
-        toTicketViewController()
-    }
-    
-    func coupon(_ viewController: MemberCenterTableViewController) {
-        let controller = UIStoryboard(name: "Coupon", bundle: nil).instantiateViewController(withIdentifier: "Coupon")
-        viewController.navigationController?.pushViewController(controller, animated: true)
-    }
-    
-    func point(_ viewController: MemberCenterTableViewController) {
-        viewController.navigationController?.pushViewController(PointViewController(), animated: true)
-    }
-    
-    func privateRule(_ viewController: MemberCenterTableViewController) {
-        viewController.navigationController?.pushViewController(PrivateRuleViewController(), animated: true)
-    }
-    
-    func question(_ viewController: MemberCenterTableViewController) {
-        viewController.navigationController?.pushViewController(QuestionViewController(), animated: true)
-    }
-    
-    func logout(_ viewController: MemberCenterTableViewController) {
-        MyKeyChain.logout()
-        showLogIn()
-    }
-    
-    func memberInfoDidUpdate(_ viewController: MemberCenterTableViewController) {
-        loadUserData()
     }
 }
 // MARK: - SignUp1 Delegate(進入第二頁面填寫認證碼、密碼)
@@ -278,11 +234,5 @@ extension MemberNavigationViewController: MemberInfoViewController_1_Delegate {
 extension MemberNavigationViewController: QRCodeViewControllerDelegate {
     func didFinishScan(_ viewController: QRCodeViewController) {
         //
-    }
-}
-
-extension MemberNavigationViewController: MemberInfoViewControllerDelegate {
-    func memberInfoDidUpdate(_ viewController: MemberInfoViewController) {
-        loadUserData()
     }
 }

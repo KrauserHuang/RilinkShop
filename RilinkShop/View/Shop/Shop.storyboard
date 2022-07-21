@@ -10,77 +10,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Shop View Controller-->
-        <scene sceneID="s0d-6b-0kx">
-            <objects>
-                <viewController id="Y6W-OH-hqX" customClass="ShopViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XSg-pa-A1Q">
-                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="gXb-CO-Jht"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dbs-cG-afi">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Fu5-N6-XZp">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RnN-rh-c0Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="0br-Mj-3Sy">
-                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0br-Mj-3Sy" secondAttribute="trailing" id="FUC-u3-5Bi"/>
-                            <constraint firstItem="XSg-pa-A1Q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="MUn-6M-exl"/>
-                            <constraint firstItem="0br-Mj-3Sy" firstAttribute="top" secondItem="XSg-pa-A1Q" secondAttribute="bottom" id="llp-r3-KXK"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="XSg-pa-A1Q" secondAttribute="trailing" id="nXB-7x-XGe"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="0br-Mj-3Sy" secondAttribute="bottom" id="tYd-g3-ASE"/>
-                            <constraint firstItem="0br-Mj-3Sy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vZK-ck-8Fs"/>
-                            <constraint firstItem="XSg-pa-A1Q" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="xRB-Zv-b5L"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="5eY-1B-3eD">
-                        <barButtonItem key="rightBarButtonItem" image="cart" catalog="system" id="CXx-gT-Uo9" customClass="BadgeBarButtonItem" customModule="RilinkShop" customModuleProvider="target">
-                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="toCartVC:" destination="Y6W-OH-hqX" id="ppG-SL-65M"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="anotherCategoryCollectionView" destination="XSg-pa-A1Q" id="caT-pf-Iqc"/>
-                        <outlet property="cartButton" destination="CXx-gT-Uo9" id="4Gq-WQ-tPP"/>
-                        <outlet property="listTableView" destination="0br-Mj-3Sy" id="flx-vr-9cN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="944.92753623188412" y="93.75"/>
-        </scene>
         <!--購物商城-->
         <scene sceneID="eY5-76-UpT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8em-zY-mNx" customClass="ShopNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="購物商城" image="資產 4.png" id="UcA-BY-d6I"/>
+                    <tabBarItem key="tabBarItem" title="購物商城" image="購物商城" id="UcA-BY-d6I"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2td-IY-Ikx">
@@ -95,34 +29,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gt-DE-dOq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="34.782608695652179" y="93.75"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="BNB-HS-1E4">
-            <objects>
-                <tableViewController id="5fc-Ve-sW5" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Nio-ST-oFH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="PV1-Mm-pcr">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PV1-Mm-pcr" id="Sie-qU-enI">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="5fc-Ve-sW5" id="5Up-tB-wiV"/>
-                            <outlet property="delegate" destination="5fc-Ve-sW5" id="YfG-3Y-dwE"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DBl-ga-biv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="35" y="878"/>
         </scene>
         <!--購物商城-->
         <scene sceneID="jUD-zH-hZx">
@@ -152,8 +58,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="AmM-KJ-IFy"/>
                                                 </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="機車租賃"/>
+                                                <buttonConfiguration key="configuration" style="filled"/>
                                                 <connections>
                                                     <action selector="shopTypeButtonTapped:" destination="qTH-m4-zGr" eventType="touchUpInside" id="uMK-sH-0Wb"/>
                                                 </connections>
@@ -219,13 +124,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1W-Br-hto" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944.92753623188412" y="877.90178571428567"/>
+            <point key="canvasLocation" x="751" y="94"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrowtriangle.right.fill" catalog="system" width="128" height="113"/>
-        <image name="cart" catalog="system" width="128" height="102"/>
-        <image name="資產 4.png" width="29" height="33"/>
+        <image name="購物商城" width="47" height="47"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

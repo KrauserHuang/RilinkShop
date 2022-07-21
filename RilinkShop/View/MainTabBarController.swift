@@ -58,7 +58,7 @@ class MainTabBarController: UITabBarController {
             self.selectedIndex = 3
         }
     }
-    // MARK: - 跳會員首頁(MemberCenterTableViewController)
+    // MARK: - 跳會員首頁(MemberCenterViewController)
     func showRoot(animated: Bool) {
         guard let memberCenterTVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as? MemberCenterViewController else {
             print("showRoot失敗")
@@ -89,9 +89,8 @@ extension MainTabBarController:  UITabBarControllerDelegate {
 //            return
 //        }
         guard Global.ACCOUNT != "" else {
-            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self) {
-                tabBar.isUserInteractionEnabled = false
-            }
+            tabBar.isUserInteractionEnabled = false
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
             return
         }
         guard let MainTabViewControllers = self.viewControllers else {

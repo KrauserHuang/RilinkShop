@@ -37,6 +37,7 @@ class MemberCenterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        navigationController?.setNavigationBarHidden(true, animated: animated)
         
         if Global.ACCOUNT != "" {
             loginButton.setTitle("登出", for: .normal)
@@ -51,8 +52,13 @@ class MemberCenterViewController: UIViewController {
 //        initUI()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     func initUI() {
-        navigationItems()
+//        navigationItems()
         //登入
         loginButton.layer.cornerRadius = 13
         loginButton.layer.borderColor = UIColor.white.cgColor
@@ -78,17 +84,17 @@ class MemberCenterViewController: UIViewController {
         loadPersonalData()
     }
     
-    func navigationItems() {
-        let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(toCartViewController))
-        navigationItem.rightBarButtonItem = shoppingcartButton
-    }
-    @objc private func toCartViewController() {
-        let vc = CartViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
+//    func navigationItems() {
+//        let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
+//                                                 style: .plain,
+//                                                 target: self,
+//                                                 action: #selector(toCartViewController))
+//        navigationItem.rightBarButtonItem = shoppingcartButton
+//    }
+//    @objc private func toCartViewController() {
+//        let vc = CartViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
     
     func loadPersonalData() {
         let accountType = "0"
@@ -211,6 +217,10 @@ class MemberCenterViewController: UIViewController {
     
     @IBAction func rPointButtonTapped(_ sender: UIButton) {
         //沒作用
+    }
+    @IBAction func toCartViewController(_ sender: UIButton) {
+        let vc = CartViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - 我的票券頁面
     @IBAction func myTicketButtonTapped(_ sender: UIButton) {
