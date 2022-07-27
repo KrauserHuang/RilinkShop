@@ -26,14 +26,14 @@ class UsableTicketViewController: UIViewController {
             }
         }
     }
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
     var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViiew.rowHeight = 124
+        tableViiew.rowHeight = 120
         tableViiew.register(UINib(nibName: "UsableTableViewCell", bundle: nil), forCellReuseIdentifier: "UsableTableViewCell")
         tableViiew.delegate = self
         tableViiew.dataSource = self
@@ -126,6 +126,7 @@ extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource
 //            controller.ticket = ticketWithQR
             controller.ticket = ticket //這裡的ticket變成商品資訊
             navigationController?.pushViewController(controller, animated: true)
+//            present(controller, animated: true, completion: nil)
         } else {
             // 如果沒有storeID代表他是套票，應該先跳轉套票所涵蓋商品內容
             let controller = PackageProductDetailTableViewController()
@@ -143,6 +144,7 @@ extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource
                 print("ticket.product is nil!")
             }
             navigationController?.pushViewController(controller, animated: true)
+//            present(controller, animated: true, completion: nil)
         }
     }
 }

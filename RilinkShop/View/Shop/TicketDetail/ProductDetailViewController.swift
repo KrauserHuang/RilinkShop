@@ -41,8 +41,8 @@ class ProductDetailViewController: UIViewController {
     let minValue = 1
     let stepValue = 1
     var stock = Int()
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
     var spec = PackageOrProduct.product
     var productNo = String()
     var producrPrice = String()
@@ -126,24 +126,22 @@ class ProductDetailViewController: UIViewController {
 //                let productStock = self.products.map { $0.productStock }
 //                self.productStockMin = productStock.sorted { $0 < $1 }.first!
 //                self.stock = Int(self.productStockMin)!
-                
-                self.stock = Int(package.productStock)!
-                self.nameLabel.text = package.productName
-                self.costLabel.text = "NT$：\(package.productPrice)"
-                self.descriptionLabel.text = package.productDescription
-                
-                let imageURLString = SHOP_ROOT_URL + package.productPicture
-                self.ticketImageView.setImage(imageURL: imageURLString)
-                
-                if self.stock == 0 {
-                    self.addToCartButton.isHidden = true
-                    self.buyNowButton.setTitle("備貨中", for: .normal)
-                    self.buyNowButton.backgroundColor = .lightGray
-                    self.buyNowButton.isUserInteractionEnabled = false
-                } else {
-                    //有庫存，沒事的
-                    print("stock:\(self.stock)")
-                }
+            }
+            let imageURLString = SHOP_ROOT_URL + package.productPicture
+            ticketImageView.setImage(imageURL: imageURLString)
+            stock = Int(package.productStock)!
+            nameLabel.text = package.productName
+            costLabel.text = "NT$：\(package.productPrice)"
+            descriptionLabel.text = package.productDescription
+            
+            if self.stock == 0 {
+                self.addToCartButton.isHidden = true
+                self.buyNowButton.setTitle("備貨中", for: .normal)
+                self.buyNowButton.backgroundColor = .lightGray
+                self.buyNowButton.isUserInteractionEnabled = false
+            } else {
+                //有庫存，沒事的
+                print("stock:\(self.stock)")
             }
         case .none:
             break

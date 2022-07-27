@@ -8,6 +8,10 @@
 import UIKit
 import SwiftUI
 
+protocol MemberCenterViewControllerDelegate: AnyObject {
+    func didTappedLogin(_ viewController: MemberCenterViewController)
+}
+
 class MemberCenterViewController: UIViewController {
     
     @IBOutlet weak var bgView: UIView!
@@ -21,8 +25,10 @@ class MemberCenterViewController: UIViewController {
     
     var tableViewController: ContainerMemberCenterTableViewController?
     var user: User?
-    let account = Global.ACCOUNT
-    let password = Global.ACCOUNT_PASSWORD
+    var account = Global.ACCOUNT
+    var password = Global.ACCOUNT_PASSWORD
+    
+    var delegate: MemberCenterViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +44,9 @@ class MemberCenterViewController: UIViewController {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        print("MemberCenterViewController + \(#function)")
+        print("ACCOUNT:\(Global.ACCOUNT)")
+        print("PASSWORD:\(Global.ACCOUNT_PASSWORD)")
         
         if Global.ACCOUNT != "" {
             loginButton.setTitle("登出", for: .normal)
@@ -45,11 +54,14 @@ class MemberCenterViewController: UIViewController {
         } else {
             loginButton.setTitle("登入", for: .normal)
             editButton.isHidden = true
+            loginNameLabel.text = "Hi~ 歡迎回來"
+            rPointButton.setTitle("0", for: .normal)
+            userImage.image = UIImage(named: "user_avatarxxhdpi")
         }
         
         guard Global.ACCOUNT.count != 7 else{return}
         
-//        initUI()
+        initUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,7 +70,6 @@ class MemberCenterViewController: UIViewController {
     }
     
     func initUI() {
-//        navigationItems()
         //登入
         loginButton.layer.cornerRadius = 13
         loginButton.layer.borderColor = UIColor.white.cgColor
@@ -84,21 +95,10 @@ class MemberCenterViewController: UIViewController {
         loadPersonalData()
     }
     
-//    func navigationItems() {
-//        let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
-//                                                 style: .plain,
-//                                                 target: self,
-//                                                 action: #selector(toCartViewController))
-//        navigationItem.rightBarButtonItem = shoppingcartButton
-//    }
-//    @objc private func toCartViewController() {
-//        let vc = CartViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
-    
     func loadPersonalData() {
         let accountType = "0"
-        HUD.showLoadingHUD(inView: self.view, text: "載入中")
+//        sleep(1)
+        HUD.showLoadingHUD(inView: self.view, text: "")
         UserService.shared.getPersonalData(account: account,
                                            pw: password,
                                            accountType: accountType) { success, response in
@@ -109,12 +109,13 @@ class MemberCenterViewController: UIViewController {
                     HUD.hideLoadingHUD(inView: self.view)
                     
                     guard success else {
-                        let errorMsg = response as! String
-                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+//                        let errorMsg = response as! String
+//                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+//                        print("errorMsg:\(errorMsg)")
                         return
                     }
                     //load完更新使用者名稱/點數/使用者頭像
-                    self.loginNameLabel.text = "Hi~ " + (Global.personalData?.name ?? "")
+                    self.loginNameLabel.text = "Hi~ " + (Global.personalData?.name ?? "歡迎回來")
                     MemberCenterViewController.newRPoint = Global.personalData?.point ?? "0"
                     
                     self.rPointButton.setTitle(Global.personalData?.point, for: .normal)
@@ -185,21 +186,27 @@ class MemberCenterViewController: UIViewController {
     }
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         if Global.ACCOUNT != "" {
-            Alert.showConfirm(title: "", msg: "確定要登出？", vc: self) {
+            Alert.showLogout(title: "確定要登出？", msg: "", vc: self) {
                 self.signOut()
             }
-        } else {
+        } else { // 沒有帳號，倒到登入頁面
 //            let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
 //            let vc = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
             
-            let vc = LoginViewController_1()
-            present(vc, animated: true, completion: nil)
+//            let vc = LoginViewController_1()
+//            self.navigationController?.setViewControllers([vc], animated: true)
+//            self.navigationController?.pushViewController(vc, animated: true)
+//            self.navigationController?.setViewControllers([vc], animated: true)
+//            self.navigationController?.viewControllers = [vc]
+//            present(vc, animated: true, completion: nil)
+            delegate?.didTappedLogin(self)
         }
     }
     
     func signOut() {
         HUD.showLoadingHUD(inView: self.view, text: "登出中")
         UserService.shared.logout()
+//        Global.personalData
         HUD.hideLoadingHUD(inView: self.view)
         loginButton.setTitle("登入", for: .normal)
         editButton.isHidden = true
@@ -219,26 +226,42 @@ class MemberCenterViewController: UIViewController {
         //沒作用
     }
     @IBAction func toCartViewController(_ sender: UIButton) {
-        let vc = CartViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if Global.ACCOUNT == "" {
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
+        } else {
+            let vc = CartViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     // MARK: - 我的票券頁面
     @IBAction func myTicketButtonTapped(_ sender: UIButton) {
-        let vc = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
-        present(vc, animated: true, completion: nil)
+        if Global.ACCOUNT == "" {
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
+        } else {
+            let vc = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     // MARK: - 點數紀錄頁面
     @IBAction func pointHistoryButtonTapped(_ sender: UIButton) {
-        let vc = PointViewController()
-        present(vc, animated: true, completion: nil)
+        if Global.ACCOUNT == "" {
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
+        } else {
+            let vc = PointViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 // MARK: - ContainerMemberCenterTableViewControllerDelegate
 extension MemberCenterViewController: ContainerMemberCenterTableViewControllerDelegate {
     //我的訂單頁面
     func myOrder(_ viewController: ContainerMemberCenterTableViewController) {
-        let vc = MyOrderTableViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if Global.ACCOUNT == "" {
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
+        } else {
+            let vc = MyOrderTableViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     //常見問題頁面(還未開放)
     func question(_ viewController: ContainerMemberCenterTableViewController) {

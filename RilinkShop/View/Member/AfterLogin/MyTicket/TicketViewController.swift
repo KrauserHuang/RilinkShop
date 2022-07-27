@@ -35,8 +35,4 @@ class TicketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    @IBAction func xmarkButtonTapped(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
 }

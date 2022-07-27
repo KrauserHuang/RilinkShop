@@ -45,5 +45,6 @@ class PackageProductDetailTableViewController: UITableViewController {
         controller.product = product //傳商品資訊
         controller.ticket = ticket //傳套票資訊
         navigationController?.pushViewController(controller, animated: true)
+//        present(controller, animated: true, completion: nil)
     }
 }

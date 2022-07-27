@@ -18,6 +18,8 @@ class UserService {
     var renewUser: (() -> ())?
     
     private init() {
+        print("UserService + \(#function)")
+        print("getAccount: \(MyKeyChain.getAccount())")
         guard let account = MyKeyChain.getAccount(),
               let password = MyKeyChain.getPassword() else {
                   didLogin = true
@@ -28,8 +30,6 @@ class UserService {
                 self.renewUser?()
                 return
             }
-//            let user = response as? User
-//            self.user = user
             Global.personalData = response as? User
             self.user = Global.personalData
 
@@ -75,9 +75,9 @@ class UserService {
                         return
                     }
                     Global.personalData = response as? User
+                    MyKeyChain.setAccount(id)
+                    MyKeyChain.setPassword(pwd)
                     self.user = Global.personalData
-//                    let user = response as? User
-//                    self.user = user
                     self.didLogin = true
                     self.renewUser = { completed(true, "" as AnyObject) }
                 }
@@ -160,8 +160,8 @@ class UserService {
             }
             
             let value = JSON(response.value!)
-            print(#function)
-            print(value)
+//            print(#function)
+//            print(value)
             
             switch response.result {
             case .success:
@@ -289,15 +289,17 @@ class UserService {
     }
     //登出
     func logout() {
+        print("UserService + \(#function)")
         user = nil
         renewUser = nil
         Global.ACCOUNT = ""
         Global.ACCOUNT_PASSWORD = ""
+        Global.personalData = nil
         MyKeyChain.setAccount("")
         MyKeyChain.setPassword("")
         MyKeyChain.setBossAccount("")
         MyKeyChain.setBossPassword("")
-        didLogin = false
+//        didLogin = false
     }
     // MARK: - 註冊1 - 傳送手機驗證號碼
     func signUp(account: String, completed: @escaping Completion) {

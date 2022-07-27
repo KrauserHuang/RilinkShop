@@ -22,14 +22,14 @@
                             <tableViewSection id="F2e-IN-kUY">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="L0q-GR-cSa">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L0q-GR-cSa" id="TGk-zR-Z2u">
-                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的訂單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7O-Pg-NUS">
-                                                    <rect key="frame" x="20" y="11" width="356.5" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="356.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -44,14 +44,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="7Xt-Nq-CZW">
-                                        <rect key="frame" x="0.0" y="87.5" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="88" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Xt-Nq-CZW" id="4OR-92-KfP">
-                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="常見問題" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gmt-Rf-H2E">
-                                                    <rect key="frame" x="20" y="11" width="356.5" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="356.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -66,14 +66,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Ew5-yD-DYC">
-                                        <rect key="frame" x="0.0" y="130.5" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="131.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ew5-yD-DYC" id="hBh-pw-Vct">
-                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="聯絡客服" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lu5-JQ-GIy">
-                                                    <rect key="frame" x="20" y="11" width="356.5" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="356.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -88,14 +88,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="d72-zA-XEz">
-                                        <rect key="frame" x="0.0" y="173.5" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="175" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d72-zA-XEz" id="b4b-eQ-kcJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="協議及聲明" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8v-gp-ZcP">
-                                                    <rect key="frame" x="20" y="11" width="356.5" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="356.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -235,8 +235,8 @@
                                                             <constraint firstAttribute="height" constant="66" id="SLL-1I-a9W"/>
                                                             <constraint firstAttribute="width" constant="66" id="jjX-cU-b5J"/>
                                                         </constraints>
-                                                        <state key="normal" image="資產 16.png"/>
-                                                        <state key="highlighted" image="btn_coupon_hove.png"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="MyTicket"/>
                                                         <connections>
                                                             <action selector="myTicketButtonTapped:" destination="2Py-oq-Cl6" eventType="touchUpInside" id="Ar5-Fr-9hy"/>
                                                         </connections>
@@ -264,8 +264,7 @@
                                                             <constraint firstAttribute="height" constant="66" id="JMs-cT-PjB"/>
                                                             <constraint firstAttribute="width" constant="66" id="jLv-AR-u80"/>
                                                         </constraints>
-                                                        <state key="normal" image="資產 17.png"/>
-                                                        <state key="highlighted" image="btn_couponget_hover.png"/>
+                                                        <state key="normal" image="MyPoint"/>
                                                         <connections>
                                                             <action selector="pointHistoryButtonTapped:" destination="2Py-oq-Cl6" eventType="touchUpInside" id="u84-y8-tTR"/>
                                                         </connections>
@@ -370,7 +369,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaE-8s-eXV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="958" y="98"/>
+            <point key="canvasLocation" x="959" y="98"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r3f-VM-zVX">
@@ -392,14 +391,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="MyPoint" width="47" height="47"/>
+        <image name="MyTicket" width="49" height="49"/>
         <image name="background_color.png" width="1242" height="740"/>
-        <image name="btn_coupon_hove.png" width="182" height="182"/>
-        <image name="btn_couponget_hover.png" width="182" height="182"/>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="r_point.png" width="360" height="360"/>
         <image name="user_avatarxxhdpi.png" width="500" height="500"/>
-        <image name="資產 16.png" width="68" height="68"/>
-        <image name="資產 17.png" width="67" height="67"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

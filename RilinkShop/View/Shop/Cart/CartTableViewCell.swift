@@ -39,6 +39,7 @@ class CartTableViewCell: UITableViewCell {
         contentView.layer.borderColor = UIColor.systemGray.cgColor
         contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 10
+        productImageView.layer.cornerRadius = 10
         initCell()
     }
     

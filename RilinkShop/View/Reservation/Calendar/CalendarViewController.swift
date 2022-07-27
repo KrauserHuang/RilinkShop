@@ -25,8 +25,8 @@ class CalendarViewController: UIViewController {
     var carDescription: String? = ""
     var appointment: String?
     var store = Store()
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
     lazy var selectedDate: String = {
         dateFormatter.string(from: Date())
     }() {

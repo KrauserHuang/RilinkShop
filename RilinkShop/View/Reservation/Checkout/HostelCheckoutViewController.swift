@@ -31,8 +31,8 @@ class HostelCheckoutViewController: UIViewController {
     var duration: String?
     var store = Store()
     
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()

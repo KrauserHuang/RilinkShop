@@ -44,8 +44,10 @@ class StoreMainViewController: UIViewController {
             }
         }
     }
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
+//    let account = Global.ACCOUNT
+//    let password = Global.ACCOUNT_PASSWORD
     let dropDown = DropDown()
 
     override func viewDidLoad() {
@@ -57,6 +59,7 @@ class StoreMainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+//        updateSnapshot()
 //        initUI()
     }
     
@@ -65,7 +68,7 @@ class StoreMainViewController: UIViewController {
         configureCollectionView()
         loadStoreType()
         loadStoreList()
-        updateSnapshot()
+//        updateSnapshot()
         configurStorePicker()
     }
     
@@ -150,12 +153,12 @@ class StoreMainViewController: UIViewController {
         print("typeNames:\(typeNames)")
 //        dropDown.dataSource = typeNames // types裡所有的name
         dropDown.dataSource = typeModelNames
-        dropDown.anchorView = sender // drop down list會顯示在所設定的view下(這裡指button)
-        dropDown.bottomOffset = CGPoint(x: 0, y: sender.frame.size.height) // 依據anchorView的bottom位置插入drop down list
+        dropDown.anchorView = storeTypeButton // drop down list會顯示在所設定的view下(這裡指button)
+        dropDown.bottomOffset = CGPoint(x: 0, y: storeTypeButton.frame.size.height) // 依據anchorView的bottom位置插入drop down list
         dropDown.show() // 設定完內容跟位置後要執行顯示
         dropDown.selectionAction = { [weak self] (index: Int, item: String) in //8
             guard let self = self else { return }
-            sender.setTitle(item, for: .normal) // 點選對應的drop down list item要做什麼
+            self.storeTypeButton.setTitle(item, for: .normal) // 點選對應的drop down list item要做什麼
             self.filteredStores.removeAll()
             for store in self.stores {
                 if store.storeTypeName == item {

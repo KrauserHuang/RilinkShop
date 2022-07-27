@@ -59,8 +59,8 @@ class ShopMainViewController: UIViewController {
     }
     let dropDown = DropDown()
     
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -190,8 +190,8 @@ class ShopMainViewController: UIViewController {
             typeNames.append(category.category.productTypeName)
         }
         dropDown.dataSource = typeNames
-        dropDown.anchorView = sender
-        dropDown.bottomOffset = CGPoint(x: 0, y: sender.frame.size.height)
+        dropDown.anchorView = shopTypeButton
+        dropDown.bottomOffset = CGPoint(x: 0, y: shopTypeButton.frame.size.height)
         dropDown.show()
         dropDown.selectionAction = { [weak self] (index: Int, item: String) in
             guard let self = self else { return }
@@ -250,12 +250,12 @@ extension ShopMainViewController {
         }
         return dataSource
     }
-    func updateSnapshot(animatingChange: Bool = false) {
+    func updateSnapshot(animatingChange: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([.all])
         snapshot.appendItems(filteredItems, toSection: .all)
         
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: animatingChange)
     }
     func createGridLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),

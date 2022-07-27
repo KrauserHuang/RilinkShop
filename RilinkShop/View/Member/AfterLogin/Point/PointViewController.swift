@@ -9,6 +9,8 @@ import UIKit
 
 class PointViewController: UIViewController {
 
+    
+    @IBOutlet weak var pointLabel: UIButton!
     @IBOutlet weak var point: UILabel!
     @IBOutlet weak var remindLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -29,6 +31,7 @@ class PointViewController: UIViewController {
         self.tableView.register(UINib(nibName: "PointTableViewCell", bundle: nil), forCellReuseIdentifier: "pointTableViewCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        pointLabel.isUserInteractionEnabled = false
         getPoint()
     }
     
@@ -38,7 +41,8 @@ class PointViewController: UIViewController {
     }
     
     func getPoint() {
-        point.text = Global.personalData?.point ?? "0"
+//        point.text = Global.personalData?.point ?? "0"
+        pointLabel.setTitle("\(Global.personalData?.point ?? "0")", for: .normal)
 //        let accountType = "0"
         HUD.showLoadingHUD(inView: self.view, text: "載入點數紀錄中")
 //        UserService.shared.getPersonalData(account: account, pw: password, accountType: accountType) { success, response in
@@ -74,9 +78,6 @@ class PointViewController: UIViewController {
             self.points = points
             self.emptyView.isHidden = self.points.count != 0
         }
-    }
-    @IBAction func xmarkButtonTapped(_ sender: UIButton) {
-        dismiss(animated: true)
     }
     
 }

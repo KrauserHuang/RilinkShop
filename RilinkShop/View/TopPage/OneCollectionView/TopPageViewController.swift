@@ -21,7 +21,10 @@ class TopPageViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     enum Section: String, CaseIterable {
-        case all
+        case store
+//        case option
+        case package
+//        case all
     }
     
     enum TopPageDataType: Hashable {
@@ -34,23 +37,15 @@ class TopPageViewController: UIViewController {
     var packages = [Package]()
     let optionImages = ["新車", "二手車", "維修保養", "機車租賃", "精品配件"]
     
-    typealias StoreDataSource = UICollectionViewDiffableDataSource<Section, Store>
-    typealias StoreSnapshot = NSDiffableDataSourceSnapshot<Section, Store>
-    typealias OptionDataSource = UICollectionViewDiffableDataSource<Section, String>
-    typealias OptionSnapshot = NSDiffableDataSourceSnapshot<Section, String>
-    typealias PackageDataSource = UICollectionViewDiffableDataSource<Section, Package>
-    typealias PackageSnapshot = NSDiffableDataSourceSnapshot<Section, Package>
-    
     typealias DataSource = UICollectionViewDiffableDataSource<Section, TopPageDataType>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TopPageDataType>
     
-    private lazy var storeDataSource = configureStoreDataSource()
-    private lazy var optionDataSource = configureOptionDataSource()
-    private lazy var packageDataSource = configurePackageDataSource()
     private lazy var dataSource = configureDataSource()
     
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    private var sections = Section.allCases
+    
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
     
     var currentIndex = 0
     var timer: Timer?
@@ -105,9 +100,7 @@ class TopPageViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateStoreSnapshot()
-//        updatePackageSnapshot()
-//        updateOptionSnapshot()
+        updateSnapshot()
     }
     
     func initUI() {
@@ -119,9 +112,9 @@ class TopPageViewController: UIViewController {
     func configureCollectionView() {
         let storeNib = UINib(nibName: TopPageStoreCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(storeNib, forCellWithReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier)
-        collectionView.dataSource = storeDataSource
+//        collectionView.dataSource = storeDataSource
         collectionView.delegate = self
-        collectionView.collectionViewLayout = createStoreScrollLayout()
+//        collectionView.collectionViewLayout = createStoreScrollLayout()
         
         let packageNib = UINib(nibName: TopPagePackageCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(packageNib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
@@ -144,7 +137,7 @@ class TopPageViewController: UIViewController {
                                          pwd: password) { storesResponse in
             let wholeStores = storesResponse
             self.stores = wholeStores
-            self.updateStoreSnapshot()
+            self.updateSnapshot()
         }
     }
     // MARK: - Load package API
@@ -153,111 +146,11 @@ class TopPageViewController: UIViewController {
                                               pwd: password) { packagesResponse in
             let wholePackages = packagesResponse
             self.packages = wholePackages
-            self.updatePackageSnapshot()
+            self.updateSnapshot()
         }
     }
 }
 extension TopPageViewController {
-    // MARK: - Store DiffableDataSource/Snapshot/Compositional Layout
-    func configureStoreDataSource() -> StoreDataSource {
-        let dataSource = StoreDataSource(collectionView: collectionView) { collectionView, indexPath, store in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageStoreCollectionViewCell
-            
-            cell.configure(with: store)
-            
-            return cell
-        }
-        return dataSource
-    }
-    func updateStoreSnapshot(animatingChange: Bool = false) {
-        var snapshot = StoreSnapshot()
-        snapshot.appendSections([.all])
-        snapshot.appendItems(stores, toSection: .all)
-        
-        storeDataSource.apply(snapshot, animatingDifferences: false)
-    }
-    func createStoreScrollLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(1))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
-    // MARK: - Package DiffableDataSource/Snapshot/Compositional Layout
-    func configurePackageDataSource() -> PackageDataSource {
-        let dataSource = PackageDataSource(collectionView: collectionView) { collectionView, indexPath, package in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPagePackageCollectionViewCell
-            
-            cell.configure(with: package)
-            
-            return cell
-        }
-        return dataSource
-    }
-    func updatePackageSnapshot(animatingChange: Bool = false) {
-        var snapshot = PackageSnapshot()
-        snapshot.appendSections([.all])
-        snapshot.appendItems(packages, toSection: .all)
-        
-        packageDataSource.apply(snapshot, animatingDifferences: false)
-    }
-    func createPackageGridLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(260.0))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-        
-        let section = NSCollectionLayoutSection(group: group)
-//        section.orthogonalScrollingBehavior = .continuous
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        
-        return layout
-    }
-    // MARK: - Option DiffableDataSource/Snapshot/Compositional Layout
-    func configureOptionDataSource() -> OptionDataSource {
-        let dataSource = OptionDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageOptionCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageOptionCollectionViewCell
-            
-            cell.imageView.image = UIImage(named: itemIdentifier)
-            cell.optionLabel.text = itemIdentifier
-            
-            return cell
-        }
-        return dataSource
-    }
-    func updateOptionSnapshot(animatingChange: Bool = false) {
-        var snapshot = OptionSnapshot()
-        snapshot.appendSections([.all])
-        snapshot.appendItems(optionImages, toSection: .all)
-        
-        optionDataSource.apply(snapshot, animatingDifferences: false)
-    }
-    func createOptionImagesLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 10, bottom: 20, trailing: 10)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(120))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        
-        return layout
-    }
     // MARK: - All DiffableDataSource/Snapshot/Compositional Layout
     func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
@@ -281,7 +174,14 @@ extension TopPageViewController {
     }
     func updateSnapshot(animatingChange: Bool = false) {
         var snapshot = Snapshot()
-        snapshot.appendSections([.all])
+        snapshot.appendSections(sections)
+//        sections.forEach { section in
+//            snapshot.appendItems(<#T##identifiers: [TopPageDataType]##[TopPageDataType]#>, toSection: <#T##Section?#>)
+//        }
+//        snapshot.appendSections([.all])
+//        snapshot.appendItems(stores, toSection: .all)
+        
+        
         
     }
     func createLayout() -> UICollectionViewLayout {

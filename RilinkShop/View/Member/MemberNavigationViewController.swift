@@ -17,10 +17,8 @@ class MemberNavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(#function)
-        print(UserService.shared.didLogin)
-        print(MyKeyChain.getAccount())
-        print(MyKeyChain.getBossAccount())
+        print("MemberNavigationViewController + \(#function)")
+        print("didLogin:\(UserService.shared.didLogin)")
         
         if UserService.shared.didLogin {
             tryLogin()
@@ -43,9 +41,13 @@ class MemberNavigationViewController: UINavigationController {
     }
     
     func tryLogin() {
-        if MyKeyChain.getAccount() == nil && MyKeyChain.getBossAccount() == nil {
+        if Global.ACCOUNT == "" {
+//        if UserService.shared.user == nil {
+//        if MyKeyChain.getAccount() == nil && MyKeyChain.getBossAccount() == nil {
+            print("showLogin")
             initAction = showLogIn
         } else {
+            print("showRoot")
             initAction = {
                 self.showRoot(animated: false)
             }
@@ -67,18 +69,24 @@ class MemberNavigationViewController: UINavigationController {
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         } else {
-//            memberCenterVC.delegate = self
+            memberCenterVC.delegate = self
 //            pushViewController(memberCenterTVC, animated: animated)
-            viewControllers = [memberCenterVC]
+            self.popToRootViewController(animated: true)
+//            self.viewControllers = [memberCenterVC]
+            self.setViewControllers([memberCenterVC], animated: false)
         }
     }
-    // MARK: - 跳登入首頁(LoginViewController_1)
+    // MARK: - 跳登入首頁(LoginViewController_1)，只要沒跑showLoIn()，就不會換頁
     func showLogIn(){
-//        let vc = MemberCenterViewController()
-        let controller = LoginViewController_1()
-        controller.delegate = self
-        setViewControllers([controller], animated: false)
+//        let vc = LoginViewController_1()
+//        vc.delegate = self
+//        popToRootViewController(animated: true)
 //        setViewControllers([vc], animated: false)
+//        user = User()
+        let memberCenterVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as! MemberCenterViewController
+        popToRootViewController(animated: true)
+        setViewControllers([memberCenterVC], animated: false)
+        memberCenterVC.delegate = self
         user = User()
     }
     // MARK: - 進會員首頁前要載會員資料
@@ -86,12 +94,12 @@ class MemberNavigationViewController: UINavigationController {
         guard Global.ACCOUNT != "" && Global.ACCOUNT.count == 10 else {
             return
         }
-        print(#function)
-        print(Global.ACCOUNT)
-        print(Global.ACCOUNT_PASSWORD)
+        print("MemberNavigationViewController + \(#function)")
+        print("GlobalACCOUNT:\(Global.ACCOUNT)")
+        print("GlobalPASSWORD:\(Global.ACCOUNT_PASSWORD)")
         
         let accountType = "0"
-        sleep(1)
+//        sleep(1)
         UserService.shared.getPersonalData(account: Global.ACCOUNT,
                                            pw: Global.ACCOUNT_PASSWORD,
                                            accountType: accountType) { success, response in
@@ -126,6 +134,13 @@ class MemberNavigationViewController: UINavigationController {
     func toTicketViewController() {
         let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
         pushViewController(controller, animated: true)
+    }
+}
+extension MemberNavigationViewController: MemberCenterViewControllerDelegate {
+    func didTappedLogin(_ viewController: MemberCenterViewController) {
+        let vc = LoginViewController_1()
+        vc.delegate = self
+        pushViewController(vc, animated: true)
     }
 }
 // MARK: - SignUp1 Delegate(進入第二頁面填寫認證碼、密碼)
@@ -177,8 +192,6 @@ extension MemberNavigationViewController: LoginViewController_1_Delegate {
             let vc = StoreAppViewController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
-//            vc.delegate = self
-//            self.setViewControllers([vc], animated: true)
         }
     }
     func showStoreID(_ viewController: LoginViewController_1) {
@@ -206,6 +219,7 @@ extension MemberNavigationViewController: ForgotPasswordViewController_2_Delegat
 extension MemberNavigationViewController: StoreIDSelectViewControllerDelegate {
     func didDismissAndPassStoreID(_ viewController: StoreIDSelectViewController, storeIDInfo: StoreIDInfo) {
         let vc = LoginViewController_1()
+        vc.delegate = self
 //        vc.storeIDs = storeIDInfo
         setViewControllers([vc], animated: false)
     }

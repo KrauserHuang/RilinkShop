@@ -26,14 +26,14 @@ class UsedTicketViewController: UIViewController {
             }
         }
     }
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
     var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViiew.rowHeight = 101
+        tableViiew.rowHeight = 120
         tableViiew.register(UINib(nibName: "UsedTableViewCell", bundle: nil), forCellReuseIdentifier: "UsedTableViewCell")
         tableViiew.delegate = self
         tableViiew.dataSource = self

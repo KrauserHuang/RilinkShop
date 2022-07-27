@@ -42,8 +42,6 @@ class MyOrderTableViewCell: UITableViewCell {
         orderNo.text = "訂單編號：\(model.orderNo)"
         orderDate.text = "訂單日期：\(model.orderDate)"
         orderMoney.text = "訂單金額：\(model.orderAmount)"
-//        payStatusLabel.text = "訂單狀態：\(model.orderStatus)"
-//        payStatusLabel.text = "付款狀態：\(model.payStatus)"
         // 付款狀態
         switch model.payStatus {
         case "0":
@@ -57,7 +55,6 @@ class MyOrderTableViewCell: UITableViewCell {
             } else {
                 payStatusLabel.text = "付款狀態：店家派發"
             }
-            payStatusLabel.text = "付款狀態：付款完成"
             payImmediateButton.alpha = 0
             payImmediateButton.isUserInteractionEnabled = false
         default:

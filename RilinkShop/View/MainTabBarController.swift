@@ -17,23 +17,20 @@ class MainTabBarController: UITabBarController {
         tabBar.tintColor = Theme.customOrange
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print(#function)
+        print("MainTabBarController + \(#function)")
         print("didLogin:\(UserService.shared.didLogin)")
         print("userAccount:\(MyKeyChain.getAccount())")
-        print("adminAccount:\(MyKeyChain.getBossAccount())")
+//        print("adminAccount:\(MyKeyChain.getBossAccount())")
         
         if UserService.shared.didLogin {
+            print("main_didLogIn")
             tryLogIn()
         } else {
             UserService.shared.renewUser = {
+                print("main_renewUser")
                 self.tryLogIn()
             }
         }
@@ -55,28 +52,7 @@ class MainTabBarController: UITabBarController {
         }
         else if MyKeyChain.getAccount() == nil,
                   MyKeyChain.getBossAccount() == nil {
-            self.selectedIndex = 3
-        }
-    }
-    // MARK: - 跳會員首頁(MemberCenterViewController)
-    func showRoot(animated: Bool) {
-        guard let memberCenterTVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as? MemberCenterViewController else {
-            print("showRoot失敗")
-            return
-        }
-        if MyKeyChain.getBossAccount() != nil {
-            let vc = StoreAppViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
-        } else {
-//            memberCenterTVC.delegate = self
-//            pushViewController(memberCenterTVC, animated: animated)
-            dismiss(animated: true, completion: nil)
-            self.selectedIndex = 3
-//            let memberNavC = self.selectedViewController as? MemberNavigationViewController
-//            memberNavC?.popToRootViewController(animated: false)
-//            if let memberCenterTVC =
-            viewControllers = [memberCenterTVC]
+            selectedIndex = 3
         }
     }
 }
@@ -84,15 +60,6 @@ class MainTabBarController: UITabBarController {
 extension MainTabBarController:  UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         tryLogIn()
-//        if Global.ACCOUNT == "" {
-//            Alert.showMessage(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
-//            return
-//        }
-        guard Global.ACCOUNT != "" else {
-            tabBar.isUserInteractionEnabled = false
-            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
-            return
-        }
         guard let MainTabViewControllers = self.viewControllers else {
             print("no valid viewControllers in MainTabBarController.")
             return
@@ -102,44 +69,10 @@ extension MainTabBarController:  UITabBarControllerDelegate {
             return
         }
         rootVC.popToRootViewController(animated: false)
-    }
-}
-
-extension MainTabBarController: LoginViewController_1_Delegate {
-    func finishLoginView(_ viewController: LoginViewController_1, action: finishLoginViewWith) {
-        switch action {
-        case .Login:
-//            loadUserData()
-            showRoot(animated: true)
-        case .Forget:
-            let vc = ForgotPasswordViewController_1()
-            vc.delegate = self
-            present(vc, animated: true, completion: nil)
-        case .Singup:
-            let vc = SignUpViewController_1()
-            vc.delegate = self
-            present(vc, animated: true, completion: nil)
-        case .BossLogIn:
-            showRoot(animated: true)
-            let vc = StoreAppViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
+        if Global.ACCOUNT == "" {
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self) {
+                self.selectedIndex = 3
+            }
         }
-    }
-    
-    func showStoreID(_ viewController: LoginViewController_1) {
-        // do nothing
-    }
-}
-
-extension MainTabBarController: ForgotPasswordViewController_1_Delegate {
-    func finishViewWith(tempAccount: String) {
-        // do nothing
-    }
-}
-
-extension MainTabBarController: SignUpViewController_1_Delegate {
-    func finishSignup1WithSubmitCode(_ viewController: SignUpViewController_1, resultType: Int) {
-        // nothing
     }
 }

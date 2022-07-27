@@ -58,6 +58,23 @@ class Alert {
         vc.present(alert, animated: true, completion: nil)
     }
     
+    class func showLogout(title: String?, msg: String?, vc: UIViewController, handler: @escaping Handler) {
+        
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        
+        let logout = UIAlertAction(title: "登出", style: .destructive) { (action) in
+            handler()
+        }
+        
+        let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        
+        alert.addAction(logout)
+        alert.addAction(cancel)
+        vc.present(alert, animated: true, completion: nil)
+    }
+    
     class func showMessage(title: String?, msg: String, vc: UIViewController, handler: Handler? = nil) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
                 

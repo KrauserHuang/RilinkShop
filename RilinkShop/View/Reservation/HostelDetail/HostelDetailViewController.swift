@@ -46,10 +46,10 @@ class HostelDetailViewController: UIViewController {
         nameView.layer.shadowOpacity = 0.2
         nameView.layer.shadowOffset = CGSize(width: 2, height: -2)
         
-//        openTimeView.layer.cornerRadius = 10
-//        openTimeView.layer.shadowColor = UIColor.black.cgColor
-//        openTimeView.layer.shadowOpacity = 0.2
-//        openTimeView.layer.shadowOffset = CGSize(width: 2, height: -2)
+        openTimeView.layer.cornerRadius = 10
+        openTimeView.layer.shadowColor = UIColor.black.cgColor
+        openTimeView.layer.shadowOpacity = 0.2
+        openTimeView.layer.shadowOffset = CGSize(width: 2, height: -2)
         
         descriptionView.layer.cornerRadius = 10
         descriptionView.layer.shadowColor = UIColor.black.cgColor

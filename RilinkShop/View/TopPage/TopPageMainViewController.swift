@@ -32,8 +32,8 @@ class TopPageMainViewController: UIViewController {
     private lazy var optionDataSource = configureOptionDataSource()
     private lazy var packageDataSource = configurePackageDataSource()
     
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
     
     var currentIndex = 0
     var timer: Timer?
@@ -151,7 +151,7 @@ class TopPageMainViewController: UIViewController {
 }
 
 extension TopPageMainViewController {
-    // MARK: - Store DiffableDataSource/Snapshot
+    // MARK: - Store DiffableDataSource/Snapshot/Compositional Layout
     func configureStoreDataSource() -> StoreDataSource {
         let dataSource = StoreDataSource(collectionView: storeCollectionView) { collectionView, indexPath, store in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageStoreCollectionViewCell
@@ -169,7 +169,22 @@ extension TopPageMainViewController {
         
         storeDataSource.apply(snapshot, animatingDifferences: false)
     }
-    // MARK: - Package DiffableDataSource/Snapshot
+    func createStoreScrollLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(1))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPagingCentered
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    // MARK: - Package DiffableDataSource/Snapshot/Compositional Layout
     func configurePackageDataSource() -> PackageDataSource {
         let dataSource = PackageDataSource(collectionView: packageCollectionView) { collectionView, indexPath, package in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPagePackageCollectionViewCell
@@ -187,23 +202,6 @@ extension TopPageMainViewController {
         
         packageDataSource.apply(snapshot, animatingDifferences: false)
     }
-    // MARK: - Store Compositional Layout
-    func createStoreScrollLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(1))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
-    }
-    // MARK: - Package Compositional Layout
     func createGridLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1))
@@ -211,10 +209,10 @@ extension TopPageMainViewController {
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .absolute(260.0))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+//        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         
         let section = NSCollectionLayoutSection(group: group)
-//        section.orthogonalScrollingBehavior = .continuous
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout

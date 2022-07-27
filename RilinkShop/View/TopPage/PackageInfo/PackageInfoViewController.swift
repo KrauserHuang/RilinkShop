@@ -45,8 +45,8 @@ class PackageInfoViewController: UIViewController {
     let minValue = 1
     let stepValue = 1
     var stock = Int()
-    let account = MyKeyChain.getAccount() ?? ""
-    let password = MyKeyChain.getPassword() ?? ""
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
     var spec = PackageOrProduct.package
     var productNo = String()
     var producrPrice = String()
@@ -63,6 +63,7 @@ class PackageInfoViewController: UIViewController {
     }
     
     func configureView() {
+        packageImageView.layer.cornerRadius = 10
         // stepper外圍
         stepperOuterView.backgroundColor = .systemGray6
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
