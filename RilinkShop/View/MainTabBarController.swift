@@ -20,9 +20,9 @@ class MainTabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("MainTabBarController + \(#function)")
-        print("didLogin:\(UserService.shared.didLogin)")
-        print("userAccount:\(MyKeyChain.getAccount())")
+//        print("MainTabBarController + \(#function)")
+//        print("didLogin:\(UserService.shared.didLogin)")
+//        print("userAccount:\(MyKeyChain.getAccount())")
 //        print("adminAccount:\(MyKeyChain.getBossAccount())")
         
         if UserService.shared.didLogin {
@@ -47,8 +47,17 @@ class MainTabBarController: UITabBarController {
                   MyKeyChain.getAccount() != nil {
             // 登入使用者頁面
             selectedIndex = 0
-            Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
-            Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
+//            Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
+//            Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
+            print("MainTabBarController + \(#function)")
+            print("Account:\(Global.ACCOUNT)")
+            print("Password:\(Global.ACCOUNT_PASSWORD)")
+            print("-----------------------------------")
+            print("Account:\(MyKeyChain.getAccount())")
+            print("Password:\(MyKeyChain.getPassword())")
+            print("-----------------------------------")
+            print("Account:\(UserService.shared.id)")
+            print("Password:\(UserService.shared.pwd)")
         }
         else if MyKeyChain.getAccount() == nil,
                   MyKeyChain.getBossAccount() == nil {
@@ -69,7 +78,7 @@ extension MainTabBarController:  UITabBarControllerDelegate {
             return
         }
         rootVC.popToRootViewController(animated: false)
-        if Global.ACCOUNT == "" {
+        if UserService.shared.id == "" {
             Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self) {
                 self.selectedIndex = 3
             }

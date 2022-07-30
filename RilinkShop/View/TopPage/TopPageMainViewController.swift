@@ -7,6 +7,31 @@
 
 import UIKit
 
+enum Options: Int, CaseIterable {
+    case newCar = 0
+    case secondhandCar = 1
+    case repair = 2
+    case rent = 3
+    case accessory = 4
+}
+
+extension Options {
+    var urlString: String {
+        switch self {
+        case .newCar:
+            return "https://www.hsinhungchia.com/brand-type/"
+        case .secondhandCar:
+            return "https://rilink.shopstore.tw/category/%E4%B8%AD%E5%8F%A4%E8%BB%8A"
+        case .repair:
+            return "https://www.hsinhungchia.com/brand-place/"
+        case .rent:
+            return "https://rilink.shopstore.tw/category/%E7%A7%9F%E8%BB%8A%E6%9C%8D%E5%8B%99"
+        case .accessory:
+            return "https://rilink.shopstore.tw/"
+        }
+    }
+}
+
 class TopPageMainViewController: UIViewController {
 
     @IBOutlet weak var storeCollectionView: UICollectionView!
@@ -20,6 +45,7 @@ class TopPageMainViewController: UIViewController {
     var stores = [Store]()
     var packages = [Package]()
     let optionImages = ["新車", "二手車", "維修保養", "機車租賃", "精品配件"]
+    var optionDidPicked = Options.newCar
     
     typealias StoreDataSource = UICollectionViewDiffableDataSource<Section, Store>
     typealias StoreSnapshot = NSDiffableDataSourceSnapshot<Section, Store>
@@ -32,8 +58,8 @@ class TopPageMainViewController: UIViewController {
     private lazy var optionDataSource = configureOptionDataSource()
     private lazy var packageDataSource = configurePackageDataSource()
     
-    var account = MyKeyChain.getAccount() ?? ""
-    var password = MyKeyChain.getPassword() ?? ""
+//    var account = MyKeyChain.getAccount() ?? ""
+//    var password = MyKeyChain.getPassword() ?? ""
     
     var currentIndex = 0
     var timer: Timer?
@@ -43,6 +69,16 @@ class TopPageMainViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         initUI()
+        
+        print("TopPageMainViewController " + #function)
+        print("GlobalAccount:\(Global.ACCOUNT)")
+        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
+        print("-----------------------------------")
+        print("MyKeychainAccount:\(MyKeyChain.getAccount())")
+        print("MyKeychainPassword:\(MyKeyChain.getPassword())")
+        print("-----------------------------------")
+        print("UserServiceAccount:\(UserService.shared.id)")
+        print("UserServicePassword:\(UserService.shared.pwd)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,14 +87,20 @@ class TopPageMainViewController: UIViewController {
         tabBarController?.hidesBottomBarWhenPushed = false
         tabBarController?.tabBar.isHidden = false
         
+//        updateStoreSnapshot()
+//        updateOptionSnapshot()
+//        updatePackageSnapshot()
+//        initUI()
+//        configureCollectionView()
+        loadStore()
+        loadPackage()
+        
         timer = Timer.scheduledTimer(timeInterval: 3.0,
                                      target: self,
                                      selector: #selector(storeCollectionViewAutoScroll),
                                      userInfo: nil,
                                      repeats: true)
-        updateStoreSnapshot()
-        updatePackageSnapshot()
-        updateOptionSnapshot()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -71,9 +113,10 @@ class TopPageMainViewController: UIViewController {
     
     func initUI() {
         navigationItems()
+        configureCollectionView()
+//        loadData()
         loadStore()
         loadPackage()
-        configureCollectionView()
     }
     
     func navigationItems() {
@@ -132,20 +175,54 @@ class TopPageMainViewController: UIViewController {
         }
     }
     
-    func loadPackage() {
-        ProductService.shared.loadPackageList(id: account,
-                                              pwd: password) { packagesResponse in
-            let wholePackages = packagesResponse
-            self.packages = wholePackages
+    func loadData() {
+        HUD.showLoadingHUD(inView: self.view, text: "")
+        let queueGroup = DispatchGroup()
+        queueGroup.enter()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            StoreService.shared.getStoreList(id: Global.ACCOUNT,
+                                             pwd: Global.ACCOUNT_PASSWORD) { storesResponse in
+                let wholeStores = storesResponse
+                self.stores = wholeStores
+                queueGroup.leave()
+            }
+            queueGroup.enter()
+            ProductService.shared.loadPackageList(id: Global.ACCOUNT,
+                                                  pwd: Global.ACCOUNT_PASSWORD) { packagesResponse in
+                let wholePackages = packagesResponse
+                self.packages = wholePackages
+                queueGroup.leave()
+            }
+        }
+        HUD.hideLoadingHUD(inView: self.view)
+        
+        queueGroup.notify(queue: DispatchQueue.main) {
+
+            self.updateStoreSnapshot()
             self.updatePackageSnapshot()
         }
     }
+    
+    func loadPackage() {
+//        HUD.showLoadingHUD(inView: self.view, text: "")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                                  pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
+                let wholePackages = packagesResponse
+                self.packages = wholePackages
+                self.updatePackageSnapshot()
+            }
+        }
+//        HUD.hideLoadingHUD(inView: self.view)
+    }
     func loadStore() {
-        StoreService.shared.getStoreList(id: account,
-                                         pwd: password) { storesResponse in
-            let wholeStores = storesResponse
-            self.stores = wholeStores
-            self.updateStoreSnapshot()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                             pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { storesResponse in
+                let wholeStores = storesResponse
+                self.stores = wholeStores
+                self.updateStoreSnapshot()
+            }
         }
     }
 }
@@ -264,7 +341,25 @@ extension TopPageMainViewController: UICollectionViewDelegate {
             hostelDetailVC.fixmotor = store.fixmotor
             navigationController?.pushViewController(hostelDetailVC, animated: true)
         case optionCollectionView:
-            Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
+            var urlString = ""
+            switch indexPath.row {
+            case 0:
+                optionDidPicked = .newCar
+            case 1:
+                optionDidPicked = .secondhandCar
+            case 2:
+                optionDidPicked = .repair
+            case 3:
+                optionDidPicked = .rent
+            default:
+                optionDidPicked = .accessory
+            }
+            urlString = optionDidPicked.urlString
+            print("urlString:\(urlString)")
+            let wkWebVC = WKWebViewController()
+            wkWebVC.delegate = self
+            wkWebVC.urlStr = urlString
+            navigationController?.pushViewController(wkWebVC, animated: true)
         case packageCollectionView:
             let package = packages[indexPath.item]
             let packageInfoVC = PackageInfoViewController()
@@ -273,5 +368,11 @@ extension TopPageMainViewController: UICollectionViewDelegate {
         default:
             break
         }
+    }
+}
+// MARK: - WKWebViewControllerDelegate
+extension TopPageMainViewController: WKWebViewControllerDelegate {
+    func backAction(_ viewController: WKWebViewController) {
+        navigationController?.popToRootViewController(animated: true)
     }
 }

@@ -99,7 +99,7 @@ class MemberNavigationViewController: UINavigationController {
         print("GlobalPASSWORD:\(Global.ACCOUNT_PASSWORD)")
         
         let accountType = "0"
-//        sleep(1)
+        sleep(1)
         UserService.shared.getPersonalData(account: Global.ACCOUNT,
                                            pw: Global.ACCOUNT_PASSWORD,
                                            accountType: accountType) { success, response in

@@ -213,6 +213,11 @@ class LoginViewController_1: UIViewController {
         
         Global.ACCOUNT = account
         Global.ACCOUNT_PASSWORD = password
+        MyKeyChain.setAccount(account)
+        MyKeyChain.setPassword(password)
+        UserService.shared.id = account
+        UserService.shared.pwd = password
+        
         print(#function)
         print("password:\(password)")
         print("globalpassword:\(Global.ACCOUNT_PASSWORD)")

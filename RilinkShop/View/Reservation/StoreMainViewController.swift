@@ -44,16 +44,29 @@ class StoreMainViewController: UIViewController {
             }
         }
     }
-    var account = MyKeyChain.getAccount() ?? ""
-    var password = MyKeyChain.getPassword() ?? ""
+//    var account = MyKeyChain.getAccount() ?? ""
+//    var password = MyKeyChain.getPassword() ?? ""
 //    let account = Global.ACCOUNT
 //    let password = Global.ACCOUNT_PASSWORD
+//    let account = UserService.shared.id
+//    let password = UserService.shared.pwd
+    
     let dropDown = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initUI()
+        
+        print("StoreMainViewController " + #function)
+        print("GlobalAccount:\(Global.ACCOUNT)")
+        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
+        print("-----------------------------------")
+        print("KeyChainAccount:\(MyKeyChain.getAccount())")
+        print("KeyChainPassword:\(MyKeyChain.getPassword())")
+        print("-----------------------------------")
+        print("UserServiceAccount:\(UserService.shared.id)")
+        print("UserServicePassword:\(UserService.shared.pwd)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,10 +112,12 @@ class StoreMainViewController: UIViewController {
     }
     
     func loadStoreType() {
-        HUD.showLoadingHUD(inView: self.view, text: "")
-        StoreService.shared.getStoreType(id: account,
-                                         pwd: password) { responseTypes in
-            HUD.hideLoadingHUD(inView: self.view)
+//        HUD.showLoadingHUD(inView: self.view, text: "")
+        StoreService.shared.getStoreType(id: UserService.shared.id,
+                                         pwd: UserService.shared.pwd) { responseTypes in
+//        StoreService.shared.getStoreType(id: account,
+//                                         pwd: password) { responseTypes in
+//            HUD.hideLoadingHUD(inView: self.view)
             var isFirstType = true
             let sortedTypes = responseTypes.sorted { $0.updateTime > $1.updateTime }
             self.types = sortedTypes.map {
@@ -122,18 +137,23 @@ class StoreMainViewController: UIViewController {
     
     func loadStoreList() {
         HUD.showLoadingHUD(inView: self.view, text: "載入店家中")
-        StoreService.shared.getStoreList(id: account,
-                                         pwd: password) { responseStores in
+//        print("StoreMainViewController" + #function)
+//        print("account: \(UserService.shared.id)")
+//        print("password: \(UserService.shared.pwd)")
+        StoreService.shared.getStoreList(id: UserService.shared.id,
+                                         pwd: UserService.shared.pwd) { responseStores in
+//        StoreService.shared.getStoreList(id: account,
+//                                         pwd: password) { responseStores in
             HUD.hideLoadingHUD(inView: self.view)
             self.stores = responseStores
             
             self.filteredStores = self.stores.filter { store in
                 store.storeType == self.types.first?.type.id
             }
-            print(#function)
-            print("stores:\(self.stores)")
-            print("++++++++++++++++++++")
-            print("filteredStores:\(self.filteredStores)")
+//            print(#function)
+//            print("stores:\(self.stores)")
+//            print("++++++++++++++++++++")
+//            print("filteredStores:\(self.filteredStores)")
             self.updateSnapshot()
         }
     }
@@ -148,9 +168,9 @@ class StoreMainViewController: UIViewController {
         for typeModel in typeModels {
             typeModelNames.append(typeModel.type.name)
         }
-        print(#function)
-        print("typeModels:\(typeModels)")
-        print("typeNames:\(typeNames)")
+//        print(#function)
+//        print("typeModels:\(typeModels)")
+//        print("typeNames:\(typeNames)")
 //        dropDown.dataSource = typeNames // types裡所有的name
         dropDown.dataSource = typeModelNames
         dropDown.anchorView = storeTypeButton // drop down list會顯示在所設定的view下(這裡指button)

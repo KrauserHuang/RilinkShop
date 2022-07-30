@@ -25,6 +25,7 @@ class UserService {
                   didLogin = true
                   return
               }
+//        loadUser(account: account, password: password)
         getPersonalData(account: account, pw: password, accountType: "0") { success, response in
             guard success else {
                 self.renewUser?()
@@ -32,13 +33,50 @@ class UserService {
             }
             Global.personalData = response as? User
             self.user = Global.personalData
+            self.id = account
+            self.pwd = password
 
             self.didLogin = true
             self.renewUser?()
         }
     }
+    
+    private func loadUser(account: String, password: String) {
+        print("UserService " + #function)
+        print("account:\(account)\npassword:\(password)")
+        let url = SHOP_API_URL + URL_USERLOGIN
+        let parameters = [
+            "member_id": account,
+            "member_pwd": password
+        ]
+        
+        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+            switch response.result {
+            case .success(let value) :
+                let json = JSON(value)
+                print(json)
+                self.setUser(account: account, password: password, from: json.rawValue as! [ String: Any])
+            case .failure(let error) :
+                print(error)
+                self.renewUser?()
+            }
+        }
+    }
+    
+    private func setUser(account: String, password: String, from dict: [String: Any]) {
+        print("UserService " + #function)
+        print("account:\(account)\npassword:\(password)")
+    }
+    
+    func reloadUser() {
+        print("UserService " + #function)
+        guard let user = user else { return }
+//        loadUser(id: user.memberId, pw: user.password)
+    }
     // MARK: - 使用者登入Login
     func userLogin(id: String, pwd: String, completed: @escaping Completion) {
+        print("UserService " + #function)
+        print("account:\(id)\npassword:\(pwd)")
         let url = SHOP_API_URL + URL_USERLOGIN
         let parameters = [
             "member_id": id,
@@ -47,8 +85,8 @@ class UserService {
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
         
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-            print("------------------------")
-            print(response)
+//            print("------------------------")
+//            print(response)
             guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
@@ -61,6 +99,11 @@ class UserService {
             
             switch response.result {
             case .success:
+                MyKeyChain.setAccount(id)
+                MyKeyChain.setPassword(pwd)
+                self.id = id
+                self.pwd = pwd
+                
                 guard value["code"].stringValue == returnCode else {
                     let errorMsg = value["responseMessage"].stringValue
                     completed(false, errorMsg as AnyObject)
@@ -75,8 +118,6 @@ class UserService {
                         return
                     }
                     Global.personalData = response as? User
-                    MyKeyChain.setAccount(id)
-                    MyKeyChain.setPassword(pwd)
                     self.user = Global.personalData
                     self.didLogin = true
                     self.renewUser = { completed(true, "" as AnyObject) }
@@ -98,8 +139,8 @@ class UserService {
         ]
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: UserResponse.self) { response in
             
-            print(#function)
-            print(response.value)
+//            print(#function)
+//            print(response.value)
             
             guard response.value != nil else {
                 print(response.error as Any)
@@ -545,15 +586,15 @@ class UserService {
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             
             guard response.value != nil else {
-                print(#function)
+//                print(#function)
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
             
             let value = JSON(response.value!)
-            print(#function)
-            print(value)
+//            print(#function)
+//            print(value)
             
             switch response.result {
             case .success:
@@ -572,7 +613,7 @@ class UserService {
                     storeIDs.append(storeID)
                 }
                 
-                print(storeIDs)
+//                print(storeIDs)
                 completed(true, storeIDs as AnyObject)
             case .failure:
                 let message = value["responseMessage"].stringValue
@@ -599,7 +640,7 @@ class UserService {
             }
 
             let value = JSON(response.value!)
-            print(#function)
+//            print(#function)
 //            print(value)
             
             switch response.result {
@@ -618,7 +659,7 @@ class UserService {
                                      storeDescript: value["store_descript"].stringValue,
                                      storeOpentime: value["store_opentime"].stringValue,
                                      storePicture: value["store_picture"].stringValue)
-                print("info:\(info)")
+//                print("info:\(info)")
                 completed(true, info as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue
@@ -642,7 +683,7 @@ class UserService {
                 return
             }
             
-            print(#function)
+//            print(#function)
             
             switch response.result {
             case .success:

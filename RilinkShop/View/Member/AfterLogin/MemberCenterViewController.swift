@@ -25,8 +25,8 @@ class MemberCenterViewController: UIViewController {
     
     var tableViewController: ContainerMemberCenterTableViewController?
     var user: User?
-    var account = Global.ACCOUNT
-    var password = Global.ACCOUNT_PASSWORD
+//    var account = Global.ACCOUNT
+//    var password = Global.ACCOUNT_PASSWORD
     
     var delegate: MemberCenterViewControllerDelegate?
 
@@ -38,15 +38,25 @@ class MemberCenterViewController: UIViewController {
         tableViewController?.delegate = self
         
         initUI()
+        
+        print("MemberCenterViewController " + #function)
+        print("GlobalAccount:\(Global.ACCOUNT)")
+        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
+        print("-----------------------------------")
+        print("KeyChainAccount:\(MyKeyChain.getAccount())")
+        print("KeyChainPassword:\(MyKeyChain.getPassword())")
+        print("-----------------------------------")
+        print("UserServiceAccount:\(UserService.shared.id)")
+        print("UserServicePassword:\(UserService.shared.pwd)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        print("MemberCenterViewController + \(#function)")
-        print("ACCOUNT:\(Global.ACCOUNT)")
-        print("PASSWORD:\(Global.ACCOUNT_PASSWORD)")
+//        print("MemberCenterViewController + \(#function)")
+//        print("ACCOUNT:\(Global.ACCOUNT)")
+//        print("PASSWORD:\(Global.ACCOUNT_PASSWORD)")
         
         if Global.ACCOUNT != "" {
             loginButton.setTitle("登出", for: .normal)
@@ -99,8 +109,8 @@ class MemberCenterViewController: UIViewController {
         let accountType = "0"
 //        sleep(1)
         HUD.showLoadingHUD(inView: self.view, text: "")
-        UserService.shared.getPersonalData(account: account,
-                                           pw: password,
+        UserService.shared.getPersonalData(account: MyKeyChain.getAccount() ?? "",
+                                           pw: MyKeyChain.getPassword() ?? "",
                                            accountType: accountType) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
@@ -134,7 +144,7 @@ class MemberCenterViewController: UIViewController {
     func uploadImage() {
         if let image = userImage.image {
             HUD.showLoadingHUD(inView: self.view, text: "")
-            UserService.shared.uploadImage(imgtitle: account,
+            UserService.shared.uploadImage(imgtitle: MyKeyChain.getAccount() ?? "",
                                            cmdImageFile: image) { success, response in
                 DispatchQueue.global(qos: .userInitiated).async {
                     URLCache.shared.removeAllCachedResponses()

@@ -59,13 +59,23 @@ class ShopMainViewController: UIViewController {
     }
     let dropDown = DropDown()
     
-    var account = MyKeyChain.getAccount() ?? ""
-    var password = MyKeyChain.getPassword() ?? ""
+//    var account = MyKeyChain.getAccount() ?? ""
+//    var password = MyKeyChain.getPassword() ?? ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initUI()
+        
+        print("ShopMainViewController " + #function)
+        print("GlobalAccount:\(Global.ACCOUNT)")
+        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
+        print("-----------------------------------")
+        print("KeyChainAccount:\(MyKeyChain.getAccount())")
+        print("KeyChainPassword:\(MyKeyChain.getPassword())")
+        print("-----------------------------------")
+        print("UserServiceAccount:\(UserService.shared.id)")
+        print("UserServicePassword:\(UserService.shared.pwd)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,8 +131,8 @@ class ShopMainViewController: UIViewController {
     }
     
     func loadProductType() {
-        ProductService.shared.getProductType(id: account,
-                                             pwd: password) { responseCategories in
+        ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? "",
+                                             pwd: MyKeyChain.getPassword() ?? "") { responseCategories in
             var isFirstCategory = true
             let packageCategory = Category(pid: "", productType: "", productTypeName: "套票")
             var wholeCategories = responseCategories
@@ -144,14 +154,17 @@ class ShopMainViewController: UIViewController {
     
     func loadProductList() {
         HUD.showLoadingHUD(inView: self.view, text: "載入商品中")
-        ProductService.shared.loadProductList(id: account,
-                                              pwd: password) { responseProducts in
+        print("ShopMainViewController" + #function)
+        print("account: \(UserService.shared.id)")
+        print("password: \(UserService.shared.pwd)")
+        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? "",
+                                              pwd: MyKeyChain.getPassword() ?? "") { responseProducts in
             HUD.hideLoadingHUD(inView: self.view)
             let wholeProducts = responseProducts
             self.products = wholeProducts
             
-            ProductService.shared.loadPackageList(id: self.account,
-                                                  pwd: self.password) { packagesResponse in
+            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? "",
+                                                  pwd: MyKeyChain.getPassword() ?? "") { packagesResponse in
                 let wholePackages = packagesResponse
                 self.packages = wholePackages
                 
