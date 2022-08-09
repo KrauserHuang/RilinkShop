@@ -17,9 +17,9 @@ class ReservationTableViewCell: UITableViewCell {
     @IBAction func reservationAction(_ sender: UIButton) {
         closure?()
     }
-    
-    var closure: (()->())?
-    
+
+    var closure: (() -> Void)?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,5 +30,5 @@ class ReservationTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

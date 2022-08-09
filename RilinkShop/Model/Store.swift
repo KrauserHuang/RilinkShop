@@ -27,7 +27,7 @@ struct Store: Codable, Hashable {
     var storePicture: String = ""
     var fixmotor: String = ""
     var storeTypeName: String = ""
-    
+
     enum CodingKeys: String, CodingKey {
         case storeID = "store_id"
         case storeType = "store_type"

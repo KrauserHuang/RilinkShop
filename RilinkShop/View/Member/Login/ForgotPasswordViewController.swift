@@ -10,7 +10,7 @@ import UIKit
 class ForgotPasswordViewController: UIViewController {
 
     let tool = Tool()
-    
+
     @IBOutlet weak var numberTF: UITextField!
     @IBOutlet weak var vertifyTF: UITextField!
     @IBOutlet weak var getVertify: UIButton!
@@ -27,7 +27,7 @@ class ForgotPasswordViewController: UIViewController {
         if passwordTF.isSecureTextEntry {
             visibleBtn.setImage(UIImage(named: "eye"), for: .normal)
             passwordTF.isSecureTextEntry = false
-        }else{
+        } else {
             visibleBtn.setImage(UIImage(named: "eyeSlash"), for: .normal)
             passwordTF.isSecureTextEntry = true
         }
@@ -37,9 +37,9 @@ class ForgotPasswordViewController: UIViewController {
         if passwordTF2.isSecureTextEntry {
             visibleBtn2.setImage(UIImage(named: "eye"), for: .normal)
             passwordTF2.isSecureTextEntry = false
-        }else{
+        } else {
             visibleBtn2.setImage(UIImage(named: "eyeSlash"), for: .normal)
-            
+
             passwordTF2.isSecureTextEntry = true
         }
     }
@@ -56,7 +56,7 @@ class ForgotPasswordViewController: UIViewController {
     @IBAction func sendAction(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -66,18 +66,18 @@ class ForgotPasswordViewController: UIViewController {
         tool.makeRoundedCornersButton(button: sendButton)
         sendButton.backgroundColor = Theme.customOrange
         sendButton.tintColor = .white
-        
+
     }
-    
-    @objc func cancelFocus(){
+
+    @objc func cancelFocus() {
         self.view.endEditing(true)
     }
-    
-    func hidekeyboard(){
+
+    func hidekeyboard() {
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(cancelFocus))
         tapGes.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapGes)
-        
+
     }
 
 }

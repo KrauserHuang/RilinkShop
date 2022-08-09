@@ -19,14 +19,14 @@ class SignUpViewController_2: UIViewController {
     @IBOutlet weak var passwordAgainTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var resendButton: UIButton!
-    
+
     var delegate: SignupViewController_2_Delegate?
     var edittingTextField: UITextField?
     let tool = Tool()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureKeyboard()
         tool.makeRoundedCornersButton(button: submitButton)
         submitButton.backgroundColor = Theme.customOrange
@@ -42,7 +42,7 @@ class SignUpViewController_2: UIViewController {
         passwordAgainTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -69,7 +69,7 @@ class SignUpViewController_2: UIViewController {
             }
             return
         }
-        
+
         let pw1 = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard pw1 != "" else {
             Alert.showMessage(title: "", msg: "請設定登入密碼", vc: self) {
@@ -77,7 +77,7 @@ class SignUpViewController_2: UIViewController {
             }
             return
         }
-        
+
         let pw2 = passwordAgainTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard pw2 != "" else {
             Alert.showMessage(title: "", msg: "請再次輸入密碼", vc: self) {
@@ -85,38 +85,38 @@ class SignUpViewController_2: UIViewController {
             }
             return
         }
-        
+
         guard pw1 == pw2 else {
             Alert.showMessage(title: "", msg: "請確認輸入密碼正確", vc: self) {
                 self.passwordAgainTextField.becomeFirstResponder()
             }
             return
         }
-        
+
 //        let action = ""  //非修改密碼
-        let action = "regpw" //第一次註冊
-        
+        let action = "regpw" // 第一次註冊
+
         Global.ACCOUNT_PASSWORD = pw1!
         MyKeyChain.setPassword(pw1!)
-        
+
         HUD.showLoadingHUD(inView: self.view, text: "驗證中")
         UserService.shared.verifyCode(action: action, account: Global.ACCOUNT, accountType: "0", registeCode: registeCode!, pw: pw1!, pw2: pw2!) { (success, response) in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
                     HUD.hideLoadingHUD(inView: self.view)
-                    
+
                     guard success else {
                         let errmsg = response as! String
                         Alert.showMessage(title: "", msg: errmsg, vc: self) {
                         }
                         return
                     }
-                    
+
                     Alert.showMessage(title: "", msg: "驗證成功", vc: self) {
-                        
+
                         Global.ACCOUNT_PASSWORD = pw1!
-                        
+
                         self.dismiss(animated: true) {
                             self.delegate?.finishSignup2With()
                         }
@@ -134,23 +134,23 @@ class SignUpViewController_2: UIViewController {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
                     HUD.hideLoadingHUD(inView: self.view)
-                 
+
                     guard success else {
                         let errmsg = response as! String
                         Alert.showMessage(title: "", msg: errmsg, vc: self) {
-                            
+
                         }
                         return
                     }
-                    
+
                     Alert.showMessage(title: "", msg: "已重送驗證碼", vc: self) {
-                        
+
                     }
                 }
             }
         }
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -161,7 +161,7 @@ extension SignUpViewController_2: UITextFieldDelegate {
         self.edittingTextField = textField
         return true
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == verifyCodeTextField {
             passwordTextField.becomeFirstResponder()

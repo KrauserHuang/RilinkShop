@@ -9,18 +9,18 @@ import Foundation
 import UIKit
 import SwiftUI
 
-class AlternateAlert: UIViewController{
-//popupWidth: self.view.frame.width - 32, popupHeight: self.view.frame.height * 0.5
-    
+class AlternateAlert: UIViewController {
+// popupWidth: self.view.frame.width - 32, popupHeight: self.view.frame.height * 0.5
+
 //    let successAlert = SuccessAlert()
-    
+
     let alternateImageView: UIImageView = {
         let theImageView = UIImageView()
             theImageView.image = UIImage(named: "alternate")
-            theImageView.translatesAutoresizingMaskIntoConstraints = false //You need to call this property so the image is added to your view
+            theImageView.translatesAutoresizingMaskIntoConstraints = false // You need to call this property so the image is added to your view
         return theImageView
     }()
-    
+
     let datelabel: UILabel = {
         let label = UILabel()
         label.text = "2021/04/10 星期六 14:00  候補第 1 位"
@@ -29,7 +29,7 @@ class AlternateAlert: UIViewController{
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     let remindLabel: UILabel = {
         let label = UILabel()
         label.text = "若有空位釋出時，將會以電話個別通知，再請留意來電，謝謝。"
@@ -40,8 +40,7 @@ class AlternateAlert: UIViewController{
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    
+
     let confirmButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 10/255, green: 109/255, blue: 160/255, alpha: 1)
@@ -50,7 +49,7 @@ class AlternateAlert: UIViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     let addMoreReservationButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = UIColor.white
@@ -60,10 +59,10 @@ class AlternateAlert: UIViewController{
         button.setTitle("添加更多預約", for: .normal)
         button.layer.cornerRadius = 22.5
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return button
     }()
-    
+
     let cancelButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .clear
@@ -72,22 +71,21 @@ class AlternateAlert: UIViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        
+
         let objectArray: [ UIView] = [ alternateImageView, datelabel, remindLabel, confirmButton, addMoreReservationButton, cancelButton]
-        
-        for obj in objectArray{
+
+        for obj in objectArray {
             self.view.addSubview(obj)
         }
-        
+
         setImageView()
         setLabel()
         setButton()
 
-        
     }
     func setImageView() {
         alternateImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
@@ -95,8 +93,8 @@ class AlternateAlert: UIViewController{
         alternateImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         alternateImageView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
     }
-    
-    func setLabel(){
+
+    func setLabel() {
 //        datelabel
         datelabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         datelabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = true
@@ -105,8 +103,8 @@ class AlternateAlert: UIViewController{
         remindLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         remindLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
     }
-    
-    func setButton(){
+
+    func setButton() {
 //        confirmButton
         confirmButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
         confirmButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
@@ -123,5 +121,5 @@ class AlternateAlert: UIViewController{
         cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         cancelButton.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
     }
-    
+
 }

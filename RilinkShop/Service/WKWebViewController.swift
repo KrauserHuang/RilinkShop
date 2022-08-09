@@ -16,22 +16,22 @@ protocol WKWebViewControllerDelegate: AnyObject {
 class WKWebViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
-    
+
     weak var delegate: WKWebViewControllerDelegate?
     var urlStr = ""
     var orderNo = ""
 //    var rootVC = 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         configureWebView()
-        
+
         let config = webView.configuration
         config.userContentController.add(self, name: "AppFunc")
     }
-    
+
     private func configureWebView() {
         webView.navigationDelegate = self
         webView.uiDelegate = self
@@ -39,42 +39,33 @@ class WKWebViewController: UIViewController {
         print(urlStr)
         print(orderNo)
     }
-    
+
     private func loadWeb(urlStr: String) {
         guard let url = URL(string: urlStr) else { return }
         let request = URLRequest(url: url)
         webView.load(request)
     }
-    
+
     func toOrderList() {
-//        dismiss(animated: true) {
-//            self.tabBarController?.selectedIndex = 3
-////            self.navigationController?.popToRootViewController(animated: false)
-//            let memberNVC = self.tabBarController?.selectedViewController as? MemberNavigationViewController
-//            memberNVC?.popToRootViewController(animated: false)
-//
-//            if let myOderTVC = memberNVC?.viewControllers.compactMap({ $0 as? MyOrderTableViewController}).first {
-//                print("To MyOrderTVC")
-//                memberNVC?.pushViewController(myOderTVC, animated: true)
-//            }
-//        }
-       
         Alert.showMessage(title: "訂單已完成", msg: "請去\n會員中心  ➡  我的訂單\n查看", vc: self) {
             self.view.window?.rootViewController?.dismiss(animated: true, completion: {
-                self.tabBarController?.selectedIndex = 3
-                let memberNVC = self.tabBarController?.selectedViewController as? MemberNavigationViewController
-                memberNVC?.popToRootViewController(animated: false)
-                
-                if let myOderTVC = memberNVC?.viewControllers.compactMap({ $0 as? MyOrderTableViewController}).first {
-                    print("To MyOrderTVC")
-                    memberNVC?.pushViewController(myOderTVC, animated: true)
-                }
+//                self.tabBarController?.selectedIndex = 3
+//                let memberNVC = self.tabBarController?.selectedViewController as? MemberNavigationViewController
+//                memberNVC?.popToRootViewController(animated: false)
+//
+//                if let myOderTVC = memberNVC?.viewControllers.compactMap({ $0 as? MyOrderTableViewController}).first {
+//                    print("To MyOrderTVC")
+//                    memberNVC?.pushViewController(myOderTVC, animated: true)
+//                }
+                self.delegate?.backAction(self)
             })
         }
     }
     @IBAction func closeButtonPressed(_ sender: UIButton) {
         Alert.showMessage(title: "訂單已完成", msg: "請去\n會員中心  ➡  我的訂單\n查看", vc: self) {
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true) {
+                self.delegate?.backAction(self)
+            }
         }
     }
 }
@@ -99,15 +90,15 @@ extension WKWebViewController: WKNavigationDelegate, WKUIDelegate {
         }
         decisionHandler(.allow)
     }
-    
+
     func setLeftItem() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(goBack))
     }
-    
+
     @objc func goBack() {
         webView.goBack()
     }
-    
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if webView.canGoBack {
 //            if let navC = navigationController,
@@ -124,8 +115,7 @@ extension WKWebViewController: WKNavigationDelegate, WKUIDelegate {
                 setLeftItem()
                 print("you got a custom arrow!")
             }
-            
-            
+
         } else if let navC = navigationController,
                   navC.viewControllers.count > 1 {
             if let lastPage = navC.viewControllers.last {
@@ -145,7 +135,7 @@ extension WKWebViewController: WKNavigationDelegate, WKUIDelegate {
             print("you have nothing!")
         }
     }
-    
+
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         if webView.canGoBack {
             setLeftItem()
@@ -167,7 +157,7 @@ extension WKWebViewController: WKScriptMessageHandler {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print(error.localizedDescription)
     }
-    
+
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         print("didReceiveMessage: \(message.name)")
 //        switch message.name {

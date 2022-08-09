@@ -17,10 +17,10 @@ class CouponViewController: UIViewController {
         }
         containerViews[sender.selectedSegmentIndex].isHidden = false
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
-    
+
 }

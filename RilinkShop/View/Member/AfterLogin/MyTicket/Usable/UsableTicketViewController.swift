@@ -11,7 +11,7 @@ class UsableTicketViewController: UIViewController {
 
     @IBOutlet weak var tableViiew: UITableView!
     @IBOutlet weak var emptyView: UIView!
-    
+
     var tickets = [QRCode]() {
         didSet {
             DispatchQueue.main.async {
@@ -29,7 +29,7 @@ class UsableTicketViewController: UIViewController {
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
     var refreshControl = UIRefreshControl()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,18 +38,18 @@ class UsableTicketViewController: UIViewController {
         tableViiew.delegate = self
         tableViiew.dataSource = self
 //        tableViiew.allowsSelection = false
-        
+
         tableViiew.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshList), for: .valueChanged)
-        
+
         getTicket()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getTicket()
     }
-    
+
     func getTicket() {
         QRCodeService.shared.unconfirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
             QRCodeService.shared.unconfirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
@@ -60,7 +60,7 @@ class UsableTicketViewController: UIViewController {
 //                    print(package)
 //                    pack
 //                }
-                
+
                 self.tickets = productResponse + packageResponse
                 self.sortedTickets = self.tickets.sorted(by: { ticket1, ticket2 in
                     ticket1.orderDate > ticket2.orderDate
@@ -76,7 +76,7 @@ class UsableTicketViewController: UIViewController {
             }
         }
     }
-    
+
     @objc func refreshList() {
         self.refreshControl.beginRefreshing()
         QRCodeService.shared.unconfirmList(id: account, pwd: password, ispackage: "0") { productResponse in
@@ -97,26 +97,25 @@ class UsableTicketViewController: UIViewController {
     }
 }
 
-extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource{
+extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortedTickets.count
 //        return tickets.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UsableTableViewCell",for: indexPath) as! UsableTableViewCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UsableTableViewCell", for: indexPath) as! UsableTableViewCell
+
 //        let ticket = tickets[indexPath.row]
         let ticket = sortedTickets[indexPath.row]
         cell.configure(with: ticket)
-        
+
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        
+
 //        let ticket = tickets[indexPath.row]
         let ticket = sortedTickets[indexPath.row]
         if ticket.storeID != nil {
@@ -124,7 +123,7 @@ extension UsableTicketViewController: UITableViewDelegate, UITableViewDataSource
             let controller = TicketDetailViewController()
 //            let ticketWithQR = ticket.product?.filter({ $0.qrconfirm != nil })
 //            controller.ticket = ticketWithQR
-            controller.ticket = ticket //這裡的ticket變成商品資訊
+            controller.ticket = ticket // 這裡的ticket變成商品資訊
             navigationController?.pushViewController(controller, animated: true)
 //            present(controller, animated: true, completion: nil)
         } else {

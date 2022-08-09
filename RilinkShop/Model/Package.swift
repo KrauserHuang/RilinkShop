@@ -16,8 +16,7 @@ struct Package: Codable {
 //    let productStatus: String
     // for packageInfo
     var productStock: String = ""
-    
-    
+
     enum CodingKeys: String, CodingKey {
         case packageNo = "package_no"
         case productName = "product_name"
@@ -45,7 +44,7 @@ struct PackageInfo: Codable {
     var productStatus: String = ""
     var storeID: String = ""
     var qrcode: String = ""
-    
+
     enum CodingKeys: String, CodingKey {
             case rid
             case productNo = "product_no"

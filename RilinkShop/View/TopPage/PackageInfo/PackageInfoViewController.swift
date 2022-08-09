@@ -26,7 +26,7 @@ class PackageInfoViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var buyNowButton: UIButton!
-    
+
     var cartButton = UIBarButtonItem() {
         didSet {
             cartButton.image = UIImage(systemName: "cart")
@@ -51,17 +51,17 @@ class PackageInfoViewController: UIViewController {
     var productNo = String()
     var producrPrice = String()
     var productStockMin = String()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureView()
         showItemInfo()
         print("@@@@@!")
         print(package.packageNo)
         print(spec.rawValue)
     }
-    
+
     func configureView() {
         packageImageView.layer.cornerRadius = 10
         // stepper外圍
@@ -89,15 +89,15 @@ class PackageInfoViewController: UIViewController {
         buyNowButton.tintColor = .white
         buyNowButton.backgroundColor = Theme.customOrange
     }
-    
+
     func showItemInfo() {
         ProductService.shared.loadPackageInfo(id: account, pwd: password, no: package.packageNo) { packagesResponse in
             self.products = packagesResponse
-            //設定庫存，將package內的product的stock取出，並重整將stock最少的product擺在前面取出，最後變數stock將取出的最少庫存數量存入
+            // 設定庫存，將package內的product的stock取出，並重整將stock最少的product擺在前面取出，最後變數stock將取出的最少庫存數量存入
 //            let productStock = self.products.map { $0.productStock }
 //            self.productStockMin = productStock.sorted { $0 < $1 }.first!
 //            self.stock = Int(self.productStockMin)!
-            
+
 //            if self.stock == 0 {
 //                self.addToCartButton.isHidden = true
 //                self.buyNowButton.setTitle("備貨中", for: .normal)
@@ -114,22 +114,22 @@ class PackageInfoViewController: UIViewController {
         packageNameLabel.text = package.productName
         packageCostLabel.text = "NT$：\(package.productPrice)"
         descriptionLabel.text = package.productDescription
-        
+
         if self.stock == 0 {
             self.addToCartButton.isHidden = true
             self.buyNowButton.setTitle("備貨中", for: .normal)
             self.buyNowButton.backgroundColor = .lightGray
             self.buyNowButton.isUserInteractionEnabled = false
         } else {
-            //有庫存，沒事的
+            // 有庫存，沒事的
             print("stock:\(self.stock)")
         }
     }
-    
+
     @objc func cartButtonAction(_ sender: UIBarButtonItem) {
         print("連進商城喔！")
     }
-    
+
     @IBAction func itemNumberStepper(_ sender: UIButton) {
         if sender.tag == 0 {
             if itemNumber > minValue {
@@ -140,8 +140,7 @@ class PackageInfoViewController: UIViewController {
             print("stock:\(stock)")
             if itemNumber < stock {
                 itemNumber += stepValue
-            }
-            else {
+            } else {
                 Alert.showMessage(title: "超過庫存數量", msg: "", vc: self) {
                     //
                 }
@@ -168,14 +167,14 @@ class PackageInfoViewController: UIViewController {
                 DispatchQueue.global(qos: .userInitiated).async {
                     URLCache.shared.removeAllCachedResponses()
                     DispatchQueue.main.sync {
-                        
+
                         guard success else {
                             HUD.hideLoadingHUD(inView: self.view)
                             let errorMsg = response as! String
                             Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
                             return
                         }
-                        
+
                         HUD.hideLoadingHUD(inView: self.view)
                         let message = "新增購物車成功"
                         Alert.showMessage(title: "", msg: message, vc: self, handler: nil)
@@ -204,20 +203,20 @@ class PackageInfoViewController: UIViewController {
                 DispatchQueue.global(qos: .userInitiated).async {
                     URLCache.shared.removeAllCachedResponses()
                     DispatchQueue.main.sync {
-                        
+
                         guard success else {
                             HUD.hideLoadingHUD(inView: self.view)
                             let errorMsg = response as! String
                             Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
                             return
                         }
-                        
+
                         HUD.hideLoadingHUD(inView: self.view)
                         let message = "新增購物車成功"
                         Alert.showMessage(title: "", msg: message, vc: self) {
                             let vc = CartViewController()
                             self.navigationController?.pushViewController(vc, animated: true)
-                            
+
                         }
                     }
                 }

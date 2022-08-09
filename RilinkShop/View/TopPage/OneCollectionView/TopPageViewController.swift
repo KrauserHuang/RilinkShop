@@ -7,91 +7,91 @@
 
 import UIKit
 
-//fileprivate extension TopPageViewController {
+// fileprivate extension TopPageViewController {
 //    enum Section: Int, CaseIterable {
 //        case store
 //        case option
 //        case package
 //        case all
 //    }
-//}
+// }
 
 class TopPageViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    
+
     enum Section: String, CaseIterable {
         case store
 //        case option
         case package
 //        case all
     }
-    
+
     enum TopPageDataType: Hashable {
         case store(Store)
         case option(String)
         case package(Package)
     }
-    
+
     var stores = [Store]()
     var packages = [Package]()
     let optionImages = ["新車", "二手車", "維修保養", "機車租賃", "精品配件"]
-    
+
     typealias DataSource = UICollectionViewDiffableDataSource<Section, TopPageDataType>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TopPageDataType>
-    
+
     private lazy var dataSource = configureDataSource()
-    
+
     private var sections = Section.allCases
-    
+
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
-    
+
     var currentIndex = 0
     var timer: Timer?
-    
+
     var storeSection: NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        
+
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPagingCentered
         return section
     }
-    
+
     var optionSection: NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 10, bottom: 20, trailing: 10)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
-        
+
         let section = NSCollectionLayoutSection(group: group)
         return section
     }
-    
+
     var packageSection: NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .absolute(260.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-        
+
         let section = NSCollectionLayoutSection(group: group)
         return section
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -102,7 +102,7 @@ class TopPageViewController: UIViewController {
         super.viewWillAppear(animated)
         updateSnapshot()
     }
-    
+
     func initUI() {
         loadStore()
         loadPackage()
@@ -115,13 +115,13 @@ class TopPageViewController: UIViewController {
 //        collectionView.dataSource = storeDataSource
         collectionView.delegate = self
 //        collectionView.collectionViewLayout = createStoreScrollLayout()
-        
+
         let packageNib = UINib(nibName: TopPagePackageCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(packageNib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
 //        collectionView.dataSource = packageDataSource
 //        collectionView.delegate = self
 //        collectionView.collectionViewLayout = createPackageGridLayout()
-        
+
         let optionNib = UINib(nibName: TopPageOptionCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(optionNib, forCellWithReuseIdentifier: TopPageOptionCollectionViewCell.reuseIdentifier)
 //        collectionView.dataSource = optionDataSource
@@ -129,7 +129,7 @@ class TopPageViewController: UIViewController {
 //        collectionView.collectionViewLayout = createOptionImagesLayout()
 //        collectionView.isScrollEnabled = false
 //        updateOptionSnapshot()
-        
+
     }
     // MARK: - Load store API
     func loadStore() {
@@ -180,12 +180,10 @@ extension TopPageViewController {
 //        }
 //        snapshot.appendSections([.all])
 //        snapshot.appendItems(stores, toSection: .all)
-        
-        
-        
+
     }
     func createLayout() -> UICollectionViewLayout {
-        UICollectionViewCompositionalLayout { [unowned self] sectionIndex, environment in
+        UICollectionViewCompositionalLayout { [unowned self] sectionIndex, _ in
             switch sectionIndex {
             case 0:
                 return self.storeSection
@@ -208,5 +206,5 @@ extension TopPageViewController {
 }
 
 extension TopPageViewController: UICollectionViewDelegate {
-    
+
 }

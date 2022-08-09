@@ -18,11 +18,11 @@ class ShopNavigationViewController: UINavigationController {
     }
 }
 
-//extension ShopNavigationViewController: ShopViewControllerDelegate {
+// extension ShopNavigationViewController: ShopViewControllerDelegate {
 //    func showInfo(_ viewController: ShopViewController, for item: Product) {
 ////        viewController.delegate = self
 //        let productDetailVC = ProductDetailViewController()
 ////        productDetailVC.itemInfo = item
 //        viewController.navigationController?.pushViewController(productDetailVC, animated: true)
 //    }
-//}
+// }

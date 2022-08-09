@@ -13,9 +13,9 @@ class PackageProductDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var storeNameLabel: UILabel!
     @IBOutlet weak var orderQtyLabel: UILabel!
-    
+
     static let reuseIdentifier = "PackageProductDetailTableViewCell"
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,26 +27,26 @@ class PackageProductDetailTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configure(with model: PackageProduct) {
         if let modelProductPicture = model.productPicture {
             productImageView.setImage(imageURL: SHOP_ROOT_URL + modelProductPicture)
         } else {
             print("model.productPicture is nil!")
         }
-        
+
         if let modelProductName = model.productName {
             productNameLabel.text = modelProductName
         } else {
             print("model.productName is nil!")
         }
-        
+
         if let modelStoreName = model.storeName {
             storeNameLabel.text = "店家名稱：\(modelStoreName)"
         } else {
             print("model.storeName is nil!")
         }
-        
+
         if let modelOrderQty = model.orderQty {
             orderQtyLabel.text = "商品數量：\(modelOrderQty)"
         } else {

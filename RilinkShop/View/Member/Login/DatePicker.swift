@@ -23,13 +23,13 @@ class DatePicker: UIView {
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         return datePicker
     }()
-    
+
     private let separator: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray
         return view
     }()
-    
+
     private lazy var doneButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(doneTapped(_:)), for: .touchUpInside)
@@ -39,18 +39,18 @@ class DatePicker: UIView {
         return button
     }()
     weak var delegate: DatePickerDelegate?
-    
+
     @objc func doneTapped(_ sender: UIButton) {
         delegate?.datePickerDidSelectDone(self)
     }
     @objc func dateChanged(_ sender: UIDatePicker) {
         delegate?.datePickerDidSelectDate(self, date: sender.date)
     }
-    
+
     func setDate(_ date: Date) {
         datePicker.date = date
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -71,7 +71,7 @@ class DatePicker: UIView {
             make.bottom.equalTo(datePicker.snp.top)
         }
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -22,7 +22,7 @@ class MemberInfoViewController_1: UIViewController {
     @IBOutlet weak var maleButton: UIButton!
     @IBOutlet weak var femaleButton: UIButton!
     @IBOutlet weak var saveEditButton: UIButton!
-    
+
     weak var delegate: MemberInfoViewController_1_Delegate?
     var edittingTextField: UITextField?
     var user: User?
@@ -31,26 +31,26 @@ class MemberInfoViewController_1: UIViewController {
         formatter.dateFormat = "YYYY-MM-dd"
         return formatter
     }()
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         initUI()
         configureKeyboard()
         getUserDate()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         nameTextField.text = user?.name ?? ""
         birthdayTextField.text = user?.birthday ?? ""
         phoneTextField.text = user?.tel ?? ""
         emailTextField.text = user?.email ?? ""
-        
+
         if user?.sex == "1" {
             femaleButton.isSelected = true
         } else {
@@ -69,7 +69,7 @@ class MemberInfoViewController_1: UIViewController {
         saveEditButton.layer.cornerRadius = saveEditButton.frame.height / 2
         saveEditButton.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
     func getUserDate() {
         let accountType = "0"
         sleep(1)
@@ -78,14 +78,14 @@ class MemberInfoViewController_1: UIViewController {
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {
-                    
+
 //                    HUD.hideLoadingHUD(inView: self.view)
                     guard success else {
                         return
                     }
-                    
+
                     Global.personalData = response as? User
-                    
+
                     if let user = response as? User {
                         self.user = user
                         self.nameTextField.text = user.name
@@ -103,7 +103,7 @@ class MemberInfoViewController_1: UIViewController {
         birthdayTextField.delegate = self
         phoneTextField.delegate = self
         emailTextField.delegate = self
-        
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
 //        view.addGestureRecognizer(tap)
         view.addGestureRecognizer(tap)
@@ -113,7 +113,7 @@ class MemberInfoViewController_1: UIViewController {
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
     }
-    
+
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
@@ -144,7 +144,7 @@ class MemberInfoViewController_1: UIViewController {
             datePickerTopConstraint?.isActive = true
             datePickerBottomConstraint?.isActive = false
         }
-        
+
         self.view.layoutIfNeeded()
         UIView.animate(withDuration: 0.25) {
             datePickerTopConstraint?.isActive = false
@@ -154,7 +154,7 @@ class MemberInfoViewController_1: UIViewController {
             self.scrollView.scrollRectToVisible(sender.frame, animated: true)
         }
     }
-    
+
     // MARK: - GenderSwitch
     @IBAction func genderSwitch(_ sender: UIButton) {
         if sender == maleButton {
@@ -164,13 +164,13 @@ class MemberInfoViewController_1: UIViewController {
         }
         sender.isSelected = true
     }
-    
+
     @IBAction func saveEditButtonTapped(_ sender: UIButton) {
         let accountType = "0"
         guard let tel = phoneTextField.text else {
             return
         }
-        
+
         guard let name = nameTextField.text,
               name != "" else {
                   let message = "請輸入姓名"
@@ -179,7 +179,7 @@ class MemberInfoViewController_1: UIViewController {
                   }
                   return
               }
-        
+
         guard let email = emailTextField.text,
               email != "" else {
                   let message = "請輸入電子郵件"
@@ -188,7 +188,7 @@ class MemberInfoViewController_1: UIViewController {
                   }
                   return
               }
-        
+
         let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}"
         let predicate  = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
 
@@ -199,7 +199,7 @@ class MemberInfoViewController_1: UIViewController {
             }
             return
         }
-        
+
         guard let birthday = birthdayTextField.text,
               birthday != "" else {
                   let message = "請輸入生日"
@@ -208,18 +208,18 @@ class MemberInfoViewController_1: UIViewController {
                   }
                   return
               }
-        
+
         var sex = ""
         if maleButton.isSelected {
             sex = "0"
         } else {
             sex = "1"
         }
-        
+
         let city = ""
         let region = ""
         let address = ""
-        
+
         HUD.showLoadingHUD(inView: self.view, text: "")
         UserService.shared.modifyPersonalData(account: Global.ACCOUNT, pw: Global.ACCOUNT_PASSWORD, accountType: accountType, name: name, tel: tel, birthday: birthday, email: email, sex: sex, city: city, region: region, address: address) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
@@ -231,7 +231,7 @@ class MemberInfoViewController_1: UIViewController {
                         Alert.showMessage(title: "", msg: message, vc: self, handler: nil)
                         return
                     }
-                    
+
                     Alert.showMessage(title: "", msg: "修改成功", vc: self) {
                         self.dismiss(animated: true, completion: nil)
                         self.delegate?.memberInfoDidUpdate(self)
@@ -240,7 +240,7 @@ class MemberInfoViewController_1: UIViewController {
             }
         }
     }
-    
+
 }
 // MARK: - UITextFieldDelegate
 extension MemberInfoViewController_1: UITextFieldDelegate {
@@ -266,14 +266,14 @@ extension MemberInfoViewController_1: DatePickerDelegate {
             make.leading.trailing.equalTo(view)
             make.top.equalTo(view.snp.bottom)
         }
-        
+
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         } completion: { _ in
             datePicker.removeFromSuperview()
         }
     }
-    
+
     func datePickerDidSelectDate(_ datePicker: DatePicker, date: Date) {
         birthdayTextField.text = dateFormatter.string(from: date)
     }

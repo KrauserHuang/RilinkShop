@@ -10,7 +10,7 @@ import UIKit
 class ShopRuleViewController: UIViewController {
 
     @IBOutlet weak var borderView: UIView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,7 +18,7 @@ class ShopRuleViewController: UIViewController {
         navigationItem.title = "購物條款"
         configureView()
     }
-    
+
     func configureView() {
         borderView.layer.borderWidth = 1
         borderView.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor

@@ -33,22 +33,22 @@ class ShopMainViewController: UIViewController {
             searchBarTextField.leftViewMode = .always
         }
     }
-    
+
     enum Section: String, CaseIterable {
         case all
     }
-    
+
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     private lazy var dataSource = configureDataSource()
-    
+
     var categories = [CategoryCellModel]()
-    
+
     var products = [Product]()
     var filteredProducts = [Product]()
-    
+
     var packages = [Package]()
-    
+
     var items = [Item]()
     var filteredItems = [Item]() {
         didSet {
@@ -58,15 +58,15 @@ class ShopMainViewController: UIViewController {
         }
     }
     let dropDown = DropDown()
-    
+
 //    var account = MyKeyChain.getAccount() ?? ""
 //    var password = MyKeyChain.getPassword() ?? ""
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         initUI()
-        
+
         print("ShopMainViewController " + #function)
         print("GlobalAccount:\(Global.ACCOUNT)")
         print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
@@ -77,10 +77,10 @@ class ShopMainViewController: UIViewController {
         print("UserServiceAccount:\(UserService.shared.id)")
         print("UserServicePassword:\(UserService.shared.pwd)")
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         tabBarController?.hidesBottomBarWhenPushed = false
         tabBarController?.tabBar.isHidden = false
 //        collectionView.contentInsetAdjustmentBehavior = .automatic
@@ -90,14 +90,14 @@ class ShopMainViewController: UIViewController {
         super.viewWillDisappear(animated)
         dismissKeyboard()
     }
-    
+
     func initUI() {
         navigationItems()
         configureCollectionView()
         loadProductType()
         configureKeyboard()
     }
-    
+
     func navigationItems() {
         let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
                                                  style: .plain,
@@ -109,7 +109,7 @@ class ShopMainViewController: UIViewController {
         let vc = CartViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     func configureKeyboard() {
         searchBarTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -120,7 +120,7 @@ class ShopMainViewController: UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
+
     func configureCollectionView() {
         let nib = UINib(nibName: ShopCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: ShopCollectionViewCell.reuseIdentifier)
@@ -129,10 +129,10 @@ class ShopMainViewController: UIViewController {
         collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = createGridLayout()
     }
-    
+
     func loadProductType() {
-        ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? "",
-                                             pwd: MyKeyChain.getPassword() ?? "") { responseCategories in
+        ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                             pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseCategories in
             var isFirstCategory = true
             let packageCategory = Category(pid: "", productType: "", productTypeName: "套票")
             var wholeCategories = responseCategories
@@ -151,23 +151,23 @@ class ShopMainViewController: UIViewController {
             self.loadProductList()
         }
     }
-    
+
     func loadProductList() {
         HUD.showLoadingHUD(inView: self.view, text: "載入商品中")
-        print("ShopMainViewController" + #function)
+        print(self, #function)
         print("account: \(UserService.shared.id)")
         print("password: \(UserService.shared.pwd)")
-        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? "",
-                                              pwd: MyKeyChain.getPassword() ?? "") { responseProducts in
+        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseProducts in
             HUD.hideLoadingHUD(inView: self.view)
             let wholeProducts = responseProducts
             self.products = wholeProducts
-            
-            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? "",
-                                                  pwd: MyKeyChain.getPassword() ?? "") { packagesResponse in
+
+            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                                  pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
                 let wholePackages = packagesResponse
                 self.packages = wholePackages
-                
+
                 self.items.removeAll()
                 for product in self.products {
                     self.items.append(Item.product(product))
@@ -175,7 +175,7 @@ class ShopMainViewController: UIViewController {
                 for package in self.packages {
                     self.items.append(Item.package(package))
                 }
-                
+
                 self.filteredItems = self.items.filter {
                     switch $0 {
 
@@ -206,10 +206,10 @@ class ShopMainViewController: UIViewController {
         dropDown.anchorView = shopTypeButton
         dropDown.bottomOffset = CGPoint(x: 0, y: shopTypeButton.frame.size.height)
         dropDown.show()
-        dropDown.selectionAction = { [weak self] (index: Int, item: String) in
+        dropDown.selectionAction = { [weak self] (_: Int, item: String) in
             guard let self = self else { return }
             self.shopTypeButton.setTitle(item, for: .normal)
-            
+
             self.filteredItems.removeAll()
             for singleItem in self.items {
                 switch singleItem {
@@ -238,10 +238,10 @@ extension ShopMainViewController: UICollectionViewDelegate, UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: ShopCollectionViewCell.reuseIdentifier, for: indexPath) as! ShopCollectionViewCell
-        
+
         let singleItem = filteredItems[indexPath.item]
         item.configure(with: singleItem)
-        
+
         return item
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -256,9 +256,9 @@ extension ShopMainViewController {
     func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShopCollectionViewCell.reuseIdentifier, for: indexPath) as! ShopCollectionViewCell
-            
+
             cell.configure(with: itemIdentifier)
-            
+
             return cell
         }
         return dataSource
@@ -267,21 +267,21 @@ extension ShopMainViewController {
         var snapshot = Snapshot()
         snapshot.appendSections([.all])
         snapshot.appendItems(filteredItems, toSection: .all)
-        
+
         dataSource.apply(snapshot, animatingDifferences: animatingChange)
     }
     func createGridLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .absolute(260.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-        
+
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
-        
+
         return layout
     }
 }

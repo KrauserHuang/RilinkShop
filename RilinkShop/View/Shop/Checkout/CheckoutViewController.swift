@@ -11,7 +11,7 @@ import SwiftUI
 import EzPopup
 
 class CheckoutViewController: UIViewController {
-    
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
@@ -25,7 +25,7 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var orderPayLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var checkoutButton: UIButton!
-    
+
     var orderAmount = 0
     var point = 0
     // 應付金額合計
@@ -44,7 +44,7 @@ class CheckoutViewController: UIViewController {
     }
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,14 +55,23 @@ class CheckoutViewController: UIViewController {
         showInfo()
         configureKeyboard()
         setPointView()
+        bonusPointTextField.addTarget(self, action: #selector(textFieldFilter(_:)), for: .editingChanged)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadInCartItems()
         setPointView()
     }
-    
+
+    @objc func textFieldFilter(_ sender: UITextField) {
+        if let text = sender.text, let intText = Int(text) {
+            sender.text = "\(intText)"
+        } else {
+            sender.text = ""
+        }
+    }
+
     func loadInCartItems() {
         HUD.showLoadingHUD(inView: self.view, text: "載入中")
         ProductService.shared.loadShoppingCartList(id: account, pwd: password) { items in
@@ -85,16 +94,17 @@ class CheckoutViewController: UIViewController {
         tool.sizeToFit()
         bonusPointTextField.inputAccessoryView = tool
     }
-    @objc func inputDone(){
-//        print(#function)
-//        print("vcPoint:\(point)")
-//        print("point:\(bonusPointTextField.text ?? "no point")")
+    @objc func inputDone() {
+        print(#function)
+        print("vcPoint:\(point)")
+        print("point:\(bonusPointTextField.text ?? "no point")")
         // pointInt = 使用點數textField輸入的文字
         guard let pointInt = Int(bonusPointTextField.text!) else {
             bonusPointTextField.text = "0"
             return
         }
-        let priceInt = orderPay //priceInt = 應付金額
+        print("pointInt:\(pointInt)")
+        let priceInt = orderPay // priceInt = 應付金額
         let pointNow = point // pointNow = 現有點數
         if pointInt < pointNow { // 輸入點數小於現有點數
             let check = priceInt - pointInt * 2 // 應付金額扣除(輸入點數*2)
@@ -107,7 +117,7 @@ class CheckoutViewController: UIViewController {
                 if priceInt == pointuse * 2 { // ??????
                     pointuse -= 1
                 }
-                bonusPointLabel.text = "\(pointNow - pointInt)"
+                bonusPointLabel.text = "\(pointNow)" // 不合理所以可使用點數不做變化
                 discountAmountLabel.text = "\(pointuse * 2)"
                 bonusPointTextField.text = String(pointuse)
                 orderPayLabel.text = String(priceInt - pointuse * 2)
@@ -124,7 +134,7 @@ class CheckoutViewController: UIViewController {
                 if priceInt == pointuse * 2 {
                     pointuse -= 1
                 }
-                bonusPointLabel.text = "0"
+                bonusPointLabel.text = "\(pointNow)" // 不合理所以可使用點數不做變化
                 discountAmountLabel.text = "\(pointuse * 2)"
                 bonusPointTextField.text = String(pointuse)
                 orderPayLabel.text = String(priceInt - pointuse * 2)
@@ -133,7 +143,7 @@ class CheckoutViewController: UIViewController {
         point = pointNow
         self.view.endEditing(true)
     }
-    
+
     func configureTableView() {
         cartTableView.rowHeight = UITableView.automaticDimension
         cartTableView.dataSource = self
@@ -141,30 +151,30 @@ class CheckoutViewController: UIViewController {
         cartTableView.isScrollEnabled = false
         cartTableView.allowsSelection = false
     }
-    
+
     func configureView() {
         backButton.layer.borderWidth = 1
         backButton.layer.borderColor = Theme.customOrange.cgColor
         backButton.layer.cornerRadius = 10
         backButton.tintColor = Theme.customOrange
-        
+
         checkoutButton.backgroundColor = Theme.customOrange
         checkoutButton.tintColor = .white
         checkoutButton.layer.cornerRadius = 10
     }
-    
+
     func showInfo() {
         orderAmountLabel.text = "\(orderAmount)"
         discountAmountLabel.text = "\(point)"
         orderPay = orderAmount - point
         orderPayLabel.text = "\(orderPay)"
-        
+
         let accountType = "0"
         UserService.shared.getPersonalData(account: account, pw: password, accountType: accountType) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {
-                    
+
                     guard success else {
                         let errorMsg = response as! String
                         Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
@@ -180,12 +190,12 @@ class CheckoutViewController: UIViewController {
             }
         }
     }
-    
+
     func configureKeyboard() {
         bonusPointTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -208,7 +218,7 @@ class CheckoutViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func checkoutButtonTapped(_ sender: UIButton) {
-        
+
         guard let orderAmount = orderAmountLabel.text,
               let discountAmount = discountAmountLabel.text,
               let orderPay = orderPayLabel.text else { return }
@@ -222,7 +232,7 @@ class CheckoutViewController: UIViewController {
                                        discountAmount: discountAmount,
                                        orderPay: orderPay) { response in
             let alertController = UIAlertController(title: "準備結帳", message: "", preferredStyle: .alert)
-            let checkoutAction = UIAlertAction(title: "付款去", style: .default) { action in
+            let checkoutAction = UIAlertAction(title: "付款去", style: .default) { _ in
                 let wkWebVC = WKWebViewController()
                 wkWebVC.delegate = self
                 wkWebVC.urlStr = PAYMENT_API_URL + "\(response.responseMessage)"
@@ -230,19 +240,22 @@ class CheckoutViewController: UIViewController {
                 let popVC = PopupViewController(contentController: wkWebVC,
                                                 popupWidth: self.view.bounds.width - 40,
                                                 popupHeight: self.view.bounds.height - 100)
-                
+
                 popVC.cornerRadius  = 10
                 popVC.backgroundColor = .black
                 popVC.backgroundAlpha = 1
                 popVC.shadowEnabled = true
                 popVC.canTapOutsideToDismiss = false
-                
-                self.present(popVC, animated: true) {
-                    self.navigationController?.popToRootViewController(animated: true)
-                }
+
+//                self.navigationController?.popToRootViewController(animated: true)
+                self.present(popVC, animated: true, completion: nil)
+
+//                self.present(popVC, animated: true) {
+//                    self.navigationController?.popToRootViewController(animated: true)
+//                }
 //                self.present(popVC, animated: true, completion: nil)
             }
-            let backToShopAction = UIAlertAction(title: "回首頁", style: .default) { action in
+            let backToShopAction = UIAlertAction(title: "回首頁", style: .default) { _ in
                 self.navigationController?.popToRootViewController(animated: true)
             }
             alertController.addAction(checkoutAction)
@@ -256,13 +269,13 @@ extension CheckoutViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return inCartItems.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CheckoutTableViewCell.reuseIdentifier, for: indexPath) as! CheckoutTableViewCell
-        
+
         let inCartItem = inCartItems[indexPath.row]
         cell.configure(with: inCartItem)
-        
+
         return cell
     }
 }
@@ -281,6 +294,8 @@ extension CheckoutViewController: UITextFieldDelegate {
 // MARK: - WKWebViewControllerDelegate
 extension CheckoutViewController: WKWebViewControllerDelegate {
     func backAction(_ viewController: WKWebViewController) {
+        HUD.showLoadingHUD(inView: self.view, text: "")
         navigationController?.popToRootViewController(animated: true)
+        HUD.hideLoadingHUD(inView: self.view)
     }
 }

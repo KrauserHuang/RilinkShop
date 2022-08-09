@@ -9,18 +9,18 @@ import Foundation
 import UIKit
 import EzPopup
 
-class SuccessAlert: UIViewController{
-//popupWidth: self.view.frame.width - 32, popupHeight: self.view.frame.height * 0.5
-    
+class SuccessAlert: UIViewController {
+// popupWidth: self.view.frame.width - 32, popupHeight: self.view.frame.height * 0.5
+
 //    let successAlert = SuccessAlert()
-    
+
     let okImageView: UIImageView = {
         let theImageView = UIImageView()
             theImageView.image = UIImage(named: "checked")
-            theImageView.translatesAutoresizingMaskIntoConstraints = false //You need to call this property so the image is added to your view
+            theImageView.translatesAutoresizingMaskIntoConstraints = false // You need to call this property so the image is added to your view
         return theImageView
     }()
-    
+
     let datelabel: UILabel = {
         let label = UILabel()
         label.text = "2021/04/10 星期六 14:00"
@@ -29,7 +29,7 @@ class SuccessAlert: UIViewController{
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     let successReservationLabel: UILabel = {
         let label = UILabel()
         label.text = "預約成功"
@@ -38,7 +38,7 @@ class SuccessAlert: UIViewController{
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     let confirmButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 10/255, green: 160/255, blue: 110/255, alpha: 1)
@@ -47,7 +47,7 @@ class SuccessAlert: UIViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     let addMoreReservationButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = UIColor.white
@@ -57,10 +57,10 @@ class SuccessAlert: UIViewController{
         button.setTitle("添加更多預約", for: .normal)
         button.layer.cornerRadius = 22.5
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return button
     }()
-    
+
     let cancelButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
@@ -69,22 +69,22 @@ class SuccessAlert: UIViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        
+
 //        let objectArray: [UIView] = [okImageView, datelabel, successReservationLabel, confirmButton, addMoreReservationButton, cancelButton]
         let objectArray: [UIView] = [okImageView, datelabel, successReservationLabel, confirmButton]
-        
-        for obj in objectArray{
+
+        for obj in objectArray {
             self.view.addSubview(obj)
         }
-        
+
         setImageView()
         setLabel()
         setButton()
-        
+
         confirmButton.addTarget(self, action: #selector(confirmButtonAction(_:)), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancelButtonAction(_:)), for: .touchUpInside)
     }
@@ -107,12 +107,12 @@ class SuccessAlert: UIViewController{
             }
         }
     }
-    @objc func cancelButtonAction(_ sender: UIButton){
+    @objc func cancelButtonAction(_ sender: UIButton) {
         let popupVC = PopupViewController(contentController: AlternateAlert(), popupWidth: self.view.frame.width, popupHeight: self.view.frame.height)
         popupVC.cornerRadius = 20
-        
-        self.present(popupVC, animated: false){
-            self.dismiss(animated: false){
+
+        self.present(popupVC, animated: false) {
+            self.dismiss(animated: false) {
                 self.present(popupVC, animated: true, completion: nil)
             }
         }
@@ -123,8 +123,8 @@ class SuccessAlert: UIViewController{
         okImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         okImageView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
     }
-    
-    func setLabel(){
+
+    func setLabel() {
 //        datelabel
         datelabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         datelabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = true
@@ -132,8 +132,8 @@ class SuccessAlert: UIViewController{
         successReservationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         successReservationLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 180).isActive = true
     }
-    
-    func setButton(){
+
+    func setButton() {
 //        confirmButton
         confirmButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
         confirmButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
@@ -150,5 +150,5 @@ class SuccessAlert: UIViewController{
 //        cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 //        cancelButton.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
     }
-    
+
 }

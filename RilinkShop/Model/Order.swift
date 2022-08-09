@@ -28,12 +28,12 @@ struct Order: Codable {
     var bonusPoint: String = ""
     var orderStatus: String = ""
     var assigntype: String = ""
-    
+
 //    var productList: [List]? = []
 //    var packageList: [List]? = []
 //    var productList: [ProductList]? = []
 //    var packageList: [PackageList]? = []
-    
+
     enum CodingKeys: String, CodingKey {
         case oid
         case orderNo = "order_no"
@@ -71,7 +71,7 @@ struct OrderInfo: Codable {
     var productList: [List] = []
     var packageList: [List] = []
     var assigntype: String = ""
-    
+
     enum CodingKeys: String, CodingKey {
         case oid
         case orderNo = "order_no"
@@ -101,7 +101,7 @@ struct List: Codable {
     // 商品為product
 //    var productNo: String? = ""
 //    var productSpec: String? = ""
-    
+
     var productPrice: String = ""
     var orderQty: String = ""
     var totalAmount: String = ""
@@ -110,7 +110,7 @@ struct List: Codable {
     var productName: String = ""
 //    var producttypeName: String? = ""
     var productPicture: String = ""
-    
+
     enum CodingKeys: String, CodingKey {
 //        case did
 //        case orderNo = "order_no"
@@ -143,7 +143,7 @@ struct ProductList: Codable {
     var productName: String? = ""
 //    var producttypeName: String? = ""
     var productPicture: String? = ""
-    
+
     enum CodingKeys: String, CodingKey {
 //        case did
 //        case orderNo = "order_no"
@@ -173,7 +173,7 @@ struct PackageList: Codable {
     var cartCreatedAt: String? = ""
     var productName: String? = ""
     var productPicture: String? = ""
-    
+
     enum CodingKeys: String, CodingKey {
         case did
         case orderNo = "order_no"

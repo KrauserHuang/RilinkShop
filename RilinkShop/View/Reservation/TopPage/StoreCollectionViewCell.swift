@@ -13,15 +13,15 @@ class StoreCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
-    
+
     static let reuseIdentifier = "StoreCollectionViewCell"
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         imageView.layer.cornerRadius = 10
     }
-    
+
     func configure(with model: Store) {
         imageView.setImage(imageURL: SHOP_ROOT_URL + model.storePicture)
         nameLabel.text = model.storeName

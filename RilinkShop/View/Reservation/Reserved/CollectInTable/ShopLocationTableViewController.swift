@@ -10,7 +10,7 @@ import UIKit
 class ShopLocationTableViewController: UITableViewController {
 
     @IBOutlet weak var cartButton: UIBarButtonItem!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,12 +23,11 @@ class ShopLocationTableViewController: UITableViewController {
         tableView.register(UINib(nibName: ShopTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: ShopTableViewCell.reuseIdentifier)
 //        cartButton.setBadge()
     }
-    
+
     @IBAction func toCartVC(_ sender: UIBarButtonItem) {
         let cartVC = CartViewController()
         navigationController?.pushViewController(cartVC, animated: true)
     }
-    
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -44,7 +43,7 @@ class ShopLocationTableViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: ShopTypeTableViewCell.reuseIdentifier, for: indexPath) as! ShopTypeTableViewCell
-            
+
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: ShopTableViewCell.reuseIdentifier, for: indexPath) as! ShopTableViewCell
@@ -52,7 +51,7 @@ class ShopLocationTableViewController: UITableViewController {
             return cell
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = HostelDetailViewController()
         self.navigationController?.pushViewController(controller, animated: true)

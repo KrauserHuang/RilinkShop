@@ -15,18 +15,18 @@ struct StoreTypeCellModel: Hashable {
 }
 
 class StoreMainViewController: UIViewController {
-    
+
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var storeTypeButton: UIButton!
-    
+
     enum Section: String, CaseIterable {
         case all
     }
-    
+
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Store>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Store>
     private lazy var dataSource = configureDataSource()
-    
+
     let typePicker = StorePicker()
     let toolBar = UIToolbar()
     var types = [StoreTypeCellModel]()
@@ -50,14 +50,14 @@ class StoreMainViewController: UIViewController {
 //    let password = Global.ACCOUNT_PASSWORD
 //    let account = UserService.shared.id
 //    let password = UserService.shared.pwd
-    
+
     let dropDown = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         initUI()
-        
+
         print("StoreMainViewController " + #function)
         print("GlobalAccount:\(Global.ACCOUNT)")
         print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
@@ -68,14 +68,14 @@ class StoreMainViewController: UIViewController {
         print("UserServiceAccount:\(UserService.shared.id)")
         print("UserServicePassword:\(UserService.shared.pwd)")
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
 //        updateSnapshot()
 //        initUI()
     }
-    
+
     func initUI() {
         navigationItems()
         configureCollectionView()
@@ -84,7 +84,7 @@ class StoreMainViewController: UIViewController {
 //        updateSnapshot()
         configurStorePicker()
     }
-    
+
     func navigationItems() {
         let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
                                                  style: .plain,
@@ -96,13 +96,13 @@ class StoreMainViewController: UIViewController {
         let vc = CartViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     func configurStorePicker() {
         typePicker.toolBarDelegate = self
         typePicker.delegate = self
         typePicker.selectRow(0, inComponent: 0, animated: false)
     }
-    
+
     func configureCollectionView() {
         let nib = UINib(nibName: StoreCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: StoreCollectionViewCell.reuseIdentifier)
@@ -110,11 +110,11 @@ class StoreMainViewController: UIViewController {
         collectionView.delegate = self
         collectionView.collectionViewLayout = createGridLayout()
     }
-    
+
     func loadStoreType() {
 //        HUD.showLoadingHUD(inView: self.view, text: "")
-        StoreService.shared.getStoreType(id: UserService.shared.id,
-                                         pwd: UserService.shared.pwd) { responseTypes in
+        StoreService.shared.getStoreType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                         pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseTypes in
 //        StoreService.shared.getStoreType(id: account,
 //                                         pwd: password) { responseTypes in
 //            HUD.hideLoadingHUD(inView: self.view)
@@ -134,19 +134,19 @@ class StoreMainViewController: UIViewController {
             self.loadStoreList()
         }
     }
-    
+
     func loadStoreList() {
         HUD.showLoadingHUD(inView: self.view, text: "載入店家中")
-//        print("StoreMainViewController" + #function)
-//        print("account: \(UserService.shared.id)")
-//        print("password: \(UserService.shared.pwd)")
-        StoreService.shared.getStoreList(id: UserService.shared.id,
-                                         pwd: UserService.shared.pwd) { responseStores in
+        print(self, #function)
+        print("account: \(UserService.shared.id)")
+        print("password: \(UserService.shared.pwd)")
+        StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                         pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseStores in
 //        StoreService.shared.getStoreList(id: account,
 //                                         pwd: password) { responseStores in
             HUD.hideLoadingHUD(inView: self.view)
             self.stores = responseStores
-            
+
             self.filteredStores = self.stores.filter { store in
                 store.storeType == self.types.first?.type.id
             }
@@ -176,7 +176,7 @@ class StoreMainViewController: UIViewController {
         dropDown.anchorView = storeTypeButton // drop down list會顯示在所設定的view下(這裡指button)
         dropDown.bottomOffset = CGPoint(x: 0, y: storeTypeButton.frame.size.height) // 依據anchorView的bottom位置插入drop down list
         dropDown.show() // 設定完內容跟位置後要執行顯示
-        dropDown.selectionAction = { [weak self] (index: Int, item: String) in //8
+        dropDown.selectionAction = { [weak self] (_: Int, item: String) in // 8
             guard let self = self else { return }
             self.storeTypeButton.setTitle(item, for: .normal) // 點選對應的drop down list item要做什麼
             self.filteredStores.removeAll()
@@ -193,7 +193,7 @@ class StoreMainViewController: UIViewController {
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(view.snp.bottom)
         }
-        
+
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         } completion: { _ in
@@ -204,35 +204,35 @@ class StoreMainViewController: UIViewController {
 }
 // MARK: - DataSource/Snapshot/CompositionalLayout
 extension StoreMainViewController {
-    //dataSource
+    // dataSource
     func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoreCollectionViewCell.reuseIdentifier, for: indexPath) as! StoreCollectionViewCell
-            
+
             cell.configure(with: itemIdentifier)
-            
+
             return cell
         }
         return dataSource
     }
-    //snapshot
+    // snapshot
     func updateSnapshot(animatingChange: Bool = false) {
         var snapshot = Snapshot()
         snapshot.appendSections([.all])
         snapshot.appendItems(filteredStores, toSection: .all)
-        
+
         dataSource.apply(snapshot, animatingDifferences: false)
     }
-    //compositional layout
+    // compositional layout
     func createGridLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .estimated(280.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-        
+
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
@@ -255,7 +255,7 @@ extension StoreMainViewController: StorePickerDelegate {
             make.leading.trailing.equalTo(view)
             make.top.equalTo(view.snp.bottom)
         }
-        
+
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         } completion: { _ in
@@ -268,20 +268,20 @@ extension StoreMainViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return types.count
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return types[row].type.name
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //點選對應type更改storeTypeButton UI
+        // 點選對應type更改storeTypeButton UI
         let typeName = types[row].type.name
         storeTypeButton.setTitle(typeName, for: .normal)
-        
+
         filteredStores.removeAll()
         for store in stores {
             if store.storeType == types[row].type.id {

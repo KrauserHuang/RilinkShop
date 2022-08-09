@@ -15,7 +15,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendarPicker: FSCalendar!
     @IBOutlet weak var emptyView: UIView!
-    
+
     var location: String?
     var name: String?
     var mobile: String?
@@ -40,9 +40,9 @@ class CalendarViewController: UIViewController {
             updateBookingData()
         }
     }
-    
+
     var bookingDataForSelectedDate = [FixMotor]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,44 +55,44 @@ class CalendarViewController: UIViewController {
 //        flowLayout?.itemSize = CGSize(width: (self.view.frame.width - 48) / 2, height: 50)
 //                flowLayout?.estimatedItemSize = .zero
 //                flowLayout?.minimumInteritemSpacing = 1
-        
+
         title = "時段預約"
         configureCalendar()
         configureTableView()
         viewInit()
     }
-    
+
     fileprivate lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
-    
+
     func configureCalendar() {
         calendarPicker.delegate = self
         calendarPicker.dataSource = self
     }
-    
+
     func configureTableView() {
         let nib = UINib(nibName: CalendarTableViewCell.cellIdentifier(), bundle: nil)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(nib, forCellReuseIdentifier: CalendarTableViewCell.cellIdentifier())
     }
-    
+
     func viewInit() {
         FixMotorService.shared.storeBookingTime(id: account, pwd: password, storeId: store.storeID) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
-                    
+
                     guard success else {
                         HUD.hideLoadingHUD(inView: self.view)
                         let errmsg = response as! String
                         Alert.showMessage(title: "", msg: errmsg, vc: self)
                         return
                     }
-                    
+
                     HUD.hideLoadingHUD(inView: self.view)
                     self.storeBookingData = response as! [FixMotor]
                 }
@@ -119,17 +119,17 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bookingDataForSelectedDate.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CalendarTableViewCell.cellIdentifier(), for: indexPath) as? CalendarTableViewCell else {
             return UITableViewCell()
         }
-        
+
         let bookingData = bookingDataForSelectedDate[indexPath.row]
-        
+
         cell.configure(with: bookingData)
         cell.delegate = self
-        
+
         return cell
     }
 }
@@ -156,15 +156,15 @@ extension CalendarViewController: CalendarTableViewCellDelegate {
     }
 }
 
-//var location: String?
-//var name: String?
-//var mobile: String?
-//var license: String?
-//var carType: String?
-//var repairType: String?
-//var carDescription: String? = ""
-//var appointment: String?
-//extension CalendarViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+// var location: String?
+// var name: String?
+// var mobile: String?
+// var license: String?
+// var carType: String?
+// var repairType: String?
+// var carDescription: String? = ""
+// var appointment: String?
+// extension CalendarViewController: UICollectionViewDelegate, UICollectionViewDataSource{
 //    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return 18
 //    }
@@ -185,4 +185,4 @@ extension CalendarViewController: CalendarTableViewCellDelegate {
 //        popupVC.cornerRadius = 20
 //        present(popupVC, animated: true)
 //    }
-//}
+// }

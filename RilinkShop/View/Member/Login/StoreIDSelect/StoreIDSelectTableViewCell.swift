@@ -10,14 +10,14 @@ import UIKit
 class StoreIDSelectTableViewCell: UITableViewCell {
 
     @IBOutlet weak var storeNameLabel: UILabel!
-    
+
     static let reuseIdentifier = "StoreIDSelectTableViewCell"
     var storeIDInfo = StoreIDInfo() {
         didSet {
             storeNameLabel.text = storeIDInfo.storeName
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,5 +28,5 @@ class StoreIDSelectTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

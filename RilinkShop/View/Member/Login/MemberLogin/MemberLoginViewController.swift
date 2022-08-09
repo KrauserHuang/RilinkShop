@@ -19,10 +19,10 @@ class MemberLoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var privateButton: UIButton!
-    
+
     let tool = Tool()
     var delegate: MemberLoginViewControllerDelegate?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,17 +31,17 @@ class MemberLoginViewController: UIViewController {
         loginButton.backgroundColor = Theme.customOrange
         tool.makeRoundedCornersButton(button: signupButton)
         signupButton.backgroundColor = Theme.customOrange
-        
+
         hideKeyBoard()
         configureTextField()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         accountTextField.text = ""
         passwordTextField.text = ""
     }
-    
+
     func configureTextField() {
         accountTextField.delegate = self
         passwordTextField.delegate = self
@@ -88,19 +88,19 @@ class MemberLoginViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
             return
         }
-        
+
         Global.ACCOUNT = account
         Global.ACCOUNT_PASSWORD = password
-        
+
         HUD.showLoadingHUD(inView: self.view, text: "登入中")
-        
+
         UserService.shared.userLogin(id: account, pwd: password) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {
-                    
+
                     HUD.hideLoadingHUD(inView: self.view)
-                    
+
                     guard success else {
                         let errorMsg = response as! String
                         Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
@@ -109,7 +109,7 @@ class MemberLoginViewController: UIViewController {
                     // 登入成功才把帳密儲存在Keychain裡面
                     MyKeyChain.setAccount(Global.ACCOUNT)
                     MyKeyChain.setPassword(Global.ACCOUNT_PASSWORD)
-                    
+
                     self.delegate?.finishLoginView(self, action: .Login)
                 }
             }
@@ -130,7 +130,7 @@ class MemberLoginViewController: UIViewController {
         let vc = PrivateRuleViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+
 }
 
 extension MemberLoginViewController: UITextFieldDelegate {

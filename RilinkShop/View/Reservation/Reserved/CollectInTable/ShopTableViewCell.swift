@@ -8,18 +8,18 @@
 import UIKit
 
 class ShopTableViewCell: UITableViewCell {
-    
+
     static let reuseIdentifier = "ShopTableViewCell"
 
     @IBOutlet weak var shopImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         let margins = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
@@ -31,5 +31,5 @@ class ShopTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

@@ -11,28 +11,28 @@ class StoreDetailViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var headerView: StoreDetailHeaderView!
-    
+
     var store = Store()
     var fixmotor: String?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureTableView()
     }
-    
+
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         navigationController?.hidesBarsOnSwipe = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -54,23 +54,23 @@ extension StoreDetailViewController: UITableViewDelegate, UITableViewDataSource 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: StoreDetailOpenTimeTextCell.reuseIdentifier, for: indexPath) as? StoreDetailOpenTimeTextCell else {
                 return UITableViewCell()
             }
-            
+
             cell.configure(with: store)
-            
+
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: StoreDetailDescriptTextCell.reuseIdentifier, for: indexPath) as? StoreDetailDescriptTextCell else {
                 return UITableViewCell()
             }
-            
+
             cell.configure(with: store)
-            
+
             return cell
         default:
             fatalError("Failed to instantiate the table view cell for store detail view controller")
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //
     }

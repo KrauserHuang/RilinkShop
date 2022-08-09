@@ -19,7 +19,7 @@ class HostelCheckoutViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var appointmentLabel: UILabel!
     @IBOutlet weak var appointmentCheckoutButton: UIButton!
-    
+
     var location: String?
     var name: String?
     var mobile: String?
@@ -30,10 +30,10 @@ class HostelCheckoutViewController: UIViewController {
     var appointment: String?
     var duration: String?
     var store = Store()
-    
+
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,13 +41,13 @@ class HostelCheckoutViewController: UIViewController {
         title = "預約確認"
         configureView()
     }
-    
+
     func configureView() {
         appointmentCheckoutButton.setTitle("預約確認", for: .normal)
         appointmentCheckoutButton.backgroundColor = Theme.customOrange
         appointmentCheckoutButton.tintColor = .white
         appointmentCheckoutButton.layer.cornerRadius = 10
-        
+
         locationLabel.text = location
         nameLabel.text = name
         mobileLabel.text = mobile
@@ -57,7 +57,7 @@ class HostelCheckoutViewController: UIViewController {
         descriptionLabel.text = carDescription ?? ""
         appointmentLabel.text = "\(appointment!) \(duration!)"
     }
-    
+
     @IBAction func confirmAppointmentAction(_ sender: UIButton) {
 //        let popupVC = PopupViewController(contentController: SuccessAlert(), popupWidth: self.view.frame.width - 32, popupHeight: self.view.frame.height * 0.5)
 //        popupVC.cornerRadius = 20
@@ -88,7 +88,7 @@ class HostelCheckoutViewController: UIViewController {
                 Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
                 return
             }
-            
+
             let successMsg = response as! String
             Alert.showMessage(title: "", msg: successMsg, vc: self) {
                 self.navigationController?.popToRootViewController(animated: true)

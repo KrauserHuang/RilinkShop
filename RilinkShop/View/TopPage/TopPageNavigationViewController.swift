@@ -8,7 +8,7 @@
 import UIKit
 
 class TopPageNavigationViewController: UINavigationController {
-    
+
     var user = User()
 
     override func viewDidLoad() {
@@ -16,7 +16,6 @@ class TopPageNavigationViewController: UINavigationController {
 
         // Do any additional setup after loading the view.
     }
-    
 
     /*
     // MARK: - Navigation

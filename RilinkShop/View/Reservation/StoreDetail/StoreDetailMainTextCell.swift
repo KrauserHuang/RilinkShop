@@ -12,9 +12,9 @@ class StoreDetailMainTextCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
-    
+
     static let reuseIdentifier = "StoreDetailMainTextCell"
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,7 +26,7 @@ class StoreDetailMainTextCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configure(with model: Store) {
         nameLabel.text = model.storeName
         locationLabel.text = model.storeAddress

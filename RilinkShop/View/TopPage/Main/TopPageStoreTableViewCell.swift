@@ -10,21 +10,21 @@ import UIKit
 class TopPageStoreTableViewCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    
+
     enum Section: String, CaseIterable {
         case all
     }
-    
+
     var stores = [Store]()
-    
+
     typealias StoreDataSource = UICollectionViewDiffableDataSource<Section, Store>
     typealias StoreSnapshot = NSDiffableDataSourceSnapshot<Section, Store>
-    
+
     private lazy var storeDataSource = configureStoreDataSource()
-    
+
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,7 +37,7 @@ class TopPageStoreTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configureCollectionView() {
         let storeNib = UINib(nibName: TopPageStoreCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(storeNib, forCellWithReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier)
@@ -45,7 +45,7 @@ class TopPageStoreTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.collectionViewLayout = createStoreScrollLayout()
     }
-    
+
     func loadStore() {
         StoreService.shared.getStoreList(id: account,
                                          pwd: password) { storesResponse in
@@ -61,9 +61,9 @@ extension TopPageStoreTableViewCell {
     func configureStoreDataSource() -> StoreDataSource {
         let dataSource = StoreDataSource(collectionView: collectionView) { collectionView, indexPath, store in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageStoreCollectionViewCell
-            
+
             cell.configure(with: store)
-            
+
             return cell
         }
         return dataSource
@@ -72,7 +72,7 @@ extension TopPageStoreTableViewCell {
         var snapshot = StoreSnapshot()
         snapshot.appendSections([.all])
         snapshot.appendItems(stores, toSection: .all)
-        
+
         storeDataSource.apply(snapshot, animatingDifferences: false)
     }
     func createStoreScrollLayout() -> UICollectionViewLayout {
@@ -80,11 +80,11 @@ extension TopPageStoreTableViewCell {
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalHeight(1))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        
+
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPagingCentered
         let layout = UICollectionViewCompositionalLayout(section: section)

@@ -8,16 +8,15 @@
 import Foundation
 import UIKit
 
+class Tool {
 
-class Tool{
-    
-    func makeRoundedCornersButton( button: UIButton){
+    func makeRoundedCornersButton( button: UIButton) {
         button.layer.cornerRadius = button.frame.height / 2
     }
-    
+
     let customOrange = UIColor(red: 255/255, green: 82/255, blue: 2/255, alpha: 1)
     let customGreen = UIColor(hex: "4F846C")
-    
+
 }
 
 class Theme {

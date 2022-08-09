@@ -16,13 +16,13 @@ struct ShoppingCartItem {
 class ShoppingCart {
     private init() {}
     static let shared = ShoppingCart()
-    
+
     private var items: [ShoppingCartItem] = []
-    
+
     private let queue = DispatchQueue(label: "ShoppingCart")
-        
+
     func add(_ item: ShoppingCartItem) {
-        
+
         queue.sync {
             items.append(item)
         }

@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         tabbarController = window?.rootViewController as? UITabBarController
-        
+
         if let url = connectionOptions.urlContexts.first?.url {
             handleURL(url)
         }
@@ -57,7 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-    
+
     // MARK: - What's openURLContexts/absoluteString
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("URLContexts:\(URLContexts)")
@@ -68,11 +68,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func handleURL(_ url: URL) {
 //        guard url.scheme == "rilinkshop" && url.host == "rilink.com.tw" else { return }
         guard url.scheme == "rilinkshop" else { return }
-        
+
         let root = UIApplication.shared.windows.first?.rootViewController as? MainTabBarController
         let navC = root?.selectedViewController as? UINavigationController
-        
-        
+
         if url.host == "rilink.com.tw" {
             navC?.popToRootViewController(animated: false)
             switch url.path {
@@ -90,13 +89,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 DispatchQueue.main.async {
                     navigationController?.toTicketViewController()
                 }
-                
+
             default:
                 return
             }
         } else {
-            navC?.popToRootViewController(animated: false)
+            self.window?.rootViewController?.dismiss(animated: true, completion: {
+                navC?.popToRootViewController(animated: false)
+            })
         }
     }
 }
-

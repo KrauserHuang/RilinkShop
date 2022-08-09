@@ -1089,7 +1089,7 @@ public class DataRequest: Request {
 
     /// Protected storage for the `Data` read by the instance.
     @Protected
-    private var mutableData: Data? = nil
+    private var mutableData: Data?
 
     /// Creates a `DataRequest` using the provided parameters.
     ///
@@ -1909,4 +1909,4 @@ extension UploadRequest.Uploadable: UploadableConvertible {
 }
 
 /// A type that can be converted to an upload, whether from an `UploadRequest.Uploadable` or `URLRequestConvertible`.
-public protocol UploadConvertible: UploadableConvertible & URLRequestConvertible {}
+public protocol UploadConvertible: UploadableConvertible, URLRequestConvertible {}

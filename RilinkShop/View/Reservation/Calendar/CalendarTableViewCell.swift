@@ -15,16 +15,16 @@ class CalendarTableViewCell: UITableViewCell {
 
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var appointmentButton: UIButton!
-    
+
     weak var delegate: CalendarTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         appointmentButton.layer.cornerRadius = appointmentButton.frame.height / 2
         appointmentButton.backgroundColor = .systemTeal
         appointmentButton.tintColor = .white
-        
+
         appointmentButton.setTitle("可選擇", for: .normal)
     }
 
@@ -33,7 +33,7 @@ class CalendarTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configure(with model: FixMotor) {
         timeLabel.text = model.duration
         let quota = Int(model.quota)! ?? 0
@@ -45,9 +45,9 @@ class CalendarTableViewCell: UITableViewCell {
             appointmentButton.backgroundColor = .systemGray4
         }
     }
-    
+
     @IBAction func appointmentButtonTapped(_ sender: UIButton) {
         delegate?.didMakeAppointment(self)
     }
-    
+
 }

@@ -19,22 +19,22 @@ class ReservationInputViewController: UIViewController {
     @IBOutlet weak var carTypeTextField: UITextField!
     @IBOutlet weak var repairTypeTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
-    
+
     let dropDown = DropDown()
     var store = Store()
     var edittingTextField: UITextField?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         title = "資料填寫"
         configureView()
         configureKeyboard()
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     func configureView() {
         nextStepButton.setTitle("下一步", for: .normal)
         nextStepButton.backgroundColor = Theme.customOrange
@@ -51,7 +51,7 @@ class ReservationInputViewController: UIViewController {
         descriptionTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -75,13 +75,13 @@ class ReservationInputViewController: UIViewController {
         dropDown.anchorView = sender // drop down list會顯示在所設定的view下(這裡指button)
         dropDown.bottomOffset = CGPoint(x: 0, y: sender.frame.size.height) // 依據anchorView的bottom位置插入drop down list
         dropDown.show() // 設定完內容跟位置後要執行顯示
-        dropDown.selectionAction = { [weak self] (index: Int, item: String) in //8
+        dropDown.selectionAction = { [weak self] (_: Int, item: String) in // 8
             guard let _ = self else { return }
 //            sender.setTitle(item, for: .normal) // 點選對應的drop down list item要做什麼
             self?.repairTypeTextField.text = item
         }
     }
-    
+
     @IBAction func nextStepButtonTapped(_ sender: UIButton) {
         let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let mobile = mobileTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
@@ -89,7 +89,7 @@ class ReservationInputViewController: UIViewController {
         let carType = carTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let repairType = repairTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let carDescription = descriptionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        
+
         guard name != "" else {
             let msg = "請輸入你的姓名"
             Alert.showMessage(title: "", msg: msg, vc: self) {
@@ -113,7 +113,7 @@ class ReservationInputViewController: UIViewController {
             }
             return
         }
-        
+
         let phoneRegEx = "(09)+[0-9]{8}"
         let phonePredicate  = NSPredicate(format: "SELF MATCHES %@", phoneRegEx)
         guard phonePredicate.evaluate(with: mobile) else {
@@ -147,8 +147,7 @@ class ReservationInputViewController: UIViewController {
             }
             return
         }
-        
-        
+
         let vc = CalendarViewController()
         vc.name = name
         vc.mobile = mobile
@@ -167,7 +166,7 @@ extension ReservationInputViewController: UITextFieldDelegate {
         self.edittingTextField = textField
         return true
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // name -> mobile -> license -> carType -> description
         if textField == nameTextField {

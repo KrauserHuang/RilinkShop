@@ -10,9 +10,9 @@ import UIKit
 class StoreDetailOpenTimeTextCell: UITableViewCell {
 
     @IBOutlet weak var openTimeLabel: UILabel!
-    
+
     static let reuseIdentifier = "StoreDetailOpenTimeTextCell"
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,7 +24,7 @@ class StoreDetailOpenTimeTextCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configure(with model: Store) {
         openTimeLabel.text = model.storeOpentime
     }

@@ -13,9 +13,9 @@ class TopPagePackageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
-    
+
     static let reuseIdentifier = "TopPagePackageCollectionViewCell"
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,11 +28,11 @@ class TopPagePackageCollectionViewCell: UICollectionViewCell {
         bgView.layer.shadowOpacity = 0.4
         bgView.layer.shadowOffset = CGSize(width: 2, height: -2)
     }
-    
+
     func configure(with model: Package) {
         let imageURLString = SHOP_ROOT_URL + model.productPicture
         imageView.setImage(imageURL: imageURLString)
-        
+
         nameLabel.text = model.productName
         costLabel.text = "NT$ \(model.productPrice)"
     }

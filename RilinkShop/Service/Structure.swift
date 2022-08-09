@@ -7,29 +7,29 @@
 
 import Foundation
 
-typealias Completion = (_ success: Bool, _ response: AnyObject?) -> ()
-typealias Handler = () -> ()
+typealias Completion = (_ success: Bool, _ response: AnyObject?) -> Void
+typealias Handler = () -> Void
 
-//個人資訊
+// 個人資訊
 struct PersonalData {
-    var account:String
-    var accountType:String
-    var tel:String
-    var name:String
-    var email:String
-    var sex:String
-    var city:String
-    var region:String
-    var address:String
-    var birthday:String
-    var imageName:String
-    var mobileType:String
-    
-    var point:String
-    var cmdImageFile:String
-    
-    var referrerPhone:String
-    var referrerCount:String
+    var account: String
+    var accountType: String
+    var tel: String
+    var name: String
+    var email: String
+    var sex: String
+    var city: String
+    var region: String
+    var address: String
+    var birthday: String
+    var imageName: String
+    var mobileType: String
+
+    var point: String
+    var cmdImageFile: String
+
+    var referrerPhone: String
+    var referrerCount: String
 }
 
 enum ReturnCode {

@@ -12,19 +12,24 @@ class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         delegate = self
         tabBar.tintColor = Theme.customOrange
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
 //        print("MainTabBarController + \(#function)")
 //        print("didLogin:\(UserService.shared.didLogin)")
 //        print("userAccount:\(MyKeyChain.getAccount())")
 //        print("adminAccount:\(MyKeyChain.getBossAccount())")
-        
+//        MyKeyChain.setAccount("0910619306")
+//        MyKeyChain.setPassword("a12345678")
+//        UserService.shared.id = "0910619306"
+//        UserService.shared.pwd = "a12345678"
+//        UserService.shared.didLogin = true
+
         if UserService.shared.didLogin {
             print("main_didLogIn")
             tryLogIn()
@@ -35,8 +40,8 @@ class MainTabBarController: UITabBarController {
             }
         }
     }
-    
-    func tryLogIn(){
+
+    func tryLogIn() {
         if MyKeyChain.getAccount() == nil,
            MyKeyChain.getBossAccount() != nil {
             // 登入店長頁面
@@ -50,24 +55,24 @@ class MainTabBarController: UITabBarController {
 //            Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
 //            Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
             print("MainTabBarController + \(#function)")
-            print("Account:\(Global.ACCOUNT)")
-            print("Password:\(Global.ACCOUNT_PASSWORD)")
+            print("GlobalAccount:\(Global.ACCOUNT)")
+            print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
             print("-----------------------------------")
-            print("Account:\(MyKeyChain.getAccount())")
-            print("Password:\(MyKeyChain.getPassword())")
+            print("KeyChainAccount:\(MyKeyChain.getAccount())")
+            print("KeyChainPassword:\(MyKeyChain.getPassword())")
             print("-----------------------------------")
-            print("Account:\(UserService.shared.id)")
-            print("Password:\(UserService.shared.pwd)")
-        }
-        else if MyKeyChain.getAccount() == nil,
+            print("UserServiceAccount:\(UserService.shared.id)")
+            print("UserServicePassword:\(UserService.shared.pwd)")
+        } else if MyKeyChain.getAccount() == nil,
                   MyKeyChain.getBossAccount() == nil {
             selectedIndex = 3
         }
     }
 }
 // MARK: - 點選tab之後會跳回該tab的第一頁，tab->nav->viewController
-extension MainTabBarController:  UITabBarControllerDelegate {
+extension MainTabBarController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print(self, #function)
         tryLogIn()
         guard let MainTabViewControllers = self.viewControllers else {
             print("no valid viewControllers in MainTabBarController.")

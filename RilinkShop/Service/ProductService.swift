@@ -30,13 +30,13 @@ class ProductService {
             completion(category)
         }
     }
-    
+
     // 載入商品列表
     func loadProductList(id: String, pwd: String, completion: @escaping ([Product]) -> Void) {
         let url = SHOP_API_URL + URL_PRODUCTLIST // 測試機
         let parameters = ["member_id": id,
                           "member_pwd": pwd]
-        
+
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             let json = JSON(response.value ?? "")
             if let results = json.array {
@@ -84,14 +84,14 @@ class ProductService {
             }
         }
     }
-    
+
     func loadPackageList(id: String, pwd: String, completion: @escaping ([Package]) -> Void) {
         let url = SHOP_API_URL + URL_PACKAGELIST // 測試機
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
         ]
-        
+
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [Package].self) { response in
 //            print(response)
             guard let packages = response.value else { return }
@@ -100,7 +100,7 @@ class ProductService {
             completion(packages)
         }
     }
-    
+
     func loadPackageInfo(id: String, pwd: String, no: String, completion: @escaping ([PackageInfo]) -> Void) {
         let url = SHOP_API_URL + URL_PACKAGEINFO // 測試機
         let parameters = [
@@ -108,7 +108,7 @@ class ProductService {
             "member_pwd": pwd,
             "package_no": no
         ]
-        
+
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [PackageInfo].self) { response in
             guard let products = response.value else { return }
             completion(products)
@@ -138,7 +138,7 @@ class ProductService {
 
         }
     }
-    
+
     func addShoppingCartItem(id: String, pwd: String, no: String, spec: String, price: String, qty: String, total: String, completed: @escaping Completion) {
         let url = SHOP_API_URL + URL_ADDSHOPPINGCART
         let parameters = [
@@ -152,7 +152,7 @@ class ProductService {
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
         print("parameters:\(parameters)")
-        
+
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             print(#function)
             print(response)
@@ -161,12 +161,12 @@ class ProductService {
                 completed(false, errorMsg as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
 //            print(#function)
 //            print(response)
             print(value)
-            
+
             switch response.result {
             case .success:
                 guard value["code"].stringValue == returnCode else {
@@ -174,7 +174,7 @@ class ProductService {
                     completed(false, errorMsg as AnyObject)
                     return
                 }
-                
+
                 let message = value["responseMessage"].stringValue
                 completed(true, message as AnyObject)
             case .failure:
@@ -250,18 +250,18 @@ class ProductService {
             "order_qty": "\(qty)"
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
-        
+
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             guard response.error == nil else {
                 let errorMsg = "伺服器連線失敗"
                 completion(false, errorMsg as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
                 guard value["code"].stringValue == returnCode else {
@@ -276,7 +276,7 @@ class ProductService {
                 completion(false, errorMsg as AnyObject)
             }
         }
-        
+
     }
     // delete item from shopping cart(刪掉對應商品)
     func removeShoppingCartItem(id: String, pwd: String, no: String, completion: @escaping (Product) -> Void) {

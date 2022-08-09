@@ -10,26 +10,26 @@ import UIKit
 class TopPageViewControllerTwo: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
+
     var collectionViewControllers = [String]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         configureTableView()
     }
-    
+
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        
+
         let storeNib = UINib(nibName: String(describing: TopPageStoreTableViewCell.self), bundle: nil)
         tableView.register(storeNib, forCellReuseIdentifier: String(describing: TopPageStoreTableViewCell.self))
-        
+
         let optionNib = UINib(nibName: String(describing: TopPageOptionTableViewCell.self), bundle: nil)
         tableView.register(optionNib, forCellReuseIdentifier: String(describing: TopPageOptionTableViewCell.self))
-        
+
         let packageNib = UINib(nibName: String(describing: TopPagePackageTableViewCell.self), bundle: nil)
         tableView.register(packageNib, forCellReuseIdentifier: String(describing: TopPagePackageTableViewCell.self))
     }
@@ -42,9 +42,9 @@ extension TopPageViewControllerTwo: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TopPageStoreTableViewCell.cellIdentifier()), for: indexPath) as! TopPageStoreTableViewCell
@@ -59,7 +59,7 @@ extension TopPageViewControllerTwo: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
@@ -73,7 +73,7 @@ extension TopPageViewControllerTwo: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
-    
+
 //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        switch section {
 //        case 0:

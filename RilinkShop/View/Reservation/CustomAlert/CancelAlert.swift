@@ -9,18 +9,18 @@ import Foundation
 import UIKit
 import SwiftUI
 
-class CancelAlert: UIViewController{
-//popupWidth: self.view.frame.width - 32, popupHeight: self.view.frame.height * 0.5
-    
+class CancelAlert: UIViewController {
+// popupWidth: self.view.frame.width - 32, popupHeight: self.view.frame.height * 0.5
+
 //    let successAlert = SuccessAlert()
-    
+
     let okImageView: UIImageView = {
         let theImageView = UIImageView()
             theImageView.image = UIImage(named: "checked")
-            theImageView.translatesAutoresizingMaskIntoConstraints = false //You need to call this property so the image is added to your view
+            theImageView.translatesAutoresizingMaskIntoConstraints = false // You need to call this property so the image is added to your view
         return theImageView
     }()
-    
+
     let datelabel: UILabel = {
         let label = UILabel()
         label.text = "2021/04/10 星期六 14:00"
@@ -29,7 +29,7 @@ class CancelAlert: UIViewController{
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     let successReservationLabel: UILabel = {
         let label = UILabel()
         label.text = "預約成功"
@@ -38,8 +38,7 @@ class CancelAlert: UIViewController{
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    
+
     let confirmButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 10/255, green: 160/255, blue: 110/255, alpha: 1)
@@ -48,7 +47,7 @@ class CancelAlert: UIViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     let addMoreReservationButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = UIColor.white
@@ -58,10 +57,10 @@ class CancelAlert: UIViewController{
         button.setTitle("添加更多預約", for: .normal)
         button.layer.cornerRadius = 22.5
         button.translatesAutoresizingMaskIntoConstraints = false
-        
+
         return button
     }()
-    
+
     let cancelButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .clear
@@ -70,22 +69,21 @@ class CancelAlert: UIViewController{
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        
+
         let objectArray: [ UIView] = [ okImageView, datelabel, successReservationLabel, confirmButton, addMoreReservationButton, cancelButton]
-        
-        for obj in objectArray{
+
+        for obj in objectArray {
             self.view.addSubview(obj)
         }
-        
+
         setImageView()
         setLabel()
         setButton()
 
-        
     }
     func setImageView() {
         okImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
@@ -93,8 +91,8 @@ class CancelAlert: UIViewController{
         okImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         okImageView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
     }
-    
-    func setLabel(){
+
+    func setLabel() {
 //        datelabel
         datelabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         datelabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = true
@@ -102,8 +100,8 @@ class CancelAlert: UIViewController{
         successReservationLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         successReservationLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 180).isActive = true
     }
-    
-    func setButton(){
+
+    func setButton() {
 //        confirmButton
         confirmButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
         confirmButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
@@ -120,5 +118,5 @@ class CancelAlert: UIViewController{
         cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         cancelButton.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
     }
-    
+
 }

@@ -10,9 +10,9 @@ import UIKit
 class TicketViewController: UIViewController {
 
     @IBOutlet weak var segment: UISegmentedControl!
-   
+
     @IBOutlet var containerViews: [UIView]!
-    
+
     @IBAction func changeView(_ sender: UISegmentedControl) {
         containerViews.forEach {
            $0.isHidden = true
@@ -28,10 +28,9 @@ class TicketViewController: UIViewController {
 //            default:
 //                print("segmentError")
 //        }
-        
+
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }

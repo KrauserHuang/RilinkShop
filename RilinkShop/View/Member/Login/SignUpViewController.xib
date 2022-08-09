@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignUpViewController" customModule="RilinkShop" customModuleProvider="target">
             <connections>
                 <outlet property="accountLabel" destination="MQN-oJ-xfk" id="Vd2-2z-nIZ"/>
+                <outlet property="birthdayButton" destination="QsX-Io-Tvg" id="0rr-he-0Wz"/>
                 <outlet property="birthdayTF" destination="ggC-U8-5Ee" id="WPp-SS-a01"/>
                 <outlet property="emailTF" destination="q2Z-cF-6xr" id="9wq-TI-Np6"/>
                 <outlet property="femaleButton" destination="La9-Ue-KLJ" id="cOV-YB-b9G"/>
@@ -103,7 +104,7 @@
                                         <constraint firstAttribute="height" constant="45" id="8iX-O3-F8S"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Qq-jN-1fv">
                                     <rect key="frame" x="16" y="647" width="382" height="45"/>
@@ -193,7 +194,7 @@
                                         <constraint firstAttribute="height" constant="45" id="n6M-47-LXL"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gT-O2-QaG">
                                     <rect key="frame" x="86" y="320" width="12.5" height="15"/>

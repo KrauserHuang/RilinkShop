@@ -22,22 +22,22 @@ class StoreAppViewController: UIViewController {
             logoutButton.setTitleColor(.white, for: .normal)
         }
     }
-    
+
     weak var delegate: StoreAppViewControllerDelegate?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+
     @IBAction func scan(_ sender: UIButton) {
         let controller = QRCodeViewController()
         controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true, completion: nil)
 //        delegate?.toQRScan(self)
     }
-    
+
     @IBAction func logoutAction(_ sender: Any) {
 //        delegate?.backToLogin(self)
         MyKeyChain.logout()

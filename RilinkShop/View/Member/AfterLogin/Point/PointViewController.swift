@@ -9,13 +9,12 @@ import UIKit
 
 class PointViewController: UIViewController {
 
-    
     @IBOutlet weak var pointLabel: UIButton!
     @IBOutlet weak var point: UILabel!
     @IBOutlet weak var remindLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyView: UIView!
-    
+
     var account = Global.ACCOUNT
     var password = Global.ACCOUNT_PASSWORD
     var points: [Point] = [] {
@@ -23,7 +22,7 @@ class PointViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,12 +33,12 @@ class PointViewController: UIViewController {
         pointLabel.isUserInteractionEnabled = false
         getPoint()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getPoint()
     }
-    
+
     func getPoint() {
 //        point.text = Global.personalData?.point ?? "0"
         pointLabel.setTitle("\(Global.personalData?.point ?? "0")", for: .normal)
@@ -65,34 +64,34 @@ class PointViewController: UIViewController {
 //            }
 //        }
         PointService.shared.fetchPointHistory(id: account, pwd: password) { success, response in
-            
+
             HUD.hideLoadingHUD(inView: self.view)
-            
+
             guard success else {
                 let errorMsg = response as! String
                 Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
                 return
             }
-            
+
             let points = response as! [Point]
             self.points = points
             self.emptyView.isHidden = self.points.count != 0
         }
     }
-    
+
 }
 // MARK: - UITableViewDelegate/DataSource
-extension PointViewController: UITableViewDelegate, UITableViewDataSource{
+extension PointViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return points.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "pointTableViewCell") as! PointTableViewCell
-        
+
         let point = points[indexPath.row]
         cell.configure(with: point)
-        
+
         return cell
     }
 }

@@ -14,9 +14,9 @@ protocol CartTableViewCellDelegate: AnyObject {
 }
 
 class CartTableViewCell: UITableViewCell {
-    
+
     static let reuseIdentifier = "CartTableViewCell"
-    
+
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
@@ -26,13 +26,13 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var substractButton: UIButton!
     @IBOutlet weak var itemNumberLabel: UILabel!
-    
+
     weak var delegate: CartTableViewCellDelegate?
     var itemNumber = 1
     var minValue = 0
     var stepValue = 1
     var stock = Int()
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,7 +42,7 @@ class CartTableViewCell: UITableViewCell {
         productImageView.layer.cornerRadius = 10
         initCell()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         let margins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
@@ -54,7 +54,7 @@ class CartTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func initCell() {
         totalCostLabel.textColor = Theme.customOrange
         // stepper外圍
@@ -78,18 +78,18 @@ class CartTableViewCell: UITableViewCell {
         // 中間的數字
         itemNumberLabel.backgroundColor = .clear
     }
-    
+
     func configure(with model: Product) {
         nameLabel.text = model.product_name
         numberLabel.text = "X \(model.order_qty)"
         itemNumberLabel.text = model.order_qty
         costLabel.text = "$\(model.product_price)"
         totalCostLabel.text = "小記：$\(model.total_amount)"
-        
+
         let imageURLString = SHOP_ROOT_URL + model.product_picture
         productImageView.setImage(imageURL: imageURLString)
     }
-    
+
     @IBAction func removeItemButtonTapped(_ sender: UIButton) {
         delegate?.removeItem(self)
     }

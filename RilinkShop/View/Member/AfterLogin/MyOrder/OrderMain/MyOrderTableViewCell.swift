@@ -25,10 +25,10 @@ class MyOrderTableViewCell: UITableViewCell {
     @IBAction func payImmediateAction(_ sender: UIButton) {
         delegate?.payImmediate(self)
     }
-    
-    var closure: (()->())?
+
+    var closure: (() -> Void)?
     weak var delegate: MyOrderTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,7 +37,7 @@ class MyOrderTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func configure(with model: Order) {
         orderNo.text = "訂單編號：\(model.orderNo)"
         orderDate.text = "訂單日期：\(model.orderDate)"

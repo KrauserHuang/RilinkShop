@@ -8,7 +8,7 @@
 import Foundation
 
 class MyKeyChain {
-    
+
     static func setAccount(_ account: String) {
         guard account != "" else {
             UserDefaults.standard.removeObject(forKey: "account")
@@ -24,7 +24,7 @@ class MyKeyChain {
         return account
     }
     static func setPassword(_ password: String) {
-        guard password != "" else{
+        guard password != "" else {
             UserDefaults.standard.removeObject(forKey: "password")
             return
         }
@@ -32,13 +32,13 @@ class MyKeyChain {
         UserDefaults.standard.set(password, forKey: "password")
     }
     static func getPassword() -> String? {
-        guard let password = UserDefaults.standard.string(forKey: "password"), password != "" else{
+        guard let password = UserDefaults.standard.string(forKey: "password"), password != "" else {
             return nil
         }
 //        let decrypt = self.decryptString(password)
         return password
     }
-    
+
     static func setBossAccount(_ account: String) {
         guard account != "" else {
             UserDefaults.standard.removeObject(forKey: "bossaccount")
@@ -52,7 +52,7 @@ class MyKeyChain {
         }
         return account
     }
-    
+
     static func setBossPassword(_ password: String) {
         guard password != "" else {
             UserDefaults.standard.removeObject(forKey: "bosspassword")
@@ -61,7 +61,7 @@ class MyKeyChain {
         UserDefaults.standard.set(password, forKey: "bosspassword")
     }
     static func getBossPassword() -> String? {
-        guard let password = UserDefaults.standard.string(forKey: "bosspassword"), password != "" else{
+        guard let password = UserDefaults.standard.string(forKey: "bosspassword"), password != "" else {
             return nil
         }
         return password

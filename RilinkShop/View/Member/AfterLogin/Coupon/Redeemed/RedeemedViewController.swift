@@ -10,7 +10,7 @@ import UIKit
 class RedeemedViewController: UIViewController {
 
     let tool = Tool()
-    
+
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,19 +23,19 @@ class RedeemedViewController: UIViewController {
 
 }
 
-extension RedeemedViewController: UITableViewDelegate, UITableViewDataSource{
+extension RedeemedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "redeemedTableViewCell", for: indexPath) as! RedeemedTableViewCell
-        
+
         tool.makeRoundedCornersButton(button: cell.copyButton)
         cell.copyButton.backgroundColor = .white
         cell.copyButton.layer.borderColor = tool.customOrange.cgColor
         cell.copyButton.layer.borderWidth = 2
         cell.copyButton.tintColor = tool.customOrange
-        
+
         return cell
     }
 }

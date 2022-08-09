@@ -11,13 +11,13 @@ import UIKit
 protocol DefinesCompositionalLayout {
     /// Required. Provides the meta data needed to layout the cells
     func layoutInfo(using layoutEnvironment: NSCollectionLayoutEnvironment) -> CompositionalLayoutOption
-    
+
     /// Optional. Override only if you want to provide additional insets (spacing) around each section
     func sectionInsets(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets
-    
+
     /// Optional. Override only if you want to provide additional spacing around each cell
     var interItemSpacing: CGFloat { get }
-    
+
     /// Optional. Override only if you want to provide additional spacing around each group
     var interGroupSpacing: CGFloat { get }
 }
@@ -26,11 +26,11 @@ extension DefinesCompositionalLayout {
     var interItemSpacing: CGFloat {
         return .zero
     }
-    
+
     var interGroupSpacing: CGFloat {
         return .zero
     }
-    
+
     func sectionInsets(layoutEnvironment: NSCollectionLayoutEnvironment) -> NSDirectionalEdgeInsets {
         return .zero
     }

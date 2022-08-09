@@ -14,9 +14,9 @@ class ProductInfoCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var qtyLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
-    
+
     static let reuseIdentifier = "ProductInfoCell"
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,7 +27,7 @@ class ProductInfoCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configure(with model: List) {
         productImageView.setImage(imageURL: SHOP_ROOT_URL + model.productPicture)
         nameLabel.text = model.productName
@@ -35,7 +35,7 @@ class ProductInfoCell: UITableViewCell {
         qtyLabel.text = "X\(model.orderQty)"
         totalLabel.text = "小計：$\(model.totalAmount)"
     }
-    
+
 //    func configure(with model: Product) {
 //        productImageView.setImage(imageURL: SHOP_ROOT_URL + model.product_picture)
 //        nameLabel.text = model.product_name
@@ -59,5 +59,5 @@ class ProductInfoCell: UITableViewCell {
 //        qtyLabel.text = "X\(model.orderQty)"
 //        totalLabel.text = "小計：$\(model.totalAmount)"
 //    }
-    
+
 }

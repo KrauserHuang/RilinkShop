@@ -15,6 +15,7 @@
                 <outlet property="descriptionLabel" destination="qnP-HG-Q9m" id="OhR-4R-hia"/>
                 <outlet property="descriptionView" destination="yJJ-5W-YVR" id="fET-IS-iX6"/>
                 <outlet property="hostelImageView" destination="cQc-dl-Sue" id="lEH-Dk-k2X"/>
+                <outlet property="locationLabel" destination="DFp-9C-TKA" id="TrX-vp-7vy"/>
                 <outlet property="nameLabel" destination="QFl-UI-Tve" id="NtA-DS-qDq"/>
                 <outlet property="nameView" destination="fqA-uf-UyM" id="hzI-BC-9KN"/>
                 <outlet property="openTimeBGView" destination="04t-s6-xZA" id="nsu-oR-85f"/>

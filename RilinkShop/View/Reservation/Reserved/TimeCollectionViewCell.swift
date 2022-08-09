@@ -11,7 +11,7 @@ class TimeCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

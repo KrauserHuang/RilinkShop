@@ -23,7 +23,7 @@ struct User: Codable {
     var birthday: String = ""
     var point: String = ""
     var cmdImageFile: String? = ""
-    
+
     var accountType: String = ""
     var referrerCount: String? = ""
     var mobileType: String? = ""
@@ -42,7 +42,7 @@ struct StoreID: Codable {
 struct StoreIDInfo: Codable {
     var storeName: String = ""
     var storeID: String = ""
-    
+
     enum CodingKeys: String, CodingKey {
         case storeName = "store_name"
         case storeID = "store_id"
@@ -64,7 +64,7 @@ struct StoreInfo: Codable {
     var storeDescript: String = ""
     var storeOpentime: String = ""
     var storePicture: String = ""
-    
+
     enum CodingKeys: String, CodingKey {
         case storeName = "store_name"
         case storeAddress = "store_address"

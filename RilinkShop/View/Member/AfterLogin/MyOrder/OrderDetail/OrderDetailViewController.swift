@@ -8,10 +8,10 @@
 import UIKit
 
 class OrderDetailViewController: UIViewController {
-    
+
     @IBOutlet weak var orderDetailTableView: UITableView!
     @IBOutlet weak var footerView: OrderDetailFooterView!
-    
+
     let account = Global.ACCOUNT
     let password = Global.ACCOUNT_PASSWORD
     var order = Order()
@@ -46,11 +46,10 @@ class OrderDetailViewController: UIViewController {
 //            }
 //        }
 //    }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         orderDetailTableView.alwaysBounceVertical = false
         orderDetailTableView.isUserInteractionEnabled = false
         getList()
@@ -59,11 +58,10 @@ class OrderDetailViewController: UIViewController {
 //        print("--------------------")
 //        print("orderNo:\(orderNo)")
     }
-    
+
     func getList() {
         OrderService.shared.getECOrderInfo(id: account, pwd: password, no: order.orderNo) { listResponse in
-            
-            
+
             if let products = listResponse.first?.productList,
                let packages = listResponse.first?.packageList {
                 self.products = products + packages
@@ -73,7 +71,7 @@ class OrderDetailViewController: UIViewController {
             print("orderInfos:\(self.orderInfos)")
         }
     }
-    
+
     func configureTableView() {
         orderDetailTableView.delegate = self
         orderDetailTableView.dataSource = self
@@ -82,7 +80,7 @@ class OrderDetailViewController: UIViewController {
         orderDetailTableView.register(nibStatus, forCellReuseIdentifier: OrderStatusCell.reuseIdentifier)
         orderDetailTableView.register(nibInfo, forCellReuseIdentifier: ProductInfoCell.reuseIdentifier)
     }
-    
+
     func configureFooterView() {
         footerView.orderAmountLabel.text = order.orderAmount
         footerView.discountAmountLabel.text = order.discountAmount
@@ -106,17 +104,17 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: OrderStatusCell.reuseIdentifier, for: indexPath) as! OrderStatusCell
-            
+
             guard let orderInfo = orderInfos.first else { return UITableViewCell() }
             cell.configure(with: orderInfo)
-            
+
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProductInfoCell.reuseIdentifier, for: indexPath) as! ProductInfoCell
-            
+
             let product = products[indexPath.row]
             cell.configure(with: product)
-            
+
             return cell
         default:
             return UITableViewCell()

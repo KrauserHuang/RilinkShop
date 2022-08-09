@@ -19,22 +19,22 @@ class MyOrderTableViewController: UITableViewController {
     }
     let account = Global.ACCOUNT
     let password = Global.ACCOUNT_PASSWORD
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         getOrder()
 
         tableView.rowHeight = 130
-        
+
         tableView.register(UINib(nibName: "MyOrderTableViewCell", bundle: nil), forCellReuseIdentifier: "myOrderTableViewCell")
     }
-    
+
     func getOrder() {
         OrderService.shared.getECOrderList(id: account, pwd: password) { ordersResponse in
             self.orders = ordersResponse
         }
-        
+
 //        OrderService.shared.getECOrderList(id: account, pwd: password) { success, response in
 //            guard success else {
 //                let errorMsg = response as! String
@@ -57,24 +57,24 @@ class MyOrderTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "myOrderTableViewCell") as! MyOrderTableViewCell
-        
+
         cell.delegate = self
-        
+
         tool.makeRoundedCornersButton(button: cell.detailButton)
         cell.detailButton.layer.borderColor = tool.customOrange.cgColor
         cell.detailButton.backgroundColor = .white
         cell.detailButton.layer.borderWidth = 3
         cell.detailButton.tintColor = tool.customOrange
-        
+
         tool.makeRoundedCornersButton(button: cell.payImmediateButton)
         cell.payImmediateButton.layer.borderColor = tool.customOrange.cgColor
         cell.payImmediateButton.backgroundColor = .white
         cell.payImmediateButton.layer.borderWidth = 3
         cell.payImmediateButton.tintColor = tool.customOrange
-        
+
         let order = orders[indexPath.row]
         cell.configure(with: order)
-        
+
         cell.closure = {
             let orderDetailVC = OrderDetailViewController()
             orderDetailVC.order = order

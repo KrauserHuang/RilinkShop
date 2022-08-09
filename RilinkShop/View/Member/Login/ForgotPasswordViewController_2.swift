@@ -18,28 +18,28 @@ class ForgotPasswordViewController_2: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordAgainTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
-    
+
     weak var delegate: ForgotPasswordViewController_2_Delegate?
     let tool = Tool()
     var edittingTextField: UITextField?
     var tempAccount: String!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureKeyboard()
-        
+
         tool.makeRoundedCornersButton(button: submitButton)
         submitButton.backgroundColor = Theme.customOrange
     }
-    
+
     func configureKeyboard() {
         verifyCodeTextField.delegate = self
         passwordTextField.delegate = self
         passwordAgainTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -57,12 +57,12 @@ class ForgotPasswordViewController_2: UIViewController {
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
     }
-    
+
     @IBAction func submitButtonTapped(_ sender: UIButton) {
-        
+
         let account = tempAccount
         let accountType = "0"
-        
+
         let verifyCode = verifyCodeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard verifyCode != "" else {
             Alert.showMessage(title: "", msg: "請輸入驗證碼", vc: self) {
@@ -70,7 +70,7 @@ class ForgotPasswordViewController_2: UIViewController {
             }
             return
         }
-        
+
         let pw1 = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard pw1 != "" else {
             Alert.showMessage(title: "", msg: "請設定登入密碼", vc: self) {
@@ -78,8 +78,7 @@ class ForgotPasswordViewController_2: UIViewController {
             }
             return
         }
-        
-        
+
         let pw2 = passwordAgainTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         guard pw2 != "" else {
             Alert.showMessage(title: "", msg: "請再次輸入密碼", vc: self) {
@@ -87,19 +86,19 @@ class ForgotPasswordViewController_2: UIViewController {
             }
             return
         }
-        
+
         guard pw1 == pw2 else {
             Alert.showMessage(title: "", msg: "請確認輸入密碼正確", vc: self) {
                 self.passwordAgainTextField.becomeFirstResponder()
             }
             return
         }
-        
-        let action = "resetpw"  //非修改密碼
-        
+
+        let action = "resetpw"  // 非修改密碼
+
 //        Global.ACCOUNT_PASSWORD = pw1!
 //        MyKeyChain.setPassword(pw1!)
-        
+
         HUD.showLoadingHUD(inView: self.view, text: "驗證中")
         UserService.shared.verifyCode(action: action,
                                       account: account!,
@@ -110,23 +109,23 @@ class ForgotPasswordViewController_2: UIViewController {
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
-                    
+
                     guard success else {
                         HUD.hideLoadingHUD(inView: self.view)
                         let errmsg = response as! String
                         Alert.showMessage(title: "", msg: errmsg, vc: self) {
-                            
+
                         }
                         return
                     }
-                    
+
                     HUD.hideLoadingHUD(inView: self.view)
                     Global.ACCOUNT_PASSWORD = pw1!
                     MyKeyChain.setPassword(pw1!)
-                    
+
                     let message = "密碼已修改，請以新密碼重新登入。"
                     Alert.showMessage(title: "", msg: message, vc: self) {
-                        
+
                         self.dismiss(animated: true) {
                             self.delegate?.finishPwdStep2ViewWith()
                         }
@@ -135,18 +134,18 @@ class ForgotPasswordViewController_2: UIViewController {
             }
         }
     }
-    
+
     func updateMallPassword(mobile: String, password: String) {
-        
-        UserService.shared.mallUpdatePassword(mobile: mobile, password: password) { (success, response) in
-            
+
+        UserService.shared.mallUpdatePassword(mobile: mobile, password: password) { (_, _) in
+
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
-                //self.updateCouponPassword(customerid: mobile, newpassword: password)
+                // self.updateCouponPassword(customerid: mobile, newpassword: password)
             }
         }
     }
-    
+
 }
 // MARK: - UITextFieldDelegate
 extension ForgotPasswordViewController_2: UITextFieldDelegate {
@@ -154,7 +153,7 @@ extension ForgotPasswordViewController_2: UITextFieldDelegate {
         self.edittingTextField = textField
         return true
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == verifyCodeTextField {
             passwordTextField.becomeFirstResponder()

@@ -14,7 +14,7 @@ class ExpiredTableViewCell: UITableViewCell {
     @IBOutlet weak var copyButton: UIButton!
     @IBAction func copyAction(_ sender: UIButton) {
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,5 +25,5 @@ class ExpiredTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

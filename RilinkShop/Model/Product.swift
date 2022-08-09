@@ -7,7 +7,7 @@
 
 import Foundation
 
-//struct Product: Codable, Hashable {
+// struct Product: Codable, Hashable {
 //    let pid: String
 //    let productNo: String
 //    let productType: String
@@ -25,7 +25,7 @@ import Foundation
 //        case productPrice = "product_price"
 ////        case productPicture = "product_picture"
 //    }
-//}
+// }
 
 struct Product: Codable {
     var pid                 = ""
@@ -44,7 +44,7 @@ struct Product: Codable {
     var total_amount        = ""
     var did                 = ""
     var product_spec        = ""
-    
+
 ////    var did: String? = ""
 //    var orderNo: String? = ""
 //    var memberID: String? = ""

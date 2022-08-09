@@ -13,7 +13,7 @@ class PointTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var eachPointLabel: UILabel!
     @IBOutlet weak var totalPointLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,11 +24,11 @@ class PointTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configure(with model: Point) {
         stateLabel.text = model.msg
         dateLabel.text = model.time
         eachPointLabel.text = model.point
     }
-    
+
 }

@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class OrderService {
     static let shared = OrderService()
-    
+
     func addECOrder(id: String, pwd: String, orderAmount: String, discountAmount: String, orderPay: String, completion: @escaping (Response) -> Void) {
         let url = SHOP_API_URL + URL_ADDECORDER
         let parameters = [
@@ -31,14 +31,14 @@ class OrderService {
             print("\(response)")
         }
     }
-    
+
     func getECOrderList(id: String, pwd: String, completion: @escaping ([Order]) -> Void) {
         let url = SHOP_API_URL + URL_ECORDERLIST
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
         ]
-        
+
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [Order].self) { response in
 //            print("-----")
 //            print(response.response)
@@ -46,7 +46,7 @@ class OrderService {
             completion(orders)
         }
     }
-    
+
     func getECOrderList(id: String, pwd: String, completion: @escaping Completion) {
         let url = SHOP_API_URL + URL_ECORDERLIST
         let parameters = [
@@ -54,19 +54,19 @@ class OrderService {
             "member_pwd": pwd
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
-        
+
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-            
+
             guard response.error == nil else {
                 let errorMsg = "伺服器連線失敗"
                 completion(false, errorMsg as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
                 let datas = value[""].arrayValue
@@ -96,7 +96,7 @@ class OrderService {
             }
         }
     }
-    
+
 //    func getECOrderList(id: String, pwd: String, completion: @escaping ([OrderInfo]) -> Void) {
 //        let url = SHOP_API_URL + URL_ECORDERLIST
 //        let parameters = [
@@ -111,7 +111,7 @@ class OrderService {
 //            completion(orders)
 //        }
 //    }
-    
+
     func getECOrderInfo(id: String, pwd: String, no: String, completion: @escaping ([OrderInfo]) -> Void) {
         let url = SHOP_API_URL + URL_ECORDERINFO
         let parameters = [
@@ -127,7 +127,7 @@ class OrderService {
             completion(order)
         }
     }
-    
+
 //    func getECOrderInfo(id: String, pwd: String, no: String, completion: @escaping ([List]) -> Void) {
 //        let url = SHOP_API_URL + URL_ECORDERINFO
 //        let parameters = [
@@ -143,7 +143,7 @@ class OrderService {
 //            completion(order)
 //        }
 //    }
-    
+
 //    func getECOrderInfo(id: String, pwd: String, no: String, completion: @escaping ([Product]) -> Void) {
 //        let url = TEST_API_URL + URL_ECORDERINFO
 //        let parameters = [
@@ -159,7 +159,7 @@ class OrderService {
 //            completion(order)
 //        }
 //    }
-    
+
 //    func getECOrderInfo(id: String, pwd: String, no: String, completion: @escaping ([ProductList]) -> Void) {
 //        let url = TEST_API_URL + URL_ECORDERINFO
 //        let parameters = [

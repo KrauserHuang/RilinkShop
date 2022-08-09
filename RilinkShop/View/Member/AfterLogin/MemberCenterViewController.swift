@@ -13,32 +13,32 @@ protocol MemberCenterViewControllerDelegate: AnyObject {
 }
 
 class MemberCenterViewController: UIViewController {
-    
+
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var loginNameLabel: UILabel!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var rPointButton: UIButton!
-    
+
     static var newRPoint = ""
-    
+
     var tableViewController: ContainerMemberCenterTableViewController?
     var user: User?
 //    var account = Global.ACCOUNT
 //    var password = Global.ACCOUNT_PASSWORD
-    
+
     var delegate: MemberCenterViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tabBarController?.tabBar.isHidden = false
         tableViewController = self.children[0] as? ContainerMemberCenterTableViewController
         tableViewController?.delegate = self
-        
+
         initUI()
-        
+
         print("MemberCenterViewController " + #function)
         print("GlobalAccount:\(Global.ACCOUNT)")
         print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
@@ -49,7 +49,7 @@ class MemberCenterViewController: UIViewController {
         print("UserServiceAccount:\(UserService.shared.id)")
         print("UserServicePassword:\(UserService.shared.pwd)")
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
@@ -57,7 +57,7 @@ class MemberCenterViewController: UIViewController {
 //        print("MemberCenterViewController + \(#function)")
 //        print("ACCOUNT:\(Global.ACCOUNT)")
 //        print("PASSWORD:\(Global.ACCOUNT_PASSWORD)")
-        
+
         if Global.ACCOUNT != "" {
             loginButton.setTitle("登出", for: .normal)
             editButton.isHidden = false
@@ -68,68 +68,68 @@ class MemberCenterViewController: UIViewController {
             rPointButton.setTitle("0", for: .normal)
             userImage.image = UIImage(named: "user_avatarxxhdpi")
         }
-        
-        guard Global.ACCOUNT.count != 7 else{return}
-        
+
+        guard Global.ACCOUNT.count != 7 else {return}
+
         initUI()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
+
     func initUI() {
-        //登入
+        // 登入
         loginButton.layer.cornerRadius = 13
         loginButton.layer.borderColor = UIColor.white.cgColor
         loginButton.layer.borderWidth = 1
-        
-        //編輯
+
+        // 編輯
         editButton.layer.cornerRadius = 13
         editButton.layer.borderColor = UIColor.white.cgColor
         editButton.layer.borderWidth = 1
-        
-        //背景
+
+        // 背景
         bgView.layer.cornerRadius  = 55
         bgView.layer.maskedCorners = [.layerMaxXMinYCorner]
         bgView.layer.shadowColor = UIColor.black.cgColor
         bgView.layer.shadowOpacity = 0.2
         bgView.layer.shadowOffset = CGSize(width: 2, height: -2)
-        
-        //大頭照
+
+        // 大頭照
         userImage.layer.cornerRadius = 36
         userImage.layer.borderColor = UIColor.white.cgColor
         userImage.layer.borderWidth = 1
-        
+
         loadPersonalData()
     }
-    
+
     func loadPersonalData() {
         let accountType = "0"
 //        sleep(1)
         HUD.showLoadingHUD(inView: self.view, text: "")
         UserService.shared.getPersonalData(account: MyKeyChain.getAccount() ?? "",
                                            pw: MyKeyChain.getPassword() ?? "",
-                                           accountType: accountType) { success, response in
+                                           accountType: accountType) { success, _ in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
-                    
+
                     HUD.hideLoadingHUD(inView: self.view)
-                    
+
                     guard success else {
 //                        let errorMsg = response as! String
 //                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
 //                        print("errorMsg:\(errorMsg)")
                         return
                     }
-                    //load完更新使用者名稱/點數/使用者頭像
+                    // load完更新使用者名稱/點數/使用者頭像
                     self.loginNameLabel.text = "Hi~ " + (Global.personalData?.name ?? "歡迎回來")
                     MemberCenterViewController.newRPoint = Global.personalData?.point ?? "0"
-                    
+
                     self.rPointButton.setTitle(Global.personalData?.point, for: .normal)
-                    
+
                     if Global.personalData?.cmdImageFile == nil || Global.personalData?.cmdImageFile == "" {
                         return
                     }
@@ -140,7 +140,7 @@ class MemberCenterViewController: UIViewController {
             }
         }
     }
-    
+
     func uploadImage() {
         if let image = userImage.image {
             HUD.showLoadingHUD(inView: self.view, text: "")
@@ -150,13 +150,13 @@ class MemberCenterViewController: UIViewController {
                     URLCache.shared.removeAllCachedResponses()
                     DispatchQueue.main.sync {
                         HUD.hideLoadingHUD(inView: self.view)
-                        
+
                         guard success else {
                             let errorMsg = response as! String
                             Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
                             return
                         }
-                        
+
                         Alert.showMessage(title: "", msg: "修改成功", vc: self) {
                             self.dismiss(animated: true) {
                                 //
@@ -202,7 +202,7 @@ class MemberCenterViewController: UIViewController {
         } else { // 沒有帳號，倒到登入頁面
 //            let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
 //            let vc = loginStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            
+
 //            let vc = LoginViewController_1()
 //            self.navigationController?.setViewControllers([vc], animated: true)
 //            self.navigationController?.pushViewController(vc, animated: true)
@@ -212,7 +212,7 @@ class MemberCenterViewController: UIViewController {
             delegate?.didTappedLogin(self)
         }
     }
-    
+
     func signOut() {
         HUD.showLoadingHUD(inView: self.view, text: "登出中")
         UserService.shared.logout()
@@ -231,9 +231,9 @@ class MemberCenterViewController: UIViewController {
         vc.delegate = self
         present(vc, animated: true, completion: nil)
     }
-    
+
     @IBAction func rPointButtonTapped(_ sender: UIButton) {
-        //沒作用
+        // 沒作用
     }
     @IBAction func toCartViewController(_ sender: UIButton) {
         if Global.ACCOUNT == "" {
@@ -264,7 +264,7 @@ class MemberCenterViewController: UIViewController {
 }
 // MARK: - ContainerMemberCenterTableViewControllerDelegate
 extension MemberCenterViewController: ContainerMemberCenterTableViewControllerDelegate {
-    //我的訂單頁面
+    // 我的訂單頁面
     func myOrder(_ viewController: ContainerMemberCenterTableViewController) {
         if Global.ACCOUNT == "" {
             Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
@@ -273,17 +273,67 @@ extension MemberCenterViewController: ContainerMemberCenterTableViewControllerDe
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    //常見問題頁面(還未開放)
+    // 常見問題頁面(還未開放)
     func question(_ viewController: ContainerMemberCenterTableViewController) {
         Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
     }
-    //聯絡客服頁面(還未開放)
+    // 聯絡客服頁面(還未開放)
     func customerService(_ viewController: ContainerMemberCenterTableViewController) {
         Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
     }
-    //協議及聲明頁面(還未開放)
+    // 協議及聲明頁面(還未開放)
     func statement(_ viewController: ContainerMemberCenterTableViewController) {
         Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
+    }
+    // 帳號刪除
+    func accountDeletion(_ viewController: ContainerMemberCenterTableViewController) {
+        if Global.ACCOUNT == "" {
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
+        } else {
+            Alert.accountDeletionAlert(title: "是否要刪除使用者帳號", msg: "", vc: self) {
+                Alert.accountDeletionAlert(title: "再次確認是否刪除帳號", msg: "一但刪除帳號就不可復原\n須重新申請帳號", vc: self) {
+                    print("這裡執行刪除帳號API")
+                    UserService.shared.userDel(id: MyKeyChain.getAccount() ?? "",
+                                               pwd: MyKeyChain.getPassword() ?? "") { success, response in
+                        guard success else {
+                            let errorMsg = response as! String
+                            Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+                            print("errorMsg:\(errorMsg)")
+                            return
+                        }
+
+                        UserService.shared.logout()
+                        self.loginButton.setTitle("登入", for: .normal)
+                        self.editButton.isHidden = true
+                        self.loginNameLabel.text = "Hi~ 歡迎回來"
+                        self.rPointButton.setTitle("0", for: .normal)
+                        self.userImage.image = UIImage(named: "user_avatarxxhdpi")
+                        self.view.layoutIfNeeded()
+                    }
+                }
+//                Alert.showSecurityAlert(title: "再次確認是否刪除帳號", msg: "一但刪除帳號就不可復原\n須重新申請帳號", vc: self) {
+//                    print("這裡執行刪除帳號API")
+//                    UserService.shared.userDel(id: MyKeyChain.getAccount() ?? "",
+//                                               pwd: MyKeyChain.getPassword() ?? "") { success, response in
+//                        guard success else {
+//                            let errorMsg = response as! String
+//                            Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+//                            print("errorMsg:\(errorMsg)")
+//                            return
+//                        }
+//
+//                        UserService.shared.logout()
+//                        self.loginButton.setTitle("登入", for: .normal)
+//                        self.editButton.isHidden = true
+//                        self.loginNameLabel.text = "Hi~ 歡迎回來"
+//                        self.rPointButton.setTitle("0", for: .normal)
+//                        self.userImage.image = UIImage(named: "user_avatarxxhdpi")
+////                        self.initUI()
+//                        self.view.layoutIfNeeded()
+//                    }
+//                }
+            }
+        }
     }
 }
 // MARK: - MemberInfoViewController_1_Delegate
@@ -294,7 +344,7 @@ extension MemberCenterViewController: MemberInfoViewController_1_Delegate {
 }
 // MARK: - UIImagePickerControllerDelegate/UINavigationControllerDelegate
 extension MemberCenterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = (info[.editedImage] as? UIImage)?.imageResized(to: userImage.frame.size) {
             dismiss(animated: true) {
                 self.userImage.backgroundColor = .clear

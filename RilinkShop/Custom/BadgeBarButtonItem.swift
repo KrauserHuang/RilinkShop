@@ -31,7 +31,7 @@ public class BadgeBarButtonItem: UIBarButtonItem {
         super.init(coder: aDecoder)
         self.addObserver(self, forKeyPath: "view", options: [], context: nil)
     }
-    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         self.updateBadge()
     }
     private func updateBadge() {

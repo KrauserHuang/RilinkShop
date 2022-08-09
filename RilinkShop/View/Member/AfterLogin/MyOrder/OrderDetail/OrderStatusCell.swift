@@ -8,13 +8,13 @@
 import UIKit
 
 class OrderStatusCell: UITableViewCell {
-    
+
     @IBOutlet weak var orderNoLabel: UILabel!
     @IBOutlet weak var orderDateLabel: UILabel!
     @IBOutlet weak var orderAmountLabel: UILabel!
     @IBOutlet weak var orderStatusLabel: UILabel!
     @IBOutlet weak var payStatusLabel: UILabel!
-    
+
     static let reuseIdentifier = "OrderStatusCell"
 
     override func awakeFromNib() {
@@ -31,7 +31,7 @@ class OrderStatusCell: UITableViewCell {
     func configure(with model: OrderInfo) {
         orderNoLabel.text = "訂單編號：\(model.orderNo)"
         orderDateLabel.text = "訂單日期：\(model.orderDate)"
-        orderAmountLabel.text = "訂單金額：\(model.orderAmount)" //顯示應付 -> 再改回商品合計
+        orderAmountLabel.text = "訂單金額：\(model.orderAmount)" // 顯示應付 -> 再改回商品合計
 //        orderStatusLabel.text = "訂單狀態：\(model.orderStatus)"
         payStatusLabel.text = "付款狀態：\(model.payStatus)"
         // 訂單狀態
@@ -39,7 +39,7 @@ class OrderStatusCell: UITableViewCell {
         case "0":
             orderStatusLabel.text = "訂單狀態：處理中"
         case "1":
-            orderStatusLabel.text = "訂單狀態：完成" //完成 -> 已發貨?
+            orderStatusLabel.text = "訂單狀態：完成" // 完成 -> 已發貨?
         case "2":
             orderStatusLabel.text = "訂單狀態：取消(退款)"
         default:
@@ -62,5 +62,5 @@ class OrderStatusCell: UITableViewCell {
             payStatusLabel.text = "付款狀態：處理中"
         }
     }
-    
+
 }

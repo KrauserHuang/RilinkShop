@@ -8,9 +8,9 @@
 import UIKit
 
 class OrderDetailFooterView: UIView {
-    
+
     @IBOutlet weak var orderAmountLabel: UILabel!
     @IBOutlet weak var discountAmountLabel: UILabel!
     @IBOutlet weak var orderPayLabel: UILabel!
-    
+
 }

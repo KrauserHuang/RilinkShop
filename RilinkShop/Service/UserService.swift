@@ -15,8 +15,8 @@ class UserService {
     var id = Global.ACCOUNT
     var pwd = Global.ACCOUNT_PASSWORD
     var didLogin = false
-    var renewUser: (() -> ())?
-    
+    var renewUser: (() -> Void)?
+
     private init() {
         print("UserService + \(#function)")
         print("getAccount: \(MyKeyChain.getAccount())")
@@ -40,7 +40,7 @@ class UserService {
             self.renewUser?()
         }
     }
-    
+
     private func loadUser(account: String, password: String) {
         print("UserService " + #function)
         print("account:\(account)\npassword:\(password)")
@@ -49,7 +49,7 @@ class UserService {
             "member_id": account,
             "member_pwd": password
         ]
-        
+
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             switch response.result {
             case .success(let value) :
@@ -62,12 +62,12 @@ class UserService {
             }
         }
     }
-    
+
     private func setUser(account: String, password: String, from dict: [String: Any]) {
         print("UserService " + #function)
         print("account:\(account)\npassword:\(password)")
     }
-    
+
     func reloadUser() {
         print("UserService " + #function)
         guard let user = user else { return }
@@ -83,7 +83,7 @@ class UserService {
             "member_pwd": pwd
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
-        
+
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
 //            print("------------------------")
 //            print(response)
@@ -92,26 +92,26 @@ class UserService {
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
                 MyKeyChain.setAccount(id)
                 MyKeyChain.setPassword(pwd)
                 self.id = id
                 self.pwd = pwd
-                
+
                 guard value["code"].stringValue == returnCode else {
                     let errorMsg = value["responseMessage"].stringValue
                     completed(false, errorMsg as AnyObject)
                     return
                 }
-                
+
                 let successMsg = value["responseMessage"].stringValue
-                
+
                 self.getPersonalData(account: id, pw: pwd, accountType: "0") { success, response in
                     guard success else {
                         self.renewUser?()
@@ -122,7 +122,7 @@ class UserService {
                     self.didLogin = true
                     self.renewUser = { completed(true, "" as AnyObject) }
                 }
-                
+
                 completed(true, successMsg as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue
@@ -138,15 +138,15 @@ class UserService {
             "member_pwd": pwd
         ]
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: UserResponse.self) { response in
-            
+
 //            print(#function)
 //            print(response.value)
-            
+
             guard response.value != nil else {
                 print(response.error as Any)
                 return
             }
-            
+
             switch response.result {
             case .success:
                 guard let user = response.value else { return }
@@ -177,42 +177,42 @@ class UserService {
             }
         }
     }
-    //獲取個人資料
-    func getPersonalData(account:String, pw:String, accountType:String, completed: @escaping Completion){
+    // 獲取個人資料
+    func getPersonalData(account: String, pw: String, accountType: String, completed: @escaping Completion) {
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        
-        let parameters: Parameters = ["account":Base64(string: account),
-                                      "pw":Base64(string: pw),
-                                      "accountType":Base64(string: accountType)
+
+        let parameters: Parameters = ["account": Base64(string: account),
+                                      "pw": Base64(string: pw),
+                                      "accountType": Base64(string: accountType)
         ]
-        
+
         let url =  API_URL + GET_PERSONAL_DATA
         let httpMethod = HTTPMethod.post
         let returnCode = ReturnCode.RETURN_SUCCESS.0
-        
+
         AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
-            
-            guard response.value != nil else{
+
+            guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
 //            print(#function)
 //            print(value)
-            
+
             switch response.result {
             case .success:
-                
+
                 guard value["returnCode"].intValue == returnCode else {
                     let message = value["errorMsg"].stringValue
                     completed(false, message  as AnyObject)
                     return
                 }
-                
+
                 let data = value["returnData"]
                 let personal = User(account: data["account"].stringValue,
                                     tel: data["tel"].stringValue,
@@ -230,51 +230,51 @@ class UserService {
                                     referrerPhone: data["referrerPhone"].stringValue,
                                     region: data["region"].stringValue,
                                     imageName: data["imageName"].stringValue)
-                
+
                 completed(true, personal as AnyObject)
-                
+
             case .failure:
                 let message = value["errorMsg"].stringValue
                 completed(false, message as AnyObject)
             }
         }
     }
-    //編修個人資料
-    func modifyPersonalData(account:String, pw:String, accountType:String, name:String, tel:String, birthday:String, email:String,sex:String, city:String, region:String, address:String, completed: @escaping Completion){
-        
+    // 編修個人資料
+    func modifyPersonalData(account: String, pw: String, accountType: String, name: String, tel: String, birthday: String, email: String, sex: String, city: String, region: String, address: String, completed: @escaping Completion) {
+
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        
-        let parameters: Parameters = ["account":Base64(string: account),
-                                      "pw":Base64(string: pw),
-                                      "accountType":Base64(string: accountType),
-                                      "name":Base64(string: name),
-                                      "tel":Base64(string: tel),
-                                      "birthday":Base64(string: birthday),
-                                      "email":Base64(string: email),
-                                      "address":Base64(string: address),
-                                      "sex":Base64(string: sex),
-                                      "city":Base64(string: city),
-                                      "region":Base64(string: region),
+
+        let parameters: Parameters = ["account": Base64(string: account),
+                                      "pw": Base64(string: pw),
+                                      "accountType": Base64(string: accountType),
+                                      "name": Base64(string: name),
+                                      "tel": Base64(string: tel),
+                                      "birthday": Base64(string: birthday),
+                                      "email": Base64(string: email),
+                                      "address": Base64(string: address),
+                                      "sex": Base64(string: sex),
+                                      "city": Base64(string: city),
+                                      "region": Base64(string: region)
         ]
-        
+
         let url =  API_URL + MODIFY_PERSONAL_DATA
         let httpMethod = HTTPMethod.post
         let returnCode = ReturnCode.RETURN_SUCCESS.0
 
         AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
 
-            guard response.value != nil else{
+            guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
                 guard value["returnCode"].intValue == returnCode else {
@@ -283,7 +283,7 @@ class UserService {
                     return
                 }
                 completed(true, "" as AnyObject)
-                
+
             case .failure:
                 let message = value["errorMsg"].stringValue
                 completed(false, message as AnyObject)
@@ -295,7 +295,7 @@ class UserService {
         let url = API_URL + UPLOAD_IMAGE
         let returnCode = ReturnCode.RETURN_SUCCESS.0
         let imgData = cmdImageFile.jpegData(compressionQuality: 0.75)!
-        
+
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "cmdImageFile", fileName: "image.jpg", mimeType: "image/jpg")
             multipartFormData.append(Base64(string: Global.ACCOUNT).data(using: .utf8)!, withName: "account")
@@ -303,17 +303,17 @@ class UserService {
             multipartFormData.append(Base64(string: Global.ACCOUNT_TYPE).data(using: .utf8)!, withName: "accountType")
             multipartFormData.append(Base64(string: imgtitle).data(using: .utf8)!, withName: "imgtitle")
         }, to: url).responseJSON { response in
-            
+
             guard response.value != nil else {
                 let errorMsg = "伺服器連線失敗"
                 completed(false, errorMsg as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
                 guard value["returnCode"].intValue == returnCode else {
@@ -328,11 +328,13 @@ class UserService {
             }
         }
     }
-    //登出
+    // 登出
     func logout() {
         print("UserService + \(#function)")
         user = nil
         renewUser = nil
+        id = ""
+        pwd = ""
         Global.ACCOUNT = ""
         Global.ACCOUNT_PASSWORD = ""
         Global.personalData = nil
@@ -340,44 +342,43 @@ class UserService {
         MyKeyChain.setPassword("")
         MyKeyChain.setBossAccount("")
         MyKeyChain.setBossPassword("")
-//        didLogin = false
+        didLogin = false
     }
     // MARK: - 註冊1 - 傳送手機驗證號碼
     func signUp(account: String, completed: @escaping Completion) {
 //        let headers: HTTPHeaders = [
 //            "Content-Type": "application/x-www-form-urlencoded"
 //        ]
-        
-        let parameters: Parameters = ["account":Base64(string: account),
-                                      "accountType":Base64(string: Global.ACCOUNT_TYPE)]
-        
+
+        let parameters: Parameters = ["account": Base64(string: account),
+                                      "accountType": Base64(string: Global.ACCOUNT_TYPE)]
+
         let url =  API_URL + SIGN_UP
         let httpMethod = HTTPMethod.post
-        
+
         AF.request(url, method: httpMethod, parameters: parameters).responseJSON { (response) in
-            
-            guard response.value != nil else{
+
+            guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
-                
-                
-                guard [101,102,103].contains(value["returnCode"].intValue) else {
+
+                guard [101, 102, 103].contains(value["returnCode"].intValue) else {
                     let message = value["errorMsg"].stringValue
                     completed(false, message  as AnyObject)
                     return
                 }
                 // 回傳成功時跳轉到驗證碼輸入畫面
                 completed(true, value["returnCode"].intValue as AnyObject)
-                
+
             case .failure:
                 let message = value["errorMsg"].stringValue
                 completed(false, message as AnyObject)
@@ -386,91 +387,90 @@ class UserService {
     }
     // MARK: - 註冊2 - 送出驗證/密碼
     func verifyCode(action: String, account: String, accountType: String, registeCode: String, pw: String, pw2: String, completed: @escaping Completion) {
-        
+
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        
-        let parameters: Parameters = ["action":Base64(string: action),
-                                      "account":Base64(string: account),
-                                      "accountType":Base64(string: accountType),
-                                      "registeCode":Base64(string: registeCode),
-                                      "pw":Base64(string: pw),
-                                      "pw2":Base64(string: pw2)
+
+        let parameters: Parameters = ["action": Base64(string: action),
+                                      "account": Base64(string: account),
+                                      "accountType": Base64(string: accountType),
+                                      "registeCode": Base64(string: registeCode),
+                                      "pw": Base64(string: pw),
+                                      "pw2": Base64(string: pw2)
         ]
-        
+
         let url =  API_URL + VERIFY_CODE
         let httpMethod = HTTPMethod.post
         let returnCode = ReturnCode.RETURN_SUCCESS.0
-        
+
         AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
-            
-            guard response.value != nil else{
+
+            guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
-                
+
                 guard value["returnCode"].intValue == returnCode else {
                     let message = value["errorMsg"].stringValue
                     completed(false, message  as AnyObject)
                     return
                 }
                 completed(true, "" as AnyObject)
-                
+
             case .failure:
                 let message = value["errorMsg"].stringValue
                 completed(false, message as AnyObject)
             }
         }
-        
+
     }
     // MARK: - 註冊2 - 重送驗證碼
-    func reSendCode(account:String, accountType:String, action:String,completed: @escaping Completion){
-        
+    func reSendCode(account: String, accountType: String, action: String, completed: @escaping Completion) {
+
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        
-        let parameters: Parameters = ["account":Base64(string: account),
-                                      "accountType":Base64(string: accountType),
-                                      "action":Base64(string: action)
+
+        let parameters: Parameters = ["account": Base64(string: account),
+                                      "accountType": Base64(string: accountType),
+                                      "action": Base64(string: action)
         ]
-        
+
         let url =  API_URL + RESEND_CODE
         let httpMethod = HTTPMethod.post
         let returnCode = ReturnCode.RETURN_SUCCESS.0
-        
+
         AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
-            
-            
-            guard response.value != nil else{
+
+            guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
-                
+
                 guard value["returnCode"].intValue == returnCode else {
                     let message = value["errorMsg"].stringValue
                     completed(false, message  as AnyObject)
                     return
                 }
                 completed(true, "" as AnyObject)
-                
+
             case .failure:
                 let message = value["errorMsg"].stringValue
                 completed(false, message as AnyObject)
@@ -478,52 +478,52 @@ class UserService {
         }
     }
     // MARK: - 註冊3 - 初始個人資料
-    func InitPersonalData(account:String, pw:String, accountType:String, name:String, tel:String, birthday:String, email:String,sex:String, city:String, region:String, address:String, referrerPhone:String, completed: @escaping Completion){
-        
+    func InitPersonalData(account: String, pw: String, accountType: String, name: String, tel: String, birthday: String, email: String, sex: String, city: String, region: String, address: String, referrerPhone: String, completed: @escaping Completion) {
+
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        
-        let parameters: Parameters = ["account":Base64(string: account),
-                                      "pw":Base64(string: pw),
-                                      "accountType":Base64(string: accountType),
-                                      "name":Base64(string: name),
-                                      "tel":Base64(string: tel),
-                                      "birthday":Base64(string: birthday),
-                                      "email":Base64(string: email),
-                                      "address":Base64(string: address),
-                                      "sex":Base64(string: sex),
-                                      "city":Base64(string: city),
-                                      "region":Base64(string: region),
-                                      "referrerPhone":Base64(string: referrerPhone)
+
+        let parameters: Parameters = ["account": Base64(string: account),
+                                      "pw": Base64(string: pw),
+                                      "accountType": Base64(string: accountType),
+                                      "name": Base64(string: name),
+                                      "tel": Base64(string: tel),
+                                      "birthday": Base64(string: birthday),
+                                      "email": Base64(string: email),
+                                      "address": Base64(string: address),
+                                      "sex": Base64(string: sex),
+                                      "city": Base64(string: city),
+                                      "region": Base64(string: region),
+                                      "referrerPhone": Base64(string: referrerPhone)
         ]
-        
+
         let url =  API_URL + MODIFY_PERSONAL_DATA
         let httpMethod = HTTPMethod.post
         let returnCode = ReturnCode.RETURN_SUCCESS.0
-        
+
         AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
-            
-            guard response.value != nil else{
+
+            guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
-                
+
                 guard value["returnCode"].intValue == returnCode else {
                     let message = value["errorMsg"].stringValue
                     completed(false, message  as AnyObject)
                     return
                 }
                 completed(true, "" as AnyObject)
-                
+
             case .failure:
                 let message = value["errorMsg"].stringValue
                 completed(false, message as AnyObject)
@@ -531,43 +531,42 @@ class UserService {
         }
     }
     // MARK: - MALL - UPDATE PASSWORD
-    func mallUpdatePassword(mobile:String, password:String,completed: @escaping Completion){
-        
+    func mallUpdatePassword(mobile: String, password: String, completed: @escaping Completion) {
+
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]
-        let parameters: Parameters = ["mobile":mobile,
-                                      "password":password]
-        
+        let parameters: Parameters = ["mobile": mobile,
+                                      "password": password]
+
         let url =  MALL_REWRITE_PWD
         let httpMethod = HTTPMethod.post
-        
+
         AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
-            
-            guard response.value != nil else{
+
+            guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
 //            print(#function)
 //            print(value)
-            
+
             switch response.result {
             case .success:
-                
+
                 let code = value["code"].stringValue
                 let responseStr = value["message"].stringValue
-                
+
                 guard ["0x0200"].contains(code) else {
                     completed(false, responseStr as AnyObject)
                     return
                 }
 
                 completed(true, responseStr as AnyObject)
-                
-                
+
             case .failure:
                 let message = value["message"].stringValue
                 completed(false, message as AnyObject)
@@ -582,29 +581,29 @@ class UserService {
             "store_pwd": storePwd
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
-        
+
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-            
+
             guard response.value != nil else {
 //                print(#function)
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
 //            print(#function)
 //            print(value)
-            
+
             switch response.result {
             case .success:
-                
+
                 guard value["code"].stringValue == returnCode else {
                     let message = value["errorMsg"].stringValue
                     completed(false, message  as AnyObject)
                     return
                 }
-                
+
                 let datas = value["info"].arrayValue
                 var storeIDs: [StoreIDInfo] = []
                 for data in datas {
@@ -612,7 +611,7 @@ class UserService {
                                            storeID: data["store_id"].stringValue)
                     storeIDs.append(storeID)
                 }
-                
+
 //                print(storeIDs)
                 completed(true, storeIDs as AnyObject)
             case .failure:
@@ -621,7 +620,7 @@ class UserService {
             }
         }
     }
-    
+
     func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping Completion) {
         let url = SHOP_API_URL + URL_STOREADMINLOGIN
         let parameters = [
@@ -630,7 +629,7 @@ class UserService {
             "store_id": storeID
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
-        
+
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
 
             guard response.value != nil else {
@@ -642,16 +641,16 @@ class UserService {
             let value = JSON(response.value!)
 //            print(#function)
 //            print(value)
-            
+
             switch response.result {
             case .success:
-                
+
                 guard value["code"].stringValue == returnCode else {
                     let errorMsg = value["responseMessage"].stringValue
                     completed(false, errorMsg as AnyObject)
                     return
                 }
-                
+
                 let info = StoreInfo(storeName: value["store_name"].stringValue,
                                      storeAddress: value["store_address"].stringValue,
                                      storePhone: value["store_phone"].stringValue,
@@ -667,7 +666,7 @@ class UserService {
             }
         }
     }
-    
+
     func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping (StoreAdminLogin) -> Void) {
         let url = SHOP_API_URL + URL_STOREADMINLOGIN
         let parameters = [
@@ -676,15 +675,15 @@ class UserService {
             "store_id": storeID
         ]
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: StoreAdminLogin.self) { response in
-            
+
             guard response.value != nil else {
                 print(#function)
                 print("伺服器連線失敗")
                 return
             }
-            
+
 //            print(#function)
-            
+
             switch response.result {
             case .success:
                 guard let store = response.value else { return }
@@ -692,6 +691,46 @@ class UserService {
                 completed(store)
             case .failure:
                 print(response.error as Any)
+            }
+        }
+    }
+
+    func userDel(id: String, pwd: String, completed: @escaping Completion) {
+        print("UserService " + #function)
+        print("Account:\(id)\nPassword:\(pwd)")
+        let url = SHOP_API_URL + URL_USERDEL
+        let parameters = [
+            "member_id": id,
+            "member_pwd": pwd
+        ]
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+
+        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+
+            guard response.value != nil else {
+                let message = "伺服器連線失敗"
+                completed(false, message as AnyObject)
+                return
+            }
+
+            let value = JSON(response.value!)
+            print(value)
+
+            switch response.result {
+            case .success:
+
+                guard value["code"].stringValue == returnCode else {
+                    let errorMsg = value["responseMessage"].stringValue
+                    completed(false, errorMsg as AnyObject)
+                    return
+                }
+
+                let successMsg = value["responseMessage"].stringValue
+
+                completed(true, successMsg as AnyObject)
+            case .failure:
+                let errorMsg = value["responseMessage"].stringValue
+                completed(false, errorMsg as AnyObject)
             }
         }
     }

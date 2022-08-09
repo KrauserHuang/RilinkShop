@@ -10,8 +10,7 @@ import MBProgressHUD
 
 class CartViewController: UIViewController {
 
-    @IBOutlet weak var noItemView: UIView!
-    {
+    @IBOutlet weak var noItemView: UIView! {
         didSet {
             noItemView.isHidden = true
         }
@@ -22,7 +21,7 @@ class CartViewController: UIViewController {
     @IBOutlet weak var clearAllButton: UIButton!
     @IBOutlet weak var keepBuyButton: UIButton!
     @IBOutlet weak var checkoutButton: UIButton!
-    
+
     var inCartItems = [Product]() {
         didSet {
             DispatchQueue.main.async {
@@ -33,7 +32,7 @@ class CartViewController: UIViewController {
     var total = 0
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,7 +41,7 @@ class CartViewController: UIViewController {
         configureTableView()
         configureView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadInCartItems()
@@ -66,7 +65,7 @@ class CartViewController: UIViewController {
 //                print(#function)
 //                print(items)
 //                indicator.hide(animated: true)
-                
+
 //                self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
                 self.noItemView.isHidden = self.inCartItems.count != 0
             }
@@ -98,13 +97,13 @@ class CartViewController: UIViewController {
         checkoutButton.backgroundColor = Theme.customOrange
         checkoutButton.tintColor = .white
     }
-    
+
     @IBAction func agreeAction(_ sender: UIButton) {
         sender.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
         sender.isSelected.toggle()
     }
-    
+
     @IBAction func shopRuleButtonTapped(_ sender: UIButton) {
         let controller = ShopRuleViewController()
         navigationController?.pushViewController(controller, animated: true)
@@ -112,8 +111,8 @@ class CartViewController: UIViewController {
     // 清除
     @IBAction func clearAllButtonTapped(_ sender: UIButton) {
         let alertController = UIAlertController(title: "是否清除全部", message: "", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "清除", style: .destructive) { action in
-            ProductService.shared.clearShoppingCartItem(id: self.account, pwd: self.password) { product in }
+        let okAction = UIAlertAction(title: "清除", style: .destructive) { _ in
+            ProductService.shared.clearShoppingCartItem(id: self.account, pwd: self.password) { _ in }
             self.inCartItems.removeAll()
             ProductService.shared.inCartItems = self.inCartItems
             self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
@@ -140,7 +139,7 @@ class CartViewController: UIViewController {
             }
         }
     }
-    
+
     @IBAction func checkoutButtonTapped(_ sender: UIButton) {
         /*
          一段確認購物車有沒有東西決定是否進結帳頁
@@ -170,14 +169,14 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return inCartItems.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CartTableViewCell.reuseIdentifier, for: indexPath) as! CartTableViewCell
-        
+
         cell.delegate = self
         let inCartItem = inCartItems[indexPath.row]
         cell.configure(with: inCartItem)
-        
+
         return cell
     }
 }
@@ -185,13 +184,13 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 extension CartViewController: CartTableViewCellDelegate {
     func didAddQty(_ cell: CartTableViewCell) {
         guard let indexPath = cartTableView.indexPath(for: cell) else { return }
-        
+
         let no = inCartItems[indexPath.row].product_no
         var qty = Int(inCartItems[indexPath.row].order_qty)!
         print(#function)
         print(inCartItems[indexPath.row].product_stock)
         let stock = Int(inCartItems[indexPath.row].product_stock)!
-        
+
         if qty < stock {
             qty += 1
             HUD.showLoadingHUD(inView: self.view, text: "")
@@ -205,7 +204,7 @@ extension CartViewController: CartTableViewCellDelegate {
                             Alert.showMessage(title: "", msg: errmsg, vc: self)
                             return
                         }
-                        
+
                         HUD.hideLoadingHUD(inView: self.view)
                         ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { products in
                             self.inCartItems = products
@@ -220,31 +219,31 @@ extension CartViewController: CartTableViewCellDelegate {
             Alert.showMessage(title: "超過庫存數量", msg: "", vc: self)
         }
     }
-    
+
     func didSubstractQty(_ cell: CartTableViewCell) {
         guard let indexPath = cartTableView.indexPath(for: cell) else { return }
-        
+
         let no = inCartItems[indexPath.row].product_no
         var qty = Int(inCartItems[indexPath.row].order_qty)!
-        
+
         if qty == 1 {
             removeItem(cell)
         } else if qty > 1 {
             qty -= 1
-            
+
             HUD.showLoadingHUD(inView: self.view, text: "")
             ProductService.shared.editShoppingCartItem(id: account, pwd: password, no: no, qty: qty) { (success, response) in
                 DispatchQueue.global(qos: .userInitiated).async {
                     URLCache.shared.removeAllCachedResponses()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        
+
                         guard success else {
                             HUD.hideLoadingHUD(inView: self.view)
                             let errmsg = response as! String
                             Alert.showMessage(title: "", msg: errmsg, vc: self)
                             return
                         }
-                        
+
                         HUD.hideLoadingHUD(inView: self.view)
                         ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { products in
                             self.inCartItems = products
@@ -257,14 +256,14 @@ extension CartViewController: CartTableViewCellDelegate {
             }
         }
     }
-    
+
     func removeItem(_ cell: CartTableViewCell) {
         guard let indexPath = cartTableView.indexPath(for: cell) else { return }
-        
+
         let alertController = UIAlertController(title: "", message: "確定要刪除此商品？", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "確認", style: .default) { action in
+        let okAction = UIAlertAction(title: "確認", style: .default) { _ in
             let no = self.inCartItems[indexPath.row].product_no
-            ProductService.shared.removeShoppingCartItem(id: self.account, pwd: self.password, no: no) { product in }
+            ProductService.shared.removeShoppingCartItem(id: self.account, pwd: self.password, no: no) { _ in }
             self.inCartItems.remove(at: indexPath.row)
             ProductService.shared.inCartItems = self.inCartItems
             self.cartTableView.beginUpdates()

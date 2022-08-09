@@ -8,18 +8,18 @@
 import UIKit
 
 class MemberNavigationViewController: UINavigationController {
-    
+
     var user = User()
     var userImage: UIImageView?
-    var initAction: (() -> ())?
+    var initAction: (() -> Void)?
     var initFlag = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         print("MemberNavigationViewController + \(#function)")
         print("didLogin:\(UserService.shared.didLogin)")
-        
+
         if UserService.shared.didLogin {
             tryLogin()
         } else {
@@ -39,7 +39,7 @@ class MemberNavigationViewController: UINavigationController {
         }
         initFlag = true
     }
-    
+
     func tryLogin() {
         if Global.ACCOUNT == "" {
 //        if UserService.shared.user == nil {
@@ -59,7 +59,7 @@ class MemberNavigationViewController: UINavigationController {
     }
     // MARK: - 跳會員首頁(MemberCenterViewController)
     func showRoot(animated: Bool) {
-        //取得Storyboard MemberCenterTableViewController其下面的ViewController(MemberCenterViewController)
+        // 取得Storyboard MemberCenterTableViewController其下面的ViewController(MemberCenterViewController)
         guard let memberCenterVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as? MemberCenterViewController else {
             print("showRoot失敗")
             return
@@ -76,8 +76,8 @@ class MemberNavigationViewController: UINavigationController {
             self.setViewControllers([memberCenterVC], animated: false)
         }
     }
-    // MARK: - 跳登入首頁(LoginViewController_1)，只要沒跑showLoIn()，就不會換頁
-    func showLogIn(){
+    // MARK: - 跳登入首頁(LoginViewController_1)，只要沒跑showLogIn()，就不會換頁
+    func showLogIn() {
 //        let vc = LoginViewController_1()
 //        vc.delegate = self
 //        popToRootViewController(animated: true)
@@ -90,14 +90,14 @@ class MemberNavigationViewController: UINavigationController {
         user = User()
     }
     // MARK: - 進會員首頁前要載會員資料
-    func loadUserData(){
+    func loadUserData() {
         guard Global.ACCOUNT != "" && Global.ACCOUNT.count == 10 else {
             return
         }
         print("MemberNavigationViewController + \(#function)")
         print("GlobalACCOUNT:\(Global.ACCOUNT)")
         print("GlobalPASSWORD:\(Global.ACCOUNT_PASSWORD)")
-        
+
         let accountType = "0"
         sleep(1)
         UserService.shared.getPersonalData(account: Global.ACCOUNT,
@@ -106,20 +106,20 @@ class MemberNavigationViewController: UINavigationController {
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
-                    
+
                     guard success else {
                         return
                     }
-                    
+
                     Global.personalData = response as? User
 //                    print(#function)
 //                    print(Global.personalData)
-                    
+
                     Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
                     Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
-                    
+
                     MemberCenterViewController.newRPoint = Global.personalData?.point ?? "0"
-                    
+
                     if Global.personalData?.cmdImageFile == nil || Global.personalData?.cmdImageFile == "" {
                         return
                     }
@@ -130,7 +130,7 @@ class MemberNavigationViewController: UINavigationController {
             }
         }
     }
-    
+
     func toTicketViewController() {
         let controller = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
         pushViewController(controller, animated: true)
@@ -146,11 +146,11 @@ extension MemberNavigationViewController: MemberCenterViewControllerDelegate {
 // MARK: - SignUp1 Delegate(進入第二頁面填寫認證碼、密碼)
 extension MemberNavigationViewController: SignUpViewController_1_Delegate {
     func finishSignup1WithSubmitCode(_ viewController: SignUpViewController_1, resultType: Int) {
-        if resultType == 1 { //繼續驗證
+        if resultType == 1 { // 繼續驗證
             let vc = SignUpViewController_2()
             vc.delegate = self
             present(vc, animated: true, completion: nil)
-        } else { //前往登入頁
+        } else { // 前往登入頁
             let vc = LoginViewController_1()
             vc.delegate = self
             present(vc, animated: true, completion: nil)
@@ -169,7 +169,9 @@ extension MemberNavigationViewController: SignupViewController_2_Delegate {
 extension MemberNavigationViewController: SignUpViewControllerDelegate {
     func finishSignup3With() {
 //        showRoot()
-        showLogIn()
+//        showLogIn()
+//        loadUserData()
+//        showRoot(animated: true)
     }
 }
 // MARK: - Login Delegate(登入/忘記密碼/註冊)
@@ -232,7 +234,7 @@ extension MemberNavigationViewController: StoreAppViewControllerDelegate {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
-    
+
     func backToLogin(_ viewController: StoreAppViewController) {
         let vc = LoginViewController_1()
         setViewControllers([vc], animated: true)

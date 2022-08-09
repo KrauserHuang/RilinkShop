@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIAlertController {
-    static func simpleOKAlert(title: String, message: String, buttonTitle: String, action: ((UIAlertAction)->())?) -> UIAlertController {
+    static func simpleOKAlert(title: String, message: String, buttonTitle: String, action: ((UIAlertAction) -> Void)?) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: buttonTitle, style: .default, handler: action)
         alert.addAction(action)

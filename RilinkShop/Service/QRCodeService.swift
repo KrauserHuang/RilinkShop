@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-enum ispackage: Int { //訂單類型
+enum ispackage: Int { // 訂單類型
     case product
     case package
 }
@@ -25,20 +25,20 @@ class QRCodeService {
             "member_pwd": pwd,
             "ispackage": ispackage
         ]
-        
+
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [QRCode].self) { response in
 
 //            print(#function)
 //            print(response)
-            
+
             guard response.value != nil else {
                 print("伺服器連線失敗")
                 return
             }
-            
+
 //            print(#function)
 //            print(response.value)
-            
+
             switch response.result {
             case .success:
                 guard let unconfirmList = response.value else { return }
@@ -109,7 +109,7 @@ class QRCodeService {
             "member_pwd": pwd,
             "ispackage": ispackage
         ]
-        
+
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [QRCode].self) { response in
 //            print("+++++")
 //            print(response)
@@ -121,7 +121,7 @@ class QRCodeService {
 //            print("+++++")
 //            print(#function)
 //            print(response.value)
-            
+
             switch response.result {
             case .success:
                 guard let confirmList = response.value else { return }
@@ -152,7 +152,7 @@ class QRCodeService {
             print(#function)
             print("value:\(value)")
 //            print("result:\(response.result)")
-            
+
             switch response.result {
             case .success:
 //                guard value["code"].stringValue == returnCode else {
@@ -192,7 +192,7 @@ class QRCodeService {
             "store_pwd": storePwd,
             "qrcode": qrcode
         ]
-        
+
         AF.request(url, method: .post, parameters: parameters).validate().responseDecodable(of: Output.self) { response in
             print("@@@@@")
             print(response)
@@ -214,21 +214,21 @@ class QRCodeService {
             "store_pwd": storePwd,
             "qrcode": qrcode
         ]
-        
+
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
-        
+
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-            
+
             guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
-            
+
             let value = JSON(response.value!)
             print(#function)
             print(value)
-            
+
             switch response.result {
             case .success:
                 guard value["code"].stringValue == returnCode else {
@@ -236,7 +236,7 @@ class QRCodeService {
                     completed(false, message as AnyObject)
                     return
                 }
-                
+
                 let message = value["responseMessage"].stringValue
                 completed(true, message as AnyObject)
             case .failure:

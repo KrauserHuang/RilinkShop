@@ -20,7 +20,7 @@ struct UNQRCode: Codable {
     var packageName: String? = ""
     var packagePicture: String? = ""
     var product: [PackageProduct]? = []
-    
+
     enum CodingKeys: String, CodingKey {
         case orderNo = "order_no"
         case orderDate = "order_date"
@@ -42,7 +42,7 @@ struct PackageProduct: Codable {
     var storeName: String? = ""
     var qrconfirm: String? = ""
     var orderQty: String? = ""
-    
+
     enum CodingKeys: String, CodingKey {
         case productName = "product_name"
         case storeID = "store_id"
@@ -67,7 +67,7 @@ struct QRCode: Codable {
     var packagePicture: String? = ""
     var orderQty: String? = ""
     var product: [PackageProduct]? = []
-    
+
     enum CodingKeys: String, CodingKey {
         case orderNo = "order_no"
         case orderDate = "order_date"
@@ -87,7 +87,7 @@ extension QRCode: Comparable {
     static func < (lhs: QRCode, rhs: QRCode) -> Bool {
         return rhs.orderDate < lhs.orderDate
     }
-    
+
     static func == (lhs: QRCode, rhs: QRCode) -> Bool {
         return lhs.orderDate == rhs.orderDate
     }

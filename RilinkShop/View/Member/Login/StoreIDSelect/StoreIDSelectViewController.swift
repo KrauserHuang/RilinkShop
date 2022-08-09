@@ -12,9 +12,9 @@ protocol StoreIDSelectViewControllerDelegate: AnyObject {
 }
 
 class StoreIDSelectViewController: UIViewController {
-    
+
     @IBOutlet weak var storeIDTableView: UITableView!
-    
+
     weak var delegate: StoreIDSelectViewControllerDelegate?
     var storeID = [StoreIDInfo]() {
         didSet {
@@ -26,11 +26,11 @@ class StoreIDSelectViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureTableView()
         getStoreID()
     }
-    
+
     func getStoreID() {
         let storeAcc = "99999"
         let storePwd = "99999"
@@ -40,11 +40,11 @@ class StoreIDSelectViewController: UIViewController {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {
                     HUD.hideLoadingHUD(inView: self.view)
-                    
+
                     guard success else {
                         return
                     }
-                    
+
                     guard let storeIDInfo = response as? [StoreIDInfo] else {
                         print("response downcast fail")
                         return
@@ -54,7 +54,7 @@ class StoreIDSelectViewController: UIViewController {
             }
         }
     }
-    
+
     func configureTableView() {
         let nib = UINib(nibName: StoreIDSelectTableViewCell.reuseIdentifier, bundle: nil)
         storeIDTableView.register(nib, forCellReuseIdentifier: StoreIDSelectTableViewCell.reuseIdentifier)
@@ -67,16 +67,16 @@ extension StoreIDSelectViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return storeID.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StoreIDSelectTableViewCell.reuseIdentifier, for: indexPath) as! StoreIDSelectTableViewCell
-        
+
         let info = storeID[indexPath.row]
         cell.storeIDInfo = info
-        
+
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let info = storeID[indexPath.row]

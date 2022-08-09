@@ -11,7 +11,7 @@ class UsedTicketViewController: UIViewController {
 
     @IBOutlet weak var tableViiew: UITableView!
     @IBOutlet weak var emptyView: UIView!
-    
+
     var tickets = [QRCode]() {
         didSet {
             DispatchQueue.main.async {
@@ -29,7 +29,7 @@ class UsedTicketViewController: UIViewController {
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
     var refreshControl = UIRefreshControl()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,13 +38,13 @@ class UsedTicketViewController: UIViewController {
         tableViiew.delegate = self
         tableViiew.dataSource = self
         tableViiew.allowsSelection = false
-        
+
         tableViiew.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshList), for: .valueChanged)
-        
+
         getTicket()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getTicket()
@@ -53,7 +53,7 @@ class UsedTicketViewController: UIViewController {
     func getTicket() {
         QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
             QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
-                
+
                 let packageWithoutQRConfirm = packageResponse.filter { package in
                     package.product?.allSatisfy({ $0.qrconfirm == nil }) as! Bool
                 }
@@ -70,7 +70,8 @@ class UsedTicketViewController: UIViewController {
 //                        packageWithQR.append(package)
 //                    }
 //                }
-                self.tickets = productResponse + packageWithoutQRConfirm
+//                self.tickets = productResponse + packageWithoutQRConfirm
+                self.tickets = productResponse + packageResponse
                 self.sortedTickets = self.tickets.sorted(by: { ticket1, ticket2 in
                     ticket1.orderDate > ticket2.orderDate
                 })
@@ -78,7 +79,7 @@ class UsedTicketViewController: UIViewController {
             }
         }
     }
-    
+
     @objc func refreshList() {
         self.refreshControl.beginRefreshing()
         QRCodeService.shared.confirmList(id: account, pwd: password, ispackage: "0") { productResponse in
@@ -102,17 +103,17 @@ class UsedTicketViewController: UIViewController {
     }
 }
 
-extension UsedTicketViewController: UITableViewDelegate, UITableViewDataSource{
+extension UsedTicketViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sortedTickets.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UsedTableViewCell") as! UsedTableViewCell
-        
+
         let ticket = sortedTickets[indexPath.row]
         cell.configure(with: ticket)
-        
+
         return cell
     }
 }

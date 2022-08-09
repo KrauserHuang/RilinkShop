@@ -14,9 +14,9 @@ class StoreDetailDescriptTextCell: UITableViewCell {
             descriptionLabel.numberOfLines = 0
         }
     }
-    
+
     static let reuseIdentifier = "StoreDetailDescriptTextCell"
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,7 +28,7 @@ class StoreDetailDescriptTextCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
     func configure(with model: Store) {
         descriptionLabel.text = model.storeDescript
     }
