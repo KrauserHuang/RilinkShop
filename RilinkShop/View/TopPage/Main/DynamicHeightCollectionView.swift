@@ -2,7 +2,7 @@
 //  DynamicHeightCollectionView.swift
 //  RilinkShop
 //
-//  Created by Tai Chin Huang on 2022/7/25.
+//  Created by Tai Chin Huang on 2022/9/15.
 //
 
 import UIKit
@@ -14,7 +14,6 @@ class DynamicHeightCollectionView: UICollectionView {
             self.invalidateIntrinsicContentSize()
         }
     }
-
     override var intrinsicContentSize: CGSize {
         return collectionViewLayout.collectionViewContentSize
     }

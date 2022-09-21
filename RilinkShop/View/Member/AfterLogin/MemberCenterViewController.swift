@@ -261,6 +261,16 @@ class MemberCenterViewController: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    // MARK: - 預約維修紀錄
+    @IBAction func repairReservationButtonTapped(_ sender: UIButton) {
+        if Global.ACCOUNT == "" {
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
+        } else {
+            let vc = RepairReservationMainViewController()
+            vc.title = "預約維修紀錄"
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 // MARK: - ContainerMemberCenterTableViewControllerDelegate
 extension MemberCenterViewController: ContainerMemberCenterTableViewControllerDelegate {
@@ -279,7 +289,10 @@ extension MemberCenterViewController: ContainerMemberCenterTableViewControllerDe
     }
     // 聯絡客服頁面(還未開放)
     func customerService(_ viewController: ContainerMemberCenterTableViewController) {
-        Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
+//        Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
+        let vc = AboutViewController()
+        vc.title = "聯絡客服"
+        navigationController?.pushViewController(vc, animated: true)
     }
     // 協議及聲明頁面(還未開放)
     func statement(_ viewController: ContainerMemberCenterTableViewController) {
@@ -311,27 +324,6 @@ extension MemberCenterViewController: ContainerMemberCenterTableViewControllerDe
                         self.view.layoutIfNeeded()
                     }
                 }
-//                Alert.showSecurityAlert(title: "再次確認是否刪除帳號", msg: "一但刪除帳號就不可復原\n須重新申請帳號", vc: self) {
-//                    print("這裡執行刪除帳號API")
-//                    UserService.shared.userDel(id: MyKeyChain.getAccount() ?? "",
-//                                               pwd: MyKeyChain.getPassword() ?? "") { success, response in
-//                        guard success else {
-//                            let errorMsg = response as! String
-//                            Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
-//                            print("errorMsg:\(errorMsg)")
-//                            return
-//                        }
-//
-//                        UserService.shared.logout()
-//                        self.loginButton.setTitle("登入", for: .normal)
-//                        self.editButton.isHidden = true
-//                        self.loginNameLabel.text = "Hi~ 歡迎回來"
-//                        self.rPointButton.setTitle("0", for: .normal)
-//                        self.userImage.image = UIImage(named: "user_avatarxxhdpi")
-////                        self.initUI()
-//                        self.view.layoutIfNeeded()
-//                    }
-//                }
             }
         }
     }

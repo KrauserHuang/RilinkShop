@@ -8,6 +8,7 @@
 import Foundation
 
 class MyKeyChain {
+    static let shared = MyKeyChain()
 
     static func setAccount(_ account: String) {
         guard account != "" else {

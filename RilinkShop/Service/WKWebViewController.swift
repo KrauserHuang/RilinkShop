@@ -20,7 +20,6 @@ class WKWebViewController: UIViewController {
     weak var delegate: WKWebViewControllerDelegate?
     var urlStr = ""
     var orderNo = ""
-//    var rootVC = 
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,14 +48,6 @@ class WKWebViewController: UIViewController {
     func toOrderList() {
         Alert.showMessage(title: "訂單已完成", msg: "請去\n會員中心  ➡  我的訂單\n查看", vc: self) {
             self.view.window?.rootViewController?.dismiss(animated: true, completion: {
-//                self.tabBarController?.selectedIndex = 3
-//                let memberNVC = self.tabBarController?.selectedViewController as? MemberNavigationViewController
-//                memberNVC?.popToRootViewController(animated: false)
-//
-//                if let myOderTVC = memberNVC?.viewControllers.compactMap({ $0 as? MyOrderTableViewController}).first {
-//                    print("To MyOrderTVC")
-//                    memberNVC?.pushViewController(myOderTVC, animated: true)
-//                }
                 self.delegate?.backAction(self)
             })
         }

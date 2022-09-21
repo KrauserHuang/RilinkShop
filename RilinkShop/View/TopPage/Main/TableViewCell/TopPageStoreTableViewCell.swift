@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TopPageStoreTableViewCellDelegate: AnyObject {
+    func didTapStore(_ cell: TopPageStoreTableViewCell, store: Store)
+}
+
 class TopPageStoreTableViewCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -15,6 +19,7 @@ class TopPageStoreTableViewCell: UITableViewCell {
         case all
     }
 
+    weak var delegate: TopPageStoreTableViewCellDelegate?
     var stores = [Store]()
 
     typealias StoreDataSource = UICollectionViewDiffableDataSource<Section, Store>
@@ -73,7 +78,7 @@ extension TopPageStoreTableViewCell {
         snapshot.appendSections([.all])
         snapshot.appendItems(stores, toSection: .all)
 
-        storeDataSource.apply(snapshot, animatingDifferences: false)
+        storeDataSource.apply(snapshot, animatingDifferences: animatingChange)
     }
     func createStoreScrollLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -94,6 +99,7 @@ extension TopPageStoreTableViewCell {
 
 extension TopPageStoreTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("被點了")
+        let store = stores[indexPath.item]
+        delegate?.didTapStore(self, store: store)
     }
 }

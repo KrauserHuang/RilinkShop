@@ -28,13 +28,13 @@ class ContainerMemberCenterTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
-        case 0:
-            delegate?.myOrder(self)
-        case 1:
-            delegate?.question(self)
         case 2:
-            delegate?.customerService(self)
+            delegate?.myOrder(self)
+        case 0:
+            delegate?.question(self)
         case 3:
+            delegate?.customerService(self)
+        case 1:
             delegate?.statement(self)
         case 4:
 //            if Global.ACCOUNT == "" {

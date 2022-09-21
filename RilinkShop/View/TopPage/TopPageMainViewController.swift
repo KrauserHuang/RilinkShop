@@ -6,31 +6,32 @@
 //
 
 import UIKit
+import BadgeHub
 
-enum Options: Int, CaseIterable {
-    case newCar = 0
-    case secondhandCar = 1
-    case repair = 2
-    case rent = 3
-    case accessory = 4
-}
-
-extension Options {
-    var urlString: String {
-        switch self {
-        case .newCar:
-            return "https://www.hsinhungchia.com/brand-type/"
-        case .secondhandCar:
-            return "https://rilink.shopstore.tw/category/%E4%B8%AD%E5%8F%A4%E8%BB%8A"
-        case .repair:
-            return "https://www.hsinhungchia.com/brand-place/"
-        case .rent:
-            return "https://rilink.shopstore.tw/category/%E7%A7%9F%E8%BB%8A%E6%9C%8D%E5%8B%99"
-        case .accessory:
-            return "https://rilink.shopstore.tw/"
-        }
-    }
-}
+// enum Options: Int, CaseIterable {
+//    case newCar = 0
+//    case secondhandCar = 1
+//    case repair = 2
+//    case rent = 3
+//    case accessory = 4
+// }
+//
+// extension Options {
+//    var urlString: String {
+//        switch self {
+//        case .newCar:
+//            return "https://www.hsinhungchia.com/brand-type/"
+//        case .secondhandCar:
+//            return "https://rilink.shopstore.tw/category/%E4%B8%AD%E5%8F%A4%E8%BB%8A"
+//        case .repair:
+//            return "https://www.hsinhungchia.com/brand-place/"
+//        case .rent:
+//            return "https://rilink.shopstore.tw/category/%E7%A7%9F%E8%BB%8A%E6%9C%8D%E5%8B%99"
+//        case .accessory:
+//            return "https://rilink.shopstore.tw/"
+//        }
+//    }
+// }
 
 class TopPageMainViewController: UIViewController {
 
@@ -63,6 +64,7 @@ class TopPageMainViewController: UIViewController {
 
     var currentIndex = 0
     var timer: Timer?
+    private var hub: BadgeHub?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,6 +119,7 @@ class TopPageMainViewController: UIViewController {
 //        loadData()
         loadStore()
         loadPackage()
+
     }
 
     func navigationItems() {
@@ -131,7 +134,13 @@ class TopPageMainViewController: UIViewController {
                                                  style: .plain,
                                                  target: self,
                                                  action: #selector(toCartViewController))
+//        hub = BadgeHub(view: imageView)
+//        hub?.moveCircleBy(x: -15, y: 15)
+//        hub?.setCount(2)
         navigationItem.rightBarButtonItem = shoppingcartButton
+//        hub = BadgeHub(barButtonItem: navigationItem.rightBarButtonItem!)
+////        hub?.moveCircleBy(x: -15, y: 15)
+//        hub?.setCount(2)
     }
     @objc private func toCartViewController() {
         let vc = CartViewController()
@@ -344,7 +353,9 @@ extension TopPageMainViewController: UICollectionViewDelegate {
             var urlString = ""
             switch indexPath.row {
             case 0:
-                optionDidPicked = .newCar
+//                optionDidPicked = .newCar
+                let vc = QRCodeViewController()
+                present(vc, animated: true, completion: nil)
             case 1:
                 optionDidPicked = .secondhandCar
             case 2:
@@ -356,8 +367,8 @@ extension TopPageMainViewController: UICollectionViewDelegate {
             }
             urlString = optionDidPicked.urlString
             print("urlString:\(urlString)")
-            let wkWebVC = WKWebViewController()
-            wkWebVC.delegate = self
+            let wkWebVC = MainPageWebViewController()
+//            wkWebVC.delegate = self
             wkWebVC.urlStr = urlString
             navigationController?.pushViewController(wkWebVC, animated: true)
         case packageCollectionView:
@@ -368,11 +379,5 @@ extension TopPageMainViewController: UICollectionViewDelegate {
         default:
             break
         }
-    }
-}
-// MARK: - WKWebViewControllerDelegate
-extension TopPageMainViewController: WKWebViewControllerDelegate {
-    func backAction(_ viewController: WKWebViewController) {
-        navigationController?.popToRootViewController(animated: true)
     }
 }

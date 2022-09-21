@@ -5,10 +5,17 @@
 //  Created by Tai Chin Huang on 2022/4/26.
 //
 
-import Foundation
 import UIKit
 
 extension UIColor {
+    static let primaryOrange = UIColor(red: 222, green: 119, blue: 58)
+    static let defaultGrey = UIColor(hex: "#262628")
+}
+
+extension UIColor {
+    convenience init(red: CGFloat, green: CGFloat, blue: CGFloat) {
+       self.init(red: red / 255, green: green / 255, blue: blue / 255, alpha: 1)
+    }
     convenience init?(hex: String) {
         // trimmingCharacters -> 修剪不必要的字元，.whitespacesAndNewlines -> 空白跟換行符號
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)

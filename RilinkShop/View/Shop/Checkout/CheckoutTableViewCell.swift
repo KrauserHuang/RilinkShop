@@ -34,13 +34,6 @@ class CheckoutTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func configure() {
-        productImageView.image = UIImage(named: "nft")
-        nameLabel.text = "阿姆斯特朗旋風噴射阿姆斯特朗砲"
-        numberLabel.text = "x2"
-        totalCostLabel.text = "$1000"
-    }
-
     func configure(with model: Product) {
         nameLabel.text = model.product_name
         numberLabel.text = "X \(model.order_qty)"

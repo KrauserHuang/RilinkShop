@@ -208,8 +208,9 @@ class ProductDetailViewController: UIViewController {
                         }
 
                         HUD.hideLoadingHUD(inView: self.view)
-                        let message = "新增購物車成功"
-                        Alert.showMessage(title: "", msg: message, vc: self, handler: nil)
+                        let title = "新增購物車成功"
+                        let message = "請儘速完成付款，商品於購物車中僅留存3天"
+                        Alert.showMessage(title: title, msg: message, vc: self, handler: nil)
                     }
                 }
             }
@@ -254,8 +255,9 @@ class ProductDetailViewController: UIViewController {
                         }
 
                         HUD.hideLoadingHUD(inView: self.view)
-                        let message = "新增購物車成功"
-                        Alert.showMessage(title: "", msg: message, vc: self) {
+                        let title = "新增購物車成功"
+                        let message = "請儘速完成付款，商品於購物車中僅留存3天"
+                        Alert.showMessage(title: title, msg: message, vc: self) {
                             let vc = CartViewController()
                             self.navigationController?.pushViewController(vc, animated: true)
                         }

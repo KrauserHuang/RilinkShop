@@ -45,9 +45,9 @@ class FixMotorService {
             }
 
             let value = JSON(response.value)
-            print(response.value)
-            print(response)
-            print(value)
+//            print(response.value)
+//            print(response)
+//            print(value)
 
             switch response.result {
             case .success:
@@ -61,13 +61,13 @@ class FixMotorService {
                 let datas = value["data"].arrayValue
                 var bookingTimes = [FixMotor]()
                 for data in datas {
-                    let bookingTime = FixMotor(bookingdate: data["bookingdate"].stringValue,
+                    let bookingTime = FixMotor(bookingDate: data["bookingdate"].stringValue,
                                                duration: data["duration"].stringValue,
                                                quota: data["quota"].stringValue,
                                                used: data["used"].stringValue)
                     bookingTimes.append(bookingTime)
                 }
-                print(bookingTimes)
+//                print(bookingTimes)
                 completion(true, bookingTimes as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue
@@ -109,6 +109,107 @@ class FixMotorService {
             switch response.result {
             case .success:
 
+                guard value["code"].stringValue == returnCode else {
+                    let errorMsg = value["responseMessage"].stringValue
+                    completion(false, errorMsg as AnyObject)
+                    return
+                }
+
+                let successMsg = value["responseMessage"].stringValue
+                completion(true, successMsg as AnyObject)
+            case .failure:
+                let errorMsg = value["responseMessage"].stringValue
+                completion(false, errorMsg as AnyObject)
+            }
+        }
+    }
+
+    func bookingFixMotorList(id: String, pwd: String, no: String, completion: @escaping Completion) {
+        let url = SHOP_API_URL + URL_BOOKINGFIXMOTORLIST
+        let parameters = [
+            "member_id": id,
+            "member_pwd": pwd,
+            "motor_no": no
+        ]
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+
+        AF.request(url, method: .post, parameters: parameters).response { response in
+            print(self, #function)
+//            print(response)
+            guard response.error == nil else {
+                let errorMsg = "伺服器連線失敗"
+                completion(false, errorMsg as AnyObject)
+                return
+            }
+
+            let value = JSON(response.value)
+//            print("value:\(value)")
+
+            switch response.result {
+            case .success:
+                guard value["code"].stringValue == returnCode else {
+                    let errorMsg = value["responseMessage"].stringValue
+                    completion(false, errorMsg as AnyObject)
+                    return
+                }
+
+                let datas = value["data"].arrayValue
+                var lists = [FixMotor]()
+//                print("datas:\(datas)")
+
+                for data in datas {
+                    if no.count == 0 {
+                        let list = FixMotor(motorNo: data["motor_no"].stringValue)
+                        lists.append(list)
+                    } else {
+                        let list = FixMotor(bookingDate: data["bookingdate"].stringValue,
+                                            duration: data["duration"].stringValue,
+                                            bid: data["bid"].stringValue,
+                                            name: data["name"].stringValue,
+                                            motorNo: data["motor_no"].stringValue,
+                                            motorType: data["motor_type"].stringValue,
+                                            fixType: data["fixtype"].stringValue,
+                                            description: data["description"].stringValue,
+                                            cancel: data["cancel"].stringValue,
+                                            storeName: data["store_name"].stringValue,
+                                            phone: data["phone"].stringValue)
+                        lists.append(list)
+                    }
+                }
+
+//                print("lists:\(lists)")
+                completion(true, lists as AnyObject)
+            case .failure:
+                let errorMsg = value["responseMessage"].stringValue
+                completion(false, errorMsg as AnyObject)
+            }
+        }
+    }
+
+    func bookingFixMotorCancel(id: String, pwd: String, bid: String, completion: @escaping Completion) {
+        let url = SHOP_API_URL + URL_BOOKINGFIXMOTORCANCEL
+        let parameters = [
+            "member_id": id,
+            "member_pwd": pwd,
+            "bid": bid
+        ]
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+
+        AF.request(url, method: .post, parameters: parameters).response { response in
+
+            guard response.error == nil else {
+                let errorMsg = "伺服器連線失敗"
+                completion(false, errorMsg as AnyObject)
+                return
+            }
+
+            let value = JSON(response.value!)
+            print(#function)
+            print("responseValue:\(value)")
+
+            switch response.result {
+
+            case .success:
                 guard value["code"].stringValue == returnCode else {
                     let errorMsg = value["responseMessage"].stringValue
                     completion(false, errorMsg as AnyObject)

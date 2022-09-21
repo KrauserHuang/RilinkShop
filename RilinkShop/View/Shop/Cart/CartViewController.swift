@@ -83,18 +83,18 @@ class CartViewController: UIViewController {
     }
     // 其餘view設定
     func configureView() {
-        agreeButton.tintColor = Theme.customOrange
-        ruleButton.titleLabel?.tintColor = Theme.customOrange
-        clearAllButton.layer.borderColor = Theme.customOrange.cgColor
+        agreeButton.tintColor = .primaryOrange
+        ruleButton.titleLabel?.tintColor = .primaryOrange
+        clearAllButton.layer.borderColor = UIColor.primaryOrange.cgColor
         clearAllButton.layer.borderWidth = 1
         clearAllButton.layer.cornerRadius = 10
-        clearAllButton.tintColor = Theme.customOrange
-        keepBuyButton.layer.borderColor = Theme.customOrange.cgColor
+        clearAllButton.tintColor = .primaryOrange
+        keepBuyButton.layer.borderColor = UIColor.primaryOrange.cgColor
         keepBuyButton.layer.borderWidth = 1
         keepBuyButton.layer.cornerRadius = 10
-        keepBuyButton.tintColor = Theme.customOrange
+        keepBuyButton.tintColor = .primaryOrange
         checkoutButton.layer.cornerRadius = 10
-        checkoutButton.backgroundColor = Theme.customOrange
+        checkoutButton.backgroundColor = .primaryOrange
         checkoutButton.tintColor = .white
     }
 

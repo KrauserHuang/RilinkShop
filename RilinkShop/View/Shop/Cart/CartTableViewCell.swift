@@ -56,24 +56,16 @@ class CartTableViewCell: UITableViewCell {
     }
 
     func initCell() {
-        totalCostLabel.textColor = Theme.customOrange
+        totalCostLabel.textColor = .primaryOrange
         // stepper外圍
         stepperOuterView.backgroundColor = .systemGray6
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
         // 加減
-//        addButton.tintColor = UIColor(hex: "#4F846C")
         addButton.tintColor = .white
-//        addButton.backgroundColor = UIColor(hex: "#D6E5E2")
-        addButton.backgroundColor = Theme.customOrange
-//        addButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
-//        addButton.layer.borderWidth = 1
+        addButton.backgroundColor = .primaryOrange
         addButton.layer.cornerRadius = addButton.frame.height / 2
-//        substractButton.tintColor = UIColor(hex: "#4F846C")
         substractButton.tintColor = .white
-//        substractButton.backgroundColor = UIColor(hex: "#D6E5E2")
-        substractButton.backgroundColor = Theme.customOrange
-//        substractButton.layer.borderColor = UIColor(hex: "#4F846C")?.cgColor
-//        substractButton.layer.borderWidth = 1
+        substractButton.backgroundColor = .primaryOrange
         substractButton.layer.cornerRadius = substractButton.frame.height / 2
         // 中間的數字
         itemNumberLabel.backgroundColor = .clear

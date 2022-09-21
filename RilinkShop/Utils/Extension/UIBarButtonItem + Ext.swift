@@ -5,7 +5,6 @@
 //  Created by Tai Chin Huang on 2022/4/28.
 //
 
-import Foundation
 import UIKit
 
 private var handle: UInt8 = 0
@@ -27,7 +26,10 @@ extension UIBarButtonItem {
         }
     }
 
-    func setBadge(offset: CGPoint = .zero, color: UIColor = .red, filled: Bool = true, fontSize: CGFloat = 11) {
+    func setBadge(offset: CGPoint = .zero,
+                  color: UIColor = .red,
+                  filled: Bool = true,
+                  fontSize: CGFloat = 11) {
         badgeLayer?.removeFromSuperlayer()
         guard let view = self.value(forKey: "view") as? UIView else { return }
 
@@ -47,13 +49,14 @@ extension UIBarButtonItem {
 //        let x = view.frame.width - width + offset.x
         /*
          I suggest you try the x and y sets, for my case, i will use this coordinates for better result,
-         but depends on the syze of your image
+         but depends on the size of your image
          */
         let x = view.frame.width + offset.x - 17
         let y = view.frame.height + offset.y - 34
 
 //        let badgeFrame = CGRect(origin: CGPoint(x: x, y: offset.y), size: CGSize(width: width, height: height))
-        let badgeFrame = CGRect(origin: CGPoint(x: x, y: y), size: CGSize(width: width, height: height))
+        let badgeFrame = CGRect(origin: CGPoint(x: x, y: y),
+                                size: CGSize(width: width, height: height))
 
         badge.drawRoundedRect(rect: badgeFrame, andColor: color, filled: filled)
         view.layer.addSublayer(badge)

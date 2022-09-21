@@ -17,6 +17,7 @@ class TopPageStoreCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         imageView.layer.cornerRadius = 10
+//        contentView.backgroundColor = .systemBlue
     }
 
     func configure(with model: Store) {

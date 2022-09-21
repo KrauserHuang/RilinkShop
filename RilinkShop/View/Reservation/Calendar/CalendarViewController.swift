@@ -100,7 +100,7 @@ class CalendarViewController: UIViewController {
         }
     }
     private func updateBookingData() {
-        bookingDataForSelectedDate = storeBookingData.filter { $0.bookingdate == selectedDate }
+        bookingDataForSelectedDate = storeBookingData.filter { $0.bookingDate == selectedDate }
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.emptyView.isHidden = self.bookingDataForSelectedDate.count != 0

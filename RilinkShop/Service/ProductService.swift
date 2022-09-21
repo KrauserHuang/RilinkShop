@@ -10,13 +10,18 @@ import Alamofire
 import SwiftyJSON
 
 class ProductService {
+
+    private init() {}
+
     static let shared = ProductService()
-    static let didUpdateInCartItems = Notification.Name("ProductService.inCartItemUpdated")
+    static let didUpdateInCartItems = Notification.Name.inCartItemsDidUpdate
     var inCartItems = [Product]() {
         didSet {
-            NotificationCenter.default.post(name: ProductService.didUpdateInCartItems, object: nil)
+            NotificationCenter.default.post(name: Notification.Name.inCartItemsDidUpdate,
+                                            object: nil)
         }
     }
+    var isEmpty: Bool = true
     private(set) var productList = [Product]()
     // MARK: - Product/Package Related
     func getProductType(id: String, pwd: String, completion: @escaping ([Category]) -> Void) {
@@ -132,7 +137,9 @@ class ProductService {
             print(response.response)
             print(response.value)
             let isSuccess: Bool = response.response == nil ? false : response.response!.statusCode == 200
-            NotificationCenter.default.post(name: ProductService.didUpdateInCartItems, object: nil, userInfo: ["ifHasItem": isSuccess])
+            NotificationCenter.default.post(name: Notification.Name.inCartItemsDidUpdate,
+                                            object: nil,
+                                            userInfo: ["ifHasItem": isSuccess])
             print("新增項目成功！")
             // dosomething for error or whatever
 
@@ -288,7 +295,9 @@ class ProductService {
         ]
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             let isSuccess: Bool = response.response == nil ? false : response.response!.statusCode == 200
-//            NotificationCenter.default.post(name: ProductService.didUpdateInCartItems, object: nil, userInfo: ["isHasItem": isSuccess])
+            NotificationCenter.default.post(name: Notification.Name.inCartItemsDidUpdate,
+                                            object: nil,
+                                            userInfo: ["isHasItem": isSuccess])
             print("刪除項目成功！")
         }
     }

@@ -17,9 +17,11 @@ class TopPageOptionCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        contentView.backgroundColor = .systemPink
     }
 
     func configure(with option: String) {
         optionLabel.text = option
+        imageView.image = UIImage(named: option)
     }
 }
