@@ -8,31 +8,6 @@
 import UIKit
 import BadgeHub
 
-// enum Options: Int, CaseIterable {
-//    case newCar = 0
-//    case secondhandCar = 1
-//    case repair = 2
-//    case rent = 3
-//    case accessory = 4
-// }
-//
-// extension Options {
-//    var urlString: String {
-//        switch self {
-//        case .newCar:
-//            return "https://www.hsinhungchia.com/brand-type/"
-//        case .secondhandCar:
-//            return "https://rilink.shopstore.tw/category/%E4%B8%AD%E5%8F%A4%E8%BB%8A"
-//        case .repair:
-//            return "https://www.hsinhungchia.com/brand-place/"
-//        case .rent:
-//            return "https://rilink.shopstore.tw/category/%E7%A7%9F%E8%BB%8A%E6%9C%8D%E5%8B%99"
-//        case .accessory:
-//            return "https://rilink.shopstore.tw/"
-//        }
-//    }
-// }
-
 class TopPageMainViewController: UIViewController {
 
     @IBOutlet weak var storeCollectionView: UICollectionView!

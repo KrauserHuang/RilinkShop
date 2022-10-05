@@ -172,7 +172,8 @@ class FixMotorService {
                                             description: data["description"].stringValue,
                                             cancel: data["cancel"].stringValue,
                                             storeName: data["store_name"].stringValue,
-                                            phone: data["phone"].stringValue)
+                                            phone: data["phone"].stringValue,
+                                            canCancel: data["can_cancel"].stringValue)
                         lists.append(list)
                     }
                 }

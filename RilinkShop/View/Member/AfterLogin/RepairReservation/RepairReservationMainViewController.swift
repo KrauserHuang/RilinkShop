@@ -45,8 +45,8 @@ class RepairReservationMainViewController: UIViewController {
             self.specificMotorNoDetails.removeAll()
 
             HUD.showLoadingHUD(inView: self.view, text: "")
-            FixMotorService.shared.bookingFixMotorList(id: Global.ACCOUNT,
-                                                       pwd: Global.ACCOUNT_PASSWORD,
+            FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                                       pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
                                                        no: item) { success, response in
                 HUD.hideLoadingHUD(inView: self.view)
                 guard success else {
@@ -78,8 +78,8 @@ extension RepairReservationMainViewController {
                            forCellReuseIdentifier: RepairReservationTableViewCell.cellIdentifier())
     }
     private func loadFixMotorList() {
-        FixMotorService.shared.bookingFixMotorList(id: Global.ACCOUNT,
-                                                   pwd: Global.ACCOUNT_PASSWORD,
+        FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                                   pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
                                                    no: "") { success, response in
             guard success else {
                 let errorMsg = response as! String

@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="width" secondItem="Esu-G4-MP4" secondAttribute="height" multiplier="1:1" id="mUi-c2-IAC"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="電話：05-216-8222" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ec-y6-TA3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" text="電話：05-216-8222" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ec-y6-TA3">
                                 <rect key="frame" x="15" y="307.5" width="258" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.80046349760000002" green="0.48583424089999999" blue="0.21951380370000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -77,7 +77,6 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" systemColor="systemGray6Color"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="XiZ-If-eoe" secondAttribute="trailing" constant="10" id="61x-YL-40y"/>
                 <constraint firstItem="XiZ-If-eoe" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="YLP-X3-e5u"/>
@@ -98,9 +97,6 @@
         <image name="nft" width="1037" height="1046"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

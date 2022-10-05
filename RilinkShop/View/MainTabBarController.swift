@@ -20,16 +20,6 @@ class MainTabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-//        print("MainTabBarController + \(#function)")
-//        print("didLogin:\(UserService.shared.didLogin)")
-//        print("userAccount:\(MyKeyChain.getAccount())")
-//        print("adminAccount:\(MyKeyChain.getBossAccount())")
-//        MyKeyChain.setAccount("0910619306")
-//        MyKeyChain.setPassword("a12345678")
-//        UserService.shared.id = "0910619306"
-//        UserService.shared.pwd = "a12345678"
-//        UserService.shared.didLogin = true
-
         if UserService.shared.didLogin {
             print("main_didLogIn")
             tryLogIn()
@@ -51,18 +41,7 @@ class MainTabBarController: UITabBarController {
         } else if MyKeyChain.getBossAccount() == nil,
                   MyKeyChain.getAccount() != nil {
             // 登入使用者頁面
-            selectedIndex = 0
-//            Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
-//            Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
-            print("MainTabBarController + \(#function)")
-            print("GlobalAccount:\(Global.ACCOUNT)")
-            print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
-            print("-----------------------------------")
-            print("KeyChainAccount:\(MyKeyChain.getAccount())")
-            print("KeyChainPassword:\(MyKeyChain.getPassword())")
-            print("-----------------------------------")
-            print("UserServiceAccount:\(UserService.shared.id)")
-            print("UserServicePassword:\(UserService.shared.pwd)")
+//            selectedIndex = 0
         } else if MyKeyChain.getAccount() == nil,
                   MyKeyChain.getBossAccount() == nil {
             selectedIndex = 3

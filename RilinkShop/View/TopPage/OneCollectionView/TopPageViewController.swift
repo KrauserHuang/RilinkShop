@@ -6,43 +6,29 @@
 //
 
 import UIKit
-
-// fileprivate extension TopPageViewController {
-//    enum Section: Int, CaseIterable {
-//        case store
-//        case option
-//        case package
-//        case all
-//    }
-// }
+import SafariServices
 
 class TopPageViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
     enum Section: String, CaseIterable {
-        case store
-//        case option
-        case package
-//        case all
+        case all
     }
 
-    enum TopPageDataType: Hashable {
-        case store(Store)
-        case option(String)
-        case package(Package)
+    enum Constants {
+        static let badgeElementKind = "badge-element-kind"
+        static let headerElementKind = "header-element-kind"
+        static let footerElementKind = "footer-element-kind"
     }
 
-    var stores = [Store]()
     var packages = [Package]()
     let optionImages = ["新車", "二手車", "維修保養", "機車租賃", "精品配件"]
 
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, TopPageDataType>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, TopPageDataType>
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, Package>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Package>
 
     private lazy var dataSource = configureDataSource()
-
-    private var sections = Section.allCases
 
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
@@ -50,95 +36,53 @@ class TopPageViewController: UIViewController {
     var currentIndex = 0
     var timer: Timer?
 
-    var storeSection: NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+    var bannerList = [Banner]()
+    var products = [Product]()
+    var filterItmes = [Item]()
+    var items = [Item]()
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalHeight(1))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
-        return section
-    }
-
-    var optionSection: NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 10, bottom: 20, trailing: 10)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(120))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 5)
-
-        let section = NSCollectionLayoutSection(group: group)
-        return section
-    }
-
-    var packageSection: NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(260.0))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-
-        let section = NSCollectionLayoutSection(group: group)
-        return section
-    }
+    let notificationCenter = NotificationCenter.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         initUI()
+
+//        let notificationName = Notification.Name.hereComesTheProductType
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateSnapshot()
     }
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        notificationCenter.removeObserver(self)
+    }
+}
+// MARK: - internal functions
+extension TopPageViewController {
     func initUI() {
-        loadStore()
+        navigationItems()
         loadPackage()
         configureCollectionView()
     }
-    // MARK: - Regist/DataSource/Delegate/Compositional Layout setting
     func configureCollectionView() {
-        let storeNib = UINib(nibName: TopPageStoreCollectionViewCell.reuseIdentifier, bundle: nil)
-        collectionView.register(storeNib, forCellWithReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier)
-//        collectionView.dataSource = storeDataSource
-        collectionView.delegate = self
-//        collectionView.collectionViewLayout = createStoreScrollLayout()
 
         let packageNib = UINib(nibName: TopPagePackageCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(packageNib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
-//        collectionView.dataSource = packageDataSource
-//        collectionView.delegate = self
-//        collectionView.collectionViewLayout = createPackageGridLayout()
+        // 註冊supplementaryView
+        let nib = UINib(nibName: String(describing: TopPageMainCollectionReusableView.self), bundle: nil)
+//        let nib = UINib(nibName: TopPageMainCollectionReusableView.reuseIdentifier, bundle: nil)
+        collectionView.register(nib,
+                                forSupplementaryViewOfKind: Constants.headerElementKind,
+                                withReuseIdentifier: TopPageMainCollectionReusableView.reuseIdentifier)
 
-        let optionNib = UINib(nibName: TopPageOptionCollectionViewCell.reuseIdentifier, bundle: nil)
-        collectionView.register(optionNib, forCellWithReuseIdentifier: TopPageOptionCollectionViewCell.reuseIdentifier)
-//        collectionView.dataSource = optionDataSource
-//        collectionView.delegate = self
-//        collectionView.collectionViewLayout = createOptionImagesLayout()
-//        collectionView.isScrollEnabled = false
-//        updateOptionSnapshot()
-
-    }
-    // MARK: - Load store API
-    func loadStore() {
-        StoreService.shared.getStoreList(id: account,
-                                         pwd: password) { storesResponse in
-            let wholeStores = storesResponse
-            self.stores = wholeStores
-            self.updateSnapshot()
-        }
+        collectionView.dataSource = dataSource
+//        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.collectionViewLayout = createLayout()
     }
     // MARK: - Load package API
     func loadPackage() {
@@ -149,62 +93,212 @@ class TopPageViewController: UIViewController {
             self.updateSnapshot()
         }
     }
+    // MARK: - Load banner API
+    func loadBanner() {
+        BannerService.shared.getBannerList(id: account,
+                                           pwd: password) { success, response in
+            guard success else {
+                let errorMsg = response as! String
+                Alert.showMessage(title: "", msg: errorMsg, vc: self)
+                return
+            }
+
+            let bannerList = response as! [Banner]
+            self.bannerList = bannerList
+        }
+    }
 }
+
 extension TopPageViewController {
-    // MARK: - All DiffableDataSource/Snapshot/Compositional Layout
+    // 設定左上logo右上購物車
+    func navigationItems() {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "LOGO")
+        imageView.contentMode = .scaleAspectFit
+
+        let leftNavigationItem = UIBarButtonItem(customView: imageView)
+        navigationItem.leftBarButtonItem = leftNavigationItem
+
+        let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(toCartViewController))
+        navigationItem.rightBarButtonItem = shoppingcartButton
+    }
+    @objc private func toCartViewController() {
+        let vc = CartViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension TopPageViewController {
+    // MARK: - DiffableDataSource/Snapshot/Compositional Layout
     func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
-            switch itemIdentifier {
-            case .store(let store):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageStoreCollectionViewCell
-                 cell.configure(with: store)
-                 return cell
-            case .option(let option):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageOptionCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageOptionCollectionViewCell
-                cell.imageView.image = UIImage(named: option)
-                cell.optionLabel.text = option
-                 return cell
-            case .package(let package):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPagePackageCollectionViewCell
-                cell.configure(with: package)
-                return cell
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPagePackageCollectionViewCell
+
+            item.configure(with: itemIdentifier)
+
+            return item
+        }
+
+//        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+//            return self?.supplementary(collectionView: collectionView, kind: kind, indexPath: indexPath)
+//        }
+        dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+            if kind == Constants.headerElementKind {
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                             withReuseIdentifier: TopPageMainCollectionReusableView.reuseIdentifier,
+                                                                             for: indexPath) as! TopPageMainCollectionReusableView
+//                headerView.label.text = "Header\nHeader\nHeader\nHeader"
+                headerView.delegate = self
+                return headerView
+            } else {
+                return UICollectionReusableView()
             }
         }
+
         return dataSource
     }
     func updateSnapshot(animatingChange: Bool = false) {
         var snapshot = Snapshot()
-        snapshot.appendSections(sections)
-//        sections.forEach { section in
-//            snapshot.appendItems(<#T##identifiers: [TopPageDataType]##[TopPageDataType]#>, toSection: <#T##Section?#>)
-//        }
-//        snapshot.appendSections([.all])
-//        snapshot.appendItems(stores, toSection: .all)
+        snapshot.appendSections([.all])
+        snapshot.appendItems(packages, toSection: .all)
 
+        dataSource.apply(snapshot, animatingDifferences: animatingChange)
     }
     func createLayout() -> UICollectionViewLayout {
-        UICollectionViewCompositionalLayout { [unowned self] sectionIndex, _ in
-            switch sectionIndex {
-            case 0:
-                return self.storeSection
-            case 1:
-                return self.optionSection
-            case 2:
-                return self.packageSection
-            default:
-                return nil
-            }
-//            if sectionIndex == 0 {
-//                return self.storeSection
-//            } else if sectionIndex == 1 {
-//                return self.optionSection
-//            } else {
-//                return self.packageSection
-//            }
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                                              heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .absolute(260.0))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .absolute(440))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                 elementKind: Constants.headerElementKind,
+                                                                 alignment: .top)
+        header.pinToVisibleBounds = false
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
+
+        let layout = UICollectionViewCompositionalLayout(section: section)
+
+        return layout
+    }
+
+    private func createBannerItem() -> NSCollectionLayoutSupplementaryItem {
+        let topRightAnchor = NSCollectionLayoutAnchor(edges: [.top, .trailing], fractionalOffset: CGPoint(x: 0.2, y: -0.2))
+        let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                heightDimension: .absolute(260))
+        let item = NSCollectionLayoutSupplementaryItem(layoutSize: itemLayoutSize, elementKind: TopPageMainCollectionReusableView.reuseIdentifier, containerAnchor: topRightAnchor)
+        return item
+    }
+
+    func supplementary(collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? {
+
+        switch kind {
+        case TopPageMainCollectionReusableView.reuseIdentifier:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: TopPageMainCollectionReusableView.reuseIdentifier,
+                                                                        withReuseIdentifier: TopPageMainCollectionReusableView.reuseIdentifier,
+                                                                        for: indexPath) as! TopPageMainCollectionReusableView
+
+            return headerView
+
+        default:
+            assertionFailure("Handle new kind")
+            return nil
         }
     }
 }
 
-extension TopPageViewController: UICollectionViewDelegate {
+extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
+    func didTapBanner(_ cell: TopPageMainCollectionReusableView, banner: Banner) {
+        if let url = URL(string: banner.bannerLink) {
+            let vc = SFSafariViewController(url: url)
+            present(vc, animated: true)
+        }
+    }
 
+    func didTapNewCar(_ button: UIButton, option: String) {
+        if let url = URL(string: option) {
+            let vc = SFSafariViewController(url: url)
+            present(vc, animated: true)
+        }
+    }
+
+    func didTapSecondhandCar(_ button: UIButton, option: String) {
+        if let url = URL(string: option) {
+            let vc = SFSafariViewController(url: url)
+            present(vc, animated: true)
+        }
+    }
+
+    func didTapRepair(_ button: UIButton) {
+        let reservationStoryboard = UIStoryboard(name: "Reservation", bundle: nil)
+        let vc = reservationStoryboard.instantiateViewController(withIdentifier: "StoreMainViewController") as! StoreMainViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func didTapRent(_ button: UIButton, productType: String) {
+        let shopStoryboard = UIStoryboard(name: "Shop", bundle: nil)
+        let vc = shopStoryboard.instantiateViewController(withIdentifier: "ShopMainViewController") as! ShopMainViewController
+        vc.productType = productType
+
+        /*
+        let notificationName = Notification.Name.hereComesTheProductType
+        // Custom data, for sending productType for the API
+        let forwardProductType: [String: String] = ["productType": productType]
+
+        notificationCenter.post(name: notificationName,
+                                object: button,
+                                userInfo: forwardProductType)
+        */
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func didTapAccessory(_ button: UIButton, productType: String) {
+        let shopStoryboard = UIStoryboard(name: "Shop", bundle: nil)
+        let vc = shopStoryboard.instantiateViewController(withIdentifier: "ShopMainViewController") as! ShopMainViewController
+        vc.productType = productType
+
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension TopPageViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                         withReuseIdentifier: TopPageMainCollectionReusableView.reuseIdentifier,
+                                                                         for: indexPath)
+            return header
+        } else {
+            return UICollectionReusableView()
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let size = CGSize(width: view.frame.size.width, height: 263)
+        return size
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = PackageInfoViewController()
+        let package = packages[indexPath.row]
+        vc.package = package
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

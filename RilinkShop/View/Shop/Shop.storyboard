@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8em-zY-mNx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8em-zY-mNx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,12 +14,12 @@
         <!--購物商城-->
         <scene sceneID="eY5-76-UpT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8em-zY-mNx" customClass="ShopNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Shop" automaticallyAdjustsScrollViewInsets="NO" id="8em-zY-mNx" customClass="ShopNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="購物商城" image="購物商城" id="UcA-BY-d6I"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2td-IY-Ikx">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -34,13 +34,13 @@
         <!--購物商城-->
         <scene sceneID="jUD-zH-hZx">
             <objects>
-                <viewController id="qTH-m4-zGr" customClass="ShopMainViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShopMainViewController" id="qTH-m4-zGr" customClass="ShopMainViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DsM-FZ-Hps">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2R-ei-Ecl">
-                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="T33-ZR-qln">
                                         <rect key="frame" x="30" y="10" width="369" height="30"/>
@@ -90,7 +90,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kcF-ss-t4n">
-                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
+                                <rect key="frame" x="0.0" y="142" width="414" height="671"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IPa-Y1-nju">
                                     <size key="itemSize" width="94" height="84"/>
@@ -136,7 +136,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowtriangle.down.fill" catalog="system" width="128" height="124"/>
+        <image name="arrowtriangle.down.fill" catalog="system" width="128" height="120"/>
         <image name="購物商城" width="47" height="47"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

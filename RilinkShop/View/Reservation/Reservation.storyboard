@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gCi-hg-jbU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gCi-hg-jbU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="WFz-ST-GH0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="895"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="ttx-MK-V0q" customClass="StoreDetailHeaderView" customModule="RilinkShop" customModuleProvider="target">
@@ -41,7 +41,7 @@
                                     </constraints>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="4mh-zl-BRY">
-                                    <rect key="frame" x="0.0" y="621" width="414" height="90"/>
+                                    <rect key="frame" x="0.0" y="632" width="414" height="90"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8z0-Ui-Rp6">
@@ -65,7 +65,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="95" id="Req-Jp-y1J" customClass="StoreDetailMainTextCell" customModule="RilinkShop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="369.5" width="414" height="95"/>
+                                        <rect key="frame" x="0.0" y="375" width="414" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Req-Jp-y1J" id="Qss-tU-Mql">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
@@ -109,7 +109,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="67" id="xPX-WM-wr9" customClass="StoreDetailOpenTimeTextCell" customModule="RilinkShop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="464.5" width="414" height="67"/>
+                                        <rect key="frame" x="0.0" y="470" width="414" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xPX-WM-wr9" id="abG-Cs-onK">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="67"/>
@@ -145,7 +145,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rHT-AC-3qj" customClass="StoreDetailDescriptTextCell" customModule="RilinkShop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="531.5" width="414" height="67"/>
+                                        <rect key="frame" x="0.0" y="537" width="414" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rHT-AC-3qj" id="nxO-Ke-QTa">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="67"/>
@@ -199,13 +199,13 @@
         <!--商家據點-->
         <scene sceneID="JbT-Sl-tdL">
             <objects>
-                <viewController id="1B8-4S-ZHM" customClass="StoreMainViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StoreMainViewController" id="1B8-4S-ZHM" customClass="StoreMainViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="swU-x8-0hX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vns-aY-Qcp">
-                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8Eg-1E-6Xo">
                                         <rect key="frame" x="30" y="10" width="246" height="30"/>
@@ -221,7 +221,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="WQW-dl-u5J"/>
                                                 </constraints>
-                                                <state key="normal" title="Button"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <buttonConfiguration key="configuration" style="filled"/>
                                                 <connections>
                                                     <action selector="storeTypeButtonTapped:" destination="1B8-4S-ZHM" eventType="touchUpInside" id="DnZ-hB-LA9"/>
@@ -250,7 +250,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uaB-LH-806">
-                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
+                                <rect key="frame" x="0.0" y="142" width="414" height="671"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YGa-NE-A7T">
                                     <size key="itemSize" width="260" height="224"/>
@@ -301,7 +301,7 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="h3M-uq-qFn">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -315,7 +315,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowtriangle.down.fill" catalog="system" width="128" height="124"/>
+        <image name="arrowtriangle.down.fill" catalog="system" width="128" height="120"/>
         <image name="商家據點" width="31" height="47"/>
         <namedColor name="NavigationBarTitle">
             <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>

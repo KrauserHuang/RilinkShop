@@ -43,6 +43,13 @@ class RepairReservationTableViewCell: UITableViewCell {
             cancelReservationButton.isUserInteractionEnabled = isCancelled == true ? false : true
         }
     }
+    var canBeCancelled: Bool = true {
+        didSet {
+//            cancelReservationButton.setTitle(canBeCancelled == true ? "已取消預約" : "取消預約", for: .normal)
+            cancelReservationButton.tintColor = canBeCancelled == true ? .primaryOrange : .systemGray5
+            cancelReservationButton.isUserInteractionEnabled = canBeCancelled == true ? true : false
+        }
+    }
     var model: FixMotor? {
         didSet {
             setDetailView()
@@ -80,10 +87,15 @@ class RepairReservationTableViewCell: UITableViewCell {
 extension RepairReservationTableViewCell {
 
     func setDetailView() {
-        if model?.cancel == "1" {
-            isCancelled = true
+        if model?.canCancel == "1" { // canCancel == 1(可以被取消-還沒過期)
+            canBeCancelled = true
+            if model?.cancel == "1" {
+                isCancelled = true
+            } else {
+                isCancelled = false
+            }
         } else {
-            isCancelled = false
+            canBeCancelled = false
         }
     }
 
@@ -101,10 +113,15 @@ extension RepairReservationTableViewCell {
         nameLabel.text        = model.name
         phoneLabel.text       = model.phone
         // 狀態欄位
-        if model.cancel == "1" {
-            isCancelled = true
+        if model.canCancel == "1" { // canCancel == 1(可以被取消-還沒過期)
+            canBeCancelled = true
+            if model.cancel == "1" {
+                isCancelled = true
+            } else {
+                isCancelled = false
+            }
         } else {
-            isCancelled = false
+            canBeCancelled = false
         }
     }
 }

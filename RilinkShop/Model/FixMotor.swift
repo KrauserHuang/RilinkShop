@@ -21,6 +21,7 @@ struct FixMotor {
     var cancel: String = ""
     var storeName: String = ""
     var phone: String = ""
+    var canCancel: String = ""
 
     enum CodingKeys: String, CodingKey {
         case bookingDate = "bookingdate"
@@ -36,5 +37,6 @@ struct FixMotor {
         case cancel
         case storeName = "store_name"
         case phone
+        case canCancel = "can_cancel"
     }
 }

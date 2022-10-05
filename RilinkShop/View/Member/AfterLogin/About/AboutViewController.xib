@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Uoy-qJ-KJk">
-                    <rect key="frame" x="14.666666666666657" y="341.66666666666669" width="361" height="161"/>
+                    <rect key="frame" x="14.666666666666657" y="337" width="361" height="161"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uls-jb-COp">
                             <rect key="frame" x="0.0" y="0.0" width="361" height="28"/>
@@ -108,9 +108,9 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Uoy-qJ-KJk" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Hk9-x1-8Ig"/>
-                <constraint firstItem="Uoy-qJ-KJk" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Vba-Xx-N7p"/>
+                <constraint firstItem="Uoy-qJ-KJk" firstAttribute="centerX" secondItem="nWF-Ik-MsG" secondAttribute="centerX" id="102-qX-yr5"/>
                 <constraint firstItem="nWF-Ik-MsG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WE4-ie-oih"/>
+                <constraint firstItem="Uoy-qJ-KJk" firstAttribute="top" secondItem="nWF-Ik-MsG" secondAttribute="bottom" constant="40" id="pBr-2e-J5m"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nWF-Ik-MsG" secondAttribute="trailing" id="xCw-DW-5aw"/>
                 <constraint firstItem="nWF-Ik-MsG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="zwv-92-d8a"/>
             </constraints>

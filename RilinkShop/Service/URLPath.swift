@@ -9,28 +9,28 @@ import Foundation
 
 // MARK: - MAIN
 // 綠悠游商城正式
-// let SHOP_API_URL = "https://rilink.com.tw/ticketec/api/"
-// let SHOP_ROOT_URL = "https://rilink.com.tw/ticketec/"
+ let SHOP_API_URL = "https://rilink.com.tw/ticketec/api/"
+ let SHOP_ROOT_URL = "https://rilink.com.tw/ticketec/"
 
 // 綠悠游商城測試
- let SHOP_API_URL = "http://211.20.181.125:11073/ticketec/api/"
- let SHOP_ROOT_URL = "http://211.20.181.125:11073/ticketec/"
+// let SHOP_API_URL = "http://211.20.181.125:11073/ticketec/api/"
+// let SHOP_ROOT_URL = "http://211.20.181.125:11073/ticketec/"
 
 // 綠悠游正式
-// let API_URL = "https://rilink.com.tw/api/v1"
+ let API_URL = "https://rilink.com.tw/api/v1"
 
 // 綠悠游測試
- let API_URL = "https://rilink.jotangi.com.tw:11074/api/v1"
+// let API_URL = "https://rilink.jotangi.com.tw:11074/api/v1"
 
 // 綠悠游商城測試
 // let SHOP_API_URL = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
 // let SHOP_ROOT_URL = "https://rilink.jotangi.com.tw:11074/ticketec/"
 
 // Web串接購買金流正式
-// let PAYMENT_API_URL = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="
+ let PAYMENT_API_URL = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="
 
 // Web串接購買金流測試
- let PAYMENT_API_URL = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid="
+// let PAYMENT_API_URL = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid="
 
 /**
  綠悠遊商城串接
@@ -129,3 +129,7 @@ let URL_FETCHPOINTHISTORY = "fetch_pointhistory.php"
 let URL_BOOKINGFIXMOTORLIST = "booking_fixmotor_list.php"
 // 會員取消預約服務
 let URL_BOOKINGFIXMOTORCANCEL = "booking_fixmotor_cancel.php"
+
+// MARK: - BANNER
+// 新增取得banner資訊
+let URL_BANNERLIST = "banner_list.php"

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class TopPageMainTableViewController: UITableViewController {
 
@@ -120,7 +121,7 @@ class TopPageMainTableViewController: UITableViewController {
 
         switch section {
         case 0:
-            label.text = "商家據點"
+            label.text = "活動資訊"
             return headerView
         case 2:
             label.text = "優惠方案"
@@ -195,6 +196,17 @@ extension TopPageMainTableViewController {
 }
 // MARK: - Store Cell的動作
 extension TopPageMainTableViewController: TopPageStoreTableViewCellDelegate {
+    func didTapBanner(_ cell: TopPageStoreTableViewCell, banner: Banner) {
+//        let vc = WKWebViewController()
+//        vc.urlStr = banner.bannerLink
+//        navigationController?.pushViewController(vc, animated: true)
+
+        if let url = URL(string: banner.bannerLink) {
+            let vc = SFSafariViewController(url: url)
+            present(vc, animated: true)
+        }
+    }
+
     func didTapStore(_ cell: TopPageStoreTableViewCell, store: Store) {
         let vc = HostelDetailViewController()
         vc.store = store
@@ -205,9 +217,34 @@ extension TopPageMainTableViewController: TopPageStoreTableViewCellDelegate {
 // MARK: - Option Cell的動作
 extension TopPageMainTableViewController: TopPageOptionTableViewCellDelegate {
     func didTapOption(_ cell: TopPageOptionTableViewCell, option: String) {
-        let vc = MainPageWebViewController()
-        vc.urlStr = option
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = MainPageWebViewController()
+//        vc.urlStr = option
+//        navigationController?.pushViewController(vc, animated: true)
+        if let url = URL(string: option) {
+            let vc = SFSafariViewController(url: url)
+            present(vc, animated: true)
+        }
+    }
+    func toRepairReservation(_ cell: TopPageOptionTableViewCell) {
+        let vc = RepairReservationMainViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+//        self.tabBarController?.selectedIndex = 3
+//        guard let memberNavigationController = self.tabBarController?.selectedViewController as? MemberNavigationViewController else { return }
+//
+//        memberNavigationController.popToRootViewController(animated: false)
+//        let repairReservationMainViewController = RepairReservationMainViewController()
+////        if let repairReservationMainViewController = memberNavigationController.viewControllers.compactMap({ $0 as? RepairReservationMainViewController }).first {
+////            memberNavigationController.pushViewController(repairReservationMainViewController, animated: true)
+////        }
+//        memberNavigationController.pushViewController(repairReservationMainViewController, animated: false)
+    }
+
+    func toShop(_ cell: TopPageOptionTableViewCell, producttypeName: String) {
+        print(#function, "Hello, world")
+        self.tabBarController?.selectedIndex = 1
+        let vc = UIStoryboard(name: "Shop", bundle: nil).instantiateViewController(withIdentifier: "Shop")
+//        let vc = ShopMainViewController()
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 // MARK: - Package Cell的動作

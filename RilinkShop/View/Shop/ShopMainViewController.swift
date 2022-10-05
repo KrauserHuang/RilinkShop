@@ -41,41 +41,53 @@ class ShopMainViewController: UIViewController {
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     private lazy var dataSource = configureDataSource()
-
+    // 類別按鈕
     var categories = [CategoryCellModel]()
-
+    // 商品
     var products = [Product]()
-    var filteredProducts = [Product]()
-
+    // 套票
     var packages = [Package]()
-
+    // 所有物件與篩選物件(商品+套票)
     var items = [Item]()
     var filteredItems = [Item]() {
         didSet {
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self.updateSnapshot()
             }
         }
     }
     let dropDown = DropDown()
 
-//    var account = MyKeyChain.getAccount() ?? ""
-//    var password = MyKeyChain.getPassword() ?? ""
+    let notificationCenter = NotificationCenter.default
+    var productType: String?
+//    var productType = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initUI()
 
-        print("ShopMainViewController " + #function)
-        print("GlobalAccount:\(Global.ACCOUNT)")
-        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
-        print("-----------------------------------")
-        print("KeyChainAccount:\(MyKeyChain.getAccount())")
-        print("KeyChainPassword:\(MyKeyChain.getPassword())")
-        print("-----------------------------------")
-        print("UserServiceAccount:\(UserService.shared.id)")
-        print("UserServicePassword:\(UserService.shared.pwd)")
+//        print("ShopMainViewController " + #function)
+//        print("GlobalAccount:\(Global.ACCOUNT)")
+//        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
+//        print("-----------------------------------")
+//        print("KeyChainAccount:\(MyKeyChain.getAccount())")
+//        print("KeyChainPassword:\(MyKeyChain.getPassword())")
+//        print("-----------------------------------")
+//        print("UserServiceAccount:\(UserService.shared.id)")
+//        print("UserServicePassword:\(UserService.shared.pwd)")
+//        let notificationName = Notification.Name.productTypeCommingHot
+        let notificationName = Notification.Name.hereComesTheProductType
+        notificationCenter.addObserver(self,
+                                       selector: #selector(navigateFromTopPage(_:)),
+                                       name: notificationName,
+                                       object: nil)
+    }
+    @objc func navigateFromTopPage(_ notification: Notification) {
+        if let productType = notification.userInfo?["productType"] {
+            print(#function)
+            print("productType:\(productType)")
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -83,12 +95,62 @@ class ShopMainViewController: UIViewController {
 
         tabBarController?.hidesBottomBarWhenPushed = false
         tabBarController?.tabBar.isHidden = false
-//        collectionView.contentInsetAdjustmentBehavior = .automatic
-//        initUI()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(#function, "productType = \(productType)")
+        if productType == "SC001" {
+//            shopTypeButton.setTitle("改裝精品配件", for: .normal)
+//            loadProductList(productType: "02")
+            filteredItems.removeAll()
+
+            for singleItem in self.items {
+                switch singleItem {
+                case .product(let product):
+                    if product.product_type == productType { // 如果item內容與所有物件內producttype_name有吻合
+                        self.filteredItems.append(singleItem) // 則更新filteredItems的內容
+                        shopTypeButton.setTitle(product.producttype_name, for: .normal)
+                    } else {
+    //                        print("append product失敗！")
+                    }
+                case .package:
+                    if productType == "套票" {
+                        self.filteredItems.append(singleItem)
+                    } else {
+    //                        print("append package失敗！")
+                    }
+                }
+            }
+        } else if productType == "Rent" {
+//            shopTypeButton.setTitle("i機車", for: .normal)
+//            loadProductList(productType: "03")
+            filteredItems.removeAll()
+            for singleItem in self.items {
+                switch singleItem {
+                case .product(let product):
+                    if product.product_type == productType { // 如果item內容與所有物件內producttype_name有吻合
+                        self.filteredItems.append(singleItem) // 則更新filteredItems的內容
+                        shopTypeButton.setTitle(product.producttype_name, for: .normal)
+                    } else {
+    //                        print("append product失敗！")
+                    }
+                case .package:
+                    if productType == "套票" {
+                        self.filteredItems.append(singleItem)
+                    } else {
+    //                        print("append package失敗！")
+                    }
+                }
+            }
+//            updateSnapshot()
+        } else {
+            return
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         dismissKeyboard()
+        notificationCenter.removeObserver(self)
     }
 
     func initUI() {
@@ -134,18 +196,18 @@ class ShopMainViewController: UIViewController {
         ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseCategories in
             var isFirstCategory = true
-            let packageCategory = Category(pid: "", productType: "", productTypeName: "套票")
-            var wholeCategories = responseCategories
-            wholeCategories.append(packageCategory)
+            let packageCategory = Category(pid: "", productType: "", productTypeName: "套票") // 建立一個空的類別儲存套票
+            var wholeCategories = responseCategories // 建立全部類別，先加入商品類別(從API來)
+            wholeCategories.append(packageCategory) // 將套票類別也加進來
             self.categories = wholeCategories.map {
                 if isFirstCategory {
                     isFirstCategory = false
-                    return CategoryCellModel(category: $0, isSelected: true)
+                    return CategoryCellModel(category: $0, isSelected: true) // 之前是為了變化categoryCollectionViewCell的UI做的，這邊應該沒用途
                 } else {
                     return CategoryCellModel(category: $0)
                 }
             }
-            if let firstType = self.categories.first {
+            if let firstType = self.categories.first { // 從類別中的第一個提出來顯示(假如是“保健食品”，那就直接變更button的UI)
                 self.shopTypeButton.setTitle(firstType.category.productTypeName, for: .normal)
             }
             self.loadProductList()
@@ -154,9 +216,6 @@ class ShopMainViewController: UIViewController {
 
     func loadProductList() {
         HUD.showLoadingHUD(inView: self.view, text: "載入商品中")
-        print(self, #function)
-        print("account: \(UserService.shared.id)")
-        print("password: \(UserService.shared.pwd)")
         ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
                                               pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseProducts in
             HUD.hideLoadingHUD(inView: self.view)
@@ -168,24 +227,24 @@ class ShopMainViewController: UIViewController {
                 let wholePackages = packagesResponse
                 self.packages = wholePackages
 
-                self.items.removeAll()
+                self.items.removeAll() // 先移除所有物件
+
                 for product in self.products {
-                    self.items.append(Item.product(product))
+                    self.items.append(Item.product(product)) // 將個別product放進items裡面
                 }
                 for package in self.packages {
-                    self.items.append(Item.package(package))
+                    self.items.append(Item.package(package)) // 將個別package放進items裡面
                 }
 
-                self.filteredItems = self.items.filter {
-                    switch $0 {
-
+                self.filteredItems = self.items.filter { // 將所有物件(items)進行篩選至篩選物件(filteredItems)裡面
+                    switch $0 { // 先篩選第一層(如果使用者選取商品類別)
                     case .product(let product):
                         if product.product_type == self.categories.first?.category.productType {
                             return true
                         } else {
                             return false
                         }
-                    case .package:
+                    case .package: // (套票類別，沒API所以有做死)
                         if self.categories.first?.category.productTypeName == "套票" {
                             return true
                         } else {
@@ -193,10 +252,46 @@ class ShopMainViewController: UIViewController {
                         }
                     }
                 }
-                self.updateSnapshot()
             }
         }
     }
+
+    func loadProductList(productType: String) {
+        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
+                                              productType: productType) { success, response in
+            guard success else {
+                let errorMsg = response as! String
+                Alert.showMessage(title: "", msg: errorMsg, vc: self)
+                return
+            }
+
+            let productList = response as! [Product]
+            self.products = productList
+            self.filteredItems.removeAll()
+            for product in self.products {
+                self.items.append(Item.product(product))
+            }
+            print(#function, "items:\(self.items)")
+            self.filteredItems = self.items.filter({
+                switch $0 { // 先篩選第一層(如果使用者選取商品類別)
+                case .product(let product):
+                    if product.product_type == self.categories.first?.category.productType {
+                        return true
+                    } else {
+                        return false
+                    }
+                case .package: // (套票類別，沒API所以有做死)
+                    if self.categories.first?.category.productTypeName == "套票" {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+            })
+        }
+    }
+
     @IBAction func shopTypeButtonTapped(_ sender: UIButton) {
         var typeNames = [String]()
         for category in categories {
@@ -208,14 +303,14 @@ class ShopMainViewController: UIViewController {
         dropDown.show()
         dropDown.selectionAction = { [weak self] (_: Int, item: String) in
             guard let self = self else { return }
-            self.shopTypeButton.setTitle(item, for: .normal)
+            self.shopTypeButton.setTitle(item, for: .normal) // 點擊dropDown的item則將item的內容放進button的UI
 
             self.filteredItems.removeAll()
             for singleItem in self.items {
                 switch singleItem {
                 case .product(let product):
-                    if product.producttype_name == item {
-                        self.filteredItems.append(singleItem)
+                    if product.producttype_name == item { // 如果item內容與所有物件內producttype_name有吻合
+                        self.filteredItems.append(singleItem) // 則更新filteredItems的內容
                     } else {
 //                        print("append product失敗！")
                     }
@@ -227,25 +322,28 @@ class ShopMainViewController: UIViewController {
                     }
                 }
             }
-            self.updateSnapshot()
         }
     }
 }
 // MARK: - UICollectionViewDelegate/DataSource
-extension ShopMainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredItems.count
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = collectionView.dequeueReusableCell(withReuseIdentifier: ShopCollectionViewCell.reuseIdentifier, for: indexPath) as! ShopCollectionViewCell
-
-        let singleItem = filteredItems[indexPath.item]
-        item.configure(with: singleItem)
-
-        return item
-    }
+// extension ShopMainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ShopMainViewController: UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return filteredItems.count
+//    }
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let item = collectionView.dequeueReusableCell(withReuseIdentifier: ShopCollectionViewCell.reuseIdentifier, for: indexPath) as! ShopCollectionViewCell
+//
+//        let singleItem = filteredItems[indexPath.item]
+//        item.configure(with: singleItem)
+//
+//        return item
+//    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = filteredItems[indexPath.item]
+        collectionView.deselectItem(at: indexPath, animated: true)
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+
+//        let item = filteredItems[indexPath.item]
         let productDetailVC = ProductDetailViewController()
         productDetailVC.itemInfo = item
         navigationController?.pushViewController(productDetailVC, animated: true)
@@ -292,7 +390,7 @@ extension ShopMainViewController: UITextFieldDelegate {
         return true
     }
 }
-// MARK: - UIGestureRecognizerDelegate
+// MARK: - UIGestureRecognizerDelegate(為了避開collectionViewCell點擊效果)
 extension ShopMainViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         print("shouldReceive")

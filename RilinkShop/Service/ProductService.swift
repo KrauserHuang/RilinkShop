@@ -65,10 +65,73 @@ class ProductService {
             }
         }
     }
+    // 載入商品列表
+    func loadProductList(id: String, pwd: String, productType: String, completion: @escaping Completion) {
+        let url = SHOP_API_URL + URL_PRODUCTLIST
+        let parameters = [
+            "member_id": id,
+            "member_pwd": pwd,
+            "product_type": productType
+        ]
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+
+        AF.request(url, method: .post, parameters: parameters).response { response in
+
+            guard response.error == nil else {
+                let errorMsg = "伺服器連線錯誤"
+                completion(false, errorMsg as AnyObject)
+                return
+            }
+
+            let value = JSON(response.value!)
+//            print("value:\(value)")
+
+            switch response.result {
+            case .success:
+//                guard value["code"].stringValue == returnCode else {
+//                    let errorMsg = value["responseMessage"].stringValue
+//                    completion(false, errorMsg as AnyObject)
+//                }
+
+                var productList: [Product] = []
+                let datas = value.arrayValue
+                for data in datas {
+                    let product = Product(pid: data["pid"].stringValue,
+                                          product_type: data["product_type"].stringValue,
+                                          producttype_name: data["producttype_name"].stringValue,
+                                          product_name: data["product_name"].stringValue,
+                                          product_price: data["product_price"].stringValue,
+                                          product_status: data["product_status"].stringValue,
+                                          product_no: data["product_no"].stringValue,
+                                          product_picture: data["product_picture"].stringValue)
+//                    var product = Product()
+//                    product.pid              = "\(result["pid"])"
+//                    product.product_no       = "\(result["product_no"])"
+//                    product.product_type     = "\(result["product_type"])"
+//                    product.producttype_name = "\(result["producttype_name"])"
+//                    product.product_name     = "\(result["product_name"])"
+//                    product.product_price    = "\(result["product_price"])"
+//                    product.product_status   = "\(result["product_status"])"
+//                    product.product_picture  = "\(result["product_picture"])"
+//                    print("product:\(product)")
+                    productList.append(product)
+                }
+//                print("productList:\(productList)")
+                completion(true, productList as AnyObject)
+            case .failure:
+                let errorMsg = value["responseMessage"].stringValue
+                completion(false, errorMsg as AnyObject)
+            }
+        }
+    }
     // 載入商品資訊
-    func loadProductInfo(id: String, pw: String, no: String, completion: @escaping (Product) -> Void) {
+    func loadProductInfo(id: String, pwd: String, no: String, completion: @escaping (Product) -> Void) {
         let url = SHOP_API_URL + URL_PRODUCTINFO // test
-        let parameters = ["member_id": id, "member_pwd": pw, "product_no": no]
+        let parameters = [
+            "member_id": id,
+            "member_pwd": pwd,
+            "product_no": no
+        ]
 
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
             let json = JSON(response.value ?? "")

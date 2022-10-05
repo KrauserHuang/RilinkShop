@@ -74,6 +74,7 @@ class StoreAdminLoginViewController: UIViewController {
         let storePwd = "99999" // 後端強制數值
         HUD.showLoadingHUD(inView: self.view, text: "取得店家資訊中")
         UserService.shared.getStoreIDList(storeAcc: storeAcc, storePwd: storePwd) { success, response in
+            HUD.hideLoadingHUD(inView: self.view)
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {

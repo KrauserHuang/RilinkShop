@@ -24,4 +24,9 @@ class TopPageStoreCollectionViewCell: UICollectionViewCell {
         let imageURLString = SHOP_ROOT_URL + model.storePicture
         imageView.setImage(imageURL: imageURLString)
     }
+
+    func configure(with model: Banner) {
+        let imageURLString = SHOP_ROOT_URL + model.bannerPicture
+        imageView.setImage(imageURL: imageURLString)
+    }
 }

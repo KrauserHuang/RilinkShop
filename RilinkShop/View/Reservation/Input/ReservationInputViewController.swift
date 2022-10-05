@@ -177,6 +177,10 @@ extension ReservationInputViewController: UITextFieldDelegate {
             carTypeTextField.becomeFirstResponder()
         } else if textField == carTypeTextField {
             descriptionTextField.becomeFirstResponder()
+        } else if textField == descriptionTextField {
+            descriptionTextField.resignFirstResponder()
+        } else if textField == repairTypeTextField {
+            repairTypeTextField.resignFirstResponder()
         }
         return true
     }

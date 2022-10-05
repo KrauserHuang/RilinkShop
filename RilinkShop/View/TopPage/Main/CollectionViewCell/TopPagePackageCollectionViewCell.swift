@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TopPagePackageCollectionViewCellDelegate: AnyObject {
+    func didTapPackage(_ cell: TopPagePackageTableViewCell, package: Package)
+}
+
 class TopPagePackageCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var bgView: UIView!
@@ -14,6 +18,7 @@ class TopPagePackageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
 
+    weak var delegate: TopPagePackageCollectionViewCellDelegate?
     static let reuseIdentifier = "TopPagePackageCollectionViewCell"
 
     override func awakeFromNib() {

@@ -9,6 +9,8 @@ import UIKit
 
 protocol TopPageOptionTableViewCellDelegate: AnyObject {
     func didTapOption(_ cell: TopPageOptionTableViewCell, option: String)
+    func toRepairReservation(_ cell: TopPageOptionTableViewCell)
+    func toShop(_ cell: TopPageOptionTableViewCell, producttypeName: String)
 }
 
 enum Options: Int, CaseIterable {
@@ -119,18 +121,24 @@ extension TopPageOptionTableViewCell: UICollectionViewDelegate {
         var urlString = ""
         switch indexPath.row {
         case 0:
-                optionDidPicked = .newCar
+            optionDidPicked = .newCar
+            urlString = optionDidPicked.urlString
+            delegate?.didTapOption(self, option: urlString)
         case 1:
             optionDidPicked = .secondhandCar
+            urlString = optionDidPicked.urlString
+            delegate?.didTapOption(self, option: urlString)
         case 2:
             optionDidPicked = .repair
+            delegate?.toRepairReservation(self)
         case 3:
             optionDidPicked = .rent
+            delegate?.toShop(self, producttypeName: "i租車")
         default:
             optionDidPicked = .accessory
+            delegate?.toShop(self, producttypeName: "改裝精品配件")
         }
-        urlString = optionDidPicked.urlString
-        print("urlString:\(urlString)")
-        delegate?.didTapOption(self, option: urlString)
+//        urlString = optionDidPicked.urlString
+//        delegate?.didTapOption(self, option: urlString)
     }
 }

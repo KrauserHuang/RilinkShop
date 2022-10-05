@@ -99,7 +99,7 @@ class ProductDetailViewController: UIViewController {
     func showItemInfo() {
         switch itemInfo {
         case .product(let product):
-            ProductService.shared.loadProductInfo(id: account, pw: password, no: product.product_no) { productResponse in
+            ProductService.shared.loadProductInfo(id: account, pwd: password, no: product.product_no) { productResponse in
                 self.stock = Int(productResponse.product_stock)!
                 self.nameLabel.text = productResponse.product_name
                 self.costLabel.text = "NT$：\(productResponse.product_price)"

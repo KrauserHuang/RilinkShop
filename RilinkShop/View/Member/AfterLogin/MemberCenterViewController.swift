@@ -285,7 +285,10 @@ extension MemberCenterViewController: ContainerMemberCenterTableViewControllerDe
     }
     // 常見問題頁面(還未開放)
     func question(_ viewController: ContainerMemberCenterTableViewController) {
-        Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
+//        Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
+        let vc = QAViewController()
+        vc.title = "常見問題"
+        navigationController?.pushViewController(vc, animated: true)
     }
     // 聯絡客服頁面(還未開放)
     func customerService(_ viewController: ContainerMemberCenterTableViewController) {

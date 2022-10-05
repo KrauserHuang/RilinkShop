@@ -18,8 +18,8 @@ class UserService {
     var renewUser: (() -> Void)?
 
     private init() {
-        print("UserService + \(#function)")
-        print("getAccount: \(MyKeyChain.getAccount())")
+//        print("UserService + \(#function)")
+//        print("getAccount: \(MyKeyChain.getAccount())")
         guard let account = MyKeyChain.getAccount(),
               let password = MyKeyChain.getPassword() else {
                   didLogin = true
@@ -84,9 +84,7 @@ class UserService {
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
 
-        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-//            print("------------------------")
-//            print(response)
+        AF.request(url, method: .post, parameters: parameters).response { response in
             guard response.value != nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)

@@ -9,6 +9,7 @@ import UIKit
 
 protocol TopPageStoreTableViewCellDelegate: AnyObject {
     func didTapStore(_ cell: TopPageStoreTableViewCell, store: Store)
+    func didTapBanner(_ cell: TopPageStoreTableViewCell, banner: Banner)
 }
 
 class TopPageStoreTableViewCell: UITableViewCell {
@@ -21,11 +22,15 @@ class TopPageStoreTableViewCell: UITableViewCell {
 
     weak var delegate: TopPageStoreTableViewCellDelegate?
     var stores = [Store]()
+    var bannerList = [Banner]()
 
     typealias StoreDataSource = UICollectionViewDiffableDataSource<Section, Store>
     typealias StoreSnapshot = NSDiffableDataSourceSnapshot<Section, Store>
+    typealias BannerDataSource = UICollectionViewDiffableDataSource<Section, Banner>
+    typealias BannerSnapshot = NSDiffableDataSourceSnapshot<Section, Banner>
 
     private lazy var storeDataSource = configureStoreDataSource()
+    private lazy var bannerDataSource = configureBannerDataSource()
 
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
@@ -33,7 +38,9 @@ class TopPageStoreTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        loadStore()
+//        loadStore()
+
+        loadBannerList()
         configureCollectionView()
     }
 
@@ -46,7 +53,8 @@ class TopPageStoreTableViewCell: UITableViewCell {
     func configureCollectionView() {
         let storeNib = UINib(nibName: TopPageStoreCollectionViewCell.reuseIdentifier, bundle: nil)
         collectionView.register(storeNib, forCellWithReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier)
-        collectionView.dataSource = storeDataSource
+//        collectionView.dataSource = storeDataSource
+        collectionView.dataSource = bannerDataSource
         collectionView.delegate = self
         collectionView.collectionViewLayout = createStoreScrollLayout()
     }
@@ -57,6 +65,22 @@ class TopPageStoreTableViewCell: UITableViewCell {
             let wholeStores = storesResponse
             self.stores = wholeStores
             self.updateStoreSnapshot()
+        }
+    }
+
+    func loadBannerList() {
+        BannerService.shared.getBannerList(id: account,
+                                           pwd: password) { success, response in
+            guard success else {
+                let errorMsg = response as! String
+//                Alert.showMessage(title: "", msg: errorMsg, vc: self)
+                print("error:\(errorMsg)")
+                return
+            }
+
+            let bannerList = response as! [Banner]
+            self.bannerList = bannerList
+            self.updateBannerSnapshot()
         }
     }
 }
@@ -95,11 +119,33 @@ extension TopPageStoreTableViewCell {
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
+
+    private func configureBannerDataSource() -> BannerDataSource {
+        let dataSource = BannerDataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+            let item = collectionView.dequeueReusableCell(withReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier, for: indexPath) as! TopPageStoreCollectionViewCell
+
+            item.configure(with: itemIdentifier)
+
+            return item
+        }
+        return dataSource
+    }
+
+    private func updateBannerSnapshot(animatingChange: Bool = false) {
+        var snapshot = BannerSnapshot()
+        snapshot.appendSections([.all])
+        snapshot.appendItems(bannerList, toSection: .all)
+
+        bannerDataSource.apply(snapshot, animatingDifferences: animatingChange)
+    }
 }
 
 extension TopPageStoreTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let store = stores[indexPath.item]
-        delegate?.didTapStore(self, store: store)
+//        let store = stores[indexPath.item]
+//        delegate?.didTapStore(self, store: store)
+
+        let banner = bannerList[indexPath.item]
+        delegate?.didTapBanner(self, banner: banner)
     }
 }

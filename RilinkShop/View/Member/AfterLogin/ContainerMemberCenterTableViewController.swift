@@ -30,18 +30,13 @@ class ContainerMemberCenterTableViewController: UITableViewController {
         switch indexPath.row {
         case 2:
             delegate?.myOrder(self)
-        case 0:
+        case 1:
             delegate?.question(self)
         case 3:
             delegate?.customerService(self)
-        case 1:
+        case 0:
             delegate?.statement(self)
         case 4:
-//            if Global.ACCOUNT == "" {
-//                tableView.cellForRow(at: indexPath)?.isHidden = true
-//            } else {
-//                delegate?.accountDeletion(self)
-//            }
             delegate?.accountDeletion(self)
         default:
             break

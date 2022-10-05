@@ -30,18 +30,21 @@ class StoreMainViewController: UIViewController {
     let typePicker = StorePicker()
     let toolBar = UIToolbar()
     var types = [StoreTypeCellModel]()
-    var stores = [Store]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-    }
+    var stores = [Store]()
+//    {
+//        didSet {
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//            }
+//            updateSnapshot()
+//        }
+//    }
     var filteredStores = [Store]() {
         didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//            }
+            updateSnapshot()
         }
     }
 //    var account = MyKeyChain.getAccount() ?? ""
@@ -58,22 +61,20 @@ class StoreMainViewController: UIViewController {
 
         initUI()
 
-        print("StoreMainViewController " + #function)
-        print("GlobalAccount:\(Global.ACCOUNT)")
-        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
-        print("-----------------------------------")
-        print("KeyChainAccount:\(MyKeyChain.getAccount())")
-        print("KeyChainPassword:\(MyKeyChain.getPassword())")
-        print("-----------------------------------")
-        print("UserServiceAccount:\(UserService.shared.id)")
-        print("UserServicePassword:\(UserService.shared.pwd)")
+//        print("StoreMainViewController " + #function)
+//        print("GlobalAccount:\(Global.ACCOUNT)")
+//        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
+//        print("-----------------------------------")
+//        print("KeyChainAccount:\(MyKeyChain.getAccount())")
+//        print("KeyChainPassword:\(MyKeyChain.getPassword())")
+//        print("-----------------------------------")
+//        print("UserServiceAccount:\(UserService.shared.id)")
+//        print("UserServicePassword:\(UserService.shared.pwd)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-//        updateSnapshot()
-//        initUI()
     }
 
     func initUI() {
@@ -81,7 +82,6 @@ class StoreMainViewController: UIViewController {
         configureCollectionView()
         loadStoreType()
         loadStoreList()
-//        updateSnapshot()
         configurStorePicker()
     }
 
@@ -112,12 +112,8 @@ class StoreMainViewController: UIViewController {
     }
 
     func loadStoreType() {
-//        HUD.showLoadingHUD(inView: self.view, text: "")
         StoreService.shared.getStoreType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
                                          pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseTypes in
-//        StoreService.shared.getStoreType(id: account,
-//                                         pwd: password) { responseTypes in
-//            HUD.hideLoadingHUD(inView: self.view)
             var isFirstType = true
             let sortedTypes = responseTypes.sorted { $0.updateTime > $1.updateTime }
             self.types = sortedTypes.map {
@@ -137,24 +133,15 @@ class StoreMainViewController: UIViewController {
 
     func loadStoreList() {
         HUD.showLoadingHUD(inView: self.view, text: "載入店家中")
-        print(self, #function)
-        print("account: \(UserService.shared.id)")
-        print("password: \(UserService.shared.pwd)")
         StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
                                          pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseStores in
-//        StoreService.shared.getStoreList(id: account,
-//                                         pwd: password) { responseStores in
             HUD.hideLoadingHUD(inView: self.view)
+            self.stores.removeAll()
             self.stores = responseStores
 
             self.filteredStores = self.stores.filter { store in
                 store.storeType == self.types.first?.type.id
             }
-//            print(#function)
-//            print("stores:\(self.stores)")
-//            print("++++++++++++++++++++")
-//            print("filteredStores:\(self.filteredStores)")
-            self.updateSnapshot()
         }
     }
     @IBAction func storeTypeButtonTapped(_ sender: UIButton) {
@@ -185,7 +172,6 @@ class StoreMainViewController: UIViewController {
                     self.filteredStores.append(store)
                 }
             }
-            self.updateSnapshot()
         }
     }
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
@@ -216,12 +202,12 @@ extension StoreMainViewController {
         return dataSource
     }
     // snapshot
-    func updateSnapshot(animatingChange: Bool = false) {
+    func updateSnapshot(animatingChange: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([.all])
         snapshot.appendItems(filteredStores, toSection: .all)
 
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: animatingChange)
     }
     // compositional layout
     func createGridLayout() -> UICollectionViewLayout {
@@ -288,6 +274,6 @@ extension StoreMainViewController: UIPickerViewDelegate, UIPickerViewDataSource 
                 filteredStores.append(store)
             }
         }
-        updateSnapshot()
+//        updateSnapshot()
     }
 }

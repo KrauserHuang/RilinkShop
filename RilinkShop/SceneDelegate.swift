@@ -91,7 +91,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
 
             default:
-                return
+//                return
+                tabbarController?.selectedIndex = 0
             }
         } else {
             self.window?.rootViewController?.dismiss(animated: true, completion: {
