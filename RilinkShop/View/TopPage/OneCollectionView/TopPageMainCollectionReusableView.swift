@@ -10,7 +10,7 @@ import UIKit
 protocol TopPageMainCollectionReusableViewDelegate: AnyObject {
     func didTapNewCar(_ button: UIButton, option: String)
     func didTapSecondhandCar(_ button: UIButton, option: String)
-    func didTapRepair(_ button: UIButton)
+    func didTapRepair(_ button: UIButton, id: String)
     func didTapRent(_ button: UIButton, productType: String)
     func didTapAccessory(_ button: UIButton, productType: String)
 
@@ -100,7 +100,8 @@ class TopPageMainCollectionReusableView: UICollectionReusableView {
     }
 
     @IBAction func repairButtonTapped(_ sender: UIButton) {
-        delegate?.didTapRepair(sender)
+        // 1 -> 預約維修。購車
+        delegate?.didTapRepair(sender, id: "1")
     }
 
     @IBAction func rentButtonTapped(_ sender: UIButton) {
@@ -146,7 +147,12 @@ extension TopPageMainCollectionReusableView {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPagingCentered
+        /*
+         這裡的orthogonalScrollingBehavior如果是水平捲動
+         section的水平捲動並不會觸發scrollView的delegate
+         scrollViewDidScroll/scrollViewDidEndDecelerating
+         */
+        section.orthogonalScrollingBehavior = .groupPagingCentered // 使移動方式固定在每個item中間(不會停在奇怪的地方)
         // 讓CollectionView滑動時同時更新UIPageControl
         section.visibleItemsInvalidationHandler = { [weak self] (_, offset, _) -> Void in
             guard let self = self else { return }
@@ -162,8 +168,7 @@ extension TopPageMainCollectionReusableView {
 
 extension TopPageMainCollectionReusableView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        let banner = bannerList[indexPath.item]
+        guard let banner = bannerDataSource.itemIdentifier(for: indexPath) else { return }
         delegate?.didTapBanner(self, banner: banner)
     }
 }

@@ -31,22 +31,12 @@ class StoreMainViewController: UIViewController {
     let toolBar = UIToolbar()
     var types = [StoreTypeCellModel]()
     var stores = [Store]()
-//    {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.collectionView.reloadData()
-//            }
-//            updateSnapshot()
-//        }
-//    }
     var filteredStores = [Store]() {
         didSet {
-//            DispatchQueue.main.async {
-//                self.collectionView.reloadData()
-//            }
             updateSnapshot()
         }
     }
+    var id = String()
 //    var account = MyKeyChain.getAccount() ?? ""
 //    var password = MyKeyChain.getPassword() ?? ""
 //    let account = Global.ACCOUNT
@@ -60,7 +50,7 @@ class StoreMainViewController: UIViewController {
         super.viewDidLoad()
 
         initUI()
-
+//        print("stores:\(stores)")
 //        print("StoreMainViewController " + #function)
 //        print("GlobalAccount:\(Global.ACCOUNT)")
 //        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
@@ -75,6 +65,25 @@ class StoreMainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        HUD.showLoadingHUD(inView: view, text: "")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            HUD.hideLoadingHUD(inView: self.view)
+            if self.id == "1" {
+                self.filteredStores.removeAll()
+                for store in self.stores {
+                    if store.storeType == self.id {
+                        self.filteredStores.append(store)
+                        self.storeTypeButton.setTitle(store.storeTypeName, for: .normal)
+                    }
+                }
+            } else {
+                return
+            }
+        }
     }
 
     func initUI() {
@@ -138,7 +147,7 @@ class StoreMainViewController: UIViewController {
             HUD.hideLoadingHUD(inView: self.view)
             self.stores.removeAll()
             self.stores = responseStores
-
+            print("stores:\(self.stores)")
             self.filteredStores = self.stores.filter { store in
                 store.storeType == self.types.first?.type.id
             }

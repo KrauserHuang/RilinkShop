@@ -98,54 +98,52 @@ class ShopMainViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print(#function, "productType = \(productType)")
-        if productType == "SC001" {
-//            shopTypeButton.setTitle("改裝精品配件", for: .normal)
-//            loadProductList(productType: "02")
-            filteredItems.removeAll()
-
-            for singleItem in self.items {
-                switch singleItem {
-                case .product(let product):
-                    if product.product_type == productType { // 如果item內容與所有物件內producttype_name有吻合
-                        self.filteredItems.append(singleItem) // 則更新filteredItems的內容
-                        shopTypeButton.setTitle(product.producttype_name, for: .normal)
-                    } else {
-    //                        print("append product失敗！")
-                    }
-                case .package:
-                    if productType == "套票" {
-                        self.filteredItems.append(singleItem)
-                    } else {
-    //                        print("append package失敗！")
-                    }
-                }
-            }
-        } else if productType == "Rent" {
-//            shopTypeButton.setTitle("i機車", for: .normal)
-//            loadProductList(productType: "03")
-            filteredItems.removeAll()
-            for singleItem in self.items {
-                switch singleItem {
-                case .product(let product):
-                    if product.product_type == productType { // 如果item內容與所有物件內producttype_name有吻合
-                        self.filteredItems.append(singleItem) // 則更新filteredItems的內容
-                        shopTypeButton.setTitle(product.producttype_name, for: .normal)
-                    } else {
-    //                        print("append product失敗！")
-                    }
-                case .package:
-                    if productType == "套票" {
-                        self.filteredItems.append(singleItem)
-                    } else {
-    //                        print("append package失敗！")
+        HUD.showLoadingHUD(inView: view, text: "")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            HUD.hideLoadingHUD(inView: self.view)
+            if self.productType == "SC001" {
+                self.filteredItems.removeAll()
+                for singleItem in self.items {
+                    switch singleItem {
+                    case .product(let product):
+                        if product.product_type == self.productType { // 如果item內容與所有物件內producttype_name有吻合
+                            self.filteredItems.append(singleItem) // 則更新filteredItems的內容
+                            self.shopTypeButton.setTitle(product.producttype_name, for: .normal)
+                        } else {
+        //                        print("append product失敗！")
+                        }
+                    case .package:
+                        if self.productType == "套票" {
+                            self.filteredItems.append(singleItem)
+                        } else {
+        //                        print("append package失敗！")
+                        }
                     }
                 }
+            } else if self.productType == "Rent" {
+                self.filteredItems.removeAll()
+                for singleItem in self.items {
+                    switch singleItem {
+                    case .product(let product):
+                        if product.product_type == self.productType { // 如果item內容與所有物件內producttype_name有吻合
+                            self.filteredItems.append(singleItem) // 則更新filteredItems的內容
+                            self.shopTypeButton.setTitle(product.producttype_name, for: .normal)
+                        } else {
+        //                        print("append product失敗！")
+                        }
+                    case .package:
+                        if self.productType == "套票" {
+                            self.filteredItems.append(singleItem)
+                        } else {
+        //                        print("append package失敗！")
+                        }
+                    }
+                }
+            } else {
+                return
             }
-//            updateSnapshot()
-        } else {
-            return
         }
+
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -328,17 +326,6 @@ class ShopMainViewController: UIViewController {
 // MARK: - UICollectionViewDelegate/DataSource
 // extension ShopMainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 extension ShopMainViewController: UICollectionViewDelegate {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return filteredItems.count
-//    }
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let item = collectionView.dequeueReusableCell(withReuseIdentifier: ShopCollectionViewCell.reuseIdentifier, for: indexPath) as! ShopCollectionViewCell
-//
-//        let singleItem = filteredItems[indexPath.item]
-//        item.configure(with: singleItem)
-//
-//        return item
-//    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }

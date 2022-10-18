@@ -74,7 +74,6 @@ extension TopPageViewController {
         collectionView.register(packageNib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
         // 註冊supplementaryView
         let nib = UINib(nibName: String(describing: TopPageMainCollectionReusableView.self), bundle: nil)
-//        let nib = UINib(nibName: TopPageMainCollectionReusableView.reuseIdentifier, bundle: nil)
         collectionView.register(nib,
                                 forSupplementaryViewOfKind: Constants.headerElementKind,
                                 withReuseIdentifier: TopPageMainCollectionReusableView.reuseIdentifier)
@@ -141,16 +140,11 @@ extension TopPageViewController {
 
             return item
         }
-
-//        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-//            return self?.supplementary(collectionView: collectionView, kind: kind, indexPath: indexPath)
-//        }
         dataSource.supplementaryViewProvider = { [weak self] (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             if kind == Constants.headerElementKind {
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                              withReuseIdentifier: TopPageMainCollectionReusableView.reuseIdentifier,
                                                                              for: indexPath) as! TopPageMainCollectionReusableView
-//                headerView.label.text = "Header\nHeader\nHeader\nHeader"
                 headerView.delegate = self
                 return headerView
             } else {
@@ -217,6 +211,7 @@ extension TopPageViewController {
 }
 
 extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
+
     func didTapBanner(_ cell: TopPageMainCollectionReusableView, banner: Banner) {
         if let url = URL(string: banner.bannerLink) {
             let vc = SFSafariViewController(url: url)
@@ -238,9 +233,10 @@ extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
         }
     }
 
-    func didTapRepair(_ button: UIButton) {
+    func didTapRepair(_ button: UIButton, id: String) {
         let reservationStoryboard = UIStoryboard(name: "Reservation", bundle: nil)
         let vc = reservationStoryboard.instantiateViewController(withIdentifier: "StoreMainViewController") as! StoreMainViewController
+        vc.id = id
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
