@@ -19,7 +19,7 @@ class TopPagePackageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var costLabel: UILabel!
 
     weak var delegate: TopPagePackageCollectionViewCellDelegate?
-    static let reuseIdentifier = "TopPagePackageCollectionViewCell"
+//    static let reuseIdentifier = "TopPagePackageCollectionViewCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()

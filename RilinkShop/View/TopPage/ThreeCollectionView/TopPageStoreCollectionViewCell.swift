@@ -11,8 +11,6 @@ class TopPageStoreCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
 
-    static let reuseIdentifier = "TopPageStoreCollectionViewCell"
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

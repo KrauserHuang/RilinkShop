@@ -34,28 +34,14 @@ class TopPageMainViewController: UIViewController {
     private lazy var optionDataSource = configureOptionDataSource()
     private lazy var packageDataSource = configurePackageDataSource()
 
-//    var account = MyKeyChain.getAccount() ?? ""
-//    var password = MyKeyChain.getPassword() ?? ""
-
     var currentIndex = 0
     var timer: Timer?
     private var hub: BadgeHub?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
         initUI()
-
-        print("TopPageMainViewController " + #function)
-        print("GlobalAccount:\(Global.ACCOUNT)")
-        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
-        print("-----------------------------------")
-        print("MyKeychainAccount:\(MyKeyChain.getAccount())")
-        print("MyKeychainPassword:\(MyKeyChain.getPassword())")
-        print("-----------------------------------")
-        print("UserServiceAccount:\(UserService.shared.id)")
-        print("UserServicePassword:\(UserService.shared.pwd)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,12 +49,7 @@ class TopPageMainViewController: UIViewController {
 
         tabBarController?.hidesBottomBarWhenPushed = false
         tabBarController?.tabBar.isHidden = false
-
-//        updateStoreSnapshot()
-//        updateOptionSnapshot()
-//        updatePackageSnapshot()
-//        initUI()
-//        configureCollectionView()
+        
         loadStore()
         loadPackage()
 
@@ -77,7 +58,6 @@ class TopPageMainViewController: UIViewController {
                                      selector: #selector(storeCollectionViewAutoScroll),
                                      userInfo: nil,
                                      repeats: true)
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,7 +71,6 @@ class TopPageMainViewController: UIViewController {
     func initUI() {
         navigationItems()
         configureCollectionView()
-//        loadData()
         loadStore()
         loadPackage()
 
@@ -109,13 +88,8 @@ class TopPageMainViewController: UIViewController {
                                                  style: .plain,
                                                  target: self,
                                                  action: #selector(toCartViewController))
-//        hub = BadgeHub(view: imageView)
-//        hub?.moveCircleBy(x: -15, y: 15)
-//        hub?.setCount(2)
+        
         navigationItem.rightBarButtonItem = shoppingcartButton
-//        hub = BadgeHub(barButtonItem: navigationItem.rightBarButtonItem!)
-////        hub?.moveCircleBy(x: -15, y: 15)
-//        hub?.setCount(2)
     }
     @objc private func toCartViewController() {
         let vc = CartViewController()
@@ -123,20 +97,17 @@ class TopPageMainViewController: UIViewController {
     }
 
     func configureCollectionView() {
-        let storeNib = UINib(nibName: TopPageStoreCollectionViewCell.reuseIdentifier, bundle: nil)
-        storeCollectionView.register(storeNib, forCellWithReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier)
+        storeCollectionView.register(TopPageStoreCollectionViewCell.nib, forCellWithReuseIdentifier: TopPageStoreCollectionViewCell.reuseIdentifier)
         storeCollectionView.dataSource = storeDataSource
         storeCollectionView.delegate = self
         storeCollectionView.collectionViewLayout = createStoreScrollLayout()
-
-        let packageNib = UINib(nibName: TopPagePackageCollectionViewCell.reuseIdentifier, bundle: nil)
-        packageCollectionView.register(packageNib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
+        
+        packageCollectionView.register(TopPagePackageCollectionViewCell.nib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
         packageCollectionView.dataSource = packageDataSource
         packageCollectionView.delegate = self
         packageCollectionView.collectionViewLayout = createGridLayout()
-
-        let optionNib = UINib(nibName: TopPageOptionCollectionViewCell.reuseIdentifier, bundle: nil)
-        optionCollectionView.register(optionNib, forCellWithReuseIdentifier: TopPageOptionCollectionViewCell.reuseIdentifier)
+        
+        optionCollectionView.register(TopPageOptionCollectionViewCell.nib, forCellWithReuseIdentifier: TopPageOptionCollectionViewCell.reuseIdentifier)
         optionCollectionView.dataSource = optionDataSource
         optionCollectionView.delegate = self
         optionCollectionView.collectionViewLayout = createOptionImagesLayout()

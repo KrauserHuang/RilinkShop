@@ -12,7 +12,7 @@ class TopPageOptionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var optionLabel: UILabel!
 
-    static let reuseIdentifier = "TopPageOptionCollectionViewCell"
+//    static let reuseIdentifier = "TopPageOptionCollectionViewCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()
