@@ -40,7 +40,7 @@ class TopPageMainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         initUI()
     }
 
@@ -49,7 +49,7 @@ class TopPageMainViewController: UIViewController {
 
         tabBarController?.hidesBottomBarWhenPushed = false
         tabBarController?.tabBar.isHidden = false
-        
+
         loadStore()
         loadPackage()
 
@@ -88,7 +88,7 @@ class TopPageMainViewController: UIViewController {
                                                  style: .plain,
                                                  target: self,
                                                  action: #selector(toCartViewController))
-        
+
         navigationItem.rightBarButtonItem = shoppingcartButton
     }
     @objc private func toCartViewController() {
@@ -101,12 +101,12 @@ class TopPageMainViewController: UIViewController {
         storeCollectionView.dataSource = storeDataSource
         storeCollectionView.delegate = self
         storeCollectionView.collectionViewLayout = createStoreScrollLayout()
-        
+
         packageCollectionView.register(TopPagePackageCollectionViewCell.nib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
         packageCollectionView.dataSource = packageDataSource
         packageCollectionView.delegate = self
         packageCollectionView.collectionViewLayout = createGridLayout()
-        
+
         optionCollectionView.register(TopPageOptionCollectionViewCell.nib, forCellWithReuseIdentifier: TopPageOptionCollectionViewCell.reuseIdentifier)
         optionCollectionView.dataSource = optionDataSource
         optionCollectionView.delegate = self

@@ -15,8 +15,6 @@ class StoreDetailDescriptTextCell: UITableViewCell {
         }
     }
 
-    static let reuseIdentifier = "StoreDetailDescriptTextCell"
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

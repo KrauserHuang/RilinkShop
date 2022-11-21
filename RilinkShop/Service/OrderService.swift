@@ -63,7 +63,7 @@ class OrderService {
                 return
             }
 
-            let value = JSON(response.value)
+            let value = JSON(response.value as Any)
             print(#function)
             print(value)
 

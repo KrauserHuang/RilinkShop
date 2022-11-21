@@ -10,6 +10,10 @@ import UIKit
 extension UIColor {
     static let primaryOrange = UIColor(red: 222, green: 119, blue: 58)
     static let defaultGrey = UIColor(hex: "#262628")
+
+    // 訊息中心頁面
+    static let messageOrange = UIColor(hex: "DC5310")
+    static let messageGray = UIColor(hex: "B7B3B3")
 }
 
 extension UIColor {

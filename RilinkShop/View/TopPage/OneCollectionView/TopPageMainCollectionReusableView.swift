@@ -23,7 +23,7 @@ class TopPageMainCollectionReusableView: UICollectionReusableView {
         case all
     }
 
-    static let reuseIdentifier = "TopPageMainCollectionReusableView"
+//    static let reuseIdentifier = "TopPageMainCollectionReusableView" 
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bannerPageControl: UIPageControl!
@@ -50,6 +50,7 @@ class TopPageMainCollectionReusableView: UICollectionReusableView {
         bannerPageControl.hidesForSinglePage = true
         loadBannerList()
         configureCollectionView()
+        print(#function, bannerList)
     }
     @objc func scrollBanner() {
         if bannerPageControl.currentPage == bannerPageControl.numberOfPages - 1 {
@@ -69,8 +70,8 @@ class TopPageMainCollectionReusableView: UICollectionReusableView {
     }
 
     func loadBannerList() {
-        BannerService.shared.getBannerList(id: MyKeyChain.getAccount() ?? "",
-                                           pwd: MyKeyChain.getPassword() ?? "") { success, response in
+        BannerService.shared.getBannerList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                           pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { success, response in
             guard success else {
                 let errorMsg = response as! String
 //                Alert.showMessage(title: "", msg: errorMsg, vc: self)
@@ -80,7 +81,6 @@ class TopPageMainCollectionReusableView: UICollectionReusableView {
 
             let bannerList = response as! [Banner]
             self.bannerList = bannerList
-            print("banner:\(self.bannerList)")
         }
     }
 

@@ -11,8 +11,6 @@ class StoreDetailOpenTimeTextCell: UITableViewCell {
 
     @IBOutlet weak var openTimeLabel: UILabel!
 
-    static let reuseIdentifier = "StoreDetailOpenTimeTextCell"
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

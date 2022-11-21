@@ -12,6 +12,12 @@ extension UITableViewCell {
     static func cellIdentifier() -> String {
         return String(describing: self)
     }
+    static var nib: UINib {
+        return UINib(nibName: String(describing: Self.self), bundle: nil)
+    }
+    static var reuseIdentifier: String {
+        return String(describing: Self.self)
+    }
 }
 
 extension UITableViewCell {

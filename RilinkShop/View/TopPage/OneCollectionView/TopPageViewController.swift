@@ -22,7 +22,11 @@ class TopPageViewController: UIViewController {
         static let footerElementKind = "footer-element-kind"
     }
 
-    var packages = [Package]()
+    var packages: [Package] = [] {
+        didSet {
+            updateSnapshot()
+        }
+    }
     let optionImages = ["新車", "二手車", "維修保養", "機車租賃", "精品配件"]
 
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Package>
@@ -30,30 +34,24 @@ class TopPageViewController: UIViewController {
 
     private lazy var dataSource = configureDataSource()
 
-    var account = MyKeyChain.getAccount() ?? ""
-    var password = MyKeyChain.getPassword() ?? ""
-
     var currentIndex = 0
     var timer: Timer?
 
     var bannerList = [Banner]()
-    var products = [Product]()
-    var filterItmes = [Item]()
-    var items = [Item]()
 
     let notificationCenter = NotificationCenter.default
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         initUI()
-
 //        let notificationName = Notification.Name.hereComesTheProductType
 
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        initUI()
+        collectionView.collectionViewLayout.invalidateLayout()
         updateSnapshot()
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -66,39 +64,37 @@ extension TopPageViewController {
     func initUI() {
         navigationItems()
         loadPackage()
+        loadBanner()
         configureCollectionView()
     }
     func configureCollectionView() {
-
-        let packageNib = UINib(nibName: TopPagePackageCollectionViewCell.reuseIdentifier, bundle: nil)
-        collectionView.register(packageNib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
+        // 註冊packageCollectionViewCell
+        collectionView.register(TopPagePackageCollectionViewCell.nib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
         // 註冊supplementaryView
-        let nib = UINib(nibName: String(describing: TopPageMainCollectionReusableView.self), bundle: nil)
-        collectionView.register(nib,
+        collectionView.register(TopPageMainCollectionReusableView.nib,
                                 forSupplementaryViewOfKind: Constants.headerElementKind,
                                 withReuseIdentifier: TopPageMainCollectionReusableView.reuseIdentifier)
 
         collectionView.dataSource = dataSource
-//        collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = createLayout()
     }
     // MARK: - Load package API
     func loadPackage() {
-        ProductService.shared.loadPackageList(id: account,
-                                              pwd: password) { packagesResponse in
+        ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
             let wholePackages = packagesResponse
             self.packages = wholePackages
-            self.updateSnapshot()
         }
     }
     // MARK: - Load banner API
     func loadBanner() {
-        BannerService.shared.getBannerList(id: account,
-                                           pwd: password) { success, response in
+        BannerService.shared.getBannerList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+                                           pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { success, response in
             guard success else {
                 let errorMsg = response as! String
-                Alert.showMessage(title: "", msg: errorMsg, vc: self)
+//                Alert.showMessage(title: "", msg: errorMsg, vc: self)
+                print("errorMsg:\(errorMsg)")
                 return
             }
 
@@ -122,10 +118,19 @@ extension TopPageViewController {
                                                  style: .plain,
                                                  target: self,
                                                  action: #selector(toCartViewController))
-        navigationItem.rightBarButtonItem = shoppingcartButton
+        let notificationButton = UIBarButtonItem(image: UIImage(systemName: "bell"),
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(toMessageViewController))
+        navigationItem.rightBarButtonItems = [shoppingcartButton, notificationButton]
     }
     @objc private func toCartViewController() {
         let vc = CartViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc private func toMessageViewController() {
+        let vc = MessageViewController()
+        vc.title = "訊息中心"
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -209,9 +214,8 @@ extension TopPageViewController {
         }
     }
 }
-
+// MARK: - ReusableView Delegate(banner/option)
 extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
-
     func didTapBanner(_ cell: TopPageMainCollectionReusableView, banner: Banner) {
         if let url = URL(string: banner.bannerLink) {
             let vc = SFSafariViewController(url: url)
@@ -265,32 +269,8 @@ extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-extension TopPageViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
-    }
-
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                         withReuseIdentifier: TopPageMainCollectionReusableView.reuseIdentifier,
-                                                                         for: indexPath)
-            return header
-        } else {
-            return UICollectionReusableView()
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let size = CGSize(width: view.frame.size.width, height: 263)
-        return size
-    }
-
+// MARK: - CollectionView Delegate
+extension TopPageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = PackageInfoViewController()
         let package = packages[indexPath.row]

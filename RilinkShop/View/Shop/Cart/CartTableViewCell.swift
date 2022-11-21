@@ -15,8 +15,6 @@ protocol CartTableViewCellDelegate: AnyObject {
 
 class CartTableViewCell: UITableViewCell {
 
-    static let reuseIdentifier = "CartTableViewCell"
-
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!

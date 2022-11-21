@@ -14,7 +14,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var costLabel: UILabel!
 
-    static let reuseIdentifier = "ShopCollectionViewCell"
+//    static let reuseIdentifier = "ShopCollectionViewCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()

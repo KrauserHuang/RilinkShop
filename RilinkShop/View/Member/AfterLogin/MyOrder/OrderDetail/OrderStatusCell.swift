@@ -15,8 +15,6 @@ class OrderStatusCell: UITableViewCell {
     @IBOutlet weak var orderStatusLabel: UILabel!
     @IBOutlet weak var payStatusLabel: UILabel!
 
-    static let reuseIdentifier = "OrderStatusCell"
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

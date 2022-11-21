@@ -11,7 +11,6 @@ class StoreIDSelectTableViewCell: UITableViewCell {
 
     @IBOutlet weak var storeNameLabel: UILabel!
 
-    static let reuseIdentifier = "StoreIDSelectTableViewCell"
     var storeIDInfo = StoreIDInfo() {
         didSet {
             storeNameLabel.text = storeIDInfo.storeName

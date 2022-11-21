@@ -9,7 +9,7 @@ import UIKit
 
 class ShopTypeCollectionViewCell: UICollectionViewCell {
 
-    static let reuseIdentifier = "ShopTypeCollectionViewCell"
+//    static let reuseIdentifier = "ShopTypeCollectionViewCell"
 
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var typeLabel: UILabel!

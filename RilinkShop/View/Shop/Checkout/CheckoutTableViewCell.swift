@@ -9,8 +9,6 @@ import UIKit
 
 class CheckoutTableViewCell: UITableViewCell {
 
-    static let reuseIdentifier = "CheckoutTableViewCell"
-
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!

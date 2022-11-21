@@ -13,8 +13,6 @@ class StoreDetailMainTextCell: UITableViewCell {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
 
-    static let reuseIdentifier = "StoreDetailMainTextCell"
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

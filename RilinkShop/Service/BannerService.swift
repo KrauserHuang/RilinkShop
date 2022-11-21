@@ -29,9 +29,9 @@ class BannerService {
             }
 
             let value = JSON(response.value!)
-            print(#function)
+//            print(#function)
 //            print("response:=====\n\(response.response)")
-            print("value:=====\n\(value)")
+//            print("value:=====\n\(value)")
 
             switch response.result {
             case .success:
@@ -54,7 +54,7 @@ class BannerService {
                     banners.append(banner)
                 }
 
-                print("banners:=====\n\(banners)")
+//                print("banners:=====\n\(banners)")
                 completion(true, banners as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue

@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import UserNotifications
+//import FirebaseCore
+//import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal)
 //        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .highlighted)
 //        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for: .default)
+        // Connect to Firebase and initialize it
+//        FirebaseApp.configure()
+        // Push Notification(請求授權給使用者)
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert]) { granted, _ in
+            if granted {
+                NSLog("取得權限成功")
+                print("User Notification got granted.")
+            } else {
+                print("User Notification got denied.")
+            }
+        }
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            NSLog("settings = \(settings)")
+        }
+        UIApplication.shared.registerForRemoteNotifications()
 
         return true
     }
@@ -47,4 +66,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // FirebaseMessaging() -> 註冊推播成功
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+
+        var token = ""
+        for i in 0..<deviceToken.count {
+            token += String(format: "%02.2hhx", arguments: [deviceToken[i]])
+        }
+        print("\n==========didRegisterForRemoteNotificationsWithDeviceToken==========")
+        print("apns token = " + token)
+        print("==========End==========\n")
+
+//        Messaging.messaging().apnsToken = deviceToken
+    }
+    // FirebaseMessaging() -> 註冊推播失敗
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    // UserNotifications(原生) -> notification要呈現的方式
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // 印出後台送出的推播訊息(JOSN 格式)
+        let userInfo = notification.request.content.userInfo
+        print("userInfo: \(userInfo)")
+        if #available(iOS 14, *) {
+            // 14以後alert被拆成banner/list
+            completionHandler([.badge, .sound, .banner, .list])
+        } else {
+            completionHandler([.badge, .sound, .alert])
+        }
+    }
+    // UserNotifications(原生) -> 當使用者點擊notification時會觸發
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // 印出後台送出的推播訊息(JOSN 格式)
+        let userInfo = response.notification.request.content.userInfo
+        print("userInfo: \(userInfo)")
+        completionHandler()
+    }
+
 }

@@ -9,8 +9,6 @@ import UIKit
 
 class ShopTableViewCell: UITableViewCell {
 
-    static let reuseIdentifier = "ShopTableViewCell"
-
     @IBOutlet weak var shopImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!

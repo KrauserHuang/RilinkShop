@@ -9,8 +9,6 @@ import UIKit
 
 class ShopTypeTableViewCell: UITableViewCell {
 
-    static let reuseIdentifier = "ShopTypeTableViewCell"
-
     @IBOutlet weak var shopTypeCollectionView: UICollectionView!
 
     var categories = [CategoryCellModel]() {

@@ -14,8 +14,6 @@ class PackageProductDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var storeNameLabel: UILabel!
     @IBOutlet weak var orderQtyLabel: UILabel!
 
-    static let reuseIdentifier = "PackageProductDetailTableViewCell"
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
