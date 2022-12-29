@@ -32,7 +32,19 @@ class CartViewController: UIViewController {
     var total = 0
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
-
+//    var account: String!
+//    var password: String!
+    
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -156,7 +168,7 @@ class CartViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
             return
         }
-        let controller = CheckoutViewController()
+        let controller = CheckoutViewController(account: account, password: password)
         total = inCartItems.reduce(0, { result, product in
             result + Int(product.total_amount)!
         })

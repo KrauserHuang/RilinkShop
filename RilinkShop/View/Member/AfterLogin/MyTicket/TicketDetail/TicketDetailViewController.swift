@@ -63,9 +63,6 @@ class TicketDetailViewController: UIViewController {
 
     func setProductView() {
 
-        print(#function)
-        print("qrCode:\(ticket.qrconfirm)")
-
         buyDateLabel.text = "購買日期：\(ticket.orderDate)"
         orderNoLabel.text = "訂單編號：\(ticket.orderNo)"
 
@@ -81,9 +78,6 @@ class TicketDetailViewController: UIViewController {
     }
 
     func setPackageView() {
-
-        print(#function)
-        print("qrCode:\(product.qrconfirm)")
 
         buyDateLabel.text = "購買日期：\(ticket.orderDate)"
         orderNoLabel.text = "訂單編號：\(ticket.orderNo)"

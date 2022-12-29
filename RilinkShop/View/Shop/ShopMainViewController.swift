@@ -167,6 +167,8 @@ class ShopMainViewController: UIViewController {
     }
     @objc private func toCartViewController() {
         let vc = CartViewController()
+//        let vc = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                    password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -191,8 +193,12 @@ class ShopMainViewController: UIViewController {
     }
 
     func loadProductType() {
-        ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                             pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseCategories in
+//        ProductService.shared.getProductType(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                             pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseCategories in
+        ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? "",
+                                             pwd: MyKeyChain.getPassword() ?? "") { responseCategories in
+//        ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                             pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseCategories in
             var isFirstCategory = true
             let packageCategory = Category(pid: "", productType: "", productTypeName: "套票") // 建立一個空的類別儲存套票
             var wholeCategories = responseCategories // 建立全部類別，先加入商品類別(從API來)
@@ -214,14 +220,22 @@ class ShopMainViewController: UIViewController {
 
     func loadProductList() {
         HUD.showLoadingHUD(inView: self.view, text: "載入商品中")
-        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseProducts in
+//        ProductService.shared.loadProductList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                              pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseProducts in
+        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? "",
+                                              pwd: MyKeyChain.getPassword() ?? "") { responseProducts in
+//        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseProducts in
             HUD.hideLoadingHUD(inView: self.view)
             let wholeProducts = responseProducts
             self.products = wholeProducts
-
-            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                                  pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
+            
+//            ProductService.shared.loadPackageList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                                  pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { packagesResponse in
+            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? "",
+                                                  pwd: MyKeyChain.getPassword() ?? "") { packagesResponse in
+//            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                                  pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
                 let wholePackages = packagesResponse
                 self.packages = wholePackages
 
@@ -255,9 +269,15 @@ class ShopMainViewController: UIViewController {
     }
 
     func loadProductList(productType: String) {
-        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
+//        ProductService.shared.loadProductList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                              pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                              productType: productType) { success, response in
+        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? "",
+                                              pwd: MyKeyChain.getPassword() ?? "",
                                               productType: productType) { success, response in
+//        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
+//                                              productType: productType) { success, response in
             guard success else {
                 let errorMsg = response as! String
                 Alert.showMessage(title: "", msg: errorMsg, vc: self)
@@ -331,6 +351,8 @@ extension ShopMainViewController: UICollectionViewDelegate {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
 
 //        let item = filteredItems[indexPath.item]
+//        let productDetailVC = ProductDetailViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                                          password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let productDetailVC = ProductDetailViewController()
         productDetailVC.itemInfo = item
         navigationController?.pushViewController(productDetailVC, animated: true)

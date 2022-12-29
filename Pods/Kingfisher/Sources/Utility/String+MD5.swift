@@ -50,7 +50,7 @@ extension KingfisherWrapper where Base == String {
 
     var ext: String? {
         var ext = ""
-        if let index  = base.lastIndex(of: ".") {
+        if let index = base.lastIndex(of: ".") {
             let extRange = base.index(index, offsetBy: 1)..<base.endIndex
             ext = String(base[extRange])
         }
@@ -75,7 +75,7 @@ func arrayOfBytes<T>(_ value: T, length: Int? = nil) -> [UInt8] {
         }
         return bytes
     }
-
+    
     valuePointer.deinitialize(count: 1)
     valuePointer.deallocate()
 

@@ -17,7 +17,7 @@ class ExpiredTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        configure()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -25,5 +25,12 @@ class ExpiredTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    private func configure() {
+        copyButton.layer.cornerRadius   = copyButton.frame.height / 2
+        copyButton.backgroundColor      = .white
+        copyButton.layer.borderColor    = UIColor.primaryOrange.cgColor
+        copyButton.layer.borderWidth    = 2
+        copyButton.tintColor            = UIColor.primaryOrange
+    }
 }

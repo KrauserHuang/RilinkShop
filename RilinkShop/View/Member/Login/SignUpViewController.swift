@@ -27,7 +27,6 @@ class SignUpViewController: UIViewController {
 
     weak var delegate: SignUpViewControllerDelegate?
     var edittingTextField: UITextField?
-    let tool = Tool()
     var birthdayDate: Date?
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -38,23 +37,15 @@ class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureTextField()
         configureKeyboard()
-
-        tool.makeRoundedCornersButton(button: signUpButton)
-        signUpButton.backgroundColor = Theme.customOrange
-
+        configreButton()
         accountLabel.text = Global.ACCOUNT
     }
     // MARK: - Keyboard
     func configureKeyboard() {
-        nameTF.delegate = self
-        birthdayTF.delegate = self
-        emailTF.delegate = self
-        invitationCodeTF.delegate = self
-        nameTF.returnKeyType = .next
-        emailTF.returnKeyType = .next
-        invitationCodeTF.returnKeyType = .next
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
 
@@ -81,14 +72,26 @@ class SignUpViewController: UIViewController {
             let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
             scrollView.contentInset = contentInsets
         }
-//        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-//        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-//        scrollView.contentInset = contentInsets
-//        scrollView.scrollIndicatorInsets = contentInsets
     }
     @objc func keyboardWillHide(_ notification: Notification) {
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         scrollView.contentInset = contentInsets
+    }
+    
+    private func configureTextField() {
+        nameTF.delegate                 = self
+        birthdayTF.delegate             = self
+        emailTF.delegate                = self
+        invitationCodeTF.delegate       = self
+        
+        nameTF.returnKeyType            = .next
+        emailTF.returnKeyType           = .next
+        invitationCodeTF.returnKeyType  = .next
+    }
+    
+    private func configreButton() {
+        signUpButton.layer.cornerRadius = signUpButton.frame.height / 2
+        signUpButton.backgroundColor    = .primaryOrange
     }
     // MARK: - BirthdayTF上覆蓋一個button來呼叫DatePicker
     @IBAction func showDatePicker(_ sender: UIButton) {
@@ -204,13 +207,6 @@ class SignUpViewController: UIViewController {
                 return
             }
         }
-
-//        Global.ACCOUNT = account
-//        Global.ACCOUNT_PASSWORD = password
-//        MyKeyChain.setAccount(account)
-//        MyKeyChain.setPassword(password)
-//        UserService.shared.id = account
-//        UserService.shared.pwd = password
 
         HUD.showLoadingHUD(inView: self.view, text: "註冊中")
         UserService.shared.InitPersonalData(account: Global.ACCOUNT,

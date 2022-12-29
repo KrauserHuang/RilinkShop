@@ -70,8 +70,10 @@ class TopPageMainCollectionReusableView: UICollectionReusableView {
     }
 
     func loadBannerList() {
-        BannerService.shared.getBannerList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                           pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { success, response in
+//        BannerService.shared.getBannerList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) ?? "",
+//                                           pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey) ?? "") { success, response in
+        BannerService.shared.getBannerList(id: MyKeyChain.getAccount() ?? "",
+                                           pwd: MyKeyChain.getPassword() ?? "") { success, response in
             guard success else {
                 let errorMsg = response as! String
 //                Alert.showMessage(title: "", msg: errorMsg, vc: self)

@@ -22,24 +22,31 @@ class SignUpViewController_2: UIViewController {
 
     var delegate: SignupViewController_2_Delegate?
     var edittingTextField: UITextField?
-    let tool = Tool()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureButton()
+        configureTextField()
         configureKeyboard()
-        tool.makeRoundedCornersButton(button: submitButton)
-        submitButton.backgroundColor = Theme.customOrange
-        tool.makeRoundedCornersButton(button: resendButton)
-        resendButton.backgroundColor = Theme.customOrange
-        passwordTextField.isSecureTextEntry = true
-        passwordAgainTextField.isSecureTextEntry = true
+    }
+    
+    private func configureButton() {
+        submitButton.layer.cornerRadius = submitButton.frame.height / 2
+        submitButton.backgroundColor    = .primaryOrange
+        resendButton.layer.cornerRadius = resendButton.frame.height / 2
+        resendButton.backgroundColor    = .primaryOrange
+    }
+    
+    private func configureTextField() {
+        verifyCodeTextField.delegate                = self
+        passwordTextField.delegate                  = self
+        passwordAgainTextField.delegate             = self
+        passwordTextField.isSecureTextEntry         = true
+        passwordAgainTextField.isSecureTextEntry    = true
     }
     // MARK: - Keyboard
-    func configureKeyboard() {
-        verifyCodeTextField.delegate = self
-        passwordTextField.delegate = self
-        passwordAgainTextField.delegate = self
+    private func configureKeyboard() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
 
@@ -51,14 +58,14 @@ class SignUpViewController_2: UIViewController {
     }
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        let contentInsets                   = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        scrollView.contentInset             = contentInsets
+        scrollView.scrollIndicatorInsets    = contentInsets
     }
     @objc func keyboardWillHide(_ notification: Notification) {
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        let contentInsets                   = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset             = contentInsets
+        scrollView.scrollIndicatorInsets    = contentInsets
     }
     // MARK: - 提交驗證碼/密碼
     @IBAction func submitButtonTapped(_ sender: UIButton) {
@@ -97,6 +104,7 @@ class SignUpViewController_2: UIViewController {
         let action = "regpw" // 第一次註冊
 
         Global.ACCOUNT_PASSWORD = pw1!
+//        LocalStorageManager.shared.setData(pw1!, key: .userPasswordKey)
         MyKeyChain.setPassword(pw1!)
 
         HUD.showLoadingHUD(inView: self.view, text: "驗證中")

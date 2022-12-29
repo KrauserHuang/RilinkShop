@@ -28,9 +28,9 @@ class UsedTableViewCell: UITableViewCell {
 
     func configure(with model: QRCode) {
         if let modelProductPicture = model.productPicture {
-            ticketImage.setImage(imageURL: SHOP_ROOT_URL + modelProductPicture)
+            ticketImage.setImage(with: SHOP_ROOT_URL + modelProductPicture)
         } else if let modelPackagePicture = model.packagePicture {
-            ticketImage.setImage(imageURL: SHOP_ROOT_URL + modelPackagePicture)
+            ticketImage.setImage(with: SHOP_ROOT_URL + modelPackagePicture)
         }
         if let modelProductName = model.productName {
             name.text = modelProductName

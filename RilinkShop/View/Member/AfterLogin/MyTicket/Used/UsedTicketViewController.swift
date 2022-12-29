@@ -26,10 +26,23 @@ class UsedTicketViewController: UIViewController {
             }
         }
     }
-    var account = MyKeyChain.getAccount() ?? ""
-    var password = MyKeyChain.getPassword() ?? ""
-    var refreshControl = UIRefreshControl()
 
+    var refreshControl = UIRefreshControl()
+//    var account = MyKeyChain.getAccount() ?? ""
+//    var password = MyKeyChain.getPassword() ?? ""
+//    var account: String!
+//    var password: String!
+//
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,6 +64,13 @@ class UsedTicketViewController: UIViewController {
     }
 
     func getTicket() {
+
+//        QRCodeService.shared.confirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                         pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                         ispackage: "0") { productResponse in
+//            QRCodeService.shared.confirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                             pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                             ispackage: "1") { packageResponse in
         QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
             QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
 
@@ -82,8 +102,14 @@ class UsedTicketViewController: UIViewController {
 
     @objc func refreshList() {
         self.refreshControl.beginRefreshing()
-        QRCodeService.shared.confirmList(id: account, pwd: password, ispackage: "0") { productResponse in
-            QRCodeService.shared.confirmList(id: self.account, pwd: self.password, ispackage: "1") { packageResponse in
+//        QRCodeService.shared.confirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                         pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                         ispackage: "0") { productResponse in
+//            QRCodeService.shared.confirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                             pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                             ispackage: "1") { packageResponse in
+        QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
+            QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
                 let packageWithoutQRConfirm = packageResponse.filter { package in
                     package.product?.allSatisfy({ $0.qrconfirm == nil }) as! Bool
                 }

@@ -13,18 +13,18 @@ class TopPageStoreCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
         imageView.layer.cornerRadius = 10
 //        contentView.backgroundColor = .systemBlue
     }
 
     func configure(with model: Store) {
         let imageURLString = SHOP_ROOT_URL + model.storePicture
-        imageView.setImage(imageURL: imageURLString)
+        imageView.setImage(with: imageURLString)
     }
 
     func configure(with model: Banner) {
         let imageURLString = SHOP_ROOT_URL + model.bannerPicture
-        imageView.setImage(imageURL: imageURLString)
+        imageView.setImage(with: imageURLString)
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Tai Chin Huang on 2022/5/17.
 //
 
-import Foundation
 import MBProgressHUD
 import UIKit
 
@@ -162,7 +161,6 @@ enum finishLoginViewWith {
     case Singup
     case Forget
     case BossLogIn  // TODO:
-//    case ReFillData //TODO:
 }
 
 public func getSavedImage(named: String) -> UIImage? {

@@ -38,7 +38,7 @@ class CheckoutTableViewCell: UITableViewCell {
         totalCostLabel.text = "$\(model.total_amount)"
 
         let imageURLString = SHOP_ROOT_URL + model.product_picture
-        productImageView.setImage(imageURL: imageURLString)
+        productImageView.setImage(with: imageURLString)
     }
 
 }

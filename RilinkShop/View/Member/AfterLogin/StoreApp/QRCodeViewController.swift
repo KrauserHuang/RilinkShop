@@ -151,9 +151,10 @@ extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
             captureSession.stopRunning()
 
             let qrcode = str
-
-            QRCodeService.shared.storeConfirm(storeAcc: Global.ACCOUNT, storePwd: Global.ACCOUNT_PASSWORD, qrcode: qrcode) { success, response in
-
+            
+            QRCodeService.shared.storeConfirm(storeAcc: Global.ACCOUNT,
+                                              storePwd: Global.ACCOUNT_PASSWORD,
+                                              qrcode: qrcode) { success, response in
                 guard success else {
                     let errorMsg = response as! String
                     Alert.showMessage(title: "", msg: errorMsg, vc: self) {

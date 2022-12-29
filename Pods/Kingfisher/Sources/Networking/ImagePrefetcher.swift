@@ -24,6 +24,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+
 #if os(macOS)
 import AppKit
 #else
@@ -73,7 +74,7 @@ public class ImagePrefetcher: CustomStringConvertible {
     public var description: String {
         return "\(Unmanaged.passUnretained(self).toOpaque())"
     }
-
+    
     /// The maximum concurrent downloads to use when prefetching images. Default is 5.
     public var maxConcurrentDownloads = 5
 
@@ -85,16 +86,16 @@ public class ImagePrefetcher: CustomStringConvertible {
 
     private var progressSourceBlock: PrefetcherSourceProgressBlock?
     private var completionSourceHandler: PrefetcherSourceCompletionHandler?
-
+    
     private var tasks = [String: DownloadTask.WrappedTask]()
-
+    
     private var pendingSources: ArraySlice<Source>
     private var skippedSources = [Source]()
     private var completedSources = [Source]()
     private var failedSources = [Source]()
-
+    
     private var stopped = false
-
+    
     // A manager used for prefetching. We will use the helper methods in manager.
     private let manager: KingfisherManager
 
@@ -127,7 +128,8 @@ public class ImagePrefetcher: CustomStringConvertible {
         urls: [URL],
         options: KingfisherOptionsInfo? = nil,
         progressBlock: PrefetcherProgressBlock? = nil,
-        completionHandler: PrefetcherCompletionHandler? = nil) {
+        completionHandler: PrefetcherCompletionHandler? = nil)
+    {
         let resources: [Resource] = urls.map { $0 }
         self.init(
             resources: resources,
@@ -155,7 +157,8 @@ public class ImagePrefetcher: CustomStringConvertible {
     public convenience init(
         urls: [URL],
         options: KingfisherOptionsInfo? = nil,
-        completionHandler: PrefetcherCompletionHandler? = nil) {
+        completionHandler: PrefetcherCompletionHandler? = nil)
+    {
         let resources: [Resource] = urls.map { $0 }
         self.init(
             resources: resources,
@@ -181,7 +184,8 @@ public class ImagePrefetcher: CustomStringConvertible {
         resources: [Resource],
         options: KingfisherOptionsInfo? = nil,
         progressBlock: PrefetcherProgressBlock? = nil,
-        completionHandler: PrefetcherCompletionHandler? = nil) {
+        completionHandler: PrefetcherCompletionHandler? = nil)
+    {
         self.init(sources: resources.map { $0.convertToSource() }, options: options)
         self.progressBlock = progressBlock
         self.completionHandler = completionHandler
@@ -202,7 +206,8 @@ public class ImagePrefetcher: CustomStringConvertible {
     public convenience init(
         resources: [Resource],
         options: KingfisherOptionsInfo? = nil,
-        completionHandler: PrefetcherCompletionHandler? = nil) {
+        completionHandler: PrefetcherCompletionHandler? = nil)
+    {
         self.init(sources: resources.map { $0.convertToSource() }, options: options)
         self.completionHandler = completionHandler
     }
@@ -223,7 +228,8 @@ public class ImagePrefetcher: CustomStringConvertible {
     public convenience init(sources: [Source],
         options: KingfisherOptionsInfo? = nil,
         progressBlock: PrefetcherSourceProgressBlock? = nil,
-        completionHandler: PrefetcherSourceCompletionHandler? = nil) {
+        completionHandler: PrefetcherSourceCompletionHandler? = nil)
+    {
         self.init(sources: sources, options: options)
         self.progressSourceBlock = progressBlock
         self.completionSourceHandler = completionHandler
@@ -243,7 +249,8 @@ public class ImagePrefetcher: CustomStringConvertible {
     /// main thread. The `.callbackQueue` value in `optionsInfo` will be ignored in this method.
     public convenience init(sources: [Source],
         options: KingfisherOptionsInfo? = nil,
-        completionHandler: PrefetcherSourceCompletionHandler? = nil) {
+        completionHandler: PrefetcherSourceCompletionHandler? = nil)
+    {
         self.init(sources: sources, options: options)
         self.completionSourceHandler = completionHandler
     }
@@ -304,18 +311,18 @@ public class ImagePrefetcher: CustomStringConvertible {
             self.tasks.values.forEach { $0.cancel() }
         }
     }
-
+    
     private func downloadAndCache(_ source: Source) {
 
         let downloadTaskCompletionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void) = { result in
             self.tasks.removeValue(forKey: source.cacheKey)
             do {
-                _ = try result.get()
+                let _ = try result.get()
                 self.completedSources.append(source)
             } catch {
                 self.failedSources.append(source)
             }
-
+            
             self.reportProgress()
             if self.stopped {
                 if self.tasks.isEmpty {
@@ -342,20 +349,21 @@ public class ImagePrefetcher: CustomStringConvertible {
             tasks[source.cacheKey] = downloadTask
         }
     }
-
+    
     private func append(cached source: Source) {
         skippedSources.append(source)
-
+ 
         reportProgress()
         reportCompletionOrStartNext()
     }
-
-    private func startPrefetching(_ source: Source) {
+    
+    private func startPrefetching(_ source: Source)
+    {
         if optionsInfo.forceRefresh {
             downloadAndCache(source)
             return
         }
-
+        
         let cacheType = manager.cache.imageCachedType(
             forKey: source.cacheKey,
             processorIdentifier: optionsInfo.processor.identifier)
@@ -367,7 +375,8 @@ public class ImagePrefetcher: CustomStringConvertible {
                 let context = RetrievingContext(options: optionsInfo, originalSource: source)
                 _ = manager.retrieveImageFromCache(
                     source: source,
-                    context: context) {
+                    context: context)
+                {
                     _ in
                     self.append(cached: source)
                 }
@@ -378,7 +387,7 @@ public class ImagePrefetcher: CustomStringConvertible {
             downloadAndCache(source)
         }
     }
-
+    
     private func reportProgress() {
 
         if progressBlock == nil && progressSourceBlock == nil {
@@ -397,7 +406,7 @@ public class ImagePrefetcher: CustomStringConvertible {
             )
         }
     }
-
+    
     private func reportCompletionOrStartNext() {
         if let resource = self.pendingSources.popFirst() {
             // Loose call stack for huge ammount of sources.
@@ -411,13 +420,13 @@ public class ImagePrefetcher: CustomStringConvertible {
     var allFinished: Bool {
         return skippedSources.count + failedSources.count + completedSources.count == prefetchSources.count
     }
-
+    
     private func handleComplete() {
 
         if completionHandler == nil && completionSourceHandler == nil {
             return
         }
-
+        
         // The completion handler should be called on the main thread
         CallbackQueue.mainCurrentOrAsync.execute {
             self.completionSourceHandler?(self.skippedSources, self.failedSources, self.completedSources)

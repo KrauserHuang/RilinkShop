@@ -56,8 +56,7 @@ class StoreIDSelectViewController: UIViewController {
     }
 
     func configureTableView() {
-        let nib = UINib(nibName: StoreIDSelectTableViewCell.reuseIdentifier, bundle: nil)
-        storeIDTableView.register(nib, forCellReuseIdentifier: StoreIDSelectTableViewCell.reuseIdentifier)
+        storeIDTableView.register(StoreIDSelectTableViewCell.nib, forCellReuseIdentifier: StoreIDSelectTableViewCell.reuseIdentifier)
         storeIDTableView.delegate = self
         storeIDTableView.dataSource = self
     }

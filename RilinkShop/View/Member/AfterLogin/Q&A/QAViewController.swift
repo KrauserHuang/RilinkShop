@@ -34,9 +34,7 @@ extension QAViewController {
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.register(QATableViewCell.self, forCellReuseIdentifier: QATableViewCell.cellIdentifier())
-        tableView.register(UINib(nibName: QATableViewCell.cellIdentifier(), bundle: nil),
-                           forCellReuseIdentifier: QATableViewCell.cellIdentifier())
+        tableView.register(QATableViewCell.nib, forCellReuseIdentifier: QATableViewCell.reuseIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
     }
@@ -51,7 +49,7 @@ extension QAViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(QATableViewCell.self)", for: indexPath) as? QATableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: QATableViewCell.reuseIdentifier, for: indexPath) as? QATableViewCell else { return UITableViewCell() }
 
         let content = qaContents[indexPath.section]
         cell.configure(with: content)

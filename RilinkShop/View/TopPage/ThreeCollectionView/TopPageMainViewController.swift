@@ -8,6 +8,32 @@
 import UIKit
 import BadgeHub
 
+enum Options: String, CaseIterable {
+    case newCar
+    case secondhandCar
+    case rent
+    case accessory
+    case repair
+}
+
+extension Options {
+    var urlString: String {
+        switch self {
+        case .newCar:
+            return ""
+        case .secondhandCar:
+            return ""
+        case .rent:
+            return ""
+        case .accessory:
+            return ""
+        case .repair:
+            return ""
+        }
+        
+    }
+}
+
 class TopPageMainViewController: UIViewController {
 
     @IBOutlet weak var storeCollectionView: UICollectionView!
@@ -92,6 +118,8 @@ class TopPageMainViewController: UIViewController {
         navigationItem.rightBarButtonItem = shoppingcartButton
     }
     @objc private func toCartViewController() {
+//        let vc = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                    password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let vc = CartViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -159,21 +187,27 @@ class TopPageMainViewController: UIViewController {
     }
 
     func loadPackage() {
-//        HUD.showLoadingHUD(inView: self.view, text: "")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                                  pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
+//            ProductService.shared.loadPackageList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                                  pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { packagesResponse in
+            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? "",
+                                                  pwd: MyKeyChain.getPassword() ?? "") { packagesResponse in
+//            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                                  pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
                 let wholePackages = packagesResponse
                 self.packages = wholePackages
                 self.updatePackageSnapshot()
             }
         }
-//        HUD.hideLoadingHUD(inView: self.view)
     }
     func loadStore() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                             pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { storesResponse in
+//            StoreService.shared.getStoreList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                             pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { storesResponse in
+            StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? "",
+                                             pwd: MyKeyChain.getPassword() ?? "") { storesResponse in
+//            StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                             pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { storesResponse in
                 let wholeStores = storesResponse
                 self.stores = wholeStores
                 self.updateStoreSnapshot()
@@ -291,6 +325,8 @@ extension TopPageMainViewController: UICollectionViewDelegate {
         switch collectionView {
         case storeCollectionView:
             let store = stores[indexPath.item]
+//            let hostelDetailVC = HostelDetailViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                                            password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
             let hostelDetailVC = HostelDetailViewController()
             hostelDetailVC.store = store
             hostelDetailVC.fixmotor = store.fixmotor
@@ -319,6 +355,8 @@ extension TopPageMainViewController: UICollectionViewDelegate {
             navigationController?.pushViewController(wkWebVC, animated: true)
         case packageCollectionView:
             let package = packages[indexPath.item]
+//            let packageInfoVC = PackageInfoViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                                          password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
             let packageInfoVC = PackageInfoViewController()
             packageInfoVC.package = package
             navigationController?.pushViewController(packageInfoVC, animated: true)

@@ -20,17 +20,19 @@ class ForgotPasswordViewController_2: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
 
     weak var delegate: ForgotPasswordViewController_2_Delegate?
-    let tool = Tool()
     var edittingTextField: UITextField?
     var tempAccount: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureButton()
         configureKeyboard()
-
-        tool.makeRoundedCornersButton(button: submitButton)
-        submitButton.backgroundColor = Theme.customOrange
+    }
+    
+    private func configureButton() {
+        submitButton.layer.cornerRadius = submitButton.frame.height / 2
+        submitButton.backgroundColor    = .primaryOrange
     }
 
     func configureKeyboard() {
@@ -122,6 +124,7 @@ class ForgotPasswordViewController_2: UIViewController {
                     HUD.hideLoadingHUD(inView: self.view)
                     Global.ACCOUNT_PASSWORD = pw1!
                     MyKeyChain.setPassword(pw1!)
+//                    LocalStorageManager.shared.setData(pw1!, key: .userPasswordKey)
 
                     let message = "密碼已修改，請以新密碼重新登入。"
                     Alert.showMessage(title: "", msg: message, vc: self) {

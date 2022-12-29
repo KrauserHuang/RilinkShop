@@ -31,7 +31,6 @@ class PackageInfoViewController: UIViewController {
         didSet {
             cartButton.image = UIImage(systemName: "cart")
             cartButton.action = #selector(cartButtonAction(_:))
-//            cartButton.setBadge()
         }
     }
     var package = Package()
@@ -41,56 +40,66 @@ class PackageInfoViewController: UIViewController {
             itemNumberLabel.text = String(itemNumber)
         }
     }
-    let maxValue = 10
-    let minValue = 1
-    let stepValue = 1
-    var stock = Int()
-    var account = MyKeyChain.getAccount() ?? ""
-    var password = MyKeyChain.getPassword() ?? ""
-    var spec = PackageOrProduct.package
-    var productNo = String()
-    var producrPrice = String()
+    let maxValue        = 10
+    let minValue        = 1
+    let stepValue       = 1
+    var stock           = Int()
+    var account         = MyKeyChain.getAccount() ?? ""
+    var password        = MyKeyChain.getPassword() ?? ""
+    var spec            = PackageOrProduct.package
+    var productNo       = String()
+    var producrPrice    = String()
     var productStockMin = String()
+    
+//    var account: String!
+//    var password: String!
+//    
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureView()
         showItemInfo()
-        print("@@@@@!")
-        print(package.packageNo)
-        print(spec.rawValue)
     }
 
-    func configureView() {
+    private func configureView() {
         packageImageView.layer.cornerRadius = 10
         // stepper外圍
-        stepperOuterView.backgroundColor = .systemGray6
+        stepperOuterView.backgroundColor    = .systemGray6
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
         // 加減
-        addButton.tintColor = .white
-        addButton.backgroundColor = Theme.customOrange
-        addButton.layer.cornerRadius = addButton.frame.height / 2
-        substractButton.tintColor = .white
-        substractButton.backgroundColor = Theme.customOrange
-        substractButton.layer.cornerRadius = substractButton.frame.height / 2
+        addButton.tintColor                 = .white
+        addButton.backgroundColor           = .primaryOrange
+        addButton.layer.cornerRadius        = addButton.frame.height / 2
+        substractButton.tintColor           = .white
+        substractButton.backgroundColor     = .primaryOrange
+        substractButton.layer.cornerRadius  = substractButton.frame.height / 2
         // 中間的數字
-        itemNumberLabel.backgroundColor = .clear
+        itemNumberLabel.backgroundColor     = .clear
         // 商品敘述View
-        descriptionView.layer.shadowColor = UIColor.black.cgColor
+        descriptionView.layer.shadowColor   = UIColor.black.cgColor
         descriptionView.layer.shadowOpacity = 0.2
-        descriptionView.layer.shadowOffset = CGSize(width: 2, height: -2)
+        descriptionView.layer.shadowOffset  = CGSize(width: 2, height: -2)
         // 下面兩個button
-        addToCartButton.layer.cornerRadius = 10
-        addToCartButton.layer.borderWidth = 1
-        addToCartButton.layer.borderColor = Theme.customOrange.cgColor
-        addToCartButton.tintColor = Theme.customOrange
-        buyNowButton.layer.cornerRadius = 10
-        buyNowButton.tintColor = .white
-        buyNowButton.backgroundColor = Theme.customOrange
+        addToCartButton.layer.cornerRadius  = 10
+        addToCartButton.layer.borderWidth   = 1
+        addToCartButton.layer.borderColor   = UIColor.primaryOrange.cgColor
+        addToCartButton.tintColor           = .primaryOrange
+        buyNowButton.layer.cornerRadius     = 10
+        buyNowButton.tintColor              = .white
+        buyNowButton.backgroundColor        = .primaryOrange
     }
 
-    func showItemInfo() {
+    private func showItemInfo() {
         ProductService.shared.loadPackageInfo(id: account, pwd: password, no: package.packageNo) { packagesResponse in
             self.products = packagesResponse
             // 設定庫存，將package內的product的stock取出，並重整將stock最少的product擺在前面取出，最後變數stock將取出的最少庫存數量存入
@@ -108,12 +117,13 @@ class PackageInfoViewController: UIViewController {
 //                print("stock:\(self.stock)")
 //            }
         }
-        let imageURLString = SHOP_ROOT_URL + package.productPicture
-        packageImageView.setImage(imageURL: imageURLString)
-        stock = Int(package.productStock)!
-        packageNameLabel.text = package.productName
-        packageCostLabel.text = "NT$：\(package.productPrice)"
-        descriptionLabel.text = package.productDescription
+        
+        stock                   = Int(package.productStock)!
+        packageNameLabel.text   = package.productName
+        packageCostLabel.text   = "NT$：\(package.productPrice)"
+        descriptionLabel.text   = package.productDescription
+        let imageURLString      = SHOP_ROOT_URL + package.productPicture
+        packageImageView.setImage(with: imageURLString)
 
         if self.stock == 0 {
             self.addToCartButton.isHidden = true
@@ -216,6 +226,7 @@ class PackageInfoViewController: UIViewController {
                         let title = "新增購物車成功"
                         let message = "請儘速完成付款，商品於購物車中僅留存3天"
                         Alert.showMessage(title: title, msg: message, vc: self) {
+//                            let vc = CartViewController(account: self.account, password: self.password)
                             let vc = CartViewController()
                             self.navigationController?.pushViewController(vc, animated: true)
 

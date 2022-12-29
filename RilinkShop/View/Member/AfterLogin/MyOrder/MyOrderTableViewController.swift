@@ -8,8 +8,7 @@
 import UIKit
 
 class MyOrderTableViewController: UITableViewController {
-
-    let tool = Tool()
+    
     var orders = [Order]() {
         didSet {
             DispatchQueue.main.async {
@@ -34,15 +33,6 @@ class MyOrderTableViewController: UITableViewController {
         OrderService.shared.getECOrderList(id: account, pwd: password) { ordersResponse in
             self.orders = ordersResponse
         }
-
-//        OrderService.shared.getECOrderList(id: account, pwd: password) { success, response in
-//            guard success else {
-//                let errorMsg = response as! String
-//                Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
-//                return
-//            }
-//            print(response)
-//        }
     }
 
     // MARK: - Table view data source
@@ -60,20 +50,8 @@ class MyOrderTableViewController: UITableViewController {
 
         cell.delegate = self
 
-        tool.makeRoundedCornersButton(button: cell.detailButton)
-        cell.detailButton.layer.borderColor = tool.customOrange.cgColor
-        cell.detailButton.backgroundColor = .white
-        cell.detailButton.layer.borderWidth = 3
-        cell.detailButton.tintColor = tool.customOrange
-
-        tool.makeRoundedCornersButton(button: cell.payImmediateButton)
-        cell.payImmediateButton.layer.borderColor = tool.customOrange.cgColor
-        cell.payImmediateButton.backgroundColor = .white
-        cell.payImmediateButton.layer.borderWidth = 3
-        cell.payImmediateButton.tintColor = tool.customOrange
-
         let order = orders[indexPath.row]
-        cell.configure(with: order)
+        cell.set(with: order)
 
         cell.closure = {
             let orderDetailVC = OrderDetailViewController()

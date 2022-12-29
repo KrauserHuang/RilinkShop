@@ -22,7 +22,7 @@ class ReservationTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        configure()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,5 +30,9 @@ class ReservationTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    private func configure() {
+        reservationButton.layer.cornerRadius   = reservationButton.frame.height / 2
+        reservationButton.backgroundColor      = .white
+    }
 }

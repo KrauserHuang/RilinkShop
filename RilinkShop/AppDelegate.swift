@@ -47,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("settings = \(settings)")
         }
         UIApplication.shared.registerForRemoteNotifications()
+        
+//        MyKeyChain.logout()
 
         return true
     }
@@ -88,20 +90,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     // UserNotifications(原生) -> notification要呈現的方式
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // 印出後台送出的推播訊息(JOSN 格式)
-        let userInfo = notification.request.content.userInfo
+        let userInfo = notification.request.content.userInfo    // 印出後台送出的推播訊息(JOSN 格式)
         print("userInfo: \(userInfo)")
         if #available(iOS 14, *) {
-            // 14以後alert被拆成banner/list
-            completionHandler([.badge, .sound, .banner, .list])
+            completionHandler([.badge, .sound, .banner, .list]) // 14以後alert被拆成banner/list
         } else {
             completionHandler([.badge, .sound, .alert])
         }
     }
     // UserNotifications(原生) -> 當使用者點擊notification時會觸發
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // 印出後台送出的推播訊息(JOSN 格式)
-        let userInfo = response.notification.request.content.userInfo
+        let userInfo = response.notification.request.content.userInfo // 印出後台送出的推播訊息(JOSN 格式)
         print("userInfo: \(userInfo)")
         completionHandler()
     }

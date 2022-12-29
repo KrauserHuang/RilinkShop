@@ -13,18 +13,15 @@ class ShopLocationTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
         tableView.register(UINib(nibName: ShopTypeTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: ShopTypeTableViewCell.reuseIdentifier)
         tableView.register(UINib(nibName: ShopTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: ShopTableViewCell.reuseIdentifier)
 //        cartButton.setBadge()
     }
 
     @IBAction func toCartVC(_ sender: UIBarButtonItem) {
+//        let cartVC = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                        password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let cartVC = CartViewController()
         navigationController?.pushViewController(cartVC, animated: true)
     }
@@ -53,6 +50,8 @@ class ShopLocationTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let controller = HostelDetailViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                                    password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let controller = HostelDetailViewController()
         self.navigationController?.pushViewController(controller, animated: true)
     }

@@ -1089,7 +1089,7 @@ public class DataRequest: Request {
 
     /// Protected storage for the `Data` read by the instance.
     @Protected
-    private var mutableData: Data?
+    private var mutableData: Data? = nil
 
     /// Creates a `DataRequest` using the provided parameters.
     ///
@@ -1721,7 +1721,7 @@ public class DownloadRequest: Request {
             } else {
                 // Resume to ensure metrics are gathered.
                 task.resume()
-                task.cancel(byProducingResumeData: { _ in })
+                task.cancel()
                 self.underlyingQueue.async { self.didCancelTask(task) }
             }
         }
@@ -1909,4 +1909,4 @@ extension UploadRequest.Uploadable: UploadableConvertible {
 }
 
 /// A type that can be converted to an upload, whether from an `UploadRequest.Uploadable` or `URLRequestConvertible`.
-public protocol UploadConvertible: UploadableConvertible, URLRequestConvertible {}
+public protocol UploadConvertible: UploadableConvertible & URLRequestConvertible {}

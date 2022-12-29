@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TopPagePackageCollectionViewCellDelegate: AnyObject {
-    func didTapPackage(_ cell: TopPagePackageTableViewCell, package: Package)
+//    func didTapPackage(_ cell: TopPagePackageTableViewCell, package: Package)
 }
 
 class TopPagePackageCollectionViewCell: UICollectionViewCell {
@@ -19,26 +19,24 @@ class TopPagePackageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var costLabel: UILabel!
 
     weak var delegate: TopPagePackageCollectionViewCellDelegate?
-//    static let reuseIdentifier = "TopPagePackageCollectionViewCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
 //        imageView.layer.cornerRadius = 15
-        bgView.layer.masksToBounds = true
-        bgView.layer.cornerRadius = 15
-        bgView.layer.borderWidth = 1
-        bgView.layer.borderColor = UIColor.black.cgColor
-        bgView.layer.shadowColor = UIColor.black.cgColor
-        bgView.layer.shadowOpacity = 0.4
-        bgView.layer.shadowOffset = CGSize(width: 2, height: -2)
+        bgView.layer.masksToBounds  = true
+        bgView.layer.cornerRadius   = 15
+        bgView.layer.borderWidth    = 1
+        bgView.layer.borderColor    = UIColor.black.cgColor
+        bgView.layer.shadowColor    = UIColor.black.cgColor
+        bgView.layer.shadowOpacity  = 0.4
+        bgView.layer.shadowOffset   = CGSize(width: 2, height: -2)
     }
 
     func configure(with model: Package) {
-        let imageURLString = SHOP_ROOT_URL + model.productPicture
-        imageView.setImage(imageURL: imageURLString)
-
-        nameLabel.text = model.productName
-        costLabel.text = "NT$ \(model.productPrice)"
+        let imageURLString  = SHOP_ROOT_URL + model.productPicture
+        nameLabel.text      = model.productName
+        costLabel.text      = "NT$ \(model.productPrice)"
+        imageView.setImage(with: imageURLString)
     }
 }

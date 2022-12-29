@@ -61,6 +61,7 @@ class MyKeyChain {
         }
         UserDefaults.standard.set(password, forKey: "bosspassword")
     }
+    
     static func getBossPassword() -> String? {
         guard let password = UserDefaults.standard.string(forKey: "bosspassword"), password != "" else {
             return nil

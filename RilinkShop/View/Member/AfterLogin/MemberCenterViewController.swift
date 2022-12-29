@@ -29,7 +29,19 @@ class MemberCenterViewController: UIViewController {
 //    var password = Global.ACCOUNT_PASSWORD
 
     var delegate: MemberCenterViewControllerDelegate?
-
+//    var account: String!
+//    var password: String!
+//
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,11 +55,6 @@ class MemberCenterViewController: UIViewController {
         print("GlobalAccount:\(Global.ACCOUNT)")
         print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
         print("-----------------------------------")
-        print("KeyChainAccount:\(MyKeyChain.getAccount())")
-        print("KeyChainPassword:\(MyKeyChain.getPassword())")
-        print("-----------------------------------")
-        print("UserServiceAccount:\(UserService.shared.id)")
-        print("UserServicePassword:\(UserService.shared.pwd)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +116,9 @@ class MemberCenterViewController: UIViewController {
         let accountType = "0"
 //        sleep(1)
         HUD.showLoadingHUD(inView: self.view, text: "")
+//        UserService.shared.getPersonalData(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                           pw: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                           accountType: accountType) { success, _ in
         UserService.shared.getPersonalData(account: MyKeyChain.getAccount() ?? "",
                                            pw: MyKeyChain.getPassword() ?? "",
                                            accountType: accountType) { success, _ in
@@ -134,7 +144,7 @@ class MemberCenterViewController: UIViewController {
                         return
                     }
                     if let personalCMDImageFile = Global.personalData?.cmdImageFile {
-                        self.userImage.setImage(imageURL: MEMBER_IMAGE_URL + personalCMDImageFile)
+                        self.userImage.setImage(with: MEMBER_IMAGE_URL + personalCMDImageFile)
                     }
                 }
             }
@@ -144,6 +154,8 @@ class MemberCenterViewController: UIViewController {
     func uploadImage() {
         if let image = userImage.image {
             HUD.showLoadingHUD(inView: self.view, text: "")
+//            UserService.shared.uploadImage(imgtitle: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                           cmdImageFile: image) { success, response in
             UserService.shared.uploadImage(imgtitle: MyKeyChain.getAccount() ?? "",
                                            cmdImageFile: image) { success, response in
                 DispatchQueue.global(qos: .userInitiated).async {
@@ -226,6 +238,8 @@ class MemberCenterViewController: UIViewController {
     }
     // MARK: - 進使用者資料畫面
     @IBAction func editButtonTapped(_ sender: UIButton) {
+//        let vc = MemberInfoViewController_1(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                            password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let vc = MemberInfoViewController_1()
         vc.user = Global.personalData
         vc.delegate = self
@@ -239,6 +253,8 @@ class MemberCenterViewController: UIViewController {
         if Global.ACCOUNT == "" {
             Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
         } else {
+//            let vc = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                        password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
             let vc = CartViewController()
             navigationController?.pushViewController(vc, animated: true)
         }
@@ -266,6 +282,8 @@ class MemberCenterViewController: UIViewController {
         if Global.ACCOUNT == "" {
             Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
         } else {
+//            let vc = RepairReservationMainViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                                         password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
             let vc = RepairReservationMainViewController()
             vc.title = "預約維修紀錄"
             navigationController?.pushViewController(vc, animated: true)
@@ -309,6 +327,8 @@ extension MemberCenterViewController: ContainerMemberCenterTableViewControllerDe
             Alert.accountDeletionAlert(title: "是否要刪除使用者帳號", msg: "", vc: self) {
                 Alert.accountDeletionAlert(title: "再次確認是否刪除帳號", msg: "一但刪除帳號就不可復原\n須重新申請帳號", vc: self) {
                     print("這裡執行刪除帳號API")
+//                    UserService.shared.userDel(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                               pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { success, response in
                     UserService.shared.userDel(id: MyKeyChain.getAccount() ?? "",
                                                pwd: MyKeyChain.getPassword() ?? "") { success, response in
                         guard success else {

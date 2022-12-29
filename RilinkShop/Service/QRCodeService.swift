@@ -111,16 +111,12 @@ class QRCodeService {
         ]
 
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [QRCode].self) { response in
-//            print("+++++")
-//            print(response)
+            
             guard response.value != nil else {
                 print(#function)
                 print("伺服器連線失敗")
                 return
             }
-//            print("+++++")
-//            print(#function)
-//            print(response.value)
 
             switch response.result {
             case .success:
@@ -155,12 +151,6 @@ class QRCodeService {
 
             switch response.result {
             case .success:
-//                guard value["code"].stringValue == returnCode else {
-//                    let errorMsg = value["responseMessage"].stringValue
-//                    completed(false, errorMsg as AnyObject)
-//                    return
-//                }
-
                 let datas = value["returnData"].arrayValue
                 var qrcodes: [QRCode] = []
                 for data in datas {
@@ -185,63 +175,37 @@ class QRCodeService {
         }
     }
     // 店家核銷商品/套票
-    func storeConfirm(storeAcc: String, storePwd: String, qrcode: String, completion: @escaping (Output) -> Void) {
+    func storeConfirm(storeAcc: String, storePwd: String, qrcode: String, completion: @escaping Completion) {
         let url = SHOP_API_URL + URL_STOREAPPQRCONFIRM
         let parameters = [
             "store_acc": storeAcc,
             "store_pwd": storePwd,
             "qrcode": qrcode
         ]
-
-        AF.request(url, method: .post, parameters: parameters).validate().responseDecodable(of: Output.self) { response in
-            print("@@@@@")
-            print(response)
-            switch response.result {
-            case .success(let output):
-                print("*****")
-                print(output.responseMessage)
-                completion(output)
-            case .failure(let error):
-                print("!!!!!")
-                print(error)
-            }
-        }
-    }
-    func storeConfirm(storeAcc: String, storePwd: String, qrcode: String, completed: @escaping Completion) {
-        let url = SHOP_API_URL + URL_STOREAPPQRCONFIRM
-        let parameters = [
-            "store_acc": storeAcc,
-            "store_pwd": storePwd,
-            "qrcode": qrcode
-        ]
-
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
 
-        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-
-            guard response.value != nil else {
-                let message = "伺服器連線失敗"
-                completed(false, message as AnyObject)
+        AF.request(url, method: .post, parameters: parameters).validate().response { response in
+            
+            guard response.error == nil else {
+                completion(false, RSError.connectionFailure as AnyObject)
                 return
             }
-
+            
             let value = JSON(response.value!)
-            print(#function)
-            print(value)
-
+            
             switch response.result {
             case .success:
                 guard value["code"].stringValue == returnCode else {
                     let message = value["responseMessage"].stringValue
-                    completed(false, message as AnyObject)
+                    completion(false, message as AnyObject)
                     return
                 }
 
                 let message = value["responseMessage"].stringValue
-                completed(true, message as AnyObject)
+                completion(true, message as AnyObject)
             case .failure:
-                let message = value["responseMessage"].stringValue
-                completed(false, message as AnyObject)
+                let errorMsg = value["responseMessage"].stringValue
+                completion(false, errorMsg as AnyObject)
             }
         }
     }

@@ -31,7 +31,21 @@ class MemberInfoViewController_1: UIViewController {
         formatter.dateFormat = "YYYY-MM-dd"
         return formatter
     }()
-
+    var account = MyKeyChain.getAccount() ?? ""
+    var password = MyKeyChain.getPassword() ?? ""
+//    var account: String!
+//    var password: String!
+//    
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -39,17 +53,22 @@ class MemberInfoViewController_1: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initUI()
+        configureButton()
+        configureTextField()
         configureKeyboard()
         getUserDate()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        nameTextField.text = user?.name ?? ""
-        birthdayTextField.text = user?.birthday ?? ""
-        phoneTextField.text = user?.tel ?? ""
-        emailTextField.text = user?.email ?? ""
+        configureViewController()
+    }
+    
+    private func configureViewController() {
+        nameTextField.text      = user?.name ?? ""
+        birthdayTextField.text  = user?.birthday ?? ""
+        phoneTextField.text     = user?.tel ?? ""
+        emailTextField.text     = user?.email ?? ""
 
         if user?.sex == "1" {
             femaleButton.isSelected = true
@@ -57,29 +76,33 @@ class MemberInfoViewController_1: UIViewController {
             maleButton.isSelected = true
         }
     }
-    func initUI() {
-//        saveEditButton.backgroundColor = UIColor(hex: "4F846C")
-        saveEditButton.backgroundColor = .white
+    
+    private func configureButton() {
         saveEditButton.setTitle("儲存變更", for: .normal)
-//        saveEditButton.setTitleColor(.white, for: .normal)
         saveEditButton.setTitleColor(.black, for: .normal)
-//        saveEditButton.layer.cornerRadius = 20
-        saveEditButton.layer.borderWidth = 1
-        saveEditButton.layer.borderColor = Theme.customOrange.cgColor
-        saveEditButton.layer.cornerRadius = saveEditButton.frame.height / 2
+        saveEditButton.backgroundColor      = .white
+        saveEditButton.layer.borderWidth    = 1
+        saveEditButton.layer.borderColor    = UIColor.primaryOrange.cgColor
+        saveEditButton.layer.cornerRadius   = saveEditButton.frame.height / 2
         saveEditButton.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    private func configureTextField() {
+        nameTextField.delegate      = self
+        birthdayTextField.delegate  = self
+        phoneTextField.delegate     = self
+        emailTextField.delegate     = self
+    }
 
-    func getUserDate() {
+    private func getUserDate() {
         let accountType = "0"
         sleep(1)
-//        HUD.showLoadingHUD(inView: self.view, text: "")
-        UserService.shared.getPersonalData(account: MyKeyChain.getAccount() ?? "", pw: MyKeyChain.getPassword() ?? "", accountType: accountType) { success, response in
+        
+        UserService.shared.getPersonalData(account: account, pw: password, accountType: accountType) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {
-
-//                    HUD.hideLoadingHUD(inView: self.view)
+                    
                     guard success else {
                         return
                     }
@@ -87,25 +110,19 @@ class MemberInfoViewController_1: UIViewController {
                     Global.personalData = response as? User
 
                     if let user = response as? User {
-                        self.user = user
-                        self.nameTextField.text = user.name
+                        self.user                   = user
+                        self.nameTextField.text     = user.name
                         self.birthdayTextField.text = user.birthday
-                        self.phoneTextField.text = user.account
-                        self.emailTextField.text = user.email
+                        self.phoneTextField.text    = user.account
+                        self.emailTextField.text    = user.email
                     }
                 }
             }
         }
     }
     // MARK: - Keyboard
-    func configureKeyboard() {
-        nameTextField.delegate = self
-        birthdayTextField.delegate = self
-        phoneTextField.delegate = self
-        emailTextField.delegate = self
-
+    private func configureKeyboard() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-//        view.addGestureRecognizer(tap)
         view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -116,14 +133,14 @@ class MemberInfoViewController_1: UIViewController {
 
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        let contentInsets                   = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        scrollView.contentInset             = contentInsets
+        scrollView.scrollIndicatorInsets    = contentInsets
     }
     @objc func keyboardWillHide(_ notification: Notification) {
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        let contentInsets                   = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset             = contentInsets
+        scrollView.scrollIndicatorInsets    = contentInsets
     }
     // MARK: - Close the controller
     @IBAction func xmarkTapped(_ sender: UIButton) {

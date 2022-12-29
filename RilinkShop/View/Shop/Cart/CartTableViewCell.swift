@@ -34,17 +34,17 @@ class CartTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        contentView.layer.borderColor = UIColor.systemGray.cgColor
-        contentView.layer.borderWidth = 1
-        contentView.layer.cornerRadius = 10
+        contentView.layer.borderColor       = UIColor.systemGray.cgColor
+        contentView.layer.borderWidth       = 1
+        contentView.layer.cornerRadius      = 10
         productImageView.layer.cornerRadius = 10
         initCell()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let margins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-        contentView.frame = contentView.frame.inset(by: margins)
+        let margins         = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        contentView.frame   = contentView.frame.inset(by: margins)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -54,39 +54,38 @@ class CartTableViewCell: UITableViewCell {
     }
 
     func initCell() {
-        totalCostLabel.textColor = .primaryOrange
-        // stepper外圍
-        stepperOuterView.backgroundColor = .systemGray6
+        totalCostLabel.textColor            = .primaryOrange
+
+        stepperOuterView.backgroundColor    = .systemGray6 // stepper外圍
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
-        // 加減
-        addButton.tintColor = .white
-        addButton.backgroundColor = .primaryOrange
-        addButton.layer.cornerRadius = addButton.frame.height / 2
-        substractButton.tintColor = .white
-        substractButton.backgroundColor = .primaryOrange
-        substractButton.layer.cornerRadius = substractButton.frame.height / 2
-        // 中間的數字
-        itemNumberLabel.backgroundColor = .clear
+        
+        addButton.tintColor                 = .white // 加減
+        addButton.backgroundColor           = .primaryOrange
+        addButton.layer.cornerRadius        = addButton.frame.height / 2
+        substractButton.tintColor           = .white
+        substractButton.backgroundColor     = .primaryOrange
+        substractButton.layer.cornerRadius  = substractButton.frame.height / 2
+        
+        itemNumberLabel.backgroundColor     = .clear // 中間的數字
     }
 
     func configure(with model: Product) {
-        nameLabel.text = model.product_name
-        numberLabel.text = "X \(model.order_qty)"
-        itemNumberLabel.text = model.order_qty
-        costLabel.text = "$\(model.product_price)"
-        totalCostLabel.text = "小記：$\(model.total_amount)"
-
-        let imageURLString = SHOP_ROOT_URL + model.product_picture
-        productImageView.setImage(imageURL: imageURLString)
+        nameLabel.text          = model.product_name
+        numberLabel.text        = "X \(model.order_qty)"
+        itemNumberLabel.text    = model.order_qty
+        costLabel.text          = "$\(model.product_price)"
+        totalCostLabel.text     = "小記：$\(model.total_amount)"
+        let imageURLString      = SHOP_ROOT_URL + model.product_picture
+        productImageView.setImage(with: imageURLString)
     }
 
     @IBAction func removeItemButtonTapped(_ sender: UIButton) {
         delegate?.removeItem(self)
     }
     @IBAction func itemNumberStepper(_ sender: UIButton) {
-        if sender.tag == 0 { // 點minus
+        if sender.tag == 0 {                // 點minus
             delegate?.didSubstractQty(self)
-        } else if sender.tag == 1 { // 點plus
+        } else if sender.tag == 1 {         // 點plus
             delegate?.didAddQty(self)
         }
     }

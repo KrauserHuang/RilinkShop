@@ -31,14 +31,28 @@ class MyOrderTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        configure()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    private func configure() {
+        detailButton.layer.cornerRadius         = detailButton.frame.height / 2
+        detailButton.layer.borderColor          = UIColor.primaryOrange.cgColor
+        detailButton.layer.borderWidth          = 3
+        detailButton.backgroundColor            = .white
+        detailButton.tintColor                  = UIColor.primaryOrange
+        
+        payImmediateButton.layer.cornerRadius   = payImmediateButton.frame.height / 2
+        payImmediateButton.layer.borderColor    = UIColor.primaryOrange.cgColor
+        payImmediateButton.layer.borderWidth    = 3
+        payImmediateButton.backgroundColor      = .white
+        payImmediateButton.tintColor            = UIColor.primaryOrange
+    }
 
-    func configure(with model: Order) {
+    func set(with model: Order) {
         orderNo.text = "訂單編號：\(model.orderNo)"
         orderDate.text = "訂單日期：\(model.orderDate)"
         orderMoney.text = "訂單金額：\(model.orderAmount)"

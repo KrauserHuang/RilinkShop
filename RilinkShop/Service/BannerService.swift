@@ -29,18 +29,9 @@ class BannerService {
             }
 
             let value = JSON(response.value!)
-//            print(#function)
-//            print("response:=====\n\(response.response)")
-//            print("value:=====\n\(value)")
 
             switch response.result {
             case .success:
-//                guard value["code"].stringValue == returnCode else {
-//                    let errorMsg = value["responseMessage"].stringValue
-//                    completion(false, errorMsg as AnyObject)
-//                    return
-//                }
-
                 let datas = value.arrayValue
                 var banners: [Banner] = []
                 for data in datas {
@@ -53,8 +44,6 @@ class BannerService {
                                         bannerLink: data["banner_link"].stringValue)
                     banners.append(banner)
                 }
-
-//                print("banners:=====\n\(banners)")
                 completion(true, banners as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue

@@ -18,22 +18,21 @@ class SignUpViewController_1: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
 
     weak var delegate: SignUpViewController_1_Delegate?
-    let tool = Tool()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureView()
+        configureButton()
     }
 
-    func configureView() {
+    private func configureButton() {
         submitButton.layer.cornerRadius = submitButton.bounds.size.height / 2
-        submitButton.backgroundColor = Theme.customOrange
+        submitButton.backgroundColor    = .primaryOrange
     }
     // MARK: - Agree Button切換
     @IBAction func agreeAction(_ sender: UIButton) {
-        sender.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
+        sender.setImage(SFSymbol.checkmark, for: .normal)
+        sender.setImage(SFSymbol.checkmarkFill, for: .selected)
         sender.isSelected.toggle()
     }
     // MARK: - 顯示條款頁
@@ -45,8 +44,9 @@ class SignUpViewController_1: UIViewController {
     @IBAction func submitButtonTapped(_ sender: UIButton) {
         let account = accountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        guard account != "",
-              account?.count == 10 else {
+//        guard account != "",
+        guard let account = accountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              account.count == 10 else {
             let alertController = UIAlertController(title: "", message: "請先輸入10碼手機號碼", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default) { _ in
                 self.accountTextField.becomeFirstResponder()
@@ -65,7 +65,7 @@ class SignUpViewController_1: UIViewController {
         }
 
         HUD.showLoadingHUD(inView: self.view, text: "處理中")
-        UserService.shared.signUp(account: account!) { (success, response) in
+        UserService.shared.signUp(account: account) { (success, response) in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
 
@@ -87,9 +87,10 @@ class SignUpViewController_1: UIViewController {
                     102 已有帳號, 已重送驗證碼
                     103 已填寫完成, 請直接登入
                     */
-
-                    Global.ACCOUNT = account!
-                    MyKeyChain.setAccount(account!)
+                    
+//                    LocalStorageManager.shared.setData(account, key: .userIdKey)
+                    Global.ACCOUNT = account
+                    MyKeyChain.setAccount(account)
 
                     if returnNum == 101 {
 

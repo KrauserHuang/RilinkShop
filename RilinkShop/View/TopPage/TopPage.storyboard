@@ -233,16 +233,16 @@
                                             <rect key="frame" x="8" y="8" width="398" height="316"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qVR-DQ-HGP">
-                                                    <rect key="frame" x="20" y="9" width="1536" height="316"/>
+                                                    <rect key="frame" x="20" y="9" width="3726" height="316"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test_img_a1 2.png" translatesAutoresizingMaskIntoConstraints="NO" id="g4O-lx-qJr">
-                                                            <rect key="frame" x="0.0" y="0.0" width="512" height="316"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_color 2" translatesAutoresizingMaskIntoConstraints="NO" id="g4O-lx-qJr">
+                                                            <rect key="frame" x="0.0" y="0.0" width="1242" height="316"/>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test_img_a2 2.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zxm-vY-tKK">
-                                                            <rect key="frame" x="512" y="0.0" width="512" height="316"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_color 2" translatesAutoresizingMaskIntoConstraints="NO" id="Zxm-vY-tKK">
+                                                            <rect key="frame" x="1242" y="0.0" width="1242" height="316"/>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test_img_a1.png" translatesAutoresizingMaskIntoConstraints="NO" id="xzM-me-4uG">
-                                                            <rect key="frame" x="1024" y="0.0" width="512" height="316"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_color 2" translatesAutoresizingMaskIntoConstraints="NO" id="xzM-me-4uG">
+                                                            <rect key="frame" x="2484" y="0.0" width="1242" height="316"/>
                                                         </imageView>
                                                     </subviews>
                                                 </stackView>
@@ -308,9 +308,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="test_img_a1 2.png" width="512" height="512"/>
-        <image name="test_img_a1.png" width="512" height="512"/>
-        <image name="test_img_a2 2.png" width="512" height="512"/>
+        <image name="background_color 2" width="1242" height="740"/>
         <image name="首頁" width="47" height="47"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

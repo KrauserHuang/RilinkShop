@@ -12,20 +12,18 @@ import SwiftyJSON
 class UserService {
     static let shared = UserService()
     private(set) var user: User?
-    var id = Global.ACCOUNT
-    var pwd = Global.ACCOUNT_PASSWORD
+//    var id = Global.ACCOUNT
+//    var pwd = Global.ACCOUNT_PASSWORD
     var didLogin = false
     var renewUser: (() -> Void)?
 
     private init() {
-//        print("UserService + \(#function)")
-//        print("getAccount: \(MyKeyChain.getAccount())")
-        guard let account = MyKeyChain.getAccount(),
-              let password = MyKeyChain.getPassword() else {
-                  didLogin = true
-                  return
-              }
-//        loadUser(account: account, password: password)
+//        guard let account = LocalStorageManager.shared.getData(String.self, forKey: .userIdKey),
+//              let password = LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey) else {
+        guard let account = MyKeyChain.getAccount(), let password = MyKeyChain.getPassword() else {
+            didLogin = true
+            return
+        }
         getPersonalData(account: account, pw: password, accountType: "0") { success, response in
             guard success else {
                 self.renewUser?()
@@ -33,8 +31,8 @@ class UserService {
             }
             Global.personalData = response as? User
             self.user = Global.personalData
-            self.id = account
-            self.pwd = password
+//            self.id = account
+//            self.pwd = password
 
             self.didLogin = true
             self.renewUser?()
@@ -75,8 +73,6 @@ class UserService {
     }
     // MARK: - 使用者登入Login
     func userLogin(id: String, pwd: String, completed: @escaping Completion) {
-        print("UserService " + #function)
-        print("account:\(id)\npassword:\(pwd)")
         let url = SHOP_API_URL + URL_USERLOGIN
         let parameters = [
             "member_id": id,
@@ -97,10 +93,12 @@ class UserService {
 
             switch response.result {
             case .success:
+//                LocalStorageManager.shared.setData(id, key: .userIdKey)
+//                LocalStorageManager.shared.setData(pwd, key: .userPasswordKey)
                 MyKeyChain.setAccount(id)
                 MyKeyChain.setPassword(pwd)
-                self.id = id
-                self.pwd = pwd
+//                self.id = id
+//                self.pwd = pwd
 
                 guard value["code"].stringValue == returnCode else {
                     let errorMsg = value["responseMessage"].stringValue
@@ -151,27 +149,6 @@ class UserService {
                 completion(user)
             case .failure:
                 print(response.error as Any)
-            }
-        }
-    }
-    // 編輯使用者資料MemberInfoViewController
-    func editUser(id: String, pwd: String, name: String, gender: String, email: String, birthday: String, address: String, phone: String, completion: @escaping (Output) -> Void) {
-        let url = SHOP_API_URL + URL_USEREDIT
-        let parameters = [
-            "member_id": id,
-            "member_pwd": pwd,
-            "member_name": name,
-            "member_gender": gender,
-            "member_email": email,
-            "member_birthday": birthday,
-            "member_address": address,
-            "member_phone": phone
-        ]
-        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: Output.self) { response in
-//            debugPrint(response)
-//            print(response.response)
-            if response.value?.code == "0x0200" {
-                completion(response.value!)
             }
         }
     }
@@ -256,14 +233,17 @@ class UserService {
                                       "city": Base64(string: city),
                                       "region": Base64(string: region)
         ]
+        
+//        print("parameters:\(parameters)")
+//        dump(parameters)
 
         let url =  API_URL + MODIFY_PERSONAL_DATA
         let httpMethod = HTTPMethod.post
         let returnCode = ReturnCode.RETURN_SUCCESS.0
 
-        AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+        AF.request(url, method: httpMethod, parameters: parameters, encoding: URLEncoding.default, headers: headers).response { (response) in
 
-            guard response.value != nil else {
+            guard response.error == nil else {
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
@@ -280,7 +260,7 @@ class UserService {
                     completed(false, message as AnyObject)
                     return
                 }
-                completed(true, "" as AnyObject)
+                completed(true, "修改完成" as AnyObject)
 
             case .failure:
                 let message = value["errorMsg"].stringValue
@@ -331,11 +311,13 @@ class UserService {
         print("UserService + \(#function)")
         user = nil
         renewUser = nil
-        id = ""
-        pwd = ""
+//        id = ""
+//        pwd = ""
         Global.ACCOUNT = ""
         Global.ACCOUNT_PASSWORD = ""
         Global.personalData = nil
+//        LocalStorageManager.shared.removeData(key: .userIdKey)
+//        LocalStorageManager.shared.removeData(key: .userPasswordKey)
         MyKeyChain.setAccount("")
         MyKeyChain.setPassword("")
         MyKeyChain.setBossAccount("")

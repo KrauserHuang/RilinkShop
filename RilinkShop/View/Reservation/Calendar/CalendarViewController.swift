@@ -11,7 +11,6 @@ import FSCalendar
 
 class CalendarViewController: UIViewController {
 
-//    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendarPicker: FSCalendar!
     @IBOutlet weak var emptyView: UIView!
@@ -27,14 +26,11 @@ class CalendarViewController: UIViewController {
     var store = Store()
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
-    lazy var selectedDate: String = {
-        dateFormatter.string(from: Date())
-    }() {
+    lazy var selectedDate: String = { dateFormatter.string(from: Date() + 1) }() {
         didSet {
             updateBookingData()
         }
     }
-//    var storeBookingDateString = ""
     var storeBookingData = [FixMotor]() {
         didSet {
             updateBookingData()
@@ -42,19 +38,20 @@ class CalendarViewController: UIViewController {
     }
 
     var bookingDataForSelectedDate = [FixMotor]()
-
+//    var account: String!
+//    var password: String!
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        collectionView.register(UINib(nibName: "TimeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "timeCollectionViewCell")
-//        self.collectionView.delegate = self
-//        self.collectionView.dataSource = self
-//        
-////        setting collectionViewCell's frame
-//        let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
-//        flowLayout?.itemSize = CGSize(width: (self.view.frame.width - 48) / 2, height: 50)
-//                flowLayout?.estimatedItemSize = .zero
-//                flowLayout?.minimumInteritemSpacing = 1
 
         title = "時段預約"
         configureCalendar()
@@ -71,13 +68,13 @@ class CalendarViewController: UIViewController {
     func configureCalendar() {
         calendarPicker.delegate = self
         calendarPicker.dataSource = self
+//        calendarPicker.minimumDate.addingTimeInterval(84600)
     }
 
     func configureTableView() {
-        let nib = UINib(nibName: CalendarTableViewCell.cellIdentifier(), bundle: nil)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(nib, forCellReuseIdentifier: CalendarTableViewCell.cellIdentifier())
+        tableView.register(CalendarTableViewCell.nib, forCellReuseIdentifier: CalendarTableViewCell.reuseIdentifier)
     }
 
     func viewInit() {
@@ -101,6 +98,9 @@ class CalendarViewController: UIViewController {
     }
     private func updateBookingData() {
         bookingDataForSelectedDate = storeBookingData.filter { $0.bookingDate == selectedDate }
+        bookingDataForSelectedDate = bookingDataForSelectedDate.sorted(by: { motor1, motor2 in
+            motor1.duration < motor2.duration
+        })
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.emptyView.isHidden = self.bookingDataForSelectedDate.count != 0
@@ -113,6 +113,9 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
         // 從點擊的 date 轉會成字串存在 dateString 裡
         selectedDate = dateFormatter.string(from: date)
     }
+    func minimumDate(for calendar: FSCalendar) -> Date {
+        return Date(timeIntervalSinceNow: 86400)
+    }
 }
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
@@ -121,9 +124,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CalendarTableViewCell.cellIdentifier(), for: indexPath) as? CalendarTableViewCell else {
-            return UITableViewCell()
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CalendarTableViewCell.reuseIdentifier, for: indexPath) as? CalendarTableViewCell else { return UITableViewCell() }
 
         let bookingData = bookingDataForSelectedDate[indexPath.row]
 
@@ -141,7 +142,7 @@ extension CalendarViewController: CalendarTableViewCellDelegate {
         let duration = bookingDataForSelectedDate[indexPath.row].duration
         print(#function)
         print(duration)
-        let vc = HostelCheckoutViewController()
+        let vc = HostelCheckoutViewController(account: account, password: password)
         vc.location = location // storeName
         vc.name = name
         vc.mobile = mobile
@@ -155,34 +156,3 @@ extension CalendarViewController: CalendarTableViewCellDelegate {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-// var location: String?
-// var name: String?
-// var mobile: String?
-// var license: String?
-// var carType: String?
-// var repairType: String?
-// var carDescription: String? = ""
-// var appointment: String?
-// extension CalendarViewController: UICollectionViewDelegate, UICollectionViewDataSource{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 18
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "timeCollectionViewCell", for: indexPath) as! TimeCollectionViewCell
-//
-//        cell.bottomView.layer.borderWidth = 1
-//        cell.bottomView.layer.borderColor = UIColor.lightGray.cgColor
-////        UIColor(red: 211/255, green: 211/255, blue: 211/255, alpha: 1).cgColor
-//        cell.bottomView.layer.cornerRadius = 5
-//
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let popupVC = PopupViewController(contentController: SuccessAlert(), popupWidth: self.view.frame.width - 32, popupHeight: self.view.frame.height * 0.5)
-//        popupVC.cornerRadius = 20
-//        present(popupVC, animated: true)
-//    }
-// }

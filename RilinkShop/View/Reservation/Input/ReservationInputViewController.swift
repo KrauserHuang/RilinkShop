@@ -23,32 +23,46 @@ class ReservationInputViewController: UIViewController {
     let dropDown = DropDown()
     var store = Store()
     var edittingTextField: UITextField?
-
+    
+//    var account: String!
+//    var password: String!
+//
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "資料填寫"
-        configureView()
+        configureButton()
+        configureTextField()
         configureKeyboard()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    func configureView() {
+    private func configureButton() {
         nextStepButton.setTitle("下一步", for: .normal)
-        nextStepButton.backgroundColor = Theme.customOrange
-        nextStepButton.tintColor = .white
-        nextStepButton.layer.cornerRadius = 10
+        nextStepButton.backgroundColor      = .primaryOrange
+        nextStepButton.tintColor            = .white
+        nextStepButton.layer.cornerRadius   = 10
+    }
+    
+    private func configureTextField() {
+        nameTextField.delegate          = self
+        mobileTextField.delegate        = self
+        licenseTextField.delegate       = self
+        carTypeTextField.delegate       = self
+        repairTypeTextField.delegate    = self
+        descriptionTextField.delegate   = self
     }
     // MARK: - Keyboard
-    func configureKeyboard() {
-        nameTextField.delegate = self
-        mobileTextField.delegate = self
-        licenseTextField.delegate = self
-        carTypeTextField.delegate = self
-        repairTypeTextField.delegate = self
-        descriptionTextField.delegate = self
+    private func configureKeyboard() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
 
@@ -60,14 +74,14 @@ class ReservationInputViewController: UIViewController {
     }
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        let contentInsets                   = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        scrollView.contentInset             = contentInsets
+        scrollView.scrollIndicatorInsets    = contentInsets
     }
     @objc func keyboardWillHide(_ notification: Notification) {
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        let contentInsets                   = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset             = contentInsets
+        scrollView.scrollIndicatorInsets    = contentInsets
     }
     // MARK: - 維修類別
     @IBAction func repairButtonTapped(_ sender: UIButton) {
@@ -83,12 +97,12 @@ class ReservationInputViewController: UIViewController {
     }
 
     @IBAction func nextStepButtonTapped(_ sender: UIButton) {
-        let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let mobile = mobileTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let license = licenseTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let carType = carTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let repairType = repairTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let carDescription = descriptionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let name            = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let mobile          = mobileTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let license         = licenseTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let carType         = carTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let repairType      = repairTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let carDescription  = descriptionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
 
         guard name != "" else {
             let msg = "請輸入你的姓名"
@@ -148,6 +162,7 @@ class ReservationInputViewController: UIViewController {
             return
         }
 
+//        let vc = CalendarViewController(account: account, password: password)
         let vc = CalendarViewController()
         vc.name = name
         vc.mobile = mobile

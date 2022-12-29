@@ -54,7 +54,8 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         let options = KingfisherParsedOptionsInfo(KingfisherManager.shared.defaultOptions + (options ?? .empty))
         return setImage(
             with: source,
@@ -87,7 +88,8 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         return setImage(
             with: resource?.convertToSource(),
             placeholder: placeholder,
@@ -101,7 +103,8 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: KFCrossPlatformImage? = nil,
         parsedOptions: KingfisherParsedOptionsInfo,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         var mutatingSelf = self
         guard let source = source else {
             base.image = placeholder
@@ -189,7 +192,8 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         let options = KingfisherParsedOptionsInfo(KingfisherManager.shared.defaultOptions + (options ?? .empty))
         return setAlternateImage(
             with: source,
@@ -222,7 +226,8 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: KFCrossPlatformImage? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         return setAlternateImage(
             with: resource?.convertToSource(),
             placeholder: placeholder,
@@ -236,7 +241,8 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: KFCrossPlatformImage? = nil,
         parsedOptions: KingfisherParsedOptionsInfo,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         var mutatingSelf = self
         guard let source = source else {
             base.alternateImage = placeholder
@@ -317,6 +323,7 @@ extension KingfisherWrapper where Base: NSButton {
     }
 }
 
+
 // MARK: - Associated Object
 private var taskIdentifierKey: Void?
 private var imageTaskKey: Void?
@@ -327,7 +334,7 @@ private var alternateImageTaskKey: Void?
 extension KingfisherWrapper where Base: NSButton {
 
     // MARK: Properties
-
+    
     public private(set) var taskIdentifier: Source.Identifier.Value? {
         get {
             let box: Box<Source.Identifier.Value>? = getAssociatedObject(base, &taskIdentifierKey)
@@ -338,7 +345,7 @@ extension KingfisherWrapper where Base: NSButton {
             setRetainedAssociatedObject(base, &taskIdentifierKey, box)
         }
     }
-
+    
     private var imageTask: DownloadTask? {
         get { return getAssociatedObject(base, &imageTaskKey) }
         set { setRetainedAssociatedObject(base, &imageTaskKey, newValue)}

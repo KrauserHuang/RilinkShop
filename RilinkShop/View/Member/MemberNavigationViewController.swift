@@ -17,8 +17,8 @@ class MemberNavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("MemberNavigationViewController + \(#function)")
-        print("didLogin:\(UserService.shared.didLogin)")
+//        print("MemberNavigationViewController + \(#function)")
+//        print("didLogin:\(UserService.shared.didLogin)")
 
         if UserService.shared.didLogin {
             tryLogin()
@@ -29,6 +29,8 @@ class MemberNavigationViewController: UINavigationController {
         }
         Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
         Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
+//        Global.ACCOUNT = LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) ?? ""
+//        Global.ACCOUNT_PASSWORD = LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey) ?? ""
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -64,6 +66,7 @@ class MemberNavigationViewController: UINavigationController {
             print("showRoot失敗")
             return
         }
+//        if LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) != nil {
         if MyKeyChain.getBossAccount() != nil {
             let vc = StoreAppViewController()
             vc.modalPresentationStyle = .fullScreen
@@ -78,11 +81,6 @@ class MemberNavigationViewController: UINavigationController {
     }
     // MARK: - 跳登入首頁(LoginViewController_1)，只要沒跑showLogIn()，就不會換頁
     func showLogIn() {
-//        let vc = LoginViewController_1()
-//        vc.delegate = self
-//        popToRootViewController(animated: true)
-//        setViewControllers([vc], animated: false)
-//        user = User()
         let memberCenterVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as! MemberCenterViewController
         popToRootViewController(animated: true)
         setViewControllers([memberCenterVC], animated: false)
@@ -112,11 +110,9 @@ class MemberNavigationViewController: UINavigationController {
                     }
 
                     Global.personalData = response as? User
-//                    print(#function)
-//                    print(Global.personalData)
 
-                    Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
-                    Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
+//                    Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
+//                    Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
 
                     MemberCenterViewController.newRPoint = Global.personalData?.point ?? "0"
 
@@ -124,7 +120,7 @@ class MemberNavigationViewController: UINavigationController {
                         return
                     }
                     if let personalCMDImageFile = Global.personalData?.cmdImageFile {
-                        self.userImage?.setImage(imageURL: API_URL + personalCMDImageFile)
+                        self.userImage?.setImage(with: API_URL + personalCMDImageFile)
                     }
                 }
             }

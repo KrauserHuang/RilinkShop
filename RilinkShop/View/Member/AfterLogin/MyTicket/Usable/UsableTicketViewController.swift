@@ -26,10 +26,23 @@ class UsableTicketViewController: UIViewController {
             }
         }
     }
-    var account = MyKeyChain.getAccount() ?? ""
-    var password = MyKeyChain.getPassword() ?? ""
+    
     var refreshControl = UIRefreshControl()
-
+//    var account = MyKeyChain.getAccount() ?? ""
+//    var password = MyKeyChain.getPassword() ?? ""
+//        var account: String!
+//        var password: String!
+//
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,6 +64,12 @@ class UsableTicketViewController: UIViewController {
     }
 
     func getTicket() {
+//        QRCodeService.shared.unconfirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                           pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                           ispackage: "0") { productResponse in
+//            QRCodeService.shared.unconfirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                               pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                               ispackage: "1") { packageResponse in
         QRCodeService.shared.unconfirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
             QRCodeService.shared.unconfirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
 //                let wholeProducts = productResponse
@@ -79,8 +98,14 @@ class UsableTicketViewController: UIViewController {
 
     @objc func refreshList() {
         self.refreshControl.beginRefreshing()
-        QRCodeService.shared.unconfirmList(id: account, pwd: password, ispackage: "0") { productResponse in
-            QRCodeService.shared.unconfirmList(id: self.account, pwd: self.password, ispackage: "1") { packageResponse in
+//        QRCodeService.shared.unconfirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                           pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                           ispackage: "0") { productResponse in
+//            QRCodeService.shared.unconfirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                               pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
+//                                               ispackage: "1") { packageResponse in
+        QRCodeService.shared.unconfirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
+            QRCodeService.shared.unconfirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
                 self.tickets = productResponse + packageResponse
                 self.sortedTickets = self.tickets.sorted(by: { ticket1, ticket2 in
                     ticket1.orderDate > ticket2.orderDate

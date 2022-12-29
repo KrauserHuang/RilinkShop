@@ -23,9 +23,9 @@ class StoreCollectionViewCell: UICollectionViewCell {
     }
 
     func configure(with model: Store) {
-        imageView.setImage(imageURL: SHOP_ROOT_URL + model.storePicture)
-        nameLabel.text = model.storeName
-        locationLabel.text = "地址：\(model.storeAddress)"
-        phoneLabel.text = "電話：\(model.storePhone)"
+        nameLabel.text      = model.storeName
+        locationLabel.text  = "地址：\(model.storeAddress)"
+        phoneLabel.text     = "電話：\(model.storePhone)"
+        imageView.setImage(with: SHOP_ROOT_URL + model.storePicture)
     }
 }

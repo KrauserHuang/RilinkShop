@@ -184,30 +184,30 @@ class ProductService {
     }
     // MARK: - Shoppingcart Related
     // Add item to shopping cart(新增商品至購物車)
-    func addShoppingCartItem(id: String, pwd: String, no: String, spec: String, price: String, qty: String, total: String, completion: @escaping (Product) -> Void) {
-        let url = SHOP_API_URL + URL_ADDSHOPPINGCART // test
-        let parameters = [
-            "member_id": id,
-            "member_pwd": pwd,
-            "product_no": no,
-            "product_spec": spec,
-            "product_price": price,
-            "order_qty": qty,
-            "total_amount": total
-        ]
-        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
-            print("---")
-            print(response.response)
-            print(response.value)
-            let isSuccess: Bool = response.response == nil ? false : response.response!.statusCode == 200
-            NotificationCenter.default.post(name: Notification.Name.inCartItemsDidUpdate,
-                                            object: nil,
-                                            userInfo: ["ifHasItem": isSuccess])
-            print("新增項目成功！")
-            // dosomething for error or whatever
-
-        }
-    }
+//    func addShoppingCartItem(id: String, pwd: String, no: String, spec: String, price: String, qty: String, total: String, completion: @escaping (Product) -> Void) {
+//        let url = SHOP_API_URL + URL_ADDSHOPPINGCART // test
+//        let parameters = [
+//            "member_id": id,
+//            "member_pwd": pwd,
+//            "product_no": no,
+//            "product_spec": spec,
+//            "product_price": price,
+//            "order_qty": qty,
+//            "total_amount": total
+//        ]
+//        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+//            print("---")
+//            print(response.response)
+//            print(response.value)
+//            let isSuccess: Bool = response.response == nil ? false : response.response!.statusCode == 200
+//            NotificationCenter.default.post(name: Notification.Name.inCartItemsDidUpdate,
+//                                            object: nil,
+//                                            userInfo: ["ifHasItem": isSuccess])
+//            print("新增項目成功！")
+//            // dosomething for error or whatever
+//
+//        }
+//    }
 
     func addShoppingCartItem(id: String, pwd: String, no: String, spec: String, price: String, qty: String, total: String, completed: @escaping Completion) {
         let url = SHOP_API_URL + URL_ADDSHOPPINGCART

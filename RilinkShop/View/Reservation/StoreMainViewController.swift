@@ -37,12 +37,6 @@ class StoreMainViewController: UIViewController {
         }
     }
     var id = String()
-//    var account = MyKeyChain.getAccount() ?? ""
-//    var password = MyKeyChain.getPassword() ?? ""
-//    let account = Global.ACCOUNT
-//    let password = Global.ACCOUNT_PASSWORD
-//    let account = UserService.shared.id
-//    let password = UserService.shared.pwd
 
     let dropDown = DropDown()
 
@@ -50,16 +44,6 @@ class StoreMainViewController: UIViewController {
         super.viewDidLoad()
 
         initUI()
-//        print("stores:\(stores)")
-//        print("StoreMainViewController " + #function)
-//        print("GlobalAccount:\(Global.ACCOUNT)")
-//        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
-//        print("-----------------------------------")
-//        print("KeyChainAccount:\(MyKeyChain.getAccount())")
-//        print("KeyChainPassword:\(MyKeyChain.getPassword())")
-//        print("-----------------------------------")
-//        print("UserServiceAccount:\(UserService.shared.id)")
-//        print("UserServicePassword:\(UserService.shared.pwd)")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +86,8 @@ class StoreMainViewController: UIViewController {
         navigationItem.rightBarButtonItem = shoppingcartButton
     }
     @objc private func toCartViewController() {
+//        let vc = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                    password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let vc = CartViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -113,16 +99,19 @@ class StoreMainViewController: UIViewController {
     }
 
     func configureCollectionView() {
-        let nib = UINib(nibName: StoreCollectionViewCell.reuseIdentifier, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: StoreCollectionViewCell.reuseIdentifier)
-        collectionView.dataSource = dataSource
+        collectionView.register(StoreCollectionViewCell.nib, forCellWithReuseIdentifier: StoreCollectionViewCell.reuseIdentifier)
+//        collectionView.dataSource = dataSource
         collectionView.delegate = self
         collectionView.collectionViewLayout = createGridLayout()
     }
 
     func loadStoreType() {
-        StoreService.shared.getStoreType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                         pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseTypes in
+//        StoreService.shared.getStoreType(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                         pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseTypes in
+        StoreService.shared.getStoreType(id: MyKeyChain.getAccount() ?? "",
+                                         pwd: MyKeyChain.getPassword() ?? "") { responseTypes in
+//        StoreService.shared.getStoreType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                         pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseTypes in
             var isFirstType = true
             let sortedTypes = responseTypes.sorted { $0.updateTime > $1.updateTime }
             self.types = sortedTypes.map {
@@ -142,8 +131,12 @@ class StoreMainViewController: UIViewController {
 
     func loadStoreList() {
         HUD.showLoadingHUD(inView: self.view, text: "載入店家中")
-        StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                         pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseStores in
+//        StoreService.shared.getStoreList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                         pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseStores in
+        StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? "",
+                                         pwd: MyKeyChain.getPassword() ?? "") { responseStores in
+//        StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                         pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseStores in
             HUD.hideLoadingHUD(inView: self.view)
             self.stores.removeAll()
             self.stores = responseStores
@@ -164,9 +157,6 @@ class StoreMainViewController: UIViewController {
         for typeModel in typeModels {
             typeModelNames.append(typeModel.type.name)
         }
-//        print(#function)
-//        print("typeModels:\(typeModels)")
-//        print("typeNames:\(typeNames)")
 //        dropDown.dataSource = typeNames // types裡所有的name
         dropDown.dataSource = typeModelNames
         dropDown.anchorView = storeTypeButton // drop down list會顯示在所設定的view下(這裡指button)
@@ -237,6 +227,8 @@ extension StoreMainViewController {
 extension StoreMainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let store = filteredStores[indexPath.item]
+//        let vc = HostelDetailViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                            password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let vc = HostelDetailViewController()
         vc.store = store
         vc.fixmotor = store.fixmotor
@@ -283,6 +275,5 @@ extension StoreMainViewController: UIPickerViewDelegate, UIPickerViewDataSource 
                 filteredStores.append(store)
             }
         }
-//        updateSnapshot()
     }
 }

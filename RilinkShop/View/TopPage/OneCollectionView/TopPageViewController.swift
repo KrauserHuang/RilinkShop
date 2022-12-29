@@ -40,7 +40,20 @@ class TopPageViewController: UIViewController {
     var bannerList = [Banner]()
 
     let notificationCenter = NotificationCenter.default
-
+    
+//    var account: String!
+//    var password: String!
+//
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -81,16 +94,24 @@ extension TopPageViewController {
     }
     // MARK: - Load package API
     func loadPackage() {
-        ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
+//        ProductService.shared.loadPackageList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) ?? "",
+//                                              pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey) ?? "") { packagesResponse in
+        ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? "",
+                                              pwd: MyKeyChain.getPassword() ?? "") { packagesResponse in
+//        ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
             let wholePackages = packagesResponse
             self.packages = wholePackages
         }
     }
     // MARK: - Load banner API
     func loadBanner() {
-        BannerService.shared.getBannerList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                           pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { success, response in
+//        BannerService.shared.getBannerList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) ?? "",
+//                                           pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey) ?? "") { success, response in
+        BannerService.shared.getBannerList(id: MyKeyChain.getAccount() ?? "",
+                                           pwd: MyKeyChain.getPassword() ?? "") { success, response in
+//        BannerService.shared.getBannerList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                           pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { success, response in
             guard success else {
                 let errorMsg = response as! String
 //                Alert.showMessage(title: "", msg: errorMsg, vc: self)
@@ -122,9 +143,12 @@ extension TopPageViewController {
                                                  style: .plain,
                                                  target: self,
                                                  action: #selector(toMessageViewController))
-        navigationItem.rightBarButtonItems = [shoppingcartButton, notificationButton]
+//        navigationItem.rightBarButtonItems = [shoppingcartButton, notificationButton]
+        navigationItem.rightBarButtonItems = [shoppingcartButton]
     }
     @objc private func toCartViewController() {
+//        let vc = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                    password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let vc = CartViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -272,6 +296,8 @@ extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
 // MARK: - CollectionView Delegate
 extension TopPageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let vc = PackageInfoViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                           password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let vc = PackageInfoViewController()
         let package = packages[indexPath.row]
         vc.package = package

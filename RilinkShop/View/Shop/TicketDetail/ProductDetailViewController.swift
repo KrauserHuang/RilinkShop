@@ -47,7 +47,20 @@ class ProductDetailViewController: UIViewController {
     var productNo = String()
     var producrPrice = String()
     var productStockMin = String()
-
+    
+//    var account: String!
+//    var password: String!
+//    
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.hidesBottomBarWhenPushed = true
@@ -69,31 +82,31 @@ class ProductDetailViewController: UIViewController {
     }
 
     func configureView() {
-        ticketImageView.layer.cornerRadius = 10
+        ticketImageView.layer.cornerRadius  = 10
         // stepper外圍
-        stepperOuterView.backgroundColor = .systemGray6
+        stepperOuterView.backgroundColor    = .systemGray6
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
         // 加減
-        addButton.tintColor = .white
-        addButton.backgroundColor = Theme.customOrange
-        addButton.layer.cornerRadius = addButton.frame.height / 2
-        substractButton.tintColor = .white
-        substractButton.backgroundColor = Theme.customOrange
-        substractButton.layer.cornerRadius = substractButton.frame.height / 2
+        addButton.tintColor                 = .white
+        addButton.backgroundColor           = .primaryOrange
+        addButton.layer.cornerRadius        = addButton.frame.height / 2
+        substractButton.tintColor           = .white
+        substractButton.backgroundColor     = .primaryOrange
+        substractButton.layer.cornerRadius  = substractButton.frame.height / 2
         // 中間的數字
-        itemNumberLabel.backgroundColor = .clear
+        itemNumberLabel.backgroundColor     = .clear
         // 商品敘述View
-        descriptionView.layer.shadowColor = UIColor.black.cgColor
+        descriptionView.layer.shadowColor   = UIColor.black.cgColor
         descriptionView.layer.shadowOpacity = 0.2
-        descriptionView.layer.shadowOffset = CGSize(width: 2, height: -2)
+        descriptionView.layer.shadowOffset  = CGSize(width: 2, height: -2)
         // 下面兩個button
-        addToCartButton.layer.cornerRadius = 10
-        addToCartButton.layer.borderWidth = 1
-        addToCartButton.layer.borderColor = Theme.customOrange.cgColor
-        addToCartButton.tintColor = Theme.customOrange
-        buyNowButton.layer.cornerRadius = 10
-        buyNowButton.tintColor = .white
-        buyNowButton.backgroundColor = Theme.customOrange
+        addToCartButton.layer.cornerRadius  = 10
+        addToCartButton.layer.borderWidth   = 1
+        addToCartButton.layer.borderColor   = UIColor.primaryOrange.cgColor
+        addToCartButton.tintColor           = .primaryOrange
+        buyNowButton.layer.cornerRadius     = 10
+        buyNowButton.tintColor              = .white
+        buyNowButton.backgroundColor        = .primaryOrange
     }
 
     func showItemInfo() {
@@ -127,12 +140,12 @@ class ProductDetailViewController: UIViewController {
 //                self.productStockMin = productStock.sorted { $0 < $1 }.first!
 //                self.stock = Int(self.productStockMin)!
             }
-            let imageURLString = SHOP_ROOT_URL + package.productPicture
-            ticketImageView.setImage(imageURL: imageURLString)
-            stock = Int(package.productStock)!
-            nameLabel.text = package.productName
-            costLabel.text = "NT$：\(package.productPrice)"
-            descriptionLabel.text = package.productDescription
+            let imageURLString      = SHOP_ROOT_URL + package.productPicture
+            stock                   = Int(package.productStock)!
+            nameLabel.text          = package.productName
+            costLabel.text          = "NT$：\(package.productPrice)"
+            descriptionLabel.text   = package.productDescription
+            ticketImageView.setImage(with: imageURLString)
 
             if self.stock == 0 {
                 self.addToCartButton.isHidden = true
@@ -258,6 +271,7 @@ class ProductDetailViewController: UIViewController {
                         let title = "新增購物車成功"
                         let message = "請儘速完成付款，商品於購物車中僅留存3天"
                         Alert.showMessage(title: title, msg: message, vc: self) {
+//                            let vc = CartViewController(account: self.account, password: self.password)
                             let vc = CartViewController()
                             self.navigationController?.pushViewController(vc, animated: true)
                         }

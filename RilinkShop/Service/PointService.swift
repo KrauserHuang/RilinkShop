@@ -18,7 +18,6 @@ class PointService {
             "member_id": id,
             "member_pwd": pwd
         ]
-//        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
 
         AF.request(url, method: .post, parameters: parameters).responseJSON { response in
 
@@ -35,13 +34,6 @@ class PointService {
 
             switch response.result {
             case .success:
-
-//                guard value["code"].stringValue == returnCode else {
-//                    let errorMsg = value["responseMessage"].stringValue
-//                    completion(false, errorMsg as AnyObject)
-//                    return
-//                }
-
                 let datas = value["data"].arrayValue
                 var points: [Point] = []
                 for data in datas {
@@ -53,8 +45,6 @@ class PointService {
                                       accountType: data["accountType"].stringValue)
                     points.append(point)
                 }
-                print("----------")
-                print(points)
                 completion(true, points as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue

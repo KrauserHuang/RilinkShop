@@ -28,7 +28,7 @@ class PackageProductDetailTableViewCell: UITableViewCell {
 
     func configure(with model: PackageProduct) {
         if let modelProductPicture = model.productPicture {
-            productImageView.setImage(imageURL: SHOP_ROOT_URL + modelProductPicture)
+            productImageView.setImage(with: SHOP_ROOT_URL + modelProductPicture)
         } else {
             print("model.productPicture is nil!")
         }

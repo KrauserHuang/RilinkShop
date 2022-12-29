@@ -16,7 +16,19 @@ class RepairReservationMainViewController: UIViewController {
     var motorNos = [FixMotor]() // 所有該使用者預約的車牌
     var specificMotorNoDetails = [FixMotor]() // 該車牌所有的預約時間
     let dropDown = DropDown()
-
+//    var account: String!
+//    var password: String!
+//
+//    init(account: String, password: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.account = account
+//        self.password = password
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,9 +57,15 @@ class RepairReservationMainViewController: UIViewController {
             self.specificMotorNoDetails.removeAll()
 
             HUD.showLoadingHUD(inView: self.view, text: "")
-            FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                                       pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
+//            FixMotorService.shared.bookingFixMotorList(id: self.account,
+//                                                       pwd: self.password,
+//                                                       no: item) { success, response in
+            FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? "",
+                                                       pwd: MyKeyChain.getPassword() ?? "",
                                                        no: item) { success, response in
+//            FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                                       pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
+//                                                       no: item) { success, response in
                 HUD.hideLoadingHUD(inView: self.view)
                 guard success else {
                     let errorMsg = response as! String
@@ -72,15 +90,18 @@ extension RepairReservationMainViewController {
     private func configTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-
-        tableView.register(UINib(nibName: RepairReservationTableViewCell.cellIdentifier(),
-                                 bundle: nil),
-                           forCellReuseIdentifier: RepairReservationTableViewCell.cellIdentifier())
+        tableView.register(RepairReservationTableViewCell.nib, forCellReuseIdentifier: RepairReservationTableViewCell.reuseIdentifier)
     }
     private func loadFixMotorList() {
-        FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-                                                   pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
+//        FixMotorService.shared.bookingFixMotorList(id: account,
+//                                                   pwd: password,
+//                                                   no: "") { success, response in
+        FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? "",
+                                                   pwd: MyKeyChain.getPassword() ?? "",
                                                    no: "") { success, response in
+//        FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
+//                                                   pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
+//                                                   no: "") { success, response in
             guard success else {
                 let errorMsg = response as! String
                 Alert.showMessage(title: "", msg: errorMsg, vc: self)
@@ -99,7 +120,7 @@ extension RepairReservationMainViewController: UITableViewDelegate, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RepairReservationTableViewCell.cellIdentifier(), for: indexPath) as? RepairReservationTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RepairReservationTableViewCell.reuseIdentifier, for: indexPath) as? RepairReservationTableViewCell else {
             return UITableViewCell()
         }
 

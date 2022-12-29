@@ -24,20 +24,10 @@ class LoginViewController_1: UIViewController {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var visibleButton: UIButton!
     @IBOutlet weak var privateButton: UIButton!
-
-    let tool = Tool()
+    
     var delegate: LoginViewController_1_Delegate?
     var storeIDs: [StoreIDInfo]?
     var storeIDInfo: StoreIDInfo?
-//    {
-//        didSet {
-//            let storeMode = storeIDInfo != nil
-//            textFieldView.isHidden = !storeMode
-//            loginButton.isHidden = !storeMode
-//            signupButton.isHidden = !storeMode
-//            privateButton.isHidden = !storeMode
-//        }
-//    }
     let storePicker = StorePicker()
     let toolBar = UIToolbar()
     var storeID: String?
@@ -47,28 +37,18 @@ class LoginViewController_1: UIViewController {
 
         tabBarController?.tabBar.isHidden = true
         storeIDButton.isHidden = true
-
+        
+        configureButton()
         hideKeyBoard()
         getStoreID()
-        tool.makeRoundedCornersButton(button: storeIDButton)
-        storeIDButton.backgroundColor = Theme.customOrange
-        tool.makeRoundedCornersButton(button: loginButton)
-        loginButton.backgroundColor = Theme.customOrange
-        tool.makeRoundedCornersButton(button: signupButton)
-        signupButton.backgroundColor = Theme.customOrange
-
-        accountTextField.delegate = self
-        passwordTextField.delegate = self
-
-        storePicker.toolBarDelegate = self
-        storePicker.delegate = self
-        storePicker.selectRow(0, inComponent: 0, animated: false)
+        configureTextField()
+        configureStorePicker()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        accountTextField.text = ""
-        passwordTextField.text = ""
+        accountTextField.text   = ""
+        passwordTextField.text  = ""
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,21 +60,40 @@ class LoginViewController_1: UIViewController {
             self.toolBar.removeFromSuperview()
         }
     }
-    // MARK: - Keyboard
-    func hideKeyBoard() {
+    
+    private func configureButton() {
+        storeIDButton.layer.cornerRadius    = storeIDButton.frame.height / 2
+        storeIDButton.backgroundColor       = .primaryOrange
+        loginButton.layer.cornerRadius      = loginButton.frame.height / 2
+        loginButton.backgroundColor         = .primaryOrange
+        signupButton.layer.cornerRadius     = signupButton.frame.height / 2
+        signupButton.backgroundColor        = .primaryOrange
+    }
+    
+    private func configureTextField() {
+        accountTextField.delegate   = self
+        passwordTextField.delegate  = self
+    }
+    
+    private func hideKeyBoard() {
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(cancelFocus))
         tapGes.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tapGes)
+        view.addGestureRecognizer(tapGes)
     }
     @objc func cancelFocus() {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
-    // MARK: - StoreID
-    func getStoreID() {
-        let storeAcc = "99999" // 後端強制數值
-        let storePwd = "99999" // 後端強制數值
-        HUD.showLoadingHUD(inView: self.view, text: "取得店家資訊中")
-        UserService.shared.getStoreIDList(storeAcc: storeAcc, storePwd: storePwd) { success, response in
+    
+    private func configureStorePicker() {
+        storePicker.toolBarDelegate = self
+        storePicker.delegate        = self
+        storePicker.selectRow(0, inComponent: 0, animated: false)
+    }
+    
+    private func getStoreID() {
+        HUD.showLoadingHUD(inView: view, text: "取得店家資訊中")
+        UserService.shared.getStoreIDList(storeAcc: "99999", storePwd: "99999") { success, response in
+            
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {
@@ -120,7 +119,6 @@ class LoginViewController_1: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             storeIDButton.isHidden = true
             signupButton.isHidden = false
-//            storeIDButton.setTitle("店家ID", for: .normal)
         } else {
             storeIDButton.isHidden = false
             signupButton.isHidden = true
@@ -128,17 +126,14 @@ class LoginViewController_1: UIViewController {
     }
     // MARK: - Button to call pickerView
     @IBAction func showStoreID(_ sender: UIButton) {
-//        storePicker.toolBarDelegate = self
-//        storePicker.delegate = self
-
         view.addSubview(storePicker)
 
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = .black
+        toolBar.barStyle        = .default
+        toolBar.isTranslucent   = true
+        toolBar.tintColor       = .black
         toolBar.sizeToFit()
 
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped(_:)))
+        let doneButton  = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped(_:)))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -162,7 +157,7 @@ class LoginViewController_1: UIViewController {
             storePickerBottomConstraint?.isActive = false
         }
 
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
         UIView.animate(withDuration: 0.25) {
             storePickerTopConstraint?.isActive = false
             storePickerBottomConstraint?.isActive = true
@@ -185,10 +180,10 @@ class LoginViewController_1: UIViewController {
     // MARK: - Password visibility
     @IBAction func visibleAction(_ sender: UIButton) {
         if passwordTextField.isSecureTextEntry {
-            visibleButton.setImage(UIImage(named: "eye"), for: .normal)
+            visibleButton.setImage(Images.eye, for: .normal)
             passwordTextField.isSecureTextEntry = false
         } else {
-            visibleButton.setImage(UIImage(named: "eyeSlash"), for: .normal)
+            visibleButton.setImage(Images.eyeSlash, for: .normal)
             passwordTextField.isSecureTextEntry = true
         }
     }
@@ -200,23 +195,18 @@ class LoginViewController_1: UIViewController {
          2. 檢查欄位輸入格式有無錯誤(基礎檢查)
          3. 與後端檢查使否有對應
          */
-        guard let account = accountTextField.text,
-              let password = passwordTextField.text else { return }
-        guard account != "",
-              password != "" else {
-                  let alertController = UIAlertController(title: "", message: "欄位不可空白", preferredStyle: .alert)
-                  let okAction = UIAlertAction(title: "確認", style: .default, handler: nil)
-                  alertController.addAction(okAction)
-                  present(alertController, animated: true, completion: nil)
-                  return
-              }
+        guard let account = accountTextField.text, let password = passwordTextField.text else { return }
+        guard account != "", password != "" else {
+            Alert.showMessage(title: "欄位不可空白", msg: "請輸入電話號碼、密碼", vc: self)
+            return
+        }
 
         Global.ACCOUNT = account
         Global.ACCOUNT_PASSWORD = password
+//        LocalStorageManager.shared.setData(account, key: .userIdKey)
+//        LocalStorageManager.shared.setData(password, key: .userPasswordKey)
         MyKeyChain.setAccount(account)
         MyKeyChain.setPassword(password)
-        UserService.shared.id = account
-        UserService.shared.pwd = password
 
         print(#function)
         print("password:\(password)")
@@ -230,13 +220,6 @@ class LoginViewController_1: UIViewController {
                 self.present(alert, animated: true, completion: nil)
                 return
             }
-
-//            let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", "^[A-Za-z0-9]{6,12}$")
-//            guard passwordPredicate.evaluate(with: password) else {
-//                let alert = UIAlertController.simpleOKAlert(title: "密碼格式錯誤", message: "請輸入6-12碼英數字混合", buttonTitle: "確認", action: nil)
-//                present(alert, animated: true, completion: nil)
-//                return
-//            }
 
             Global.ACCOUNT = account
             Global.ACCOUNT_PASSWORD = password
@@ -256,8 +239,16 @@ class LoginViewController_1: UIViewController {
                             return
                         }
                         // 登入成功才把帳密儲存在Keychain裡面
+//                        LocalStorageManager.shared.setData(account, key: .userIdKey)
+//                        LocalStorageManager.shared.setData(password, key: .userPasswordKey)
                         MyKeyChain.setAccount(Global.ACCOUNT)
                         MyKeyChain.setPassword(Global.ACCOUNT_PASSWORD)
+                        
+//                        NotificationService.shared.memberSetToken(id: account,
+//                                                                  pwd: password,
+//                                                                  token: <#T##String#>) { success, response in
+//                            <#code#>
+//                        }
 
                         self.delegate?.finishLoginView(self, action: .Login)
                     }
@@ -290,7 +281,9 @@ class LoginViewController_1: UIViewController {
                             Alert.showMessage(title: "", msg: errmsg, vc: self, handler: nil)
                             return
                         }
-
+                        
+//                        LocalStorageManager.shared.setData(account, key: .userIdKey)
+//                        LocalStorageManager.shared.setData(password, key: .userPasswordKey)
                         MyKeyChain.setBossAccount(Global.ACCOUNT)
                         MyKeyChain.setBossPassword(Global.ACCOUNT_PASSWORD)
 
@@ -315,7 +308,7 @@ class LoginViewController_1: UIViewController {
     }
     // MARK: - 條款頁
     @IBAction func privateAction(_ sender: UIButton) {
-        self.navigationController?.pushViewController(PrivateRuleViewController(), animated: true)
+        navigationController?.pushViewController(PrivateRuleViewController(), animated: true)
     }
 }
 // MARK: - UITextFieldDelegate
@@ -360,7 +353,5 @@ extension LoginViewController_1: UIPickerViewDelegate, UIPickerViewDataSource {
 
         let storeID = storeIDs?[row].storeID ?? ""
         self.storeID = storeID
-        print(#function)
-        print(storeID)
     }
 }

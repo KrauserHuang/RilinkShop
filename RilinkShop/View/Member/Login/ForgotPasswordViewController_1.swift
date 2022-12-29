@@ -17,19 +17,21 @@ class ForgotPasswordViewController_1: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
 
     weak var delegate: ForgotPasswordViewController_1_Delegate?
-    let tool = Tool()
     var edittingTextField: UITextField?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureButton()
         configureKeyboard()
-
-        tool.makeRoundedCornersButton(button: submitButton)
-        submitButton.backgroundColor = Theme.customOrange
+    }
+    
+    private func configureButton() {
+        submitButton.layer.cornerRadius = submitButton.frame.height / 2
+        submitButton.backgroundColor    = .primaryOrange
     }
     // MARK: - Keyboard
-    func configureKeyboard() {
+    private func configureKeyboard() {
         phoneTextField.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)

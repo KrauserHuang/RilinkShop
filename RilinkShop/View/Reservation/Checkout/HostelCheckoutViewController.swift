@@ -31,31 +31,45 @@ class HostelCheckoutViewController: UIViewController {
     var duration: String?
     var store = Store()
 
-    var account = MyKeyChain.getAccount() ?? ""
-    var password = MyKeyChain.getPassword() ?? ""
-
+//    var account = MyKeyChain.getAccount() ?? ""
+//    var password = MyKeyChain.getPassword() ?? ""
+    var account: String!
+    var password: String!
+    
+    init(account: String, password: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.account = account
+        self.password = password
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
         title = "預約確認"
+        configureButton()
         configureView()
     }
-
-    func configureView() {
+    
+    private func configureButton() {
         appointmentCheckoutButton.setTitle("預約確認", for: .normal)
-        appointmentCheckoutButton.backgroundColor = Theme.customOrange
-        appointmentCheckoutButton.tintColor = .white
-        appointmentCheckoutButton.layer.cornerRadius = 10
+        appointmentCheckoutButton.backgroundColor       = .primaryOrange
+        appointmentCheckoutButton.tintColor             = .white
+        appointmentCheckoutButton.layer.cornerRadius    = 10
+    }
 
-        locationLabel.text = location
-        nameLabel.text = name
-        mobileLabel.text = mobile
-        licenseLabel.text = license
-        carTypeLabel.text = carType
-        repairTypeLabel.text = repairType
-        descriptionLabel.text = carDescription ?? ""
-        appointmentLabel.text = "\(appointment!) \(duration!)"
+    private func configureView() {
+        locationLabel.text      = location
+        nameLabel.text          = name
+        mobileLabel.text        = mobile
+        licenseLabel.text       = license
+        carTypeLabel.text       = carType
+        repairTypeLabel.text    = repairType
+        descriptionLabel.text   = carDescription ?? ""
+        appointmentLabel.text   = "\(appointment!) \(duration!)"
     }
 
     @IBAction func confirmAppointmentAction(_ sender: UIButton) {

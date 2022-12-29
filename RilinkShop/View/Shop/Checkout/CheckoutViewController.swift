@@ -17,12 +17,9 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bonusPointLabel: UILabel!
     @IBOutlet weak var bonusPointTextField: UITextField!
-    // 商品合計
-    @IBOutlet weak var orderAmountLabel: UILabel!
-    // 點數折抵
-    @IBOutlet weak var discountAmountLabel: UILabel!
-    // 應付金額合計
-    @IBOutlet weak var orderPayLabel: UILabel!
+    @IBOutlet weak var orderAmountLabel: UILabel!       // 商品合計
+    @IBOutlet weak var discountAmountLabel: UILabel!    // 點數折抵
+    @IBOutlet weak var orderPayLabel: UILabel!          // 應付金額合計
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var checkoutButton: UIButton!
 
@@ -42,16 +39,28 @@ class CheckoutViewController: UIViewController {
             }
         }
     }
-    var account = MyKeyChain.getAccount() ?? ""
-    var password = MyKeyChain.getPassword() ?? ""
-
+//    var account = MyKeyChain.getAccount() ?? ""
+//    var password = MyKeyChain.getPassword() ?? ""
+    var account: String!
+    var password: String!
+    
+    init(account: String, password: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.account = account
+        self.password = password
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         loadInCartItems()
         configureTableView()
-        configureView()
+        configureButton()
         showInfo()
         configureKeyboard()
         setPointView()
@@ -144,23 +153,23 @@ class CheckoutViewController: UIViewController {
         self.view.endEditing(true)
     }
 
-    func configureTableView() {
+    private func configureTableView() {
         cartTableView.rowHeight = UITableView.automaticDimension
         cartTableView.dataSource = self
-        cartTableView.register(UINib(nibName: CheckoutTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CheckoutTableViewCell.reuseIdentifier)
+        cartTableView.register(CheckoutTableViewCell.nib, forCellReuseIdentifier: CheckoutTableViewCell.reuseIdentifier)
         cartTableView.isScrollEnabled = false
         cartTableView.allowsSelection = false
     }
 
-    func configureView() {
-        backButton.layer.borderWidth = 1
-        backButton.layer.borderColor = Theme.customOrange.cgColor
-        backButton.layer.cornerRadius = 10
-        backButton.tintColor = Theme.customOrange
-
-        checkoutButton.backgroundColor = Theme.customOrange
-        checkoutButton.tintColor = .white
-        checkoutButton.layer.cornerRadius = 10
+    private func configureButton() {
+        backButton.layer.borderWidth        = 1
+        backButton.layer.borderColor        = UIColor.primaryOrange.cgColor
+        backButton.layer.cornerRadius       = 10
+        backButton.tintColor                = .primaryOrange
+    
+        checkoutButton.backgroundColor      = .primaryOrange
+        checkoutButton.tintColor            = .white
+        checkoutButton.layer.cornerRadius   = 10
     }
 
     func showInfo() {
@@ -204,14 +213,14 @@ class CheckoutViewController: UIViewController {
     }
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        let contentInsets                   = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        scrollView.contentInset             = contentInsets
+        scrollView.scrollIndicatorInsets    = contentInsets
     }
     @objc func keyboardWillHide(_ notification: Notification) {
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        let contentInsets                   = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentInset             = contentInsets
+        scrollView.scrollIndicatorInsets    = contentInsets
     }
 
     @IBAction func backButtonTapped(_ sender: UIButton) {

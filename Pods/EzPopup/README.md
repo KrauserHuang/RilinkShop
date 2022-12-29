@@ -7,7 +7,8 @@
 ## What is EzPopup
 If you are struggling in finding a way to show a view or view controller as a pop up on your iOS devices, this pod is for you. With EzPopup, you can show popup easily, like below:
 
-<img src="https://raw.githubusercontent.com/huynguyencong/EzPopup/develop/Images/custom-alert-at-center.png" alt="Show custom popup at center" width="341px" height="606px"/> <img src="https://raw.githubusercontent.com/huynguyencong/EzPopup/develop/Images/custom-picker-at-bottom.png" alt="Show custom popup at bottom" width="341px" height="606px"/>
+![Custom alert at center](Images/custom-alert-at-center.png)
+![Custom picker at bottom](Images/custom-picker-at-bottom.png)
 
 ## Example
 
@@ -15,9 +16,24 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Compatibility
 - iOS 13 and later.
-- Swift 5.1 and later (for earlier Swift version, please use earlier ImageScrollView version).
+- Swift 5.1 and later (for earlier Swift version, please use earlier `ImageScrollView` version).
 
 ## Installation
+
+### Swift Package Manager
+```swift
+dependencies: [
+    .package(url: "https://github.com/huynguyencong/EzPopup.git", .upToNextMajor(from: "1.0.0"))
+]
+```
+
+Or
+
+File > Swift Packages > Add Package Dependency
+Add https://github.com/huynguyencong/EzPopup.git
+Select "Up to Next Major" with "1.0.0"
+
+### Cocoapods
 
 EzPopup is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
@@ -29,9 +45,9 @@ pod 'EzPopup'
 ## Usage
 Using pop up view controller is very simple:
 
-Firstly, init a PopupViewController with a view or view controller you want to show:
+Firstly, init a `PopupViewController` with a view or view controller you want to show:
 
-```
+```swift
 // init YourViewController
 let contentViewController = ...
 
@@ -46,7 +62,7 @@ present(popupVC, animated: true)
 
 Optional: You can custom some properties of `PopupViewController` if you'd like. For example:
 
-```
+```swift
 popupVC.backgroundAlpha = 0.3
 popupVC.backgroundColor = .black
 popupVC.canTapOutsideToDismiss = true

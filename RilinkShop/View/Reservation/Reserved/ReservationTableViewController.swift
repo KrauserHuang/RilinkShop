@@ -8,9 +8,7 @@
 import UIKit
 
 class ReservationTableViewController: UITableViewController {
-
-    let tool = Tool()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,11 +32,11 @@ class ReservationTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reservationTableViewCell", for: indexPath) as! ReservationTableViewCell
 
         cell.closure = {
-            self.navigationController?.pushViewController(CalendarViewController(), animated: true)
+//            let controller = CalendarViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
+//                                                    password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
+            let controller = CalendarViewController()
+            self.navigationController?.pushViewController(controller, animated: true)
         }
-
-        cell.reservationButton.backgroundColor = tool.customOrange
-        tool.makeRoundedCornersButton(button: cell.reservationButton)
 
         return cell
 

@@ -99,7 +99,9 @@ extension WKWebViewController: WKNavigationDelegate, WKUIDelegate {
 //            } else {
 //                setLeftItem()
 //            }
-            if webView.url?.absoluteString == "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/payments/epospay/eposOrderResult.php" {
+            //https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid=
+//            if webView.url?.absoluteString == "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/payments/epospay/eposOrderResult.php" {
+            if webView.url?.absoluteString == "https://rilink.jotangi.tw:11074/ticketec/ecpay/payments/epospay/eposOrderResult.php" {
                 navigationItem.leftBarButtonItem = nil
                 print("you are on the last page, no button for you!")
             } else {

@@ -29,9 +29,9 @@ class UsableTableViewCell: UITableViewCell {
 
     func configure(with model: QRCode) {
         if let modelProductPicture = model.productPicture {
-            ticketImage.setImage(imageURL: SHOP_ROOT_URL + modelProductPicture)
+            ticketImage.setImage(with: SHOP_ROOT_URL + modelProductPicture)
         } else if let modelPackagePicture = model.packagePicture {
-            ticketImage.setImage(imageURL: SHOP_ROOT_URL + modelPackagePicture)
+            ticketImage.setImage(with: SHOP_ROOT_URL + modelPackagePicture)
         }
         if let modelProductName = model.productName {
             name.text = modelProductName
@@ -39,8 +39,8 @@ class UsableTableViewCell: UITableViewCell {
             name.text = modelPackageName
         }
 
-        buyDay.text = "購買日期：\(model.orderDate)"
-        orderNo.text = "訂單編號：\(model.orderNo)"
+        buyDay.text     = "購買日期：\(model.orderDate)"
+        orderNo.text    = "訂單編號：\(model.orderNo)"
 
         if let modelOrderQty = model.orderQty {
             if model.storeID == nil {

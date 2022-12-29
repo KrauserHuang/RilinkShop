@@ -36,7 +36,7 @@ class FixMotorService {
 //                    print("fail")
 //                }
 //            }
-        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+        AF.request(url, method: .post, parameters: parameters).response { response in
 
             guard response.error == nil else {
                 let errorMsg = "伺服器連線失敗"
@@ -97,7 +97,7 @@ class FixMotorService {
 
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
 
-        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+        AF.request(url, method: .post, parameters: parameters).response { response in
             guard response.error == nil else {
                 let errorMsg = "伺服器連線失敗"
                 completion(false, errorMsg as AnyObject)

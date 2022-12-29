@@ -31,10 +31,10 @@ import Foundation
 /// to load some image data in your own way, as long as you can provide the data
 /// representation for the image.
 public protocol ImageDataProvider {
-
+    
     /// The key used in cache.
     var cacheKey: String { get }
-
+    
     /// Provides the data which represents image. Kingfisher uses the data you pass in the
     /// handler to process images and caches it for later use.
     ///
@@ -109,34 +109,6 @@ public struct LocalFileImageDataProvider: ImageDataProvider {
     }
 }
 
-extension URL {
-    static let localFileCacheKeyPrefix = "kingfisher.local.cacheKey"
-
-    // The special version of cache key for a local file on disk. Every time the app is reinstalled on the disk,
-    // the system assigns a new container folder to hold the .app (and the extensions, .appex) folder. So the URL for
-    // the same image in bundle might be different.
-    //
-    // This getter only uses the fixed part in the URL (until the bundle name folder) to provide a stable cache key
-    // for the image under the same path inside the bundle.
-    //
-    // See #1825 (https://github.com/onevcat/Kingfisher/issues/1825)
-    var localFileCacheKey: String {
-        var validComponents: [String] = []
-        for part in pathComponents.reversed() {
-            validComponents.append(part)
-            if part.hasSuffix(".app") || part.hasSuffix(".appex") {
-                break
-            }
-        }
-        let fixedPath = "\(Self.localFileCacheKeyPrefix)/\(validComponents.reversed().joined(separator: "/"))"
-        if let q = query {
-            return "\(fixedPath)?\(q)"
-        } else {
-            return fixedPath
-        }
-    }
-}
-
 /// Represents an image data provider for loading image from a given Base64 encoded string.
 public struct Base64ImageDataProvider: ImageDataProvider {
 
@@ -188,7 +160,7 @@ public struct RawImageDataProvider: ImageDataProvider {
     }
 
     // MARK: Protocol Conforming
-
+    
     /// The key used in cache.
     public var cacheKey: String
 

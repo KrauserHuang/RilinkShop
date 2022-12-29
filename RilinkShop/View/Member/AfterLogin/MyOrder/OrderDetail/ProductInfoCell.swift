@@ -27,7 +27,7 @@ class ProductInfoCell: UITableViewCell {
     }
 
     func configure(with model: List) {
-        productImageView.setImage(imageURL: SHOP_ROOT_URL + model.productPicture)
+        productImageView.setImage(with: SHOP_ROOT_URL + model.productPicture)
         nameLabel.text = model.productName
         priceLabel.text = "NT$\(model.productPrice)"
         qtyLabel.text = "X\(model.orderQty)"

@@ -14,7 +14,9 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
 
         delegate = self
-        tabBar.tintColor = Theme.customOrange
+        tabBar.tintColor = .primaryOrange
+//        LocalStorageManager.shared.setData("0911838460", key: .userIdKey)
+//        LocalStorageManager.shared.setData("simon07801", key: .userPasswordKey)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -32,6 +34,23 @@ class MainTabBarController: UITabBarController {
     }
 
     func tryLogIn() {
+        
+//        if LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) == nil,
+//           LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) != nil {
+//            // 登入店長頁面
+//            let storeVC = StoreAppViewController()
+//            storeVC.modalPresentationStyle = .fullScreen
+//            present(storeVC, animated: true, completion: nil)
+//        } else if LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) == nil,
+//                  LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) != nil {
+//            // 登入使用者頁面
+////            selectedIndex = 0
+//        } else if LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) == nil,
+//                  LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) == nil {
+//            selectedIndex = 3
+//        }
+        
+        
         if MyKeyChain.getAccount() == nil,
            MyKeyChain.getBossAccount() != nil {
             // 登入店長頁面
@@ -52,6 +71,33 @@ class MainTabBarController: UITabBarController {
 extension MainTabBarController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         print(self, #function)
+//        guard LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) == nil else {
+////        guard MyKeyChain.getAccount() == nil else {
+//            tryLogIn()
+//            guard let MainTabViewControllers = self.viewControllers else {
+//                print("no valid viewControllers in MainTabBarController.")
+//                return
+//            }
+//            guard let rootVC = MainTabViewControllers[self.selectedIndex] as? UINavigationController else {
+//                print("fail to get viewControllers(as UINavigationController).")
+//                return
+//            }
+//            rootVC.popToRootViewController(animated: false)
+//            return
+//        }
+//        guard let MainTabViewControllers = self.viewControllers else {
+//            print("no valid viewControllers in MainTabBarController.")
+//            return
+//        }
+//        guard let rootVC = MainTabViewControllers[self.selectedIndex] as? UINavigationController else {
+//            print("fail to get viewControllers(as UINavigationController).")
+//            return
+//        }
+//        rootVC.popToRootViewController(animated: false)
+//        Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self) {
+//            self.selectedIndex = 3
+//        }
+        
         tryLogIn()
         guard let MainTabViewControllers = self.viewControllers else {
             print("no valid viewControllers in MainTabBarController.")
@@ -62,10 +108,16 @@ extension MainTabBarController: UITabBarControllerDelegate {
             return
         }
         rootVC.popToRootViewController(animated: false)
-        if UserService.shared.id == "" {
-            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self) {
-                self.selectedIndex = 3
-            }
-        }
+        
+//        if LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) == nil {
+////        if MyKeyChain.getAccount() == nil {
+//            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self) {
+//                self.selectedIndex = 3
+//            }
+//        }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        tryLogIn()
     }
 }
