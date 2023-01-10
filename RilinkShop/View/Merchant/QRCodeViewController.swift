@@ -2,45 +2,44 @@
 //  QRCodeViewController.swift
 //  RilinkShop
 //
-//  Created by Tai Chin Huang on 2022/4/27.
+//  Created by Tai Chin Huang on 2023/1/10.
 //
 
 import UIKit
 import AVFoundation
-import SwiftUI
 
 protocol QRCodeViewControllerDelegate: AnyObject {
     func didFinishScan(_ viewController: QRCodeViewController)
 }
 
 class QRCodeViewController: UIViewController {
-
+    
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var outView: UIView!
-
+    
     weak var delegate: QRCodeViewControllerDelegate?
     var captureSession = AVCaptureSession()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
 
-    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
         self.navigationItem.backButtonTitle = ""
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setMask()
         setLayer()
         configureQRCodeReader()
-//        outView.alpha = 0.5
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.isHidden = false
@@ -100,7 +99,7 @@ class QRCodeViewController: UIViewController {
 
             // 使用前一個裝置物件來取得AVCaptureDeviceInput類別的實例
             let input = try AVCaptureDeviceInput(device: captureDevice)
-            // 在擷取session設定輸入裝置
+            // 在capture session設定輸入裝置
             captureSession.addInput(input)
 
             let captureMetadataOutput = AVCaptureMetadataOutput()
@@ -109,7 +108,7 @@ class QRCodeViewController: UIViewController {
             captureMetadataOutput.metadataObjectTypes = [.qr]
 
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-            videoPreviewLayer?.videoGravity = .resizeAspectFill
+            videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
 //            videoPreviewLayer?.frame = view.layer.bounds
             videoPreviewLayer?.frame.size = view.bounds.size
 //            view.layer.addSublayer(videoPreviewLayer!)
@@ -121,10 +120,6 @@ class QRCodeViewController: UIViewController {
             return
         }
     }
-
-    @IBAction func backAction() {
-        self.dismiss(animated: true, completion: nil)
-    }
 }
 
 extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
@@ -132,7 +127,6 @@ extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
         if let metaDataObj = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
            metaDataObj.type == .qr,
            let str = metaDataObj.stringValue {
-            print("回吐qrcode:\(str)")
             captureSession.stopRunning()
 
             let qrcode = str

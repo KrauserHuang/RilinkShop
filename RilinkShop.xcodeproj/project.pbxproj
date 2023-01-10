@@ -19,6 +19,8 @@
 		45F016FF278D34E800F03BC2 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45F016FD278D34E800F03BC2 /* OrderDetailViewController.xib */; };
 		45F8FA6C278D246A00D8BFFB /* PointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8FA6A278D246900D8BFFB /* PointTableViewCell.swift */; };
 		45F8FA6D278D246A00D8BFFB /* PointTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45F8FA6B278D246900D8BFFB /* PointTableViewCell.xib */; };
+		4F0187FF296D4CAA00EED3DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F0187FE296D4CA900EED3DD /* GoogleService-Info.plist */; };
+		4F018801296D522A00EED3DD /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F018800296D522900EED3DD /* QRCodeViewController.swift */; };
 		4F025B572834CD5200DC0101 /* LoginViewController_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F025B552834CD5200DC0101 /* LoginViewController_1.swift */; };
 		4F025B582834CD5200DC0101 /* LoginViewController_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F025B562834CD5200DC0101 /* LoginViewController_1.xib */; };
 		4F025B5B2834DE7800DC0101 /* ForgotPasswordViewController_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F025B592834DE7800DC0101 /* ForgotPasswordViewController_1.swift */; };
@@ -175,8 +177,6 @@
 		4FFE3BBA281926D100F09CFE /* UIAlertController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE3BB9281926D100F09CFE /* UIAlertController + Ext.swift */; };
 		4FFE3BBE28192C0E00F09CFE /* TicketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE3BBC28192C0E00F09CFE /* TicketDetailViewController.swift */; };
 		4FFE3BBF28192C0E00F09CFE /* TicketDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFE3BBD28192C0E00F09CFE /* TicketDetailViewController.xib */; };
-		4FFE3BC228192C9200F09CFE /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFE3BC028192C9200F09CFE /* QRCodeViewController.swift */; };
-		4FFE3BC328192C9200F09CFE /* QRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFE3BC128192C9200F09CFE /* QRCodeViewController.xib */; };
 		571A9A302786B48B00E8440D /* TopPageNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A9A2F2786B48B00E8440D /* TopPageNavigationViewController.swift */; };
 		571A9A322786B4B900E8440D /* ShopNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A9A312786B4B900E8440D /* ShopNavigationViewController.swift */; };
 		571A9A342786B4D200E8440D /* ReservationNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571A9A332786B4D200E8440D /* ReservationNavigationViewController.swift */; };
@@ -243,6 +243,8 @@
 		45F016FD278D34E800F03BC2 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrderDetailViewController.xib; path = RilinkShop/View/Member/AfterLogin/MyOrder/OrderDetail/OrderDetailViewController.xib; sourceTree = SOURCE_ROOT; };
 		45F8FA6A278D246900D8BFFB /* PointTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTableViewCell.swift; sourceTree = "<group>"; };
 		45F8FA6B278D246900D8BFFB /* PointTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PointTableViewCell.xib; sourceTree = "<group>"; };
+		4F0187FE296D4CA900EED3DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		4F018800296D522900EED3DD /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		4F025B552834CD5200DC0101 /* LoginViewController_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController_1.swift; sourceTree = "<group>"; };
 		4F025B562834CD5200DC0101 /* LoginViewController_1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController_1.xib; sourceTree = "<group>"; };
 		4F025B592834DE7800DC0101 /* ForgotPasswordViewController_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController_1.swift; sourceTree = "<group>"; };
@@ -400,8 +402,6 @@
 		4FFE3BB9281926D100F09CFE /* UIAlertController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController + Ext.swift"; sourceTree = "<group>"; };
 		4FFE3BBC28192C0E00F09CFE /* TicketDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDetailViewController.swift; sourceTree = "<group>"; };
 		4FFE3BBD28192C0E00F09CFE /* TicketDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketDetailViewController.xib; sourceTree = "<group>"; };
-		4FFE3BC028192C9200F09CFE /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
-		4FFE3BC128192C9200F09CFE /* QRCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRCodeViewController.xib; sourceTree = "<group>"; };
 		571A9A2F2786B48B00E8440D /* TopPageNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPageNavigationViewController.swift; sourceTree = "<group>"; };
 		571A9A312786B4B900E8440D /* ShopNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopNavigationViewController.swift; sourceTree = "<group>"; };
 		571A9A332786B4D200E8440D /* ReservationNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationNavigationViewController.swift; sourceTree = "<group>"; };
@@ -507,6 +507,7 @@
 				4F0D4681296BFD5D00BC49B7 /* Merchant.storyboard */,
 				4F0D4683296BFDC100BC49B7 /* MerchantNavigationController.swift */,
 				4F0D468F296C12EA00BC49B7 /* MerchantMainViewController.swift */,
+				4F018800296D522900EED3DD /* QRCodeViewController.swift */,
 				4F0D4689296C06BA00BC49B7 /* PreferencesTableViewController.swift */,
 				4F0D4687296BFFE300BC49B7 /* NotifyTableViewController.swift */,
 				4F0D468B296C0C3D00BC49B7 /* NotifyViewModel.swift */,
@@ -613,8 +614,6 @@
 			children = (
 				4F1669D5282CEBE90031E37C /* StoreAppViewController.swift */,
 				4F1669D6282CEBE90031E37C /* StoreAppViewController.xib */,
-				4FFE3BC028192C9200F09CFE /* QRCodeViewController.swift */,
-				4FFE3BC128192C9200F09CFE /* QRCodeViewController.xib */,
 				4F1669D9282CF2C80031E37C /* DidReimbursementViewController.swift */,
 				4F1669DA282CF2C80031E37C /* DidReimbursementViewController.xib */,
 			);
@@ -1070,6 +1069,7 @@
 				4577B542278E993600838139 /* SceneDelegate.swift */,
 				57A5ECD5278422E100245DB0 /* Assets.xcassets */,
 				57A5ECD7278422E100245DB0 /* LaunchScreen.storyboard */,
+				4F0187FE296D4CA900EED3DD /* GoogleService-Info.plist */,
 				57A5ECDA278422E100245DB0 /* Info.plist */,
 			);
 			path = RilinkShop;
@@ -1249,7 +1249,6 @@
 				4F53F1B6287EBB7600EB0358 /* ShopCollectionViewCell.xib in Resources */,
 				57ADBD2227869F9C009C1C4E /* TimeCollectionViewCell.xib in Resources */,
 				57ADBD1A27868D86009C1C4E /* ReservationTableViewCell.xib in Resources */,
-				4FFE3BC328192C9200F09CFE /* QRCodeViewController.xib in Resources */,
 				572A1F752786864200D368D2 /* TopPage.storyboard in Resources */,
 				5789AE92278C253600B15225 /* RedeemedTableViewCell.xib in Resources */,
 				4F0A29DB282A13B00000FFB6 /* PackageInfoViewController.xib in Resources */,
@@ -1270,6 +1269,7 @@
 				45F016EE278D2E7A00F03BC2 /* MyOrderTableViewCell.xib in Resources */,
 				4F101BEF28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.xib in Resources */,
 				5789AE78278C0D8500B15225 /* UsableTableViewCell.xib in Resources */,
+				4F0187FF296D4CAA00EED3DD /* GoogleService-Info.plist in Resources */,
 				4FE7407C28DC413E0067E620 /* QAViewController.xib in Resources */,
 				4FFE3BB42818EF4F00F09CFE /* ShopTypeCollectionViewCell.xib in Resources */,
 				4F025B582834CD5200DC0101 /* LoginViewController_1.xib in Resources */,
@@ -1407,6 +1407,7 @@
 				4F8F81CD287E6E2900B228A7 /* StoreDetailViewController.swift in Sources */,
 				5789AE74278C0CE500B15225 /* TicketViewController.swift in Sources */,
 				571A9A362786B52900E8440D /* MemberNavigationViewController.swift in Sources */,
+				4F018801296D522A00EED3DD /* QRCodeViewController.swift in Sources */,
 				4FB8BB6B28813C7200A8DE3E /* TopPageOptionCollectionViewCell.swift in Sources */,
 				4FF26C8B2838715200CA3665 /* StoreIDSelectTableViewCell.swift in Sources */,
 				5789AE8D278C252800B15225 /* ConvertibleTableViewCell.swift in Sources */,
@@ -1455,7 +1456,6 @@
 				4F0D468E296C0C9800BC49B7 /* NotifyTableViewCell.swift in Sources */,
 				4F3B43C828AA3CD500CD8684 /* MainPageWebViewController.swift in Sources */,
 				4F74528728178087006D6E93 /* URLPath.swift in Sources */,
-				4FFE3BC228192C9200F09CFE /* QRCodeViewController.swift in Sources */,
 				4FFE3BB72818F98C00F09CFE /* ShopTypeTableViewCell.swift in Sources */,
 				4FC95F4928634C9C00633594 /* FixMotor.swift in Sources */,
 				4F0F5801285B2F22001EBE9F /* ReservationInputViewController.swift in Sources */,
@@ -1670,7 +1670,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1706,7 +1706,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;

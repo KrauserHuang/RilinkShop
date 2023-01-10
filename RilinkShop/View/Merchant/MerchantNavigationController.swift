@@ -29,7 +29,7 @@ class MerchantNavigationController: UINavigationController {
 
 extension MerchantNavigationController: MerchantMainViewControllerDelegate {
     func didTapScanButton(_ viewController: MerchantMainViewController) {
-        let vc = QRCodeViewController()
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "QRCodeViewController") as! QRCodeViewController
         vc.modalPresentationStyle = .fullScreen
         viewController.present(vc, animated: true, completion: nil)
     }
@@ -86,6 +86,7 @@ extension MerchantNavigationController: PreferencesTableViewControllerDelegate {
     }
     
     func didTapLogout(_ viewController: PreferencesTableViewController) {
-        print("登出拉")
+        MyKeyChain.logout()
+        dismiss(animated: true, completion: nil)
     }
 }

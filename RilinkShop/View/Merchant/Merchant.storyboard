@@ -150,13 +150,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="r5z-dE-nPc">
                                                     <rect key="frame" x="10" y="10" width="143" height="37.333333333333336"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="通知設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EnN-7o-bnp">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通知設定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EnN-7o-bnp">
                                                             <rect key="frame" x="0.0" y="0.0" width="69.333333333333329" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="有新的訂單時推播訊息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh1-hY-Jmx">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有新的訂單時推播訊息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh1-hY-Jmx">
                                                             <rect key="frame" x="0.0" y="20.333333333333332" width="143" height="16.999999999999996"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -196,7 +196,6 @@
                                                         <color key="titleColor" red="1" green="0.32156862749999998" blue="0.0078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="logOut:" destination="kib-TP-Qpz" eventType="touchUpInside" id="itQ-k3-kUb"/>
                                                         <action selector="logoutAction:" destination="kib-TP-Qpz" eventType="touchUpInside" id="Pru-bM-xjs"/>
                                                     </connections>
                                                 </button>
@@ -304,6 +303,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8O-cc-daU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2496.9230769230767" y="98.815165876777243"/>
+        </scene>
+        <!--Code View Controller-->
+        <scene sceneID="ynN-gQ-sON">
+            <objects>
+                <viewController storyboardIdentifier="QRCodeViewController" id="tLG-9j-BWD" customClass="QRCodeViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LQP-BS-It0">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dU2-Nh-sny">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cW4-m9-HNn" userLabel="TitleView">
+                                <rect key="frame" x="0.0" y="47" width="390" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="掃描 QR Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsC-j2-RrD">
+                                        <rect key="frame" x="138" y="14" width="114" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Y7-U8-2PY">
+                                        <rect key="frame" x="17" y="8" width="30" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Ｘ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backAction" destination="tLG-9j-BWD" eventType="touchUpInside" id="gwO-qb-7R3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="QsC-j2-RrD" firstAttribute="centerX" secondItem="cW4-m9-HNn" secondAttribute="centerX" id="2wf-s6-mdI"/>
+                                    <constraint firstItem="QsC-j2-RrD" firstAttribute="centerY" secondItem="cW4-m9-HNn" secondAttribute="centerY" id="8zp-QS-SOm"/>
+                                    <constraint firstItem="2Y7-U8-2PY" firstAttribute="centerY" secondItem="cW4-m9-HNn" secondAttribute="centerY" id="FYA-wk-mhq"/>
+                                    <constraint firstItem="2Y7-U8-2PY" firstAttribute="leading" secondItem="cW4-m9-HNn" secondAttribute="leading" constant="17" id="kAB-XA-Mos"/>
+                                    <constraint firstAttribute="height" constant="50" id="wL0-Ho-2HE"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bzx-mz-xS2" userLabel="CameraView">
+                                <rect key="frame" x="20" y="97" width="350" height="350"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="X9W-Lv-Yb3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bzx-mz-xS2" firstAttribute="width" secondItem="bzx-mz-xS2" secondAttribute="height" multiplier="1:1" id="0aN-pX-bFz"/>
+                            <constraint firstItem="cW4-m9-HNn" firstAttribute="leading" secondItem="X9W-Lv-Yb3" secondAttribute="leading" id="2Ex-lI-eVe"/>
+                            <constraint firstAttribute="bottom" secondItem="dU2-Nh-sny" secondAttribute="bottom" id="UPq-Ob-ABE"/>
+                            <constraint firstItem="dU2-Nh-sny" firstAttribute="top" secondItem="LQP-BS-It0" secondAttribute="top" id="V5z-yg-tUy"/>
+                            <constraint firstItem="bzx-mz-xS2" firstAttribute="top" secondItem="cW4-m9-HNn" secondAttribute="bottom" id="X6r-JQ-HJU"/>
+                            <constraint firstItem="X9W-Lv-Yb3" firstAttribute="trailing" secondItem="cW4-m9-HNn" secondAttribute="trailing" id="gLe-db-JzO"/>
+                            <constraint firstItem="bzx-mz-xS2" firstAttribute="leading" secondItem="X9W-Lv-Yb3" secondAttribute="leading" constant="20" id="hlV-re-8Mv"/>
+                            <constraint firstItem="cW4-m9-HNn" firstAttribute="top" secondItem="X9W-Lv-Yb3" secondAttribute="top" id="qUG-hM-GAr"/>
+                            <constraint firstItem="bzx-mz-xS2" firstAttribute="centerX" secondItem="LQP-BS-It0" secondAttribute="centerX" id="rw3-jW-exW"/>
+                            <constraint firstItem="dU2-Nh-sny" firstAttribute="leading" secondItem="X9W-Lv-Yb3" secondAttribute="leading" id="sXM-SH-YiZ"/>
+                            <constraint firstItem="X9W-Lv-Yb3" firstAttribute="trailing" secondItem="dU2-Nh-sny" secondAttribute="trailing" id="skp-KC-MLn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="bzx-mz-xS2" id="dQL-kf-oOa"/>
+                        <outlet property="outView" destination="dU2-Nh-sny" id="Y52-89-dj5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lxm-PN-SLB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2498" y="763"/>
         </scene>
         <!--Merchant Navigation Controller-->
         <scene sceneID="NIJ-80-HFU">
