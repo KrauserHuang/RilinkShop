@@ -54,9 +54,10 @@ class MainTabBarController: UITabBarController {
         if MyKeyChain.getAccount() == nil,
            MyKeyChain.getBossAccount() != nil {
             // 登入店長頁面
-            let storeVC = StoreAppViewController()
-            storeVC.modalPresentationStyle = .fullScreen
-            present(storeVC, animated: true, completion: nil)
+//            let storeVC = StoreAppViewController()
+            let vc = UIStoryboard(name: "Merchant", bundle: nil).instantiateViewController(withIdentifier: "MerchantNavigationController") as! MerchantNavigationController
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
         } else if MyKeyChain.getBossAccount() == nil,
                   MyKeyChain.getAccount() != nil {
             // 登入使用者頁面

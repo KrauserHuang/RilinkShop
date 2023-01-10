@@ -205,7 +205,8 @@ class StoreAdminLoginViewController: UIViewController {
                     MyKeyChain.setBossPassword(Global.ACCOUNT_PASSWORD)
 
 //                        self.delegate?.finishLoginView(self, action: .BossLogIn)
-                    let vc = StoreAppViewController()
+//                    let vc = StoreAppViewController()
+                    let vc = UIStoryboard(name: "Merchant", bundle: nil).instantiateViewController(withIdentifier: "MerchantNavigationController") as! MerchantNavigationController
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)
                 }

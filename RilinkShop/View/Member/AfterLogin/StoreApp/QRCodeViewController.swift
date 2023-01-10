@@ -129,21 +129,6 @@ class QRCodeViewController: UIViewController {
 
 extension QRCodeViewController: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-//        // 檢查metadataObjects陣列為非空值，他至少需包含一個物件
-//        if metadataObjects.count == 0 {
-//            qrCodeFrameView?.frame = .zero
-//        }
-//        // 取得元資料(metadata)物件
-//        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-//
-//        if metadataObj.type == .qr {
-//            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
-//            qrCodeFrameView?.frame = barCodeObject!.bounds
-//
-//            if metadataObj.stringValue != nil {
-//
-//            }
-//        }
         if let metaDataObj = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
            metaDataObj.type == .qr,
            let str = metaDataObj.stringValue {

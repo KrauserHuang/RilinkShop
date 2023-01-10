@@ -30,6 +30,13 @@
 		4F0A29DD282A3FCA0000FFB6 /* MyKeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A29DC282A3FCA0000FFB6 /* MyKeyChain.swift */; };
 		4F0A29DF282A68050000FFB6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A29DE282A68040000FFB6 /* Store.swift */; };
 		4F0A29E1282A698B0000FFB6 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A29E0282A698B0000FFB6 /* StoreService.swift */; };
+		4F0D4682296BFD5D00BC49B7 /* Merchant.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0D4681296BFD5D00BC49B7 /* Merchant.storyboard */; };
+		4F0D4684296BFDC200BC49B7 /* MerchantNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D4683296BFDC100BC49B7 /* MerchantNavigationController.swift */; };
+		4F0D4688296BFFE300BC49B7 /* NotifyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D4687296BFFE300BC49B7 /* NotifyTableViewController.swift */; };
+		4F0D468A296C06BA00BC49B7 /* PreferencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D4689296C06BA00BC49B7 /* PreferencesTableViewController.swift */; };
+		4F0D468C296C0C3D00BC49B7 /* NotifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D468B296C0C3D00BC49B7 /* NotifyViewModel.swift */; };
+		4F0D468E296C0C9800BC49B7 /* NotifyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D468D296C0C9800BC49B7 /* NotifyTableViewCell.swift */; };
+		4F0D4690296C12EA00BC49B7 /* MerchantMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D468F296C12EA00BC49B7 /* MerchantMainViewController.swift */; };
 		4F0F5801285B2F22001EBE9F /* ReservationInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0F57FF285B2F22001EBE9F /* ReservationInputViewController.swift */; };
 		4F0F5802285B2F22001EBE9F /* ReservationInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F0F5800285B2F22001EBE9F /* ReservationInputViewController.xib */; };
 		4F101BEE28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F101BEC28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.swift */; };
@@ -247,6 +254,13 @@
 		4F0A29DC282A3FCA0000FFB6 /* MyKeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyKeyChain.swift; sourceTree = "<group>"; };
 		4F0A29DE282A68040000FFB6 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		4F0A29E0282A698B0000FFB6 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
+		4F0D4681296BFD5D00BC49B7 /* Merchant.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Merchant.storyboard; sourceTree = "<group>"; };
+		4F0D4683296BFDC100BC49B7 /* MerchantNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantNavigationController.swift; sourceTree = "<group>"; };
+		4F0D4687296BFFE300BC49B7 /* NotifyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableViewController.swift; sourceTree = "<group>"; };
+		4F0D4689296C06BA00BC49B7 /* PreferencesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesTableViewController.swift; sourceTree = "<group>"; };
+		4F0D468B296C0C3D00BC49B7 /* NotifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyViewModel.swift; sourceTree = "<group>"; };
+		4F0D468D296C0C9800BC49B7 /* NotifyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifyTableViewCell.swift; sourceTree = "<group>"; };
+		4F0D468F296C12EA00BC49B7 /* MerchantMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerchantMainViewController.swift; sourceTree = "<group>"; };
 		4F0F57FF285B2F22001EBE9F /* ReservationInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationInputViewController.swift; sourceTree = "<group>"; };
 		4F0F5800285B2F22001EBE9F /* ReservationInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservationInputViewController.xib; sourceTree = "<group>"; };
 		4F101BEC28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPageMainCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -485,6 +499,20 @@
 				45F8FA6B278D246900D8BFFB /* PointTableViewCell.xib */,
 			);
 			path = Point;
+			sourceTree = "<group>";
+		};
+		4F0D4680296BFBBB00BC49B7 /* Merchant */ = {
+			isa = PBXGroup;
+			children = (
+				4F0D4681296BFD5D00BC49B7 /* Merchant.storyboard */,
+				4F0D4683296BFDC100BC49B7 /* MerchantNavigationController.swift */,
+				4F0D468F296C12EA00BC49B7 /* MerchantMainViewController.swift */,
+				4F0D4689296C06BA00BC49B7 /* PreferencesTableViewController.swift */,
+				4F0D4687296BFFE300BC49B7 /* NotifyTableViewController.swift */,
+				4F0D468B296C0C3D00BC49B7 /* NotifyViewModel.swift */,
+				4F0D468D296C0C9800BC49B7 /* NotifyTableViewCell.swift */,
+			);
+			path = Merchant;
 			sourceTree = "<group>";
 		};
 		4F0F57FC285B2AF1001EBE9F /* Reserved */ = {
@@ -1064,6 +1092,7 @@
 				57A5ECE7278424E900245DB0 /* Shop */,
 				572A1F76278686D400D368D2 /* Reservation */,
 				57A5ECE32784247300245DB0 /* Member */,
+				4F0D4680296BFBBB00BC49B7 /* Merchant */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1273,6 +1302,7 @@
 				4F521D612817DD1200391292 /* HostelDetailViewController.xib in Resources */,
 				4FA96132282B629100BB22EB /* OrderStatusCell.xib in Resources */,
 				5789AE96278C254800B15225 /* ExpiredTableViewCell.xib in Resources */,
+				4F0D4682296BFD5D00BC49B7 /* Merchant.storyboard in Resources */,
 				4F8DA89128321BA8001CD3BD /* PackageProductDetailTableViewCell.xib in Resources */,
 				4FAE563F283DB90C004EA6B8 /* MemberInfoViewController_1.xib in Resources */,
 			);
@@ -1385,6 +1415,7 @@
 				571A9A6D27880D9300E8440D /* PrivateRuleViewController.swift in Sources */,
 				571A9A302786B48B00E8440D /* TopPageNavigationViewController.swift in Sources */,
 				4FA96131282B629100BB22EB /* OrderStatusCell.swift in Sources */,
+				4F0D468A296C06BA00BC49B7 /* PreferencesTableViewController.swift in Sources */,
 				4F34779F285C70EF005E676F /* UITableViewCell + Ext.swift in Sources */,
 				4FA9613A282BB0AD00BB22EB /* QRCodeService.swift in Sources */,
 				4FE12E8A2880067A001230FE /* MemberCenterViewController.swift in Sources */,
@@ -1402,6 +1433,7 @@
 				4F2C080C2822529700E56AC1 /* UserService.swift in Sources */,
 				4FB4E69F287FBA7500DBA71E /* TopPagePackageCollectionViewCell.swift in Sources */,
 				45F8FA6C278D246A00D8BFFB /* PointTableViewCell.swift in Sources */,
+				4F0D4690296C12EA00BC49B7 /* MerchantMainViewController.swift in Sources */,
 				571A9A6527880D6900E8440D /* ForgotPasswordViewController.swift in Sources */,
 				4FE12E8C28800A67001230FE /* ContainerMemberCenterTableViewController.swift in Sources */,
 				4F6F0BF229029D3200C0568D /* MessageTableViewCell.swift in Sources */,
@@ -1420,6 +1452,7 @@
 				4F521D5B2817D82100391292 /* ShopTableViewCell.swift in Sources */,
 				4F99638628CEE6010020A685 /* RepairReservationTableViewCell.swift in Sources */,
 				4FE7408328DC4D1B0067E620 /* QATableViewCell.swift in Sources */,
+				4F0D468E296C0C9800BC49B7 /* NotifyTableViewCell.swift in Sources */,
 				4F3B43C828AA3CD500CD8684 /* MainPageWebViewController.swift in Sources */,
 				4F74528728178087006D6E93 /* URLPath.swift in Sources */,
 				4FFE3BC228192C9200F09CFE /* QRCodeViewController.swift in Sources */,
@@ -1445,6 +1478,7 @@
 				57ADBD2127869F9C009C1C4E /* TimeCollectionViewCell.swift in Sources */,
 				57A5ECCD278422E000245DB0 /* AppDelegate.swift in Sources */,
 				5789AE95278C254800B15225 /* ExpiredTableViewCell.swift in Sources */,
+				4F0D468C296C0C3D00BC49B7 /* NotifyViewModel.swift in Sources */,
 				4F93F30C2863F81800336A0F /* PointService.swift in Sources */,
 				4F53F1B5287EBB7600EB0358 /* ShopCollectionViewCell.swift in Sources */,
 				4FF26C8728386AC700CA3665 /* StoreIDSelectViewController.swift in Sources */,
@@ -1459,6 +1493,7 @@
 				571A9A492786BB5D00E8440D /* ReservationTableViewController.swift in Sources */,
 				450ED64C2790070E00CDF731 /* SuccessAlert.swift in Sources */,
 				57ADBD1927868D86009C1C4E /* ReservationTableViewCell.swift in Sources */,
+				4F0D4688296BFFE300BC49B7 /* NotifyTableViewController.swift in Sources */,
 				4F53F1B8287EBDA300EB0358 /* ShopMainViewController.swift in Sources */,
 				4F182A1528D94BD0007CC41F /* AboutViewController.swift in Sources */,
 				45F016FE278D34E800F03BC2 /* OrderDetailViewController.swift in Sources */,
@@ -1481,6 +1516,7 @@
 				4F53F1AE287E793C00EB0358 /* StoreMainViewController.swift in Sources */,
 				4FE5854829027BFD00D2B2EE /* MessageViewController.swift in Sources */,
 				4FEEEBD62824A25900A8F3B2 /* UIImageView + Ext.swift in Sources */,
+				4F0D4684296BFDC200BC49B7 /* MerchantNavigationController.swift in Sources */,
 				4F8DA89028321BA8001CD3BD /* PackageProductDetailTableViewCell.swift in Sources */,
 				4F914D9928DD580B00F17071 /* Banner.swift in Sources */,
 				4F8498B9292C7BBD00DFE7CC /* ErrorMessage.swift in Sources */,

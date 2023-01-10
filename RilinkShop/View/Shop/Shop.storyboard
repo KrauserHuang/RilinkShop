@@ -62,17 +62,17 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2t4-C2-XNc">
-                                                <rect key="frame" x="183.5" y="0.0" width="16.5" height="30"/>
+                                                <rect key="frame" x="183.5" y="0.0" width="27" height="30"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal">
-                                                    <imageReference key="image" image="arrowtriangle.down.fill" catalog="system" symbolScale="medium"/>
+                                                    <imageReference key="image" image="line.3.horizontal" catalog="system" symbolScale="large"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="shopTypeButtonTapped:" destination="qTH-m4-zGr" eventType="touchUpInside" id="b09-Pp-4vy"/>
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cRD-NY-Ppc">
-                                                <rect key="frame" x="207" y="0.0" width="162" height="30"/>
+                                                <rect key="frame" x="217.5" y="0.0" width="151.5" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -136,7 +136,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowtriangle.down.fill" catalog="system" width="128" height="120"/>
+        <image name="line.3.horizontal" catalog="system" width="128" height="65"/>
         <image name="購物商城" width="47" height="47"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

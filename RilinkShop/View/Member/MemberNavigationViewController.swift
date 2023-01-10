@@ -68,7 +68,8 @@ class MemberNavigationViewController: UINavigationController {
         }
 //        if LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) != nil {
         if MyKeyChain.getBossAccount() != nil {
-            let vc = StoreAppViewController()
+            let vc = UIStoryboard(name: "Merchant", bundle: nil).instantiateViewController(withIdentifier: "MerchantNavigationController") as! MerchantNavigationController
+//            let vc = StoreAppViewController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         } else {
@@ -186,8 +187,9 @@ extension MemberNavigationViewController: LoginViewController_1_Delegate {
             vc.delegate = self
             present(vc, animated: true, completion: nil)
         case .BossLogIn:
-            showRoot(animated: true)
-            let vc = StoreAppViewController()
+//            showRoot(animated: true)
+//            let vc = StoreAppViewController()
+            let vc = UIStoryboard(name: "Merchant", bundle: nil).instantiateViewController(withIdentifier: "MerchantNavigationController") as! MerchantNavigationController
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }
