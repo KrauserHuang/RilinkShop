@@ -15,6 +15,9 @@ public class Global {
     static var ACCOUNT_PASSWORD = ""
     static var ACCESS_TOKEN     = ""
 //    for 店長
+    static var OWNER_STORE_ID   = ""
+    static var OWNER_STORE_NAME = ""
+    
     static var personalData: User?
 }
 

@@ -54,9 +54,22 @@ extension MerchantNavigationController: MerchantMainViewControllerDelegate {
 //            controller.messages = dataArray
 //            self.pushViewController(controller, animated: true)
 //        }
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "NotifyTableViewController") as! NotifyTableViewController
-//        controller.messages = dataArray
-        self.pushViewController(controller, animated: true)
+        guard let adminAccount = MyKeyChain.getBossAccount(),
+              let adminPassword = MyKeyChain.getBossPassword() else { return }
+        NotificationService.shared.storeAdminGetNotifyHistory(storeAcc: adminAccount,
+                                                              storePwd: adminPassword,
+                                                              storeID: Global.OWNER_STORE_ID) { success, response in
+            guard success else {
+                let errorMsg = response as! String
+                Alert.showMessage(title: "", msg: errorMsg, vc: self)
+                return
+            }
+            
+            let messages = response as! [NotifyViewModel]
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "NotifyTableViewController") as! NotifyTableViewController
+            controller.messages = messages
+            self.pushViewController(controller, animated: true)
+        }
     }
     
     func didTapPreferencesButton(_ viewController: MerchantMainViewController) {
@@ -86,7 +99,20 @@ extension MerchantNavigationController: PreferencesTableViewControllerDelegate {
     }
     
     func didTapLogout(_ viewController: PreferencesTableViewController) {
-        MyKeyChain.logout()
-        dismiss(animated: true, completion: nil)
+        print("Hello")
+//        self.dismiss(animated: true)
+//        MyKeyChain.logout()
+        guard let adminAccount = MyKeyChain.getBossAccount(),
+              let adminPassword = MyKeyChain.getBossPassword() else { return }
+        UserService.shared.storeAdminLogout(storeAcc: adminAccount,
+                                            storePwd: adminPassword,
+                                            storeID: Global.OWNER_STORE_ID) { success, response in
+            guard success else {
+                return
+            }
+
+//            self.popToRootViewController(animated: true)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

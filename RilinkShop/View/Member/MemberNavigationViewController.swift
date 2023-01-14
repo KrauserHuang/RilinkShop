@@ -69,7 +69,6 @@ class MemberNavigationViewController: UINavigationController {
 //        if LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) != nil {
         if MyKeyChain.getBossAccount() != nil {
             let vc = UIStoryboard(name: "Merchant", bundle: nil).instantiateViewController(withIdentifier: "MerchantNavigationController") as! MerchantNavigationController
-//            let vc = StoreAppViewController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         } else {
@@ -188,7 +187,7 @@ extension MemberNavigationViewController: LoginViewController_1_Delegate {
             present(vc, animated: true, completion: nil)
         case .BossLogIn:
 //            showRoot(animated: true)
-//            let vc = StoreAppViewController()
+            print("我有跑到這邊！")
             let vc = UIStoryboard(name: "Merchant", bundle: nil).instantiateViewController(withIdentifier: "MerchantNavigationController") as! MerchantNavigationController
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
@@ -225,19 +224,19 @@ extension MemberNavigationViewController: StoreIDSelectViewControllerDelegate {
     }
 }
 // MARK: - StoreApp(登入後店長主頁-剩單純掃描)
-extension MemberNavigationViewController: StoreAppViewControllerDelegate {
-    func toQRScan(_ viewController: StoreAppViewController) {
-        let vc = QRCodeViewController()
-        vc.delegate = self
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
-    }
-
-    func backToLogin(_ viewController: StoreAppViewController) {
-        let vc = LoginViewController_1()
-        setViewControllers([vc], animated: true)
-    }
-}
+//extension MemberNavigationViewController: StoreAppViewControllerDelegate {
+//    func toQRScan(_ viewController: StoreAppViewController) {
+//        let vc = QRCodeViewController()
+//        vc.delegate = self
+//        vc.modalPresentationStyle = .fullScreen
+//        present(vc, animated: true, completion: nil)
+//    }
+//
+//    func backToLogin(_ viewController: StoreAppViewController) {
+//        let vc = LoginViewController_1()
+//        setViewControllers([vc], animated: true)
+//    }
+//}
 
 extension MemberNavigationViewController: MemberInfoViewController_1_Delegate {
     func memberInfoDidUpdate(_ viewController: MemberInfoViewController_1) {

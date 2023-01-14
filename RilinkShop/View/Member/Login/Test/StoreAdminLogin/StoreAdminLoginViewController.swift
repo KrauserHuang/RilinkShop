@@ -183,10 +183,11 @@ class StoreAdminLoginViewController: UIViewController {
         Global.ACCOUNT_PASSWORD = password
 
         let storeID = storeID ?? ""
+        let apnsToken = AppDelegate.apnsToken!
 
         HUD.showLoadingHUD(inView: self.view, text: "登入中")
 
-        UserService.shared.storeAdminLogin(storeAcc: account, storePwd: password, storeID: storeID) { success, response in
+        UserService.shared.storeAdminLogin(storeAcc: account, storePwd: password, storeID: storeID, notificationToken: apnsToken) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {
@@ -205,7 +206,6 @@ class StoreAdminLoginViewController: UIViewController {
                     MyKeyChain.setBossPassword(Global.ACCOUNT_PASSWORD)
 
 //                        self.delegate?.finishLoginView(self, action: .BossLogIn)
-//                    let vc = StoreAppViewController()
                     let vc = UIStoryboard(name: "Merchant", bundle: nil).instantiateViewController(withIdentifier: "MerchantNavigationController") as! MerchantNavigationController
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true, completion: nil)

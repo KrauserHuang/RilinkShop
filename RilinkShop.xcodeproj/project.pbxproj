@@ -19,7 +19,6 @@
 		45F016FF278D34E800F03BC2 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45F016FD278D34E800F03BC2 /* OrderDetailViewController.xib */; };
 		45F8FA6C278D246A00D8BFFB /* PointTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8FA6A278D246900D8BFFB /* PointTableViewCell.swift */; };
 		45F8FA6D278D246A00D8BFFB /* PointTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45F8FA6B278D246900D8BFFB /* PointTableViewCell.xib */; };
-		4F0187FF296D4CAA00EED3DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F0187FE296D4CA900EED3DD /* GoogleService-Info.plist */; };
 		4F018801296D522A00EED3DD /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F018800296D522900EED3DD /* QRCodeViewController.swift */; };
 		4F025B572834CD5200DC0101 /* LoginViewController_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F025B552834CD5200DC0101 /* LoginViewController_1.swift */; };
 		4F025B582834CD5200DC0101 /* LoginViewController_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F025B562834CD5200DC0101 /* LoginViewController_1.xib */; };
@@ -43,8 +42,6 @@
 		4F0F5802285B2F22001EBE9F /* ReservationInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F0F5800285B2F22001EBE9F /* ReservationInputViewController.xib */; };
 		4F101BEE28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F101BEC28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.swift */; };
 		4F101BEF28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F101BED28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.xib */; };
-		4F1669D7282CEBE90031E37C /* StoreAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1669D5282CEBE90031E37C /* StoreAppViewController.swift */; };
-		4F1669D8282CEBE90031E37C /* StoreAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1669D6282CEBE90031E37C /* StoreAppViewController.xib */; };
 		4F1669DB282CF2C80031E37C /* DidReimbursementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1669D9282CF2C80031E37C /* DidReimbursementViewController.swift */; };
 		4F1669DC282CF2C80031E37C /* DidReimbursementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1669DA282CF2C80031E37C /* DidReimbursementViewController.xib */; };
 		4F182A1528D94BD0007CC41F /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F182A1328D94BD0007CC41F /* AboutViewController.swift */; };
@@ -111,6 +108,7 @@
 		4F8F81CB287E6B4000B228A7 /* StoreDetailDescriptTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F81CA287E6B4000B228A7 /* StoreDetailDescriptTextCell.swift */; };
 		4F8F81CD287E6E2900B228A7 /* StoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F81CC287E6E2900B228A7 /* StoreDetailViewController.swift */; };
 		4F8F81D1287E6F5E00B228A7 /* StoreDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8F81D0287E6F5E00B228A7 /* StoreDetailHeaderView.swift */; };
+		4F905B66296E651700A2993C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F905B65296E651700A2993C /* GoogleService-Info.plist */; };
 		4F914D9928DD580B00F17071 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F914D9828DD580B00F17071 /* Banner.swift */; };
 		4F914D9B28DD95A300F17071 /* BannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F914D9A28DD95A300F17071 /* BannerService.swift */; };
 		4F93F30C2863F81800336A0F /* PointService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F93F30B2863F81800336A0F /* PointService.swift */; };
@@ -243,7 +241,6 @@
 		45F016FD278D34E800F03BC2 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OrderDetailViewController.xib; path = RilinkShop/View/Member/AfterLogin/MyOrder/OrderDetail/OrderDetailViewController.xib; sourceTree = SOURCE_ROOT; };
 		45F8FA6A278D246900D8BFFB /* PointTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointTableViewCell.swift; sourceTree = "<group>"; };
 		45F8FA6B278D246900D8BFFB /* PointTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PointTableViewCell.xib; sourceTree = "<group>"; };
-		4F0187FE296D4CA900EED3DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4F018800296D522900EED3DD /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		4F025B552834CD5200DC0101 /* LoginViewController_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController_1.swift; sourceTree = "<group>"; };
 		4F025B562834CD5200DC0101 /* LoginViewController_1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController_1.xib; sourceTree = "<group>"; };
@@ -267,8 +264,6 @@
 		4F0F5800285B2F22001EBE9F /* ReservationInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReservationInputViewController.xib; sourceTree = "<group>"; };
 		4F101BEC28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPageMainCollectionReusableView.swift; sourceTree = "<group>"; };
 		4F101BED28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopPageMainCollectionReusableView.xib; sourceTree = "<group>"; };
-		4F1669D5282CEBE90031E37C /* StoreAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAppViewController.swift; sourceTree = "<group>"; };
-		4F1669D6282CEBE90031E37C /* StoreAppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreAppViewController.xib; sourceTree = "<group>"; };
 		4F1669D9282CF2C80031E37C /* DidReimbursementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidReimbursementViewController.swift; sourceTree = "<group>"; };
 		4F1669DA282CF2C80031E37C /* DidReimbursementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DidReimbursementViewController.xib; sourceTree = "<group>"; };
 		4F182A1328D94BD0007CC41F /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -336,6 +331,7 @@
 		4F8F81CA287E6B4000B228A7 /* StoreDetailDescriptTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailDescriptTextCell.swift; sourceTree = "<group>"; };
 		4F8F81CC287E6E2900B228A7 /* StoreDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailViewController.swift; sourceTree = "<group>"; };
 		4F8F81D0287E6F5E00B228A7 /* StoreDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailHeaderView.swift; sourceTree = "<group>"; };
+		4F905B65296E651700A2993C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4F914D9828DD580B00F17071 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		4F914D9A28DD95A300F17071 /* BannerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerService.swift; sourceTree = "<group>"; };
 		4F93F30B2863F81800336A0F /* PointService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointService.swift; sourceTree = "<group>"; };
@@ -612,8 +608,6 @@
 		4F6CF9E1282CEA91000F66BA /* StoreApp */ = {
 			isa = PBXGroup;
 			children = (
-				4F1669D5282CEBE90031E37C /* StoreAppViewController.swift */,
-				4F1669D6282CEBE90031E37C /* StoreAppViewController.xib */,
 				4F1669D9282CF2C80031E37C /* DidReimbursementViewController.swift */,
 				4F1669DA282CF2C80031E37C /* DidReimbursementViewController.xib */,
 			);
@@ -1069,7 +1063,7 @@
 				4577B542278E993600838139 /* SceneDelegate.swift */,
 				57A5ECD5278422E100245DB0 /* Assets.xcassets */,
 				57A5ECD7278422E100245DB0 /* LaunchScreen.storyboard */,
-				4F0187FE296D4CA900EED3DD /* GoogleService-Info.plist */,
+				4F905B65296E651700A2993C /* GoogleService-Info.plist */,
 				57A5ECDA278422E100245DB0 /* Info.plist */,
 			);
 			path = RilinkShop;
@@ -1269,7 +1263,7 @@
 				45F016EE278D2E7A00F03BC2 /* MyOrderTableViewCell.xib in Resources */,
 				4F101BEF28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.xib in Resources */,
 				5789AE78278C0D8500B15225 /* UsableTableViewCell.xib in Resources */,
-				4F0187FF296D4CAA00EED3DD /* GoogleService-Info.plist in Resources */,
+				4F905B66296E651700A2993C /* GoogleService-Info.plist in Resources */,
 				4FE7407C28DC413E0067E620 /* QAViewController.xib in Resources */,
 				4FFE3BB42818EF4F00F09CFE /* ShopTypeCollectionViewCell.xib in Resources */,
 				4F025B582834CD5200DC0101 /* LoginViewController_1.xib in Resources */,
@@ -1278,7 +1272,6 @@
 				4F025B602834DFFA00DC0101 /* ForgotPasswordViewController_2.xib in Resources */,
 				4FA96136282B62AB00BB22EB /* ProductInfoCell.xib in Resources */,
 				5789AE7F278C23F200B15225 /* Coupon.storyboard in Resources */,
-				4F1669D8282CEBE90031E37C /* StoreAppViewController.xib in Resources */,
 				5789AE8E278C252800B15225 /* ConvertibleTableViewCell.xib in Resources */,
 				4FE7408428DC4D1B0067E620 /* QATableViewCell.xib in Resources */,
 				5789AE7C278C0DB000B15225 /* UsedTableViewCell.xib in Resources */,
@@ -1375,7 +1368,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F1669D7282CEBE90031E37C /* StoreAppViewController.swift in Sources */,
 				4FB038F92838C59A00A69875 /* DatePicker.swift in Sources */,
 				4FFE3BBA281926D100F09CFE /* UIAlertController + Ext.swift in Sources */,
 				4F74528B28179053006D6E93 /* ShopRuleViewController.swift in Sources */,

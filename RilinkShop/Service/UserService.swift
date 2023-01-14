@@ -93,12 +93,7 @@ class UserService {
 
             switch response.result {
             case .success:
-//                LocalStorageManager.shared.setData(id, key: .userIdKey)
-//                LocalStorageManager.shared.setData(pwd, key: .userPasswordKey)
-                MyKeyChain.setAccount(id)
-                MyKeyChain.setPassword(pwd)
-//                self.id = id
-//                self.pwd = pwd
+
 
                 guard value["code"].stringValue == returnCode else {
                     let errorMsg = value["responseMessage"].stringValue
@@ -107,6 +102,12 @@ class UserService {
                 }
 
                 let successMsg = value["responseMessage"].stringValue
+//                LocalStorageManager.shared.setData(id, key: .userIdKey)
+//                LocalStorageManager.shared.setData(pwd, key: .userPasswordKey)
+                MyKeyChain.setAccount(id)
+                MyKeyChain.setPassword(pwd)
+//                self.id = id
+//                self.pwd = pwd
 
                 self.getPersonalData(account: id, pw: pwd, accountType: "0") { success, response in
                     guard success else {
@@ -562,18 +563,15 @@ class UserService {
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
 
-        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+        AF.request(url, method: .post, parameters: parameters).response { response in
 
             guard response.value != nil else {
-//                print(#function)
                 let message = "伺服器連線失敗"
                 completed(false, message as AnyObject)
                 return
             }
 
             let value = JSON(response.value!)
-//            print(#function)
-//            print(value)
 
             switch response.result {
             case .success:
@@ -601,16 +599,17 @@ class UserService {
         }
     }
 
-    func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping Completion) {
+    func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, notificationToken: String, completed: @escaping Completion) {
         let url = SHOP_API_URL + URL_STOREADMINLOGIN
         let parameters = [
             "store_acc": storeAcc,
             "store_pwd": storePwd,
-            "store_id": storeID
+            "store_id": storeID,
+            "notification_token": notificationToken
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
 
-        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+        AF.request(url, method: .post, parameters: parameters).response { response in
 
             guard response.value != nil else {
                 let message = "伺服器連線失敗"
@@ -619,8 +618,6 @@ class UserService {
             }
 
             let value = JSON(response.value!)
-//            print(#function)
-//            print(value)
 
             switch response.result {
             case .success:
@@ -630,6 +627,10 @@ class UserService {
                     completed(false, errorMsg as AnyObject)
                     return
                 }
+                
+                MyKeyChain.setBossAccount(storeAcc)
+                MyKeyChain.setBossPassword(storePwd)
+                Global.OWNER_STORE_ID = storeID
 
                 let info = StoreInfo(storeName: value["store_name"].stringValue,
                                      storeAddress: value["store_address"].stringValue,
@@ -638,7 +639,6 @@ class UserService {
                                      storeDescript: value["store_descript"].stringValue,
                                      storeOpentime: value["store_opentime"].stringValue,
                                      storePicture: value["store_picture"].stringValue)
-//                print("info:\(info)")
                 completed(true, info as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue
@@ -647,30 +647,70 @@ class UserService {
         }
     }
 
-    func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping (StoreAdminLogin) -> Void) {
-        let url = SHOP_API_URL + URL_STOREADMINLOGIN
+//    func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping (StoreAdminLogin) -> Void) {
+//        let url = SHOP_API_URL + URL_STOREADMINLOGIN
+//        let parameters = [
+//            "store_acc": storeAcc,
+//            "store_pwd": storePwd,
+//            "store_id": storeID
+//        ]
+//        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: StoreAdminLogin.self) { response in
+//
+//            guard response.value != nil else {
+//                print(#function)
+//                print("伺服器連線失敗")
+//                return
+//            }
+//
+////            print(#function)
+//
+//            switch response.result {
+//            case .success:
+//                guard let store = response.value else { return }
+//                self.didLogin = true
+//                completed(store)
+//            case .failure:
+//                print(response.error as Any)
+//            }
+//        }
+//    }
+    
+    func storeAdminLogout(storeAcc: String, storePwd: String, storeID: String, completion: @escaping Completion) {
+        let url = SHOP_API_URL + URL_STOREADMINLOGOUT
         let parameters = [
             "store_acc": storeAcc,
             "store_pwd": storePwd,
             "store_id": storeID
         ]
-        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: StoreAdminLogin.self) { response in
-
+        let returnCode = ReturnCode.RETURN_SUCCESS.0
+        
+        AF.request(url, method: .post, parameters: parameters).response { response in
+            
             guard response.value != nil else {
-                print(#function)
-                print("伺服器連線失敗")
+                let message = "伺服器連線失敗"
+                completion(false, message as AnyObject)
                 return
             }
-
-//            print(#function)
-
+            
+            let value = JSON(response.value)
+            print("===================================")
+            print(value)
+            print("===================================")
+            
             switch response.result {
             case .success:
-                guard let store = response.value else { return }
-                self.didLogin = true
-                completed(store)
+                guard value["code"].intValue == returnCode else {
+                    let errorMsg = value["responseMessage"].stringValue
+                    completion(false, errorMsg as AnyObject)
+                    return
+                }
+                
+                MyKeyChain.logout()
+                let successMsg = value["responseMessage"].stringValue
+                completion(true, successMsg as AnyObject)
             case .failure:
-                print(response.error as Any)
+                let errorMsg = value["responseMessage"].stringValue
+                completion(false, errorMsg as AnyObject)
             }
         }
     }
@@ -685,7 +725,7 @@ class UserService {
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
 
-        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+        AF.request(url, method: .post, parameters: parameters).response { response in
 
             guard response.value != nil else {
                 let message = "伺服器連線失敗"
@@ -706,7 +746,6 @@ class UserService {
                 }
 
                 let successMsg = value["responseMessage"].stringValue
-
                 completed(true, successMsg as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue

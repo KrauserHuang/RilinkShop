@@ -7,13 +7,14 @@
 
 import UIKit
 import UserNotifications
-//import FirebaseCore
-//import FirebaseMessaging
+import FirebaseCore
+import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    static var apnsToken: String?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -32,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .highlighted)
 //        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for: .default)
         // Connect to Firebase and initialize it
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         // Push Notification(請求授權給使用者)
         UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert]) { granted, _ in
@@ -47,8 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("settings = \(settings)")
         }
         UIApplication.shared.registerForRemoteNotifications()
-        
-//        MyKeyChain.logout()
 
         return true
     }
@@ -82,7 +81,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("apns token = " + token)
         print("==========End==========\n")
 
-//        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().apnsToken = deviceToken
     }
     // FirebaseMessaging() -> 註冊推播失敗
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -104,5 +103,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         print("userInfo: \(userInfo)")
         completionHandler()
     }
+}
 
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        guard let fcmToken = fcmToken else { return }
+        print("Firebase registration token: \(fcmToken)")
+        
+        AppDelegate.apnsToken = fcmToken //FCM確認有收到token後才把它存到AppDelegate的apnsToken
+        
+        let userInfo: [String: String] = ["token": fcmToken]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: userInfo)
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
 }

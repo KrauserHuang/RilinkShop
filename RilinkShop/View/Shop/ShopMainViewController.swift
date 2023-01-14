@@ -22,17 +22,7 @@ class ShopMainViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var shopTypeButton: UIButton!
-    @IBOutlet weak var searchBarTextField: UITextField! {
-        didSet {
-            let view = UIView()
-            let imageView = UIImageView(image: UIImage(named: "search"))
-            view.addSubview(imageView)
-            imageView.frame = CGRect(x: 6, y: 4.5, width: 18, height: 21)
-            view.frame = CGRect(x: 0, y: 0, width: 24, height: 30)
-            searchBarTextField.leftView = view
-            searchBarTextField.leftViewMode = .always
-        }
-    }
+    @IBOutlet weak var searchBar: UISearchBar!
 
     enum Section: String, CaseIterable {
         case all
@@ -41,47 +31,37 @@ class ShopMainViewController: UIViewController {
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     private lazy var dataSource = configureDataSource()
-    // 類別按鈕
-    var categories = [CategoryCellModel]()
-    // 商品
-    var products = [Product]()
-    // 套票
-    var packages = [Package]()
-    // 所有物件與篩選物件(商品+套票)
-    var items = [Item]()
+    var categories = [CategoryCellModel]() // 類別按鈕
+    var products = [Product]() // 商品
+    var packages = [Package]() // 套票
+    var items = [Item]() // 所有物件與篩選物件(商品+套票)
     var filteredItems = [Item]() {
         didSet {
-            DispatchQueue.main.async {
-                self.updateSnapshot()
-            }
+            updateSnapshot(on: filteredItems)
         }
     }
     let dropDown = DropDown()
+    var isSearching = false
+    var searchItems: [Item] = [] {
+        didSet {
+            updateSnapshot(on: searchItems)
+        }
+    }
 
     let notificationCenter = NotificationCenter.default
     var productType: String?
-//    var productType = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initUI()
-
-//        print("ShopMainViewController " + #function)
-//        print("GlobalAccount:\(Global.ACCOUNT)")
-//        print("GlobalPassword:\(Global.ACCOUNT_PASSWORD)")
-//        print("-----------------------------------")
-//        print("KeyChainAccount:\(MyKeyChain.getAccount())")
-//        print("KeyChainPassword:\(MyKeyChain.getPassword())")
-//        print("-----------------------------------")
-//        print("UserServiceAccount:\(UserService.shared.id)")
-//        print("UserServicePassword:\(UserService.shared.pwd)")
 //        let notificationName = Notification.Name.productTypeCommingHot
         let notificationName = Notification.Name.hereComesTheProductType
         notificationCenter.addObserver(self,
                                        selector: #selector(navigateFromTopPage(_:)),
                                        name: notificationName,
                                        object: nil)
+        searchBar.delegate = self
     }
     @objc func navigateFromTopPage(_ notification: Notification) {
         if let productType = notification.userInfo?["productType"] {
@@ -96,6 +76,7 @@ class ShopMainViewController: UIViewController {
         tabBarController?.hidesBottomBarWhenPushed = false
         tabBarController?.tabBar.isHidden = false
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         HUD.showLoadingHUD(inView: view, text: "")
@@ -147,18 +128,17 @@ class ShopMainViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        dismissKeyboard()
         notificationCenter.removeObserver(self)
     }
 
-    func initUI() {
+    private func initUI() {
         navigationItems()
         configureCollectionView()
         loadProductType()
-        configureKeyboard()
+        configureSearchController()
     }
 
-    func navigationItems() {
+    private func navigationItems() {
         let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
                                                  style: .plain,
                                                  target: self,
@@ -172,27 +152,14 @@ class ShopMainViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 
-    func configureKeyboard() {
-        searchBarTextField.delegate = self
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        tap.delegate = self
-        view.addGestureRecognizer(tap)
-    }
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-
-    func configureCollectionView() {
-        let nib = UINib(nibName: ShopCollectionViewCell.reuseIdentifier, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: ShopCollectionViewCell.reuseIdentifier)
+    private func configureCollectionView() {
+        collectionView.register(ShopCollectionViewCell.nib, forCellWithReuseIdentifier: ShopCollectionViewCell.reuseIdentifier)
         collectionView.delegate = self
-//        collectionView.dataSource = self
-        collectionView.dataSource = dataSource
+//        collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = createGridLayout()
     }
 
-    func loadProductType() {
+    private func loadProductType() {
 //        ProductService.shared.getProductType(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
 //                                             pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseCategories in
         ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? "",
@@ -218,7 +185,7 @@ class ShopMainViewController: UIViewController {
         }
     }
 
-    func loadProductList() {
+    private func loadProductList() {
         HUD.showLoadingHUD(inView: self.view, text: "載入商品中")
 //        ProductService.shared.loadProductList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
 //                                              pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseProducts in
@@ -267,47 +234,17 @@ class ShopMainViewController: UIViewController {
             }
         }
     }
-
-    func loadProductList(productType: String) {
-//        ProductService.shared.loadProductList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                              pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
-//                                              productType: productType) { success, response in
-        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? "",
-                                              pwd: MyKeyChain.getPassword() ?? "",
-                                              productType: productType) { success, response in
-//        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-//                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
-//                                              productType: productType) { success, response in
-            guard success else {
-                let errorMsg = response as! String
-                Alert.showMessage(title: "", msg: errorMsg, vc: self)
-                return
-            }
-
-            let productList = response as! [Product]
-            self.products = productList
-            self.filteredItems.removeAll()
-            for product in self.products {
-                self.items.append(Item.product(product))
-            }
-            print(#function, "items:\(self.items)")
-            self.filteredItems = self.items.filter({
-                switch $0 { // 先篩選第一層(如果使用者選取商品類別)
-                case .product(let product):
-                    if product.product_type == self.categories.first?.category.productType {
-                        return true
-                    } else {
-                        return false
-                    }
-                case .package: // (套票類別，沒API所以有做死)
-                    if self.categories.first?.category.productTypeName == "套票" {
-                        return true
-                    } else {
-                        return false
-                    }
-                }
-            })
-        }
+    
+    private func configureSearchController() {
+        let searchController                    = UISearchController()
+        searchController.searchResultsUpdater   = self
+//        searchController.searchBar.delegate     = self
+        searchController.searchBar.placeholder  = "請填入邀搜尋的商品"
+        searchController.obscuresBackgroundDuringPresentation = false //true: obscure(有遮罩), false: unobscure(無遮罩)
+//        searchController.automaticallyShowsSearchResultsController = true
+        navigationItem.searchController         = searchController
+//        navigationItem.hidesSearchBarWhenScrolling = false
+//        navigationController?.navigationItem.searchController         = searchController
     }
 
     @IBAction func shopTypeButtonTapped(_ sender: UIButton) {
@@ -349,8 +286,7 @@ extension ShopMainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-
-//        let item = filteredItems[indexPath.item]
+        
 //        let productDetailVC = ProductDetailViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
 //                                                          password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let productDetailVC = ProductDetailViewController()
@@ -360,7 +296,7 @@ extension ShopMainViewController: UICollectionViewDelegate {
 }
 // MARK: - Item DiffableDataSource/Snapshot/Compositional Layout
 extension ShopMainViewController {
-    func configureDataSource() -> DataSource {
+    private func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShopCollectionViewCell.reuseIdentifier, for: indexPath) as! ShopCollectionViewCell
 
@@ -370,14 +306,18 @@ extension ShopMainViewController {
         }
         return dataSource
     }
-    func updateSnapshot(animatingChange: Bool = true) {
+    
+    private func updateSnapshot(on items: [Item],animated: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([.all])
-        snapshot.appendItems(filteredItems, toSection: .all)
-
-        dataSource.apply(snapshot, animatingDifferences: animatingChange)
+        snapshot.appendItems(items, toSection: .all)
+        
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: animated)
+        }
     }
-    func createGridLayout() -> UICollectionViewLayout {
+    
+    private func createGridLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -390,6 +330,29 @@ extension ShopMainViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
 
         return layout
+    }
+}
+// MARK: - UISearchBarDelegate
+extension ShopMainViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        updateSnapshot(on: filteredItems)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateSnapshot(on: filteredItems)
+    }
+}
+
+extension ShopMainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        //從 searchBar 上的 text 去抓取要過濾的 followers，並且 searchBar 一定要輸入文字
+        //這一段在你按下 searchBar 的 cancel 按鈕時也會執行
+        guard let filter = searchController.searchBar.text?.lowercased(), !filter.isEmpty else {
+            updateSnapshot(on: filteredItems, animated: true)                   //點 cancel 被清空搜尋內容時，需要還原最初始 followers 內容
+            return
+        }
+//        filteredItems = filteredItems.filter { $0.
+//        } // didSet 將會直接執行 updateSnapshot
     }
 }
 // MARK: - UITextFieldDelegate

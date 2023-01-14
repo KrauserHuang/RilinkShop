@@ -15,11 +15,14 @@ protocol MerchantMainViewControllerDelegate: AnyObject {
 
 class MerchantMainViewController: UIViewController {
     
+    @IBOutlet weak var storeNameLabel: UILabel!
+    
     weak var delegate: MerchantMainViewControllerDelegate?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        storeNameLabel.text = Global.OWNER_STORE_NAME
     }
     
     @IBAction func scanButtonTapped(_ sender: UIButton) {

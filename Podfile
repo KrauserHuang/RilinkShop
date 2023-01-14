@@ -15,7 +15,9 @@ target 'RilinkShop' do
   pod 'SnapKit', '~> 5.6.0'
   pod 'DropDown'
   # Add the Firebase pod for Google Analytics
-  # pod 'FirebaseAnalytics'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Messaging'
 
   # For Analytics without IDFA collection capability, use this pod instead
   # pod ‘Firebase/AnalyticsWithoutAdIdSupport’

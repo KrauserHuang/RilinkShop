@@ -62,7 +62,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2t4-C2-XNc">
-                                                <rect key="frame" x="183.5" y="0.0" width="27" height="30"/>
+                                                <rect key="frame" x="183.5" y="0.0" width="66.5" height="30"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal">
                                                     <imageReference key="image" image="line.3.horizontal" catalog="system" symbolScale="large"/>
@@ -71,11 +71,13 @@
                                                     <action selector="shopTypeButtonTapped:" destination="qTH-m4-zGr" eventType="touchUpInside" id="b09-Pp-4vy"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cRD-NY-Ppc">
-                                                <rect key="frame" x="217.5" y="0.0" width="151.5" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="XI2-tQ-YZR">
+                                                <rect key="frame" x="257" y="0.0" width="112" height="30"/>
                                                 <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <connections>
+                                                    <outlet property="delegate" destination="qTH-m4-zGr" id="EqE-km-RgW"/>
+                                                </connections>
+                                            </searchBar>
                                         </subviews>
                                         <color key="tintColor" red="0.80046349760000002" green="0.48583424089999999" blue="0.21951380370000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </stackView>
@@ -126,7 +128,7 @@
                     <navigationItem key="navigationItem" title="購物商城" id="mac-CD-Hag"/>
                     <connections>
                         <outlet property="collectionView" destination="kcF-ss-t4n" id="AeQ-Fc-Pfk"/>
-                        <outlet property="searchBarTextField" destination="cRD-NY-Ppc" id="Lkn-0y-Vxs"/>
+                        <outlet property="searchBar" destination="XI2-tQ-YZR" id="q5o-5v-tp7"/>
                         <outlet property="shopTypeButton" destination="pPw-D1-jPn" id="w1J-In-B9P"/>
                     </connections>
                 </viewController>

@@ -91,13 +91,11 @@ class LoginViewController_1: UIViewController {
     }
     
     private func getStoreID() {
-        HUD.showLoadingHUD(inView: view, text: "取得店家資訊中")
         UserService.shared.getStoreIDList(storeAcc: "99999", storePwd: "99999") { success, response in
             
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {
-                    HUD.hideLoadingHUD(inView: self.view)
 
                     guard success else {
                         return
@@ -205,94 +203,94 @@ class LoginViewController_1: UIViewController {
         Global.ACCOUNT_PASSWORD = password
 //        LocalStorageManager.shared.setData(account, key: .userIdKey)
 //        LocalStorageManager.shared.setData(password, key: .userPasswordKey)
-        MyKeyChain.setAccount(account)
-        MyKeyChain.setPassword(password)
+//        MyKeyChain.setAccount(account)
+//        MyKeyChain.setPassword(password)
+        
+        let apnsToken = AppDelegate.apnsToken ?? ""
+        
+        if loginSegmentedControl.selectedSegmentIndex == 0 { // 一般使用者登入
+            userLogin(account: account, password: password, token: apnsToken)
+        } else if loginSegmentedControl.selectedSegmentIndex == 1 { // 店長登入
+            adminLogin(account: account, password: password, token: apnsToken)
+        }
+    }
+    
+    private func userLogin(account: String, password: String, token: String) {
+        let accountPredicate = NSPredicate(format: "SELF MATCHES %@", "^09[0-9]{8}$")
+        guard accountPredicate.evaluate(with: account) else {
+            Alert.showMessage(title: "", msg: "請確認是否輸入正確之手機號碼", vc: self)
+            return
+        }
 
-        print(#function)
-        print("password:\(password)")
-        print("globalpassword:\(Global.ACCOUNT_PASSWORD)")
-        // 一般使用者登入
-        if loginSegmentedControl.selectedSegmentIndex == 0 {
-            // 只檢查密碼格式
-            let accountPredicate = NSPredicate(format: "SELF MATCHES %@", "^09[0-9]{8}$")
-            guard accountPredicate.evaluate(with: account) else {
-                let alert = UIAlertController.simpleOKAlert(title: "", message: "請確認是否輸入正確之手機號碼", buttonTitle: "確認", action: nil)
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
+        HUD.showLoadingHUD(inView: self.view, text: "登入中")
+        
+        let group = DispatchGroup()
+        group.enter()
+        UserService.shared.userLogin(id: account, pwd: password) { success, response in
+            DispatchQueue.global(qos: .userInitiated).async {
+                URLCache.shared.removeAllCachedResponses()
+                DispatchQueue.main.async {
 
-            Global.ACCOUNT = account
-            Global.ACCOUNT_PASSWORD = password
+                    HUD.hideLoadingHUD(inView: self.view)
 
-            HUD.showLoadingHUD(inView: self.view, text: "登入中")
-
-            UserService.shared.userLogin(id: account, pwd: password) { success, response in
-                DispatchQueue.global(qos: .userInitiated).async {
-                    URLCache.shared.removeAllCachedResponses()
-                    DispatchQueue.main.async {
-
-                        HUD.hideLoadingHUD(inView: self.view)
-
-                        guard success else {
-                            let errorMsg = response as! String
-                            Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
-                            return
-                        }
-                        // 登入成功才把帳密儲存在Keychain裡面
-//                        LocalStorageManager.shared.setData(account, key: .userIdKey)
-//                        LocalStorageManager.shared.setData(password, key: .userPasswordKey)
-                        MyKeyChain.setAccount(Global.ACCOUNT)
-                        MyKeyChain.setPassword(Global.ACCOUNT_PASSWORD)
-                        
-//                        NotificationService.shared.memberSetToken(id: account,
-//                                                                  pwd: password,
-//                                                                  token: <#T##String#>) { success, response in
-//                            <#code#>
-//                        }
-
-                        self.delegate?.finishLoginView(self, action: .Login)
+                    guard success else {
+                        let errorMsg = response as! String
+                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+                        return
                     }
+                    print("完成登入API動作")
                 }
             }
-        } else if loginSegmentedControl.selectedSegmentIndex == 1 { // 店長登入
-
-            guard storeIDButton.titleLabel?.text != "店家ID" else {
-                let errorMsg = "請選擇店家"
-                Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
-                return
-            }
-
-            Global.ACCOUNT = account
-            Global.ACCOUNT_PASSWORD = password
-
-            let storeID = storeID ?? ""
-
-            HUD.showLoadingHUD(inView: self.view, text: "登入中")
-
-            UserService.shared.storeAdminLogin(storeAcc: account, storePwd: password, storeID: storeID) { success, response in
-                DispatchQueue.global(qos: .userInitiated).async {
-                    URLCache.shared.removeAllCachedResponses()
-                    DispatchQueue.main.async {
-
-                        HUD.hideLoadingHUD(inView: self.view)
-
-                        guard success else {
-                            let errmsg = response as! String
-                            Alert.showMessage(title: "", msg: errmsg, vc: self, handler: nil)
-                            return
-                        }
-                        
-//                        LocalStorageManager.shared.setData(account, key: .userIdKey)
-//                        LocalStorageManager.shared.setData(password, key: .userPasswordKey)
-                        MyKeyChain.setBossAccount(Global.ACCOUNT)
-                        MyKeyChain.setBossPassword(Global.ACCOUNT_PASSWORD)
-
-//                        self.delegate?.finishLoginView(self, action: .BossLogIn)
-//                        let vc = StoreAppViewController()
-                        let vc = UIStoryboard(name: "Merchant", bundle: nil).instantiateViewController(withIdentifier: "MerchantNavigationController") as! MerchantNavigationController
-                        vc.modalPresentationStyle = .fullScreen
-                        self.present(vc, animated: true, completion: nil)
+            group.leave()
+        }
+//        group.wait()
+        group.enter()
+        NotificationService.shared.memberSetToken(id: account,
+                                                  pwd: password,
+                                                  token: token) { success, response in
+            DispatchQueue.global(qos:.userInitiated).async {
+                URLCache.shared.removeAllCachedResponses()
+                DispatchQueue.main.async {
+                    guard success else {
+                        let errorMsg = response as! String
+                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+                        return
                     }
+                    print("完成設定token API動作")
+                }
+            }
+            group.leave()
+        }
+        group.notify(queue: DispatchQueue.global()) {
+            print("完成登入、設定完token，將進行畫面移轉")
+            self.delegate?.finishLoginView(self, action: .Login)
+        }
+    }
+    
+    private func adminLogin(account: String, password: String, token: String) {
+        guard storeIDButton.titleLabel?.text != "店家ID" else {
+            Alert.showMessage(title: "", msg: "請選擇店家", vc: self, handler: nil)
+            return
+        }
+
+        let storeID = storeID ?? ""
+        
+        HUD.showLoadingHUD(inView: self.view, text: "登入中")
+
+        UserService.shared.storeAdminLogin(storeAcc: account, storePwd: password, storeID: storeID, notificationToken: token) { success, response in
+            DispatchQueue.global(qos: .userInitiated).async {
+                URLCache.shared.removeAllCachedResponses()
+                DispatchQueue.main.async {
+
+                    HUD.hideLoadingHUD(inView: self.view)
+
+                    guard success else {
+                        let errmsg = response as! String
+                        Alert.showMessage(title: "", msg: errmsg, vc: self, handler: nil)
+                        return
+                    }
+
+                    self.delegate?.finishLoginView(self, action: .BossLogIn)
                 }
             }
         }
@@ -309,7 +307,8 @@ class LoginViewController_1: UIViewController {
     }
     // MARK: - 條款頁
     @IBAction func privateAction(_ sender: UIButton) {
-        navigationController?.pushViewController(PrivateRuleViewController(), animated: true)
+        let vc = PrivateRuleViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 // MARK: - UITextFieldDelegate
@@ -351,6 +350,7 @@ extension LoginViewController_1: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let storeName = storeIDs?[row].storeName ?? ""
         storeIDButton.setTitle(storeName, for: .normal)
+        Global.OWNER_STORE_NAME = storeName
 
         let storeID = storeIDs?[row].storeID ?? ""
         self.storeID = storeID

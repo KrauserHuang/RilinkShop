@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: - 綠悠遊商城
- let SHOP_API_URL   = "https://rilink.com.tw/ticketec/api/"             // 正式網域
- let SHOP_ROOT_URL  = "https://rilink.com.tw/ticketec/"
+// let SHOP_API_URL   = "https://rilink.com.tw/ticketec/api/"             // 正式網域
+// let SHOP_ROOT_URL  = "https://rilink.com.tw/ticketec/"
 // let SHOP_API_URL     = "http://211.20.181.125:11073/ticketec/api/"   // 測試網域
 // let SHOP_ROOT_URL    = "http://211.20.181.125:11073/ticketec/"
-// let SHOP_API_URL     = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
-// let SHOP_ROOT_URL    = "https://rilink.jotangi.com.tw:11074/ticketec/"
+ let SHOP_API_URL     = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
+ let SHOP_ROOT_URL    = "https://rilink.jotangi.com.tw:11074/ticketec/"
 
 // MARK: - 綠悠遊租車
  let API_URL    = "https://rilink.com.tw/api/v1"                    // 正式網域
@@ -26,6 +26,10 @@ import Foundation
 // MARK: - ADMIN
 let URL_STOREIDLIST             = "storeId_list.php"        // 商店ID列表
 let URL_STOREADMINLOGIN         = "storeadmin_login.php"    // 店長登入
+let URL_STOREADMINLOGOUT        = "storeadmin_logout.php"   // 店長登出
+let URL_STOREADMINGETNOTIFYHISTORY = "storeadmin_get_notify_history.php" // 取得推播歷史資料
+let URL_STOREADMINISNOTIFY      = "storeadmin_isnotify.php" // 店長是否推播
+let URL_STOREADMINSETNOTIFY     = "storeadmin_set_notify.php" //店長設定推播狀態
 
 // MARK: - USER
 let URL_USERLOGIN               = "user_login.php"                                  // 使用者登入
