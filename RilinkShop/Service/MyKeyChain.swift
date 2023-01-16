@@ -99,16 +99,4 @@ class MyKeyChain {
         }
         return storeId
     }
-    
-    static func logout() {
-        MyKeyChain.setAccount("")
-        MyKeyChain.setPassword("")
-        MyKeyChain.setBossAccount("")
-        MyKeyChain.setBossPassword("")
-        Global.ACCOUNT = ""
-        Global.ACCOUNT_PASSWORD = ""
-        Global.OWNER_STORE_ID = ""
-        Global.OWNER_STORE_NAME = ""
-        UserService.shared.didLogin = false
-    }
 }

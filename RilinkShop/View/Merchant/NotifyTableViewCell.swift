@@ -37,27 +37,27 @@ class NotifyTableViewCell: UITableViewCell {
         backView.layer.shadowOpacity = 0.5
     }
     
-    func set(with viewModel: NotifyViewModel) {
-        messageLabel.text = viewModel.msg
-        timeLabel.text = viewModel.createDateTime
+    func set(with viewModel: AdminHistory) {
+        messageLabel.text = viewModel.message
+        timeLabel.text = viewModel.updatetime
         
-        switch viewModel.type {
-        case 1:
-            titleLabel.text = "系統群發"
-        case 2:
-            titleLabel.text = "系統單發"
-        case 3:
-            titleLabel.text = "租車預約通知"
-        case 4:
-            titleLabel.text = "附近店家"
-        case 5:
-            titleLabel.text = "還車通知"
-        case 6:
-            titleLabel.text = "機車退款通知"
-        case 7:
-            titleLabel.text = "取消預約通知"
-        default:
-            titleLabel.text = "未知訊息"
-        }
+//        switch viewModel.type {
+//        case 1:
+//            titleLabel.text = "系統群發"
+//        case 2:
+//            titleLabel.text = "系統單發"
+//        case 3:
+//            titleLabel.text = "租車預約通知"
+//        case 4:
+//            titleLabel.text = "附近店家"
+//        case 5:
+//            titleLabel.text = "還車通知"
+//        case 6:
+//            titleLabel.text = "機車退款通知"
+//        case 7:
+//            titleLabel.text = "取消預約通知"
+//        default:
+//            titleLabel.text = "未知訊息"
+//        }
     }
 }

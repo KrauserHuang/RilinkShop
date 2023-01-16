@@ -157,14 +157,13 @@ class NotificationService {
                     return
                 }
                 
-                let datas = value.arrayValue
-                var histories: [History] = []
+                let datas = value["data"].arrayValue
+                var histories: [AdminHistory] = []
                 for data in datas {
-                    let history = History(type: data["type"].stringValue,
-                                          title: data["title"].stringValue,
-                                          message: data["message"].stringValue,
-                                          log: data["log"].stringValue,
-                                          push_datetime: data["push_datetime"].stringValue)
+                    let history = AdminHistory(type: data["type"].stringValue,
+                                               title: data["title"].stringValue,
+                                               message: data["message"].stringValue,
+                                               updatetime: data["updatetime"].stringValue)
                     histories.append(history)
                 }
                 completion(true, histories as AnyObject)

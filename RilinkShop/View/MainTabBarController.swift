@@ -15,8 +15,6 @@ class MainTabBarController: UITabBarController {
 
         delegate = self
         tabBar.tintColor = .primaryOrange
-//        LocalStorageManager.shared.setData("0911838460", key: .userIdKey)
-//        LocalStorageManager.shared.setData("simon07801", key: .userPasswordKey)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -34,23 +32,6 @@ class MainTabBarController: UITabBarController {
     }
 
     func tryLogIn() {
-        
-//        if LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) == nil,
-//           LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) != nil {
-//            // 登入店長頁面
-//            let storeVC = StoreAppViewController()
-//            storeVC.modalPresentationStyle = .fullScreen
-//            present(storeVC, animated: true, completion: nil)
-//        } else if LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) == nil,
-//                  LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) != nil {
-//            // 登入使用者頁面
-////            selectedIndex = 0
-//        } else if LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) == nil,
-//                  LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) == nil {
-//            selectedIndex = 3
-//        }
-        
-        
         if MyKeyChain.getAccount() == nil,
            MyKeyChain.getBossAccount() != nil {
             // 登入店長頁面
@@ -64,6 +45,8 @@ class MainTabBarController: UITabBarController {
         } else if MyKeyChain.getAccount() == nil,
                   MyKeyChain.getBossAccount() == nil {
             selectedIndex = 3
+//            let memberCenterVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as! MemberCenterViewController
+//            setViewControllers([memberCenterVC], animated: false)
         }
     }
 }

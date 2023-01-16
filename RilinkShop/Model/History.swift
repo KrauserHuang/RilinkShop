@@ -14,3 +14,10 @@ struct History {
     let log: String
     let push_datetime: String
 }
+
+struct AdminHistory {
+    let type: String
+    let title: String
+    let message: String
+    let updatetime: String
+}

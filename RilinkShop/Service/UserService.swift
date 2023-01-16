@@ -12,16 +12,15 @@ import SwiftyJSON
 class UserService {
     static let shared = UserService()
     private(set) var user: User?
-//    var id = Global.ACCOUNT
-//    var pwd = Global.ACCOUNT_PASSWORD
     var didLogin = false
     var renewUser: (() -> Void)?
 
     private init() {
-//        guard let account = LocalStorageManager.shared.getData(String.self, forKey: .userIdKey),
-//              let password = LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey) else {
-        guard let account = MyKeyChain.getAccount(), let password = MyKeyChain.getPassword() else {
-            didLogin = true
+//        let account = Global.ACCOUNT
+//        let password = Global.ACCOUNT_PASSWORD
+        guard let account = MyKeyChain.getAccount(),
+              let password = MyKeyChain.getPassword() else {
+            didLogin = false
             return
         }
         getPersonalData(account: account, pw: password, accountType: "0") { success, response in
@@ -31,8 +30,6 @@ class UserService {
             }
             Global.personalData = response as? User
             self.user = Global.personalData
-//            self.id = account
-//            self.pwd = password
 
             self.didLogin = true
             self.renewUser?()
@@ -107,8 +104,6 @@ class UserService {
                 MyKeyChain.setAccount(id)
                 MyKeyChain.setPassword(pwd)
                 MyKeyChain.setAccessToken(Global.ACCESS_TOKEN)
-//                self.id = id
-//                self.pwd = pwd
 
                 self.getPersonalData(account: id, pw: pwd, accountType: "0") { success, response in
                     guard success else {
@@ -313,15 +308,12 @@ class UserService {
         print("UserService + \(#function)")
         user = nil
         renewUser = nil
-//        id = ""
-//        pwd = ""
         Global.ACCOUNT = ""
         Global.ACCOUNT_PASSWORD = ""
         Global.OWNER_STORE_ID = ""
+        Global.OWNER_STORE_NAME = ""
         Global.ACCESS_TOKEN = ""
         Global.personalData = nil
-//        LocalStorageManager.shared.removeData(key: .userIdKey)
-//        LocalStorageManager.shared.removeData(key: .userPasswordKey)
         MyKeyChain.setAccount("")
         MyKeyChain.setPassword("")
         MyKeyChain.setBossAccount("")
@@ -329,6 +321,8 @@ class UserService {
         MyKeyChain.setStoreId("")
         MyKeyChain.setAccessToken("")
         didLogin = false
+        //        LocalStorageManager.shared.removeData(key: .userIdKey)
+        //        LocalStorageManager.shared.removeData(key: .userPasswordKey)
     }
     // MARK: - 註冊1 - 傳送手機驗證號碼
     func signUp(account: String, completed: @escaping Completion) {
@@ -654,7 +648,7 @@ class UserService {
             }
         }
     }
-    
+    // MARK: - 店長登出
     func storeAdminLogout(storeAcc: String, storePwd: String, storeID: String, completion: @escaping Completion) {
         let url = SHOP_API_URL + URL_STOREADMINLOGOUT
         let parameters = [
@@ -673,9 +667,6 @@ class UserService {
             }
             
             let value = JSON(response.value)
-            print("===================================")
-            print(value)
-            print("===================================")
             
             switch response.result {
             case .success:
@@ -685,7 +676,7 @@ class UserService {
                     return
                 }
                 
-                MyKeyChain.logout()
+                self.logout() //API完成進行清除資料動作
                 let successMsg = value["responseMessage"].stringValue
                 completion(true, successMsg as AnyObject)
             case .failure:
@@ -694,7 +685,7 @@ class UserService {
             }
         }
     }
-
+    // MARK: - 帳號刪除
     func userDel(id: String, pwd: String, completed: @escaping Completion) {
         print("UserService " + #function)
         print("Account:\(id)\nPassword:\(pwd)")

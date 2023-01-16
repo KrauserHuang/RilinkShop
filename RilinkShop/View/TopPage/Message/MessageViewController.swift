@@ -51,6 +51,8 @@ class MessageViewController: UIViewController {
         Message(title: "信息標題", description: "信息內容", date: "發布時間"),
         Message(title: "信息標題1", description: "信息內容2", date: "發布時間3")
     ]
+    
+    var histories: [History] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +62,17 @@ class MessageViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         updateSnapshot()
+    }
+    
+    private func fetchHistory() {
+        NotificationService.shared.pushMsgGetHistory(id: Global.ACCOUNT, pwd: Global.ACCOUNT_PASSWORD) { success, response in
+            guard success else {
+                return
+            }
+            
+            let histories = response as! [History]
+            self.histories = histories
+        }
     }
 }
 

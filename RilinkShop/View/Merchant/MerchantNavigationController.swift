@@ -42,9 +42,6 @@ extension MerchantNavigationController: MerchantMainViewControllerDelegate {
     func didTapNotifyButton(_ viewController: MerchantMainViewController) {
         guard let adminAccount = MyKeyChain.getBossAccount(),
               let adminPassword = MyKeyChain.getBossPassword() else { return }
-        print("adminAccount:\(adminAccount)")
-        print("adminPassword:\(adminPassword)")
-        print("ID:\(Global.OWNER_STORE_ID)")
         NotificationService.shared.storeAdminGetNotifyHistory(storeAcc: adminAccount,
                                                               storePwd: adminPassword,
                                                               storeID: Global.OWNER_STORE_ID) { success, response in
@@ -54,7 +51,7 @@ extension MerchantNavigationController: MerchantMainViewControllerDelegate {
                 return
             }
             
-            let messages = response as! [NotifyViewModel]
+            let messages = response as! [AdminHistory]
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "NotifyTableViewController") as! NotifyTableViewController
             controller.messages = messages
             
@@ -69,9 +66,6 @@ extension MerchantNavigationController: MerchantMainViewControllerDelegate {
         guard let adminAccount = MyKeyChain.getBossAccount(),
               let adminPassword = MyKeyChain.getBossPassword() else { return }
         HUD.showLoadingHUD(inView: viewController.view, text: "設定中")
-        print("adminAccount:\(adminAccount)")
-        print("adminPassword:\(adminPassword)")
-        print("ID:\(Global.OWNER_STORE_ID)")
         NotificationService.shared.storeAdminIsNotify(storeAcc: adminAccount,
                                                       storePwd: adminPassword,
                                                       storeID: Global.OWNER_STORE_ID) { success, response in

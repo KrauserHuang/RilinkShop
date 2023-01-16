@@ -51,10 +51,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Messaging.messaging().delegate = self
         
+        UserService.shared.didLogin = true
+        
         Global.ACCOUNT          = MyKeyChain.getAccount() ?? ""
         Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
         Global.ACCESS_TOKEN     = MyKeyChain.getAccessToken() ?? ""
         Global.OWNER_STORE_ID   = MyKeyChain.getStoreId() ?? ""
+        
+//        print("ACCOUNT:\(MyKeyChain.getAccount())")
+//        print("PASSWORD:\(MyKeyChain.getPassword())")
+//        print("ACCESSTOKEN:\(MyKeyChain.getAccessToken())")
 
         return true
     }
@@ -118,6 +124,7 @@ extension AppDelegate: MessagingDelegate {
         print("Firebase registration token: \(fcmToken)")
         
         AppDelegate.apnsToken = fcmToken //FCM確認有收到token後才把它存到AppDelegate的apnsToken
+        Global.ACCESS_TOKEN = fcmToken
         
         let userInfo: [String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: userInfo)

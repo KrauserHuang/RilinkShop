@@ -39,4 +39,10 @@ class MessageTableViewCell: UITableViewCell {
         descriptionLabel.text = model.description
         dateLabel.text        = model.date
     }
+    
+    func configure(with model: History) {
+        titleLabel.text = model.title
+        descriptionLabel.text = model.message
+        dateLabel.text = model.push_datetime
+    }
 }

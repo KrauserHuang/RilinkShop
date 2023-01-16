@@ -9,7 +9,7 @@ import UIKit
 
 class NotifyTableViewController: UITableViewController {
     
-    var messages = [NotifyViewModel]()
+    var messages = [AdminHistory]()
 //    private var adminAccount: String!
 //    private var adminPassword: String!
 //    private var storeID: String!
@@ -27,7 +27,7 @@ class NotifyTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("messages:\(messages)")
     }
 
     // MARK: - Table view data source

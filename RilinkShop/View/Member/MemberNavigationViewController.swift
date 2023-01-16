@@ -17,9 +17,6 @@ class MemberNavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        print("MemberNavigationViewController + \(#function)")
-//        print("didLogin:\(UserService.shared.didLogin)")
-
         if UserService.shared.didLogin {
             tryLogin()
         } else {
@@ -27,8 +24,6 @@ class MemberNavigationViewController: UINavigationController {
                 self.tryLogin()
             }
         }
-        Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
-        Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
 //        Global.ACCOUNT = LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) ?? ""
 //        Global.ACCOUNT_PASSWORD = LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey) ?? ""
     }
