@@ -96,8 +96,8 @@ extension RepairReservationMainViewController {
 //        FixMotorService.shared.bookingFixMotorList(id: account,
 //                                                   pwd: password,
 //                                                   no: "") { success, response in
-        FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? "",
-                                                   pwd: MyKeyChain.getPassword() ?? "",
+        FixMotorService.shared.bookingFixMotorList(id: Global.ACCOUNT,
+                                                   pwd: Global.ACCOUNT_PASSWORD,
                                                    no: "") { success, response in
 //        FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
 //                                                   pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,

@@ -148,6 +148,8 @@
 		4FCD048E2824CC5B00E30C3E /* OrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCD048D2824CC5B00E30C3E /* OrderService.swift */; };
 		4FCD04912824D13200E30C3E /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCD048F2824D13200E30C3E /* WKWebViewController.swift */; };
 		4FCD04922824D13200E30C3E /* WKWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FCD04902824D13200E30C3E /* WKWebViewController.xib */; };
+		4FCD722D297528C400C95F38 /* RSEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCD722C297528C400C95F38 /* RSEmptyStateView.swift */; };
+		4FCD722F2975305300C95F38 /* UIViewController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCD722E2975305300C95F38 /* UIViewController + Ext.swift */; };
 		4FD95FB42954021000F92CE5 /* Date + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD95FB32954021000F92CE5 /* Date + Ext.swift */; };
 		4FDA27BF283361EC003CCA3D /* SignUpViewController_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDA27BD283361EB003CCA3D /* SignUpViewController_1.swift */; };
 		4FDA27C0283361EC003CCA3D /* SignUpViewController_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FDA27BE283361EC003CCA3D /* SignUpViewController_1.xib */; };
@@ -371,6 +373,8 @@
 		4FCD048D2824CC5B00E30C3E /* OrderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderService.swift; sourceTree = "<group>"; };
 		4FCD048F2824D13200E30C3E /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
 		4FCD04902824D13200E30C3E /* WKWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WKWebViewController.xib; sourceTree = "<group>"; };
+		4FCD722C297528C400C95F38 /* RSEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSEmptyStateView.swift; sourceTree = "<group>"; };
+		4FCD722E2975305300C95F38 /* UIViewController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Ext.swift"; sourceTree = "<group>"; };
 		4FD95FB32954021000F92CE5 /* Date + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Ext.swift"; sourceTree = "<group>"; };
 		4FDA27BD283361EB003CCA3D /* SignUpViewController_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController_1.swift; sourceTree = "<group>"; };
 		4FDA27BE283361EC003CCA3D /* SignUpViewController_1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController_1.xib; sourceTree = "<group>"; };
@@ -819,8 +823,17 @@
 				4FC20EE328E3DDDE004114C6 /* Dictionary + Ext.swift */,
 				4F71957A2822143500B2A63A /* NSCollectionLayoutSize + Ext.swift */,
 				4FD95FB32954021000F92CE5 /* Date + Ext.swift */,
+				4FCD722E2975305300C95F38 /* UIViewController + Ext.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		4FCD722B297528A300C95F38 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4FCD722C297528C400C95F38 /* RSEmptyStateView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		4FE5854529027BC000D2B2EE /* Message */ = {
@@ -1072,6 +1085,7 @@
 		57A5ECE02784243300245DB0 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				4FCD722B297528A300C95F38 /* Views */,
 				4F82505E286EE92400A4298C /* BadgeBarButtonItem.swift */,
 			);
 			path = Custom;
@@ -1447,10 +1461,12 @@
 				4FE7408328DC4D1B0067E620 /* QATableViewCell.swift in Sources */,
 				4F0D468E296C0C9800BC49B7 /* NotifyTableViewCell.swift in Sources */,
 				4F3B43C828AA3CD500CD8684 /* MainPageWebViewController.swift in Sources */,
+				4FCD722F2975305300C95F38 /* UIViewController + Ext.swift in Sources */,
 				4F74528728178087006D6E93 /* URLPath.swift in Sources */,
 				4FFE3BB72818F98C00F09CFE /* ShopTypeTableViewCell.swift in Sources */,
 				4FC95F4928634C9C00633594 /* FixMotor.swift in Sources */,
 				4F0F5801285B2F22001EBE9F /* ReservationInputViewController.swift in Sources */,
+				4FCD722D297528C400C95F38 /* RSEmptyStateView.swift in Sources */,
 				4F8498B4292C798200DFE7CC /* NetworkManager.swift in Sources */,
 				4F8F81C7287E6B0400B228A7 /* StoreDetailMainTextCell.swift in Sources */,
 				4FB038FB2838DD0C00A69875 /* StorePicker.swift in Sources */,
@@ -1662,7 +1678,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1681,7 +1697,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.05;
+				MARKETING_VERSION = 1.06;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jotanji.RilinkShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1698,7 +1714,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1717,7 +1733,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.05;
+				MARKETING_VERSION = 1.06;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jotanji.RilinkShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -110,10 +110,6 @@ class MemberNavigationViewController: UINavigationController {
                     }
 
                     Global.personalData = response as? User
-
-//                    Global.ACCOUNT = MyKeyChain.getAccount() ?? ""
-//                    Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
-
                     MemberCenterViewController.newRPoint = Global.personalData?.point ?? "0"
 
                     if Global.personalData?.cmdImageFile == nil || Global.personalData?.cmdImageFile == "" {
@@ -122,6 +118,27 @@ class MemberNavigationViewController: UINavigationController {
                     if let personalCMDImageFile = Global.personalData?.cmdImageFile {
                         self.userImage?.setImage(with: API_URL + personalCMDImageFile)
                     }
+                }
+            }
+        }
+    }
+    
+    private func setUserToken() {
+        let apnsToken = AppDelegate.apnsToken ?? ""
+        guard let account = MyKeyChain.getAccount(),
+              let password = MyKeyChain.getPassword() else { return }
+        NotificationService.shared.memberSetToken(id: account,
+                                                  pwd: password,
+                                                  token: apnsToken) { success, response in
+            DispatchQueue.global(qos:.userInitiated).async {
+                URLCache.shared.removeAllCachedResponses()
+                DispatchQueue.main.async {
+                    guard success else {
+                        let errorMsg = response as! String
+                        Alert.showMessage(title: "", msg: "設定token出錯", vc: self, handler: nil)
+                        return
+                    }
+                    print("完成設定token API動作")
                 }
             }
         }
@@ -177,6 +194,7 @@ extension MemberNavigationViewController: LoginViewController_1_Delegate {
         case .Login:
             loadUserData()
             showRoot(animated: true)
+            setUserToken()
         case .Forget:
             let vc = ForgotPasswordViewController_1()
             vc.delegate = self

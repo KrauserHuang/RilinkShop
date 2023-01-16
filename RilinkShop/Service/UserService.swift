@@ -106,6 +106,7 @@ class UserService {
 //                LocalStorageManager.shared.setData(pwd, key: .userPasswordKey)
                 MyKeyChain.setAccount(id)
                 MyKeyChain.setPassword(pwd)
+                MyKeyChain.setAccessToken(Global.ACCESS_TOKEN)
 //                self.id = id
 //                self.pwd = pwd
 
@@ -316,6 +317,8 @@ class UserService {
 //        pwd = ""
         Global.ACCOUNT = ""
         Global.ACCOUNT_PASSWORD = ""
+        Global.OWNER_STORE_ID = ""
+        Global.ACCESS_TOKEN = ""
         Global.personalData = nil
 //        LocalStorageManager.shared.removeData(key: .userIdKey)
 //        LocalStorageManager.shared.removeData(key: .userPasswordKey)
@@ -323,6 +326,8 @@ class UserService {
         MyKeyChain.setPassword("")
         MyKeyChain.setBossAccount("")
         MyKeyChain.setBossPassword("")
+        MyKeyChain.setStoreId("")
+        MyKeyChain.setAccessToken("")
         didLogin = false
     }
     // MARK: - 註冊1 - 傳送手機驗證號碼
@@ -618,6 +623,7 @@ class UserService {
             }
 
             let value = JSON(response.value!)
+            print("value:\(value)")
 
             switch response.result {
             case .success:
@@ -630,6 +636,8 @@ class UserService {
                 
                 MyKeyChain.setBossAccount(storeAcc)
                 MyKeyChain.setBossPassword(storePwd)
+                MyKeyChain.setAccessToken(notificationToken)
+                MyKeyChain.setStoreId(storeID)
                 Global.OWNER_STORE_ID = storeID
 
                 let info = StoreInfo(storeName: value["store_name"].stringValue,
@@ -646,34 +654,6 @@ class UserService {
             }
         }
     }
-
-//    func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, completed: @escaping (StoreAdminLogin) -> Void) {
-//        let url = SHOP_API_URL + URL_STOREADMINLOGIN
-//        let parameters = [
-//            "store_acc": storeAcc,
-//            "store_pwd": storePwd,
-//            "store_id": storeID
-//        ]
-//        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: StoreAdminLogin.self) { response in
-//
-//            guard response.value != nil else {
-//                print(#function)
-//                print("伺服器連線失敗")
-//                return
-//            }
-//
-////            print(#function)
-//
-//            switch response.result {
-//            case .success:
-//                guard let store = response.value else { return }
-//                self.didLogin = true
-//                completed(store)
-//            case .failure:
-//                print(response.error as Any)
-//            }
-//        }
-//    }
     
     func storeAdminLogout(storeAcc: String, storePwd: String, storeID: String, completion: @escaping Completion) {
         let url = SHOP_API_URL + URL_STOREADMINLOGOUT
@@ -682,7 +662,7 @@ class UserService {
             "store_pwd": storePwd,
             "store_id": storeID
         ]
-        let returnCode = ReturnCode.RETURN_SUCCESS.0
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
         
         AF.request(url, method: .post, parameters: parameters).response { response in
             
@@ -699,7 +679,7 @@ class UserService {
             
             switch response.result {
             case .success:
-                guard value["code"].intValue == returnCode else {
+                guard value["code"].stringValue == returnCode else {
                     let errorMsg = value["responseMessage"].stringValue
                     completion(false, errorMsg as AnyObject)
                     return

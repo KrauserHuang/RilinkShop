@@ -24,7 +24,12 @@ class MerchantNavigationController: UINavigationController {
         rootVC.delegate = self
         self.setNeedsStatusBarAppearanceUpdate()
     }
-
+    
+    private func showRoot(animated: Bool) {
+        let vc = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(withIdentifier: "MemberCenterViewController") as! MemberCenterViewController
+        self.dismiss(animated: true)
+        self.setViewControllers([vc], animated: false)
+    }
 }
 
 extension MerchantNavigationController: MerchantMainViewControllerDelegate {
@@ -33,29 +38,13 @@ extension MerchantNavigationController: MerchantMainViewControllerDelegate {
         vc.modalPresentationStyle = .fullScreen
         viewController.present(vc, animated: true, completion: nil)
     }
-    
+    // MARK: - 取得店長推播歷史紀錄
     func didTapNotifyButton(_ viewController: MerchantMainViewController) {
-//        let url = API_URL + URL_BOSSFETCHNOTIFYHISTORY
-//        let parameters: [String: Any] = ["account": Global.ACCOUNT, "accessToken": Global.ACCESS_TOKEN]
-//        HUD.showLoadingHUD(inView: viewController.view, text: "讀取中")
-//        ApiConnection.getAPIRequest(url: url, parameters: parameters) { isSuccess, response in
-//            HUD.hideLoadingHUD(inView: viewController.view)
-//            guard isSuccess else {
-//                print("ERROR\(response)")
-//                return}
-//            guard let response = response as? JSON, let returnData = response["returnData"].array else{
-//                print("ERROR response")
-//                return}
-//            var dataArray = [NotifyViewModel]()
-//            for data in returnData {
-//                dataArray.append(NotifyViewModel(with: data))
-//            }
-//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "NotifyTableViewController") as! NotifyTableViewController
-//            controller.messages = dataArray
-//            self.pushViewController(controller, animated: true)
-//        }
         guard let adminAccount = MyKeyChain.getBossAccount(),
               let adminPassword = MyKeyChain.getBossPassword() else { return }
+        print("adminAccount:\(adminAccount)")
+        print("adminPassword:\(adminPassword)")
+        print("ID:\(Global.OWNER_STORE_ID)")
         NotificationService.shared.storeAdminGetNotifyHistory(storeAcc: adminAccount,
                                                               storePwd: adminPassword,
                                                               storeID: Global.OWNER_STORE_ID) { success, response in
@@ -68,40 +57,60 @@ extension MerchantNavigationController: MerchantMainViewControllerDelegate {
             let messages = response as! [NotifyViewModel]
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "NotifyTableViewController") as! NotifyTableViewController
             controller.messages = messages
+            
+            if messages.count == 0 {
+                controller.showEmptyStateView(with: "無訊息", in: controller.view)
+            }
             self.pushViewController(controller, animated: true)
         }
     }
-    
+    // MARK: - 進入設定頁面，先取得推播設定狀態
     func didTapPreferencesButton(_ viewController: MerchantMainViewController) {
-//        let url = API_URL + URL_BOSSISNOTIFY
-//        let parameters: [String: Any] = ["account": Global.ACCOUNT, "accessToken": Global.ACCESS_TOKEN]
-//        HUD.showLoadingHUD(inView: viewController.view, text: "讀取中")
-//        ApiConnection.getAPIRequest(url: url, parameters: parameters) { isSuccess, response in
-//            HUD.hideLoadingHUD(inView: viewController.view)
-//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "PreferencesTableViewController") as! PreferencesTableViewController
-//            controller.delegate = self
-//            if let response = response as? JSON, let returnData = response["returnData"].array, let notify = returnData.first {
-//                if notify["notify"].stringValue == "ON" {
-//                    controller.isOn = true
-//                }
-//            }
-//            self.pushViewController(controller, animated: true)
-//        }
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "PreferencesTableViewController") as! PreferencesTableViewController
-        controller.delegate = self
-        self.pushViewController(controller, animated: true)
+        guard let adminAccount = MyKeyChain.getBossAccount(),
+              let adminPassword = MyKeyChain.getBossPassword() else { return }
+        HUD.showLoadingHUD(inView: viewController.view, text: "設定中")
+        print("adminAccount:\(adminAccount)")
+        print("adminPassword:\(adminPassword)")
+        print("ID:\(Global.OWNER_STORE_ID)")
+        NotificationService.shared.storeAdminIsNotify(storeAcc: adminAccount,
+                                                      storePwd: adminPassword,
+                                                      storeID: Global.OWNER_STORE_ID) { success, response in
+            HUD.hideLoadingHUD(inView: viewController.view)
+            
+            guard success else {
+                print("取得推播狀態失敗")
+                return
+            }
+            
+            let status = response as! String
+            let controller = self.storyboard?.instantiateViewController(withIdentifier: "PreferencesTableViewController") as! PreferencesTableViewController
+            controller.delegate = self
+            if status == "on" {
+                controller.isOn = true
+            } else {
+                controller.isOn = false
+            }
+            self.pushViewController(controller, animated: true)
+        }
     }
 }
 
 extension MerchantNavigationController: PreferencesTableViewControllerDelegate {
+    // MARK: - 設定頁面，設定推播狀態
     func didTapNotifySwitch(_ viewController: PreferencesTableViewController, to status: Bool) {
-        print("switch切換")
+        guard let adminAccount = MyKeyChain.getBossAccount(),
+              let adminPassword = MyKeyChain.getBossPassword() else { return }
+        HUD.showLoadingHUD(inView: viewController.view, text: "設定中")
+        NotificationService.shared.storeAdminSetNotify(storeAcc: adminAccount,
+                                                       storePwd: adminPassword,
+                                                       storeID: Global.OWNER_STORE_ID,
+                                                       isNotify: status ? "on" : "off") { success, response in
+            print("設定成功")
+            HUD.hideLoadingHUD(inView: viewController.view)
+        }
     }
     
     func didTapLogout(_ viewController: PreferencesTableViewController) {
-        print("Hello")
-//        self.dismiss(animated: true)
-//        MyKeyChain.logout()
         guard let adminAccount = MyKeyChain.getBossAccount(),
               let adminPassword = MyKeyChain.getBossPassword() else { return }
         UserService.shared.storeAdminLogout(storeAcc: adminAccount,
@@ -110,9 +119,7 @@ extension MerchantNavigationController: PreferencesTableViewControllerDelegate {
             guard success else {
                 return
             }
-
-//            self.popToRootViewController(animated: true)
-            self.dismiss(animated: true, completion: nil)
+            self.showRoot(animated: true)
         }
     }
 }

@@ -17,4 +17,5 @@ enum Images {
     static let eye      = UIImage(named: "eye")
     static let eyeSlash = UIImage(named: "eyeSlash")
     static let agree    = UIImage(named: "agree")
+    static let dataSearching = UIImage(named: "data-searching")
 }

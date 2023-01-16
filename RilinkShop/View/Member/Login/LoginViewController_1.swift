@@ -224,8 +224,6 @@ class LoginViewController_1: UIViewController {
 
         HUD.showLoadingHUD(inView: self.view, text: "登入中")
         
-        let group = DispatchGroup()
-        group.enter()
         UserService.shared.userLogin(id: account, pwd: password) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
@@ -235,35 +233,13 @@ class LoginViewController_1: UIViewController {
 
                     guard success else {
                         let errorMsg = response as! String
-                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+                        Alert.showMessage(title: "", msg: "帳號或密碼出錯，請再次確認", vc: self, handler: nil)
                         return
                     }
                     print("完成登入API動作")
+                    self.delegate?.finishLoginView(self, action: .Login)
                 }
             }
-            group.leave()
-        }
-//        group.wait()
-        group.enter()
-        NotificationService.shared.memberSetToken(id: account,
-                                                  pwd: password,
-                                                  token: token) { success, response in
-            DispatchQueue.global(qos:.userInitiated).async {
-                URLCache.shared.removeAllCachedResponses()
-                DispatchQueue.main.async {
-                    guard success else {
-                        let errorMsg = response as! String
-                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
-                        return
-                    }
-                    print("完成設定token API動作")
-                }
-            }
-            group.leave()
-        }
-        group.notify(queue: DispatchQueue.global()) {
-            print("完成登入、設定完token，將進行畫面移轉")
-            self.delegate?.finishLoginView(self, action: .Login)
         }
     }
     
@@ -274,10 +250,16 @@ class LoginViewController_1: UIViewController {
         }
 
         let storeID = storeID ?? ""
+        print("storeID:\(storeID)")
+        print("account:\(account)")
+        print("password:\(password)")
+        print("token:\(token)")
         
         HUD.showLoadingHUD(inView: self.view, text: "登入中")
-
-        UserService.shared.storeAdminLogin(storeAcc: account, storePwd: password, storeID: storeID, notificationToken: token) { success, response in
+        UserService.shared.storeAdminLogin(storeAcc: account,
+                                           storePwd: password,
+                                           storeID: storeID,
+                                           notificationToken: token) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.async {

@@ -59,6 +59,8 @@ class TopPageViewController: UIViewController {
 
         initUI()
 //        let notificationName = Notification.Name.hereComesTheProductType
+        print("MyKeyChain.getAccount():\(MyKeyChain.getAccount())")
+        print("MyKeyChain.getPassword():\(MyKeyChain.getPassword())")
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -143,8 +145,7 @@ extension TopPageViewController {
                                                  style: .plain,
                                                  target: self,
                                                  action: #selector(toMessageViewController))
-//        navigationItem.rightBarButtonItems = [shoppingcartButton, notificationButton]
-        navigationItem.rightBarButtonItems = [shoppingcartButton]
+        navigationItem.rightBarButtonItems = [shoppingcartButton, notificationButton]
     }
     @objc private func toCartViewController() {
 //        let vc = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,

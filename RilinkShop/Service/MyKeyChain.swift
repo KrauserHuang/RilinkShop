@@ -9,6 +9,7 @@ import Foundation
 
 class MyKeyChain {
     static let shared = MyKeyChain()
+    private let defaults = UserDefaults.standard
 
     static func setAccount(_ account: String) {
         guard account != "" else {
@@ -67,6 +68,36 @@ class MyKeyChain {
             return nil
         }
         return password
+    }
+    
+    static func setAccessToken(_ token: String) {
+        guard token != "" else {
+            UserDefaults.standard.removeObject(forKey: "ACCESS_TOKEN")
+            return
+        }
+        UserDefaults.standard.set(token, forKey: "ACCESS_TOKEN")
+    }
+    
+    static func getAccessToken() -> String? {
+        guard let token = UserDefaults.standard.string(forKey: "ACCESS_TOKEN"), token != "" else {
+            return nil
+        }
+        return token
+    }
+    
+    static func setStoreId(_ storeId: String) {
+        guard storeId != "" else {
+            UserDefaults.standard.removeObject(forKey: "STORE_ID")
+            return
+        }
+        UserDefaults.standard.set(storeId, forKey: "STORE_ID")
+    }
+    
+    static func getStoreId() -> String? {
+        guard let storeId = UserDefaults.standard.string(forKey: "STORE_ID"), storeId != "" else {
+            return nil
+        }
+        return storeId
     }
     
     static func logout() {

@@ -209,6 +209,7 @@ class MemberCenterViewController: UIViewController {
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         if Global.ACCOUNT != "" {
             Alert.showLogout(title: "確定要登出？", msg: "", vc: self) {
+                self.clearMemberToken()
                 self.signOut()
             }
         } else { // 沒有帳號，倒到登入頁面
@@ -228,13 +229,19 @@ class MemberCenterViewController: UIViewController {
     func signOut() {
         HUD.showLoadingHUD(inView: self.view, text: "登出中")
         UserService.shared.logout()
-//        Global.personalData
         HUD.hideLoadingHUD(inView: self.view)
         loginButton.setTitle("登入", for: .normal)
         editButton.isHidden = true
         loginNameLabel.text = "Hi~ 歡迎回來"
         rPointButton.setTitle("0", for: .normal)
         userImage.image = UIImage(named: "user_avatarxxhdpi")
+    }
+    
+    private func clearMemberToken() {
+        NotificationService.shared.memberClearToken(id: Global.ACCOUNT,
+                                                    pwd: Global.ACCOUNT_PASSWORD) { success, response in
+            print("清除成功")
+        }
     }
     // MARK: - 進使用者資料畫面
     @IBAction func editButtonTapped(_ sender: UIButton) {
@@ -303,14 +310,12 @@ extension MemberCenterViewController: ContainerMemberCenterTableViewControllerDe
     }
     // 常見問題頁面(還未開放)
     func question(_ viewController: ContainerMemberCenterTableViewController) {
-//        Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
         let vc = QAViewController()
         vc.title = "常見問題"
         navigationController?.pushViewController(vc, animated: true)
     }
     // 聯絡客服頁面(還未開放)
     func customerService(_ viewController: ContainerMemberCenterTableViewController) {
-//        Alert.showSecurityAlert(title: "", msg: "敬請期待", vc: self, handler: nil)
         let vc = AboutViewController()
         vc.title = "聯絡客服"
         navigationController?.pushViewController(vc, animated: true)

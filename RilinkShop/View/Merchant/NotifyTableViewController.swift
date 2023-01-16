@@ -10,20 +10,20 @@ import UIKit
 class NotifyTableViewController: UITableViewController {
     
     var messages = [NotifyViewModel]()
-    private var adminAccount: String!
-    private var adminPassword: String!
-    private var storeID: String!
+//    private var adminAccount: String!
+//    private var adminPassword: String!
+//    private var storeID: String!
     
-    init(adminAccount: String, adminPassword: String, storeID: String) {
-        super.init(nibName: nil, bundle: nil)
-        self.adminAccount = adminAccount
-        self.adminPassword = adminPassword
-        self.storeID = storeID
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    init(adminAccount: String, adminPassword: String, storeID: String) {
+//        super.init(nibName: nil, bundle: nil)
+//        self.adminAccount = adminAccount
+//        self.adminPassword = adminPassword
+//        self.storeID = storeID
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

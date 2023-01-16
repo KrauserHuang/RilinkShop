@@ -48,6 +48,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("settings = \(settings)")
         }
         UIApplication.shared.registerForRemoteNotifications()
+        
+        Messaging.messaging().delegate = self
+        
+        Global.ACCOUNT          = MyKeyChain.getAccount() ?? ""
+        Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
+        Global.ACCESS_TOKEN     = MyKeyChain.getAccessToken() ?? ""
+        Global.OWNER_STORE_ID   = MyKeyChain.getStoreId() ?? ""
 
         return true
     }

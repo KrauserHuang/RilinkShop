@@ -36,6 +36,12 @@ extension UIView {
         layer.shadowOpacity = shadowOpacity
         layer.shadowRadius = shadowRadius
     }
+    
+    func addSubviews(_ views: UIView...) {
+        for view in views {
+            self.addSubview(view)
+        }
+    }
 }
 
 protocol Badgeable {}
