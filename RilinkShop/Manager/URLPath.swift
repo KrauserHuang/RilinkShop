@@ -21,7 +21,8 @@ import Foundation
 
 // MARK: - Web串接金流
 // let PAYMENT_API_URL    = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="            // 正式
- let PAYMENT_API_URL  = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid="      // 測試
+// let PAYMENT_API_URL  = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid="      // 測試
+let PAYMENT_API_URL = "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/ecpayindex.php?orderid=" // 新測試
 
 // MARK: - ADMIN
 let URL_STOREIDLIST             = "storeId_list.php"        // 商店ID列表

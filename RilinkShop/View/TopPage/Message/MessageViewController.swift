@@ -8,12 +8,6 @@
 import UIKit
 import SnapKit
 
-struct Message: Hashable {
-    let title: String
-    let description: String
-    let date: String
-}
-
 class MessageViewController: UIViewController {
 
     enum Section {
@@ -28,40 +22,31 @@ class MessageViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-
-    typealias DataSource = UITableViewDiffableDataSource<Section, Message>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Message>
+    
+    typealias DataSource = UITableViewDiffableDataSource<Section, History>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, History>
 
     private lazy var dataSource = configureDataSource()
-
-//    var messages: [Message] = [] {
-//        didSet {
-//            updateSnapshot()
-//        }
-//    }
-
-//    var messages: [Message] = [
-//        Message(title: "1", description: "String1", date: "123"),
-//        Message(title: "2", description: "String2", date: "234"),
-//        Message(title: "3", description: "String3", date: "345")
-//    ]
-
-    var messages: [Message] = [
-        Message(title: "10月生日禮", description: "10月份壽星您好，祝福您天天愉快，贈送您十點點數", date: "2022-09-10 24:00"),
-        Message(title: "信息標題", description: "信息內容", date: "發布時間"),
-        Message(title: "信息標題1", description: "信息內容2", date: "發布時間3")
-    ]
     
-    var histories: [History] = []
+    var histories: [History] = [] {
+        didSet {
+            updateSnapshot()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = dataSource
+        
+        configureTableView()
+        fetchHistory()
+    }
+    
+    private func configureTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        updateSnapshot()
+        tableView.allowsSelection = false
     }
     
     private func fetchHistory() {
@@ -71,7 +56,14 @@ class MessageViewController: UIViewController {
             }
             
             let histories = response as! [History]
-            self.histories = histories
+            let sortedHistories = histories.sorted { $0.push_datetime > $1.push_datetime}
+            self.histories = sortedHistories
+            
+            if histories.isEmpty {
+                DispatchQueue.main.async {
+                    self.showEmptyStateView(with: "沒有任何訊息", in: self.view)
+                }
+            }
         }
     }
 }
@@ -91,16 +83,13 @@ extension MessageViewController {
     private func updateSnapshot(animated: Bool = false) {
         var snapshot = Snapshot()
         snapshot.appendSections([.all])
-        snapshot.appendItems(messages, toSection: .all)
+        snapshot.appendItems(histories, toSection: .all)
 
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
 }
 
 extension MessageViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }

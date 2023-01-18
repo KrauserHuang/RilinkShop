@@ -16,7 +16,16 @@ class MessageTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        configure()
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    private func configure() {
         outerView.addShadow(cornerRadius: 10,
                             shadowColor: .systemGray,
                             shadowOffset: CGSize(width: 2, height: 2),
@@ -26,18 +35,6 @@ class MessageTableViewCell: UITableViewCell {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         dateLabel.textColor  = .messageGray
         descriptionLabel.numberOfLines = 0
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-    func configure(with model: Message) {
-        titleLabel.text       = model.title
-        descriptionLabel.text = model.description
-        dateLabel.text        = model.date
     }
     
     func configure(with model: History) {

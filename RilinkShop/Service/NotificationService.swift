@@ -101,15 +101,15 @@ class NotificationService {
             
             let value = JSON(response.value)
             print(#function)
-            print(value)
+//            print(value)
             
             switch response.result {
             case .success:
-                guard value["code"].stringValue == returnCode else {
-                    let errorMsg = value["responseMessage"].stringValue
-                    completion(false, errorMsg as AnyObject)
-                    return
-                }
+//                guard value["code"].stringValue == returnCode else {
+//                    let errorMsg = value["responseMessage"].stringValue
+//                    completion(false, errorMsg as AnyObject)
+//                    return
+//                }
                 
                 let datas = value.arrayValue
                 var histories: [History] = []
@@ -121,6 +121,7 @@ class NotificationService {
                                           push_datetime: data["push_datetime"].stringValue)
                     histories.append(history)
                 }
+                print("histories:\(histories)")
                 completion(true, histories as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue

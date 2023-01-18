@@ -52,8 +52,9 @@ extension MerchantNavigationController: MerchantMainViewControllerDelegate {
             }
             
             let messages = response as! [AdminHistory]
+            let sortedMessages = messages.sorted { $0.updatetime > $1.updatetime }
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "NotifyTableViewController") as! NotifyTableViewController
-            controller.messages = messages
+            controller.messages = sortedMessages
             
             if messages.count == 0 {
                 controller.showEmptyStateView(with: "無訊息", in: controller.view)

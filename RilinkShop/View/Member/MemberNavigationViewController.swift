@@ -90,6 +90,7 @@ class MemberNavigationViewController: UINavigationController {
         print("MemberNavigationViewController + \(#function)")
         print("GlobalACCOUNT:\(Global.ACCOUNT)")
         print("GlobalPASSWORD:\(Global.ACCOUNT_PASSWORD)")
+        print("GlobalACCESSTOKEN:\(Global.ACCESS_TOKEN)")
 
         let accountType = "0"
         sleep(1)

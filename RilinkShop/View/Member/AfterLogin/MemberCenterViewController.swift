@@ -240,7 +240,7 @@ class MemberCenterViewController: UIViewController {
     private func clearMemberToken() {
         NotificationService.shared.memberClearToken(id: Global.ACCOUNT,
                                                     pwd: Global.ACCOUNT_PASSWORD) { success, response in
-            print("清除成功")
+            print("清除token成功")
         }
     }
     // MARK: - 進使用者資料畫面

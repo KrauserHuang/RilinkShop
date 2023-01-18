@@ -597,7 +597,7 @@ class UserService {
             }
         }
     }
-
+    // MARK: - 店長登入
     func storeAdminLogin(storeAcc: String, storePwd: String, storeID: String, notificationToken: String, completed: @escaping Completion) {
         let url = SHOP_API_URL + URL_STOREADMINLOGIN
         let parameters = [

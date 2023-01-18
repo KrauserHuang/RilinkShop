@@ -40,7 +40,7 @@ class NotifyTableViewCell: UITableViewCell {
     func set(with viewModel: AdminHistory) {
         messageLabel.text = viewModel.message
         timeLabel.text = viewModel.updatetime
-        
+        titleLabel.text = viewModel.title
 //        switch viewModel.type {
 //        case 1:
 //            titleLabel.text = "系統群發"
