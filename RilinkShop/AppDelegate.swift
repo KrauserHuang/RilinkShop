@@ -57,10 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Global.ACCOUNT_PASSWORD = MyKeyChain.getPassword() ?? ""
         Global.ACCESS_TOKEN     = MyKeyChain.getAccessToken() ?? ""
         Global.OWNER_STORE_ID   = MyKeyChain.getStoreId() ?? ""
-        
-//        print("ACCOUNT:\(MyKeyChain.getAccount())")
-//        print("PASSWORD:\(MyKeyChain.getPassword())")
-//        print("ACCESSTOKEN:\(MyKeyChain.getAccessToken())")
+        Global.OWNER_STORE_NAME = MyKeyChain.getStoreName() ?? ""
 
         return true
     }
@@ -83,6 +80,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+    }
     // FirebaseMessaging() -> 註冊推播成功
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 
@@ -90,9 +90,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         for i in 0..<deviceToken.count {
             token += String(format: "%02.2hhx", arguments: [deviceToken[i]])
         }
-        print("\n==========didRegisterForRemoteNotificationsWithDeviceToken==========")
+        print("\n==========didRegisterForRemoteNotificationsWithDeviceToken===========")
         print("apns token = " + token)
-        print("==========End==========\n")
+        print("=================================End=================================\n")
 
         Messaging.messaging().apnsToken = deviceToken
     }
@@ -125,6 +125,7 @@ extension AppDelegate: MessagingDelegate {
         
         AppDelegate.apnsToken = fcmToken //FCM確認有收到token後才把它存到AppDelegate的apnsToken
         Global.ACCESS_TOKEN = fcmToken
+        MyKeyChain.setAccessToken(fcmToken)
         
         let userInfo: [String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: userInfo)

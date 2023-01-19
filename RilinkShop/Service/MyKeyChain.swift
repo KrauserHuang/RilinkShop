@@ -99,4 +99,19 @@ class MyKeyChain {
         }
         return storeId
     }
+    
+    static func setStoreName(_ storeName: String) {
+        guard storeName != "" else {
+            UserDefaults.standard.removeObject(forKey: "STORE_NAME")
+            return
+        }
+        UserDefaults.standard.set(storeName, forKey: "STORE_NAME")
+    }
+    
+    static func getStoreName() -> String? {
+        guard let storeName = UserDefaults.standard.string(forKey: "STORE_NAME"), storeName != "" else {
+            return nil
+        }
+        return storeName
+    }
 }

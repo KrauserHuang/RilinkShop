@@ -8,7 +8,13 @@
 import UIKit
 import SafariServices
 
-class TopPageViewController: UIViewController {
+protocol TopPageViewControllerDelegate: AnyObject {
+    func didTapRepairButton(_ viewController: TopPageViewController, with id: String)
+    func didTapRentButton(_ viewController: TopPageViewController, with productType: String)
+    func didTapAccessoryButton(_ viewController: TopPageViewController, with productType: String)
+}
+
+class TopPageViewController: BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
@@ -33,13 +39,10 @@ class TopPageViewController: UIViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Package>
 
     private lazy var dataSource = configureDataSource()
-
-    var currentIndex = 0
-    var timer: Timer?
-
-    var bannerList = [Banner]()
-
+    private var bannerList = [Banner]()
     let notificationCenter = NotificationCenter.default
+    
+    weak var delegate: TopPageViewControllerDelegate?
     
 //    var account: String!
 //    var password: String!
@@ -59,15 +62,11 @@ class TopPageViewController: UIViewController {
 
         initUI()
 //        let notificationName = Notification.Name.hereComesTheProductType
-        print("MyKeyChain.getAccount():\(MyKeyChain.getAccount())")
-        print("MyKeyChain.getPassword():\(MyKeyChain.getPassword())")
-
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         initUI()
         collectionView.collectionViewLayout.invalidateLayout()
-        updateSnapshot()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -76,13 +75,14 @@ class TopPageViewController: UIViewController {
 }
 // MARK: - internal functions
 extension TopPageViewController {
-    func initUI() {
+    private func initUI() {
         navigationItems()
         loadPackage()
         loadBanner()
         configureCollectionView()
     }
-    func configureCollectionView() {
+    
+    private func configureCollectionView() {
         // 註冊packageCollectionViewCell
         collectionView.register(TopPagePackageCollectionViewCell.nib, forCellWithReuseIdentifier: TopPagePackageCollectionViewCell.reuseIdentifier)
         // 註冊supplementaryView
@@ -90,7 +90,6 @@ extension TopPageViewController {
                                 forSupplementaryViewOfKind: Constants.headerElementKind,
                                 withReuseIdentifier: TopPageMainCollectionReusableView.reuseIdentifier)
 
-        collectionView.dataSource = dataSource
         collectionView.delegate = self
         collectionView.collectionViewLayout = createLayout()
     }
@@ -131,32 +130,11 @@ extension TopPageViewController {
     // 設定左上logo右上購物車
     func navigationItems() {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "LOGO")
+        imageView.image = Images.topPageLogo
         imageView.contentMode = .scaleAspectFit
 
         let leftNavigationItem = UIBarButtonItem(customView: imageView)
         navigationItem.leftBarButtonItem = leftNavigationItem
-
-        let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(toCartViewController))
-        let notificationButton = UIBarButtonItem(image: UIImage(systemName: "bell"),
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(toMessageViewController))
-        navigationItem.rightBarButtonItems = [shoppingcartButton, notificationButton]
-    }
-    @objc private func toCartViewController() {
-//        let vc = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                    password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
-        let vc = CartViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    @objc private func toMessageViewController() {
-        let vc = MessageViewController()
-        vc.title = "訊息中心"
-        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -242,27 +220,19 @@ extension TopPageViewController {
 // MARK: - ReusableView Delegate(banner/option)
 extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
     func didTapBanner(_ cell: TopPageMainCollectionReusableView, banner: Banner) {
-        if let url = URL(string: banner.bannerLink) {
-            let vc = SFSafariViewController(url: url)
-            present(vc, animated: true)
-        }
+        showSafariViewController(with: banner.bannerLink)
     }
 
     func didTapNewCar(_ button: UIButton, option: String) {
-        if let url = URL(string: option) {
-            let vc = SFSafariViewController(url: url)
-            present(vc, animated: true)
-        }
+        showSafariViewController(with: option)
     }
 
     func didTapSecondhandCar(_ button: UIButton, option: String) {
-        if let url = URL(string: option) {
-            let vc = SFSafariViewController(url: url)
-            present(vc, animated: true)
-        }
+        showSafariViewController(with: option)
     }
 
     func didTapRepair(_ button: UIButton, id: String) {
+        delegate?.didTapRepairButton(self, with: id)
         let reservationStoryboard = UIStoryboard(name: "Reservation", bundle: nil)
         let vc = reservationStoryboard.instantiateViewController(withIdentifier: "StoreMainViewController") as! StoreMainViewController
         vc.id = id
@@ -270,6 +240,7 @@ extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
     }
 
     func didTapRent(_ button: UIButton, productType: String) {
+        delegate?.didTapRentButton(self, with: productType)
         let shopStoryboard = UIStoryboard(name: "Shop", bundle: nil)
         let vc = shopStoryboard.instantiateViewController(withIdentifier: "ShopMainViewController") as! ShopMainViewController
         vc.productType = productType
@@ -287,6 +258,7 @@ extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
     }
 
     func didTapAccessory(_ button: UIButton, productType: String) {
+        delegate?.didTapAccessoryButton(self, with: productType)
         let shopStoryboard = UIStoryboard(name: "Shop", bundle: nil)
         let vc = shopStoryboard.instantiateViewController(withIdentifier: "ShopMainViewController") as! ShopMainViewController
         vc.productType = productType
@@ -305,3 +277,9 @@ extension TopPageViewController: UICollectionViewDelegate {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+//extension TopPageViewController: UITabBarControllerDelegate {
+//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+//        <#code#>
+//    }
+//}

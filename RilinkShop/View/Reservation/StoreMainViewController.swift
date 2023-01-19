@@ -14,7 +14,7 @@ struct StoreTypeCellModel: Hashable {
     var isSelected: Bool = false
 }
 
-class StoreMainViewController: UIViewController {
+class StoreMainViewController: BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var storeTypeButton: UIButton!
@@ -71,25 +71,10 @@ class StoreMainViewController: UIViewController {
     }
 
     func initUI() {
-        navigationItems()
         configureCollectionView()
         loadStoreType()
         loadStoreList()
         configurStorePicker()
-    }
-
-    func navigationItems() {
-        let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(toCartViewController))
-        navigationItem.rightBarButtonItem = shoppingcartButton
-    }
-    @objc private func toCartViewController() {
-//        let vc = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                    password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
-        let vc = CartViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
 
     func configurStorePicker() {
@@ -100,7 +85,6 @@ class StoreMainViewController: UIViewController {
 
     func configureCollectionView() {
         collectionView.register(StoreCollectionViewCell.nib, forCellWithReuseIdentifier: StoreCollectionViewCell.reuseIdentifier)
-//        collectionView.dataSource = dataSource
         collectionView.delegate = self
         collectionView.collectionViewLayout = createGridLayout()
     }

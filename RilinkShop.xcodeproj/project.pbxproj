@@ -130,6 +130,7 @@
 		4FAE563F283DB90C004EA6B8 /* MemberInfoViewController_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FAE563D283DB90C004EA6B8 /* MemberInfoViewController_1.xib */; };
 		4FB038F92838C59A00A69875 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB038F82838C59A00A69875 /* DatePicker.swift */; };
 		4FB038FB2838DD0C00A69875 /* StorePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB038FA2838DD0C00A69875 /* StorePicker.swift */; };
+		4FB0FE1E2977A45D00113802 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB0FE1D2977A45D00113802 /* BaseViewController.swift */; };
 		4FB43BF628338700008F06FF /* SignUpViewController_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB43BF428338700008F06FF /* SignUpViewController_2.swift */; };
 		4FB43BF728338700008F06FF /* SignUpViewController_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FB43BF528338700008F06FF /* SignUpViewController_2.xib */; };
 		4FB4E69F287FBA7500DBA71E /* TopPagePackageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4E69D287FBA7500DBA71E /* TopPagePackageCollectionViewCell.swift */; };
@@ -355,6 +356,7 @@
 		4FAE563D283DB90C004EA6B8 /* MemberInfoViewController_1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberInfoViewController_1.xib; sourceTree = "<group>"; };
 		4FB038F82838C59A00A69875 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
 		4FB038FA2838DD0C00A69875 /* StorePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePicker.swift; sourceTree = "<group>"; };
+		4FB0FE1D2977A45D00113802 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		4FB43BF428338700008F06FF /* SignUpViewController_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController_2.swift; sourceTree = "<group>"; };
 		4FB43BF528338700008F06FF /* SignUpViewController_2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController_2.xib; sourceTree = "<group>"; };
 		4FB4E69D287FBA7500DBA71E /* TopPagePackageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPagePackageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -808,6 +810,14 @@
 			path = MemberLogin;
 			sourceTree = "<group>";
 		};
+		4FB0FE1C2977A44300113802 /* UIViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4FB0FE1D2977A45D00113802 /* BaseViewController.swift */,
+			);
+			path = UIViewControllers;
+			sourceTree = "<group>";
+		};
 		4FC537182817E18E005807DA /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -1085,6 +1095,7 @@
 		57A5ECE02784243300245DB0 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				4FB0FE1C2977A44300113802 /* UIViewControllers */,
 				4FCD722B297528A300C95F38 /* Views */,
 				4F82505E286EE92400A4298C /* BadgeBarButtonItem.swift */,
 			);
@@ -1467,6 +1478,7 @@
 				4FC95F4928634C9C00633594 /* FixMotor.swift in Sources */,
 				4F0F5801285B2F22001EBE9F /* ReservationInputViewController.swift in Sources */,
 				4FCD722D297528C400C95F38 /* RSEmptyStateView.swift in Sources */,
+				4FB0FE1E2977A45D00113802 /* BaseViewController.swift in Sources */,
 				4F8498B4292C798200DFE7CC /* NetworkManager.swift in Sources */,
 				4F8F81C7287E6B0400B228A7 /* StoreDetailMainTextCell.swift in Sources */,
 				4FB038FB2838DD0C00A69875 /* StorePicker.swift in Sources */,
@@ -1678,7 +1690,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1714,7 +1726,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;

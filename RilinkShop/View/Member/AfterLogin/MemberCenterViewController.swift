@@ -266,6 +266,17 @@ class MemberCenterViewController: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    @IBAction func toMessageViewController(_ sender: UIButton) {
+        if Global.ACCOUNT == "" {
+            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
+        } else {
+            let vc = MessageViewController()
+            vc.title = "訊息中心"
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     // MARK: - 我的票券頁面
     @IBAction func myTicketButtonTapped(_ sender: UIButton) {
         if Global.ACCOUNT == "" {

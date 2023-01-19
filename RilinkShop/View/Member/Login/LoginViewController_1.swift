@@ -31,6 +31,7 @@ class LoginViewController_1: UIViewController {
     let storePicker = StorePicker()
     let toolBar = UIToolbar()
     var storeID: String?
+    var storeName: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -271,6 +272,9 @@ class LoginViewController_1: UIViewController {
                         Alert.showMessage(title: "", msg: errmsg, vc: self, handler: nil)
                         return
                     }
+                    
+                    Global.OWNER_STORE_NAME = self.storeName ?? ""
+                    MyKeyChain.setStoreName(self.storeName ?? "")
 
                     self.delegate?.finishLoginView(self, action: .BossLogIn)
                 }
@@ -332,7 +336,7 @@ extension LoginViewController_1: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let storeName = storeIDs?[row].storeName ?? ""
         storeIDButton.setTitle(storeName, for: .normal)
-        Global.OWNER_STORE_NAME = storeName
+        self.storeName = storeName
 
         let storeID = storeIDs?[row].storeID ?? ""
         self.storeID = storeID

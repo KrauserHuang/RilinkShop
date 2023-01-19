@@ -11,7 +11,5 @@ class ReservationNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
-
 }

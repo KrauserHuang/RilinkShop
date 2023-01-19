@@ -18,7 +18,7 @@ struct CategoryCellModel {
     var isSelected: Bool = false
 }
 
-class ShopMainViewController: UIViewController {
+class ShopMainViewController: BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var shopTypeButton: UIButton!
@@ -132,30 +132,14 @@ class ShopMainViewController: UIViewController {
     }
 
     private func initUI() {
-        navigationItems()
         configureCollectionView()
         loadProductType()
         configureSearchController()
     }
 
-    private func navigationItems() {
-        let shoppingcartButton = UIBarButtonItem(image: UIImage(systemName: "cart"),
-                                                 style: .plain,
-                                                 target: self,
-                                                 action: #selector(toCartViewController))
-        navigationItem.rightBarButtonItem = shoppingcartButton
-    }
-    @objc private func toCartViewController() {
-        let vc = CartViewController()
-//        let vc = CartViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                    password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
-        navigationController?.pushViewController(vc, animated: true)
-    }
-
     private func configureCollectionView() {
         collectionView.register(ShopCollectionViewCell.nib, forCellWithReuseIdentifier: ShopCollectionViewCell.reuseIdentifier)
         collectionView.delegate = self
-//        collectionView.dataSource = dataSource
         collectionView.collectionViewLayout = createGridLayout()
     }
 
@@ -239,7 +223,7 @@ class ShopMainViewController: UIViewController {
         let searchController                    = UISearchController()
         searchController.searchResultsUpdater   = self
 //        searchController.searchBar.delegate     = self
-        searchController.searchBar.placeholder  = "請填入邀搜尋的商品"
+        searchController.searchBar.placeholder  = "請填入要搜尋的商品"
         searchController.obscuresBackgroundDuringPresentation = false //true: obscure(有遮罩), false: unobscure(無遮罩)
 //        searchController.automaticallyShowsSearchResultsController = true
         navigationItem.searchController         = searchController
