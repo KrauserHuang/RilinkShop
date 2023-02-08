@@ -68,6 +68,7 @@
 		4F53F1B6287EBB7600EB0358 /* ShopCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F53F1B4287EBB7600EB0358 /* ShopCollectionViewCell.xib */; };
 		4F53F1B8287EBDA300EB0358 /* ShopMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F53F1B7287EBDA300EB0358 /* ShopMainViewController.swift */; };
 		4F53F1BA287ECBF500EB0358 /* TopPageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F53F1B9287ECBF500EB0358 /* TopPageMainViewController.swift */; };
+		4F5E02BD298E03A600E0316A /* StoreTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5E02BC298E03A600E0316A /* StoreTypeModel.swift */; };
 		4F675356281A9697008E0CAF /* UIBarButtonItem + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F675355281A9696008E0CAF /* UIBarButtonItem + Ext.swift */; };
 		4F6CF9E0282CD982000F66BA /* UIImage + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6CF9DF282CD982000F66BA /* UIImage + Ext.swift */; };
 		4F6D16F028167A3300772FF3 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D16EE28167A3300772FF3 /* ProductDetailViewController.swift */; };
@@ -293,6 +294,7 @@
 		4F53F1B4287EBB7600EB0358 /* ShopCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopCollectionViewCell.xib; sourceTree = "<group>"; };
 		4F53F1B7287EBDA300EB0358 /* ShopMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopMainViewController.swift; sourceTree = "<group>"; };
 		4F53F1B9287ECBF500EB0358 /* TopPageMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopPageMainViewController.swift; sourceTree = "<group>"; };
+		4F5E02BC298E03A600E0316A /* StoreTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTypeModel.swift; sourceTree = "<group>"; };
 		4F675355281A9696008E0CAF /* UIBarButtonItem + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem + Ext.swift"; sourceTree = "<group>"; };
 		4F6CF9DF282CD982000F66BA /* UIImage + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Ext.swift"; sourceTree = "<group>"; };
 		4F6D16EE28167A3300772FF3 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
@@ -965,6 +967,7 @@
 			children = (
 				571A9A332786B4D200E8440D /* ReservationNavigationViewController.swift */,
 				4F53F1AD287E793C00EB0358 /* StoreMainViewController.swift */,
+				4F5E02BC298E03A600E0316A /* StoreTypeModel.swift */,
 				57ADBD1527868D28009C1C4E /* Reservation.storyboard */,
 				4FFE3BB02818EF1400F09CFE /* TopPage */,
 				4F521D5E2817DD1200391292 /* HostelDetail */,
@@ -1512,6 +1515,7 @@
 				4F71957B2822143500B2A63A /* NSCollectionLayoutSize + Ext.swift in Sources */,
 				571A9A492786BB5D00E8440D /* ReservationTableViewController.swift in Sources */,
 				450ED64C2790070E00CDF731 /* SuccessAlert.swift in Sources */,
+				4F5E02BD298E03A600E0316A /* StoreTypeModel.swift in Sources */,
 				57ADBD1927868D86009C1C4E /* ReservationTableViewCell.swift in Sources */,
 				4F0D4688296BFFE300BC49B7 /* NotifyTableViewController.swift in Sources */,
 				4F53F1B8287EBDA300EB0358 /* ShopMainViewController.swift in Sources */,
@@ -1690,7 +1694,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1726,7 +1730,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;

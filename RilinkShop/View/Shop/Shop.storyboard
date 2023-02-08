@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8em-zY-mNx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8em-zY-mNx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,7 +14,7 @@
         <!--購物商城-->
         <scene sceneID="eY5-76-UpT">
             <objects>
-                <navigationController storyboardIdentifier="Shop" automaticallyAdjustsScrollViewInsets="NO" id="8em-zY-mNx" customClass="ShopNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ShopNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="8em-zY-mNx" customClass="ShopNavigationViewController" customModule="RilinkShop" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="購物商城" image="購物商城" id="UcA-BY-d6I"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -43,7 +43,7 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="T33-ZR-qln">
-                                        <rect key="frame" x="30" y="10" width="369" height="30"/>
+                                        <rect key="frame" x="30" y="10" width="210.5" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="服務類型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vq2-o7-kEx">
                                                 <rect key="frame" x="0.0" y="0.0" width="69.5" height="30"/>
@@ -62,7 +62,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2t4-C2-XNc">
-                                                <rect key="frame" x="183.5" y="0.0" width="66.5" height="30"/>
+                                                <rect key="frame" x="183.5" y="0.0" width="27" height="30"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal">
                                                     <imageReference key="image" image="line.3.horizontal" catalog="system" symbolScale="large"/>
@@ -71,20 +71,13 @@
                                                     <action selector="shopTypeButtonTapped:" destination="qTH-m4-zGr" eventType="touchUpInside" id="b09-Pp-4vy"/>
                                                 </connections>
                                             </button>
-                                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="XI2-tQ-YZR">
-                                                <rect key="frame" x="257" y="0.0" width="112" height="30"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="qTH-m4-zGr" id="EqE-km-RgW"/>
-                                                </connections>
-                                            </searchBar>
                                         </subviews>
                                         <color key="tintColor" red="0.80046349760000002" green="0.48583424089999999" blue="0.21951380370000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="T33-ZR-qln" secondAttribute="trailing" constant="15" id="RpW-zq-Rdf"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="T33-ZR-qln" secondAttribute="trailing" constant="15" id="RpW-zq-Rdf"/>
                                     <constraint firstItem="T33-ZR-qln" firstAttribute="top" secondItem="d2R-ei-Ecl" secondAttribute="top" constant="10" id="mZs-El-nlG"/>
                                     <constraint firstItem="T33-ZR-qln" firstAttribute="leading" secondItem="d2R-ei-Ecl" secondAttribute="leading" constant="30" id="tcR-dW-Z7k"/>
                                     <constraint firstAttribute="height" constant="50" id="vgK-NQ-WJP"/>
@@ -128,7 +121,6 @@
                     <navigationItem key="navigationItem" title="購物商城" id="mac-CD-Hag"/>
                     <connections>
                         <outlet property="collectionView" destination="kcF-ss-t4n" id="AeQ-Fc-Pfk"/>
-                        <outlet property="searchBar" destination="XI2-tQ-YZR" id="q5o-5v-tp7"/>
                         <outlet property="shopTypeButton" destination="pPw-D1-jPn" id="w1J-In-B9P"/>
                     </connections>
                 </viewController>

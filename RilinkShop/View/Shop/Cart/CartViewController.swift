@@ -199,8 +199,6 @@ extension CartViewController: CartTableViewCellDelegate {
 
         let no = inCartItems[indexPath.row].product_no
         var qty = Int(inCartItems[indexPath.row].order_qty)!
-        print(#function)
-        print(inCartItems[indexPath.row].product_stock)
         let stock = Int(inCartItems[indexPath.row].product_stock)!
 
         if qty < stock {

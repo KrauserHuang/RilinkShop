@@ -30,9 +30,6 @@ class HostelCheckoutViewController: UIViewController {
     var appointment: String?
     var duration: String?
     var store = Store()
-
-//    var account = MyKeyChain.getAccount() ?? ""
-//    var password = MyKeyChain.getPassword() ?? ""
     var account: String!
     var password: String!
     
@@ -77,13 +74,13 @@ class HostelCheckoutViewController: UIViewController {
 //        popupVC.cornerRadius = 20
 //        present(popupVC, animated: true)
         guard let appointment = appointment,
-            let duration = duration,
-            let name = name,
-            let mobile = mobile,
-            let license = license,
-            let carType = carType,
-            let repairType = repairType,
-            let carDescription = carDescription else { return }
+              let duration = duration,
+              let name = name,
+              let mobile = mobile,
+              let license = license,
+              let carType = carType,
+              let repairType = repairType,
+              let carDescription = carDescription else { return }
         HUD.showLoadingHUD(inView: self.view, text: "預約中")
         FixMotorService.shared.bookingFixMotor(id: account,
                                                pwd: password,

@@ -234,17 +234,19 @@ extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
     func didTapRepair(_ button: UIButton, id: String) {
         delegate?.didTapRepairButton(self, with: id)
         let reservationStoryboard = UIStoryboard(name: "Reservation", bundle: nil)
-        let vc = reservationStoryboard.instantiateViewController(withIdentifier: "StoreMainViewController") as! StoreMainViewController
+        let nav = reservationStoryboard.instantiateViewController(withIdentifier: "ReservationNavigationViewController") as! ReservationNavigationViewController
+        let vc = StoreMainViewController()
         vc.id = id
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.tabBarController?.selectedIndex = 2
+        nav.pushViewController(vc, animated: true)
     }
 
     func didTapRent(_ button: UIButton, productType: String) {
-        delegate?.didTapRentButton(self, with: productType)
+//        delegate?.didTapRentButton(self, with: productType)
         let shopStoryboard = UIStoryboard(name: "Shop", bundle: nil)
         let vc = shopStoryboard.instantiateViewController(withIdentifier: "ShopMainViewController") as! ShopMainViewController
         vc.productType = productType
-
+        self.tabBarController?.selectedIndex = 1
         /*
         let notificationName = Notification.Name.hereComesTheProductType
         // Custom data, for sending productType for the API
@@ -254,16 +256,18 @@ extension TopPageViewController: TopPageMainCollectionReusableViewDelegate {
                                 object: button,
                                 userInfo: forwardProductType)
         */
-        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     func didTapAccessory(_ button: UIButton, productType: String) {
-        delegate?.didTapAccessoryButton(self, with: productType)
+//        delegate?.didTapAccessoryButton(self, with: productType)
         let shopStoryboard = UIStoryboard(name: "Shop", bundle: nil)
-        let vc = shopStoryboard.instantiateViewController(withIdentifier: "ShopMainViewController") as! ShopMainViewController
+        let nav = shopStoryboard.instantiateViewController(withIdentifier: "ShopNavigationViewController") as! ShopNavigationViewController
+        let vc = ShopMainViewController()
         vc.productType = productType
-
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.tabBarController?.selectedIndex = 1
+//        self.tabBarController?.selectedViewController = nav
+        nav.pushViewController(vc, animated: true)
+        
     }
 }
 // MARK: - CollectionView Delegate
@@ -271,15 +275,15 @@ extension TopPageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        let vc = PackageInfoViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
 //                                           password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
+        guard let package = dataSource.itemIdentifier(for: indexPath) else { return }
+        let shopStoryboard = UIStoryboard(name: "Shop", bundle: nil)
+        let nav = shopStoryboard.instantiateViewController(withIdentifier: "ShopNavigationViewController") as! ShopNavigationViewController
         let vc = PackageInfoViewController()
-        let package = packages[indexPath.row]
         vc.package = package
+//        let vc = ProductDetailViewController()
+//        vc.itemInfo = package
+//        self.tabBarController?.selectedIndex = 1
+//        nav.pushViewController(vc, animated: true)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-//extension TopPageViewController: UITabBarControllerDelegate {
-//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-//        <#code#>
-//    }
-//}

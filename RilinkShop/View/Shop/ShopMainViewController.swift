@@ -22,7 +22,6 @@ class ShopMainViewController: BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var shopTypeButton: UIButton!
-    @IBOutlet weak var searchBar: UISearchBar!
 
     enum Section: String, CaseIterable {
         case all
@@ -31,13 +30,15 @@ class ShopMainViewController: BaseViewController {
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     private lazy var dataSource = configureDataSource()
-    var categories = [CategoryCellModel]() // 類別按鈕
-    var products = [Product]() // 商品
-    var packages = [Package]() // 套票
-    var items = [Item]() // 所有物件與篩選物件(商品+套票)
-    var filteredItems = [Item]() {
+    var categories: [CategoryCellModel] = [] // 類別按鈕
+    var products: [Product] = [] // 商品
+    var packages: [Package] = [] // 套票
+    var items: [Item] = [] // 所有物件與篩選物件(商品+套票)
+    var shopModels: [AnyObject] = []
+    var filterShopModels: [AnyObject] = []
+    var sortedItems: [Item] = [] {
         didSet {
-            updateSnapshot(on: filteredItems)
+            updateSnapshot(on: sortedItems)
         }
     }
     let dropDown = DropDown()
@@ -61,7 +62,6 @@ class ShopMainViewController: BaseViewController {
                                        selector: #selector(navigateFromTopPage(_:)),
                                        name: notificationName,
                                        object: nil)
-        searchBar.delegate = self
     }
     @objc func navigateFromTopPage(_ notification: Notification) {
         if let productType = notification.userInfo?["productType"] {
@@ -83,38 +83,38 @@ class ShopMainViewController: BaseViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             HUD.hideLoadingHUD(inView: self.view)
             if self.productType == "SC001" {
-                self.filteredItems.removeAll()
+                self.sortedItems.removeAll()
                 for singleItem in self.items {
                     switch singleItem {
                     case .product(let product):
                         if product.product_type == self.productType { // 如果item內容與所有物件內producttype_name有吻合
-                            self.filteredItems.append(singleItem) // 則更新filteredItems的內容
+                            self.sortedItems.append(singleItem) // 則更新filteredItems的內容
                             self.shopTypeButton.setTitle(product.producttype_name, for: .normal)
                         } else {
         //                        print("append product失敗！")
                         }
                     case .package:
                         if self.productType == "套票" {
-                            self.filteredItems.append(singleItem)
+                            self.sortedItems.append(singleItem)
                         } else {
         //                        print("append package失敗！")
                         }
                     }
                 }
             } else if self.productType == "Rent" {
-                self.filteredItems.removeAll()
+                self.sortedItems.removeAll()
                 for singleItem in self.items {
                     switch singleItem {
                     case .product(let product):
                         if product.product_type == self.productType { // 如果item內容與所有物件內producttype_name有吻合
-                            self.filteredItems.append(singleItem) // 則更新filteredItems的內容
+                            self.sortedItems.append(singleItem) // 則更新filteredItems的內容
                             self.shopTypeButton.setTitle(product.producttype_name, for: .normal)
                         } else {
         //                        print("append product失敗！")
                         }
                     case .package:
                         if self.productType == "套票" {
-                            self.filteredItems.append(singleItem)
+                            self.sortedItems.append(singleItem)
                         } else {
         //                        print("append package失敗！")
                         }
@@ -148,8 +148,6 @@ class ShopMainViewController: BaseViewController {
 //                                             pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseCategories in
         ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? "",
                                              pwd: MyKeyChain.getPassword() ?? "") { responseCategories in
-//        ProductService.shared.getProductType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-//                                             pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseCategories in
             var isFirstCategory = true
             let packageCategory = Category(pid: "", productType: "", productTypeName: "套票") // 建立一個空的類別儲存套票
             var wholeCategories = responseCategories // 建立全部類別，先加入商品類別(從API來)
@@ -165,54 +163,49 @@ class ShopMainViewController: BaseViewController {
             if let firstType = self.categories.first { // 從類別中的第一個提出來顯示(假如是“保健食品”，那就直接變更button的UI)
                 self.shopTypeButton.setTitle(firstType.category.productTypeName, for: .normal)
             }
-            self.loadProductList()
+            self.loadProduct()
         }
     }
-
-    private func loadProductList() {
-        HUD.showLoadingHUD(inView: self.view, text: "載入商品中")
-//        ProductService.shared.loadProductList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                              pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseProducts in
-        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? "",
-                                              pwd: MyKeyChain.getPassword() ?? "") { responseProducts in
-//        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-//                                              pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseProducts in
-            HUD.hideLoadingHUD(inView: self.view)
+    
+    private func loadProduct() {
+        let group = DispatchGroup()
+        group.enter()
+        ProductService.shared.loadProductList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "") { responseProducts in
             let wholeProducts = responseProducts
             self.products = wholeProducts
+            group.leave()
+        }
+        
+        group.enter()
+        ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "") { packagesResponse in
+            let wholePackages = packagesResponse
+            self.packages = wholePackages
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            self.items.removeAll() // 先移除所有物件
             
-//            ProductService.shared.loadPackageList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                                  pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { packagesResponse in
-            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? "",
-                                                  pwd: MyKeyChain.getPassword() ?? "") { packagesResponse in
-//            ProductService.shared.loadPackageList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-//                                                  pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { packagesResponse in
-                let wholePackages = packagesResponse
-                self.packages = wholePackages
-
-                self.items.removeAll() // 先移除所有物件
-
-                for product in self.products {
-                    self.items.append(Item.product(product)) // 將個別product放進items裡面
-                }
-                for package in self.packages {
-                    self.items.append(Item.package(package)) // 將個別package放進items裡面
-                }
-
-                self.filteredItems = self.items.filter { // 將所有物件(items)進行篩選至篩選物件(filteredItems)裡面
-                    switch $0 { // 先篩選第一層(如果使用者選取商品類別)
-                    case .product(let product):
-                        if product.product_type == self.categories.first?.category.productType {
-                            return true
-                        } else {
-                            return false
-                        }
-                    case .package: // (套票類別，沒API所以有做死)
-                        if self.categories.first?.category.productTypeName == "套票" {
-                            return true
-                        } else {
-                            return false
-                        }
+            for product in self.products {
+                self.items.append(Item.product(product)) // 將個別product放進items裡面
+            }
+            for package in self.packages {
+                self.items.append(Item.package(package)) // 將個別package放進items裡面
+            }
+            
+            self.sortedItems = self.items.filter { // 將所有物件(items)進行篩選至篩選物件(filteredItems)裡面
+                switch $0 { // 先篩選第一層(如果使用者選取商品類別)
+                case .product(let product):
+                    if product.product_type == self.categories.first?.category.productType {
+                        return true
+                    } else {
+                        return false
+                    }
+                case .package: // (套票類別，沒API所以做死)
+                    if self.categories.first?.category.productTypeName == "套票" {
+                        return true
+                    } else {
+                        return false
                     }
                 }
             }
@@ -221,21 +214,15 @@ class ShopMainViewController: BaseViewController {
     
     private func configureSearchController() {
         let searchController                    = UISearchController()
-        searchController.searchResultsUpdater   = self
-//        searchController.searchBar.delegate     = self
+        searchController.searchResultsUpdater   = self //設定代理UISearchResultsUpdating的協議
         searchController.searchBar.placeholder  = "請填入要搜尋的商品"
-        searchController.obscuresBackgroundDuringPresentation = false //true: obscure(有遮罩), false: unobscure(無遮罩)
-//        searchController.automaticallyShowsSearchResultsController = true
+        searchController.obscuresBackgroundDuringPresentation = false //true: obscure(有遮罩),代表UISearchController會半透明蓋著目前的VC，false則透明使用者不會發現
         navigationItem.searchController         = searchController
-//        navigationItem.hidesSearchBarWhenScrolling = false
-//        navigationController?.navigationItem.searchController         = searchController
     }
 
     @IBAction func shopTypeButtonTapped(_ sender: UIButton) {
         var typeNames = [String]()
-        for category in categories {
-            typeNames.append(category.category.productTypeName)
-        }
+        for category in categories { typeNames.append(category.category.productTypeName) }
         dropDown.dataSource = typeNames
         dropDown.anchorView = shopTypeButton
         dropDown.bottomOffset = CGPoint(x: 0, y: shopTypeButton.frame.size.height)
@@ -244,18 +231,18 @@ class ShopMainViewController: BaseViewController {
             guard let self = self else { return }
             self.shopTypeButton.setTitle(item, for: .normal) // 點擊dropDown的item則將item的內容放進button的UI
 
-            self.filteredItems.removeAll()
+            self.sortedItems.removeAll()
             for singleItem in self.items {
                 switch singleItem {
                 case .product(let product):
                     if product.producttype_name == item { // 如果item內容與所有物件內producttype_name有吻合
-                        self.filteredItems.append(singleItem) // 則更新filteredItems的內容
+                        self.sortedItems.append(singleItem) // 則更新filteredItems的內容
                     } else {
 //                        print("append product失敗！")
                     }
                 case .package:
                     if item == "套票" {
-                        self.filteredItems.append(singleItem)
+                        self.sortedItems.append(singleItem)
                     } else {
 //                        print("append package失敗！")
                     }
@@ -291,7 +278,7 @@ extension ShopMainViewController {
         return dataSource
     }
     
-    private func updateSnapshot(on items: [Item],animated: Bool = true) {
+    private func updateSnapshot(on items: [Item], animated: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([.all])
         snapshot.appendItems(items, toSection: .all)
@@ -317,27 +304,54 @@ extension ShopMainViewController {
     }
 }
 // MARK: - UISearchBarDelegate
-extension ShopMainViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        updateSnapshot(on: filteredItems)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        updateSnapshot(on: filteredItems)
-    }
-}
-
-extension ShopMainViewController: UISearchResultsUpdating {
+extension ShopMainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        //從 searchBar 上的 text 去抓取要過濾的 followers，並且 searchBar 一定要輸入文字
         //這一段在你按下 searchBar 的 cancel 按鈕時也會執行
         guard let filter = searchController.searchBar.text?.lowercased(), !filter.isEmpty else {
-            updateSnapshot(on: filteredItems, animated: true)                   //點 cancel 被清空搜尋內容時，需要還原最初始 followers 內容
+            updateSnapshot(on: sortedItems, animated: true)
             return
         }
-//        filteredItems = filteredItems.filter { $0.
-//        } // didSet 將會直接執行 updateSnapshot
+//        if sortedItems is [Product] {
+//            searchItems = sortedItems.filter { ($0 as! Product).product_name.lowercased().contains(filter) }
+//        } else {
+//            searchItems = sortedItems.filter { ($0 as! Package).productName.lowercased().contains(filter) }
+//        }
+        searchItems = searchItems(with: sortedItems, by: filter)
+//        searchItems = sortedItems.filter {
+//            switch $0 {
+//            case .product(let product):
+//                product.product_name.lowercased().contains(filter)
+//                return true
+//            case .package(let package):
+//                if package.productName.lowercased().contains(filter) {
+//                    searchItems.append($0)
+//                }
+//                return true
+//            }
+//        }
     }
+    
+    func searchItems(with items: [Item],by filter: String) -> [Item] {
+        var searchItems: [Item] = []
+        searchItems = items.filter {
+            switch $0 {
+            case .product(let product):
+                product.product_name.lowercased().contains(filter)
+            case .package(let package):
+                package.productName.lowercased().contains(filter)
+            }
+            return true
+        }
+        return searchItems
+    }
+    
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        updateSnapshot(on: sortedItems)
+//    }
+//
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        updateSnapshot(on: sortedItems)
+//    }
 }
 // MARK: - UITextFieldDelegate
 extension ShopMainViewController: UITextFieldDelegate {

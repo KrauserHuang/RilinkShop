@@ -9,11 +9,6 @@ import UIKit
 import DropDown
 import SnapKit
 
-struct StoreTypeCellModel: Hashable {
-    let type: StoreType
-    var isSelected: Bool = false
-}
-
 class StoreMainViewController: BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -31,12 +26,17 @@ class StoreMainViewController: BaseViewController {
     let toolBar = UIToolbar()
     var types = [StoreTypeCellModel]()
     var stores = [Store]()
-    var filteredStores = [Store]() {
+    var sortedStores = [Store]() {
         didSet {
-            updateSnapshot()
+            updateSnapshot(on: sortedStores)
         }
     }
     var id = String()
+    var filteredStores = [Store]() {
+        didSet {
+            updateSnapshot(on: filteredStores)
+        }
+    }
 
     let dropDown = DropDown()
 
@@ -46,21 +46,16 @@ class StoreMainViewController: BaseViewController {
         initUI()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         HUD.showLoadingHUD(inView: view, text: "")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             HUD.hideLoadingHUD(inView: self.view)
             if self.id == "1" {
-                self.filteredStores.removeAll()
+                self.sortedStores.removeAll()
                 for store in self.stores {
                     if store.storeType == self.id {
-                        self.filteredStores.append(store)
+                        self.sortedStores.append(store)
                         self.storeTypeButton.setTitle(store.storeTypeName, for: .normal)
                     }
                 }
@@ -70,32 +65,39 @@ class StoreMainViewController: BaseViewController {
         }
     }
 
-    func initUI() {
+    private func initUI() {
         configureCollectionView()
         loadStoreType()
-        loadStoreList()
+        loadStore()
         configurStorePicker()
+        configureSearchController()
     }
 
-    func configurStorePicker() {
+    private func configurStorePicker() {
         typePicker.toolBarDelegate = self
         typePicker.delegate = self
         typePicker.selectRow(0, inComponent: 0, animated: false)
     }
 
-    func configureCollectionView() {
+    private func configureCollectionView() {
         collectionView.register(StoreCollectionViewCell.nib, forCellWithReuseIdentifier: StoreCollectionViewCell.reuseIdentifier)
         collectionView.delegate = self
         collectionView.collectionViewLayout = createGridLayout()
     }
+    
+    private func configureSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "請填入要搜尋的店家"
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+    }
 
-    func loadStoreType() {
+    private func loadStoreType() {
 //        StoreService.shared.getStoreType(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
 //                                         pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseTypes in
         StoreService.shared.getStoreType(id: MyKeyChain.getAccount() ?? "",
                                          pwd: MyKeyChain.getPassword() ?? "") { responseTypes in
-//        StoreService.shared.getStoreType(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-//                                         pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseTypes in
             var isFirstType = true
             let sortedTypes = responseTypes.sorted { $0.updateTime > $1.updateTime }
             self.types = sortedTypes.map {
@@ -109,23 +111,18 @@ class StoreMainViewController: BaseViewController {
             if let firstType = self.types.first {
                 self.storeTypeButton.setTitle(firstType.type.name, for: .normal)
             }
-            self.loadStoreList()
+            self.loadStore()
         }
     }
 
-    func loadStoreList() {
-        HUD.showLoadingHUD(inView: self.view, text: "載入店家中")
+    private func loadStore() {
 //        StoreService.shared.getStoreList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
 //                                         pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!) { responseStores in
         StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? "",
                                          pwd: MyKeyChain.getPassword() ?? "") { responseStores in
-//        StoreService.shared.getStoreList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-//                                         pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd) { responseStores in
-            HUD.hideLoadingHUD(inView: self.view)
             self.stores.removeAll()
             self.stores = responseStores
-            print("stores:\(self.stores)")
-            self.filteredStores = self.stores.filter { store in
+            self.sortedStores = self.stores.filter { store in
                 store.storeType == self.types.first?.type.id
             }
         }
@@ -141,7 +138,6 @@ class StoreMainViewController: BaseViewController {
         for typeModel in typeModels {
             typeModelNames.append(typeModel.type.name)
         }
-//        dropDown.dataSource = typeNames // types裡所有的name
         dropDown.dataSource = typeModelNames
         dropDown.anchorView = storeTypeButton // drop down list會顯示在所設定的view下(這裡指button)
         dropDown.bottomOffset = CGPoint(x: 0, y: storeTypeButton.frame.size.height) // 依據anchorView的bottom位置插入drop down list
@@ -149,10 +145,10 @@ class StoreMainViewController: BaseViewController {
         dropDown.selectionAction = { [weak self] (_: Int, item: String) in // 8
             guard let self = self else { return }
             self.storeTypeButton.setTitle(item, for: .normal) // 點選對應的drop down list item要做什麼
-            self.filteredStores.removeAll()
+            self.sortedStores.removeAll()
             for store in self.stores {
                 if store.storeTypeName == item {
-                    self.filteredStores.append(store)
+                    self.sortedStores.append(store)
                 }
             }
         }
@@ -173,7 +169,6 @@ class StoreMainViewController: BaseViewController {
 }
 // MARK: - DataSource/Snapshot/CompositionalLayout
 extension StoreMainViewController {
-    // dataSource
     func configureDataSource() -> DataSource {
         let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoreCollectionViewCell.reuseIdentifier, for: indexPath) as! StoreCollectionViewCell
@@ -184,15 +179,15 @@ extension StoreMainViewController {
         }
         return dataSource
     }
-    // snapshot
-    func updateSnapshot(animatingChange: Bool = true) {
+    
+    func updateSnapshot(on stores: [Store], animated: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([.all])
-        snapshot.appendItems(filteredStores, toSection: .all)
+        snapshot.appendItems(stores, toSection: .all)
 
-        dataSource.apply(snapshot, animatingDifferences: animatingChange)
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
-    // compositional layout
+    
     func createGridLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1))
@@ -210,13 +205,25 @@ extension StoreMainViewController {
 // MARK: - UICollectionViewDelegate
 extension StoreMainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let store = filteredStores[indexPath.item]
+        collectionView.deselectItem(at: indexPath, animated: true)
+        guard let store = dataSource.itemIdentifier(for: indexPath) else { return }
 //        let vc = HostelDetailViewController(account: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
 //                                            password: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!)
         let vc = HostelDetailViewController()
         vc.store = store
         vc.fixmotor = store.fixmotor
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension StoreMainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text?.lowercased(), !filter.isEmpty else {
+            updateSnapshot(on: sortedStores, animated: true)
+            return
+        }
+        
+        filteredStores = sortedStores.filter { $0.storeName.lowercased().contains(filter) }
     }
 }
 // MARK: - StorePickerDelegate本身(調用done的動作，點下去要做下收的動畫)
@@ -253,10 +260,10 @@ extension StoreMainViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         let typeName = types[row].type.name
         storeTypeButton.setTitle(typeName, for: .normal)
 
-        filteredStores.removeAll()
+        sortedStores.removeAll()
         for store in stores {
             if store.storeType == types[row].type.id {
-                filteredStores.append(store)
+                sortedStores.append(store)
             }
         }
     }

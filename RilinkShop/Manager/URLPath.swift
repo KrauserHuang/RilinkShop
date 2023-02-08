@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: - 綠悠遊商城
-// let SHOP_API_URL   = "https://rilink.com.tw/ticketec/api/"             // 正式網域
-// let SHOP_ROOT_URL  = "https://rilink.com.tw/ticketec/"
+ let SHOP_API_URL   = "https://rilink.com.tw/ticketec/api/"             // 正式網域
+ let SHOP_ROOT_URL  = "https://rilink.com.tw/ticketec/"
 // let SHOP_API_URL     = "http://211.20.181.125:11073/ticketec/api/"   // 測試網域
 // let SHOP_ROOT_URL    = "http://211.20.181.125:11073/ticketec/"
- let SHOP_API_URL     = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
- let SHOP_ROOT_URL    = "https://rilink.jotangi.com.tw:11074/ticketec/"
+// let SHOP_API_URL     = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
+// let SHOP_ROOT_URL    = "https://rilink.jotangi.com.tw:11074/ticketec/"
 
 // MARK: - 綠悠遊租車
 // let API_URL    = "https://rilink.com.tw/api/v1"                    // 正式網域

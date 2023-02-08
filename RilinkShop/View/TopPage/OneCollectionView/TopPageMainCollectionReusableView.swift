@@ -23,8 +23,6 @@ class TopPageMainCollectionReusableView: UICollectionReusableView {
         case all
     }
 
-//    static let reuseIdentifier = "TopPageMainCollectionReusableView" 
-
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var bannerPageControl: UIPageControl!
 
@@ -108,14 +106,12 @@ class TopPageMainCollectionReusableView: UICollectionReusableView {
 
     @IBAction func rentButtonTapped(_ sender: UIButton) {
         // 03 -> i租車
-//        delegate?.didTapRent(sender, productType: "03")
         delegate?.didTapRent(sender, productType: "Rent")
     }
 
     @IBAction func accessoryButtonTapped(_ sender: UIButton) {
         // 02 -> 改裝精品配件
-//        delegate?.didTapAccessory(sender, productType: "02")
-        delegate?.didTapRent(sender, productType: "SC001")
+        delegate?.didTapAccessory(sender, productType: "SC001")
     }
 }
 
