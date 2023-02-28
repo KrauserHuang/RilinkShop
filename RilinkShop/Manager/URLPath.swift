@@ -8,12 +8,10 @@
 import Foundation
 
 // MARK: - 綠悠遊商城
- let SHOP_API_URL   = "https://rilink.com.tw/ticketec/api/"             // 正式網域
- let SHOP_ROOT_URL  = "https://rilink.com.tw/ticketec/"
-// let SHOP_API_URL     = "http://211.20.181.125:11073/ticketec/api/"   // 測試網域
-// let SHOP_ROOT_URL    = "http://211.20.181.125:11073/ticketec/"
-// let SHOP_API_URL     = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
-// let SHOP_ROOT_URL    = "https://rilink.jotangi.com.tw:11074/ticketec/"
+// let SHOP_API_URL   = "https://rilink.com.tw/ticketec/api/"             // 正式網域
+// let SHOP_ROOT_URL  = "https://rilink.com.tw/ticketec/"
+ let SHOP_API_URL     = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
+ let SHOP_ROOT_URL    = "https://rilink.jotangi.com.tw:11074/ticketec/"
 
 // MARK: - 綠悠遊租車
 // let API_URL    = "https://rilink.com.tw/api/v1"                    // 正式網域
@@ -21,7 +19,6 @@ import Foundation
 
 // MARK: - Web串接金流
 // let PAYMENT_API_URL    = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="            // 正式
-// let PAYMENT_API_URL  = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid="      // 測試
 let PAYMENT_API_URL = "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/ecpayindex.php?orderid=" // 新測試
 
 // MARK: - ADMIN
@@ -89,3 +86,16 @@ let URL_BANNERLIST              = "banner_list.php"             // 新增取得b
 let URL_MEMBERSETTOKEN          = "member_set_token.php"        //設定會員推播token
 let URL_MEMBERCLEARTOKEN        = "member_clear_token.php"      //清除會員推播token
 let URL_PUSHMSGGETHISTORY       = "pushmsg_get_history.php"     //取得推播歷史資料
+
+// MARK: - INVOICE
+let URL_ECORDERINVOICE          = "ecorder_invoice.php"         //開立發票資訊
+
+enum Endpoint {
+    case storeList
+}
+
+private extension URL {
+    static func makeForEndpoint(_ endpoint: String) -> URL {
+        URL(string: "https://rilink.com.tw/ticketec/api/\(endpoint)")!
+    }
+}

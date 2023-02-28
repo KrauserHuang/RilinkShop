@@ -9,11 +9,12 @@ import UIKit
 import MBProgressHUD
 import SwiftUI
 import EzPopup
+import DropDown
 
 class CheckoutViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var cartTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bonusPointLabel: UILabel!
     @IBOutlet weak var bonusPointTextField: UITextField!
@@ -22,20 +23,22 @@ class CheckoutViewController: UIViewController {
     @IBOutlet weak var orderPayLabel: UILabel!          // 應付金額合計
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var checkoutButton: UIButton!
+    
+    @IBOutlet weak var invoicePhoneStackView: UIStackView!
+    @IBOutlet weak var uniformNoStackView: UIStackView!
+    
+    @IBOutlet weak var invoicePhoneTextField: UITextField!
+    @IBOutlet weak var uniformNoTextField: UITextField!
+    @IBOutlet weak var uniformNoTitleTextField: UITextField!
 
     var orderAmount = 0
     var point = 0
     // 應付金額合計
-    var orderPay = 0 {
-        didSet {
-            // 應付金額合計 = 商品合計 - 點數折抵
-//            orderPay = orderAmount - point
-        }
-    }
+    var orderPay = 0
     var inCartItems = [Product]() {
         didSet {
             DispatchQueue.main.async {
-                self.cartTableView.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
@@ -43,6 +46,11 @@ class CheckoutViewController: UIViewController {
 //    var password = MyKeyChain.getPassword() ?? ""
     var account: String!
     var password: String!
+    let dropDown = DropDown()
+    var invoiceType = InvoiceType.individual.rawValue
+    let allowedPredicate = NSPredicate(format: "SELF MATCHES %@", "^[0-9A-Z+-.]{0,7}$")
+    var orderNo: String?
+
     
     init(account: String, password: String) {
         super.init(nibName: nil, bundle: nil)
@@ -64,6 +72,8 @@ class CheckoutViewController: UIViewController {
         showInfo()
         configureKeyboard()
         setPointView()
+        invoicePhoneStackView.isHidden = true
+        uniformNoStackView.isHidden = true
         bonusPointTextField.addTarget(self, action: #selector(textFieldFilter(_:)), for: .editingChanged)
     }
 
@@ -104,15 +114,11 @@ class CheckoutViewController: UIViewController {
         bonusPointTextField.inputAccessoryView = tool
     }
     @objc func inputDone() {
-        print(#function)
-        print("vcPoint:\(point)")
-        print("point:\(bonusPointTextField.text ?? "no point")")
         // pointInt = 使用點數textField輸入的文字
         guard let pointInt = Int(bonusPointTextField.text!) else {
             bonusPointTextField.text = "0"
             return
         }
-        print("pointInt:\(pointInt)")
         let priceInt = orderPay // priceInt = 應付金額
         let pointNow = point // pointNow = 現有點數
         if pointInt < pointNow { // 輸入點數小於現有點數
@@ -154,11 +160,11 @@ class CheckoutViewController: UIViewController {
     }
 
     private func configureTableView() {
-        cartTableView.rowHeight = UITableView.automaticDimension
-        cartTableView.dataSource = self
-        cartTableView.register(CheckoutTableViewCell.nib, forCellReuseIdentifier: CheckoutTableViewCell.reuseIdentifier)
-        cartTableView.isScrollEnabled = false
-        cartTableView.allowsSelection = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.dataSource = self
+        tableView.register(CheckoutTableViewCell.nib, forCellReuseIdentifier: CheckoutTableViewCell.reuseIdentifier)
+        tableView.isScrollEnabled = false
+        tableView.allowsSelection = false
     }
 
     private func configureButton() {
@@ -192,16 +198,20 @@ class CheckoutViewController: UIViewController {
                     if let user = response as? User {
                         self.bonusPointLabel.text = user.point
                         self.point = Int(user.point)!
-                        print(#function)
-                        print("point2:\(self.point)")
                     }
                 }
             }
         }
     }
 
-    func configureKeyboard() {
+    private func configureKeyboard() {
         bonusPointTextField.delegate = self
+        invoicePhoneTextField.delegate = self
+        uniformNoTextField.delegate = self
+        uniformNoTitleTextField.delegate = self
+        
+        uniformNoTextField.keyboardType = .numberPad
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
 
@@ -222,47 +232,97 @@ class CheckoutViewController: UIViewController {
         scrollView.contentInset             = contentInsets
         scrollView.scrollIndicatorInsets    = contentInsets
     }
+    
+    @IBAction func invoiceButtonTapped(_ sender: UIButton) {
+        dropDown.dataSource = ["個人電子發票", "手機條碼載具", "三聯式發票"]
+        dropDown.anchorView = sender
+        dropDown.bottomOffset = CGPoint(x: 0, y: sender.frame.size.height)
+        dropDown.show()
+        dropDown.selectionAction = { [weak self] (index: Int, item: String) in
+            guard let _ = self else { return }
+            sender.setTitle(item, for: .normal)
+            switch index {
+            case 0:
+                self?.invoiceType = InvoiceType.individual.rawValue
+                self?.invoicePhoneStackView.isHidden = true
+                self?.uniformNoStackView.isHidden = true
+            case 1:
+                self?.invoiceType = InvoiceType.phone.rawValue
+                self?.invoicePhoneStackView.isHidden = false
+                self?.uniformNoStackView.isHidden = true
+            case 2:
+                self?.invoiceType = InvoiceType.uniform.rawValue
+                self?.invoicePhoneStackView.isHidden = true
+                self?.uniformNoStackView.isHidden = false
+            default:
+                break
+            }
+        }
+    }
+    
 
     @IBAction func backButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func checkoutButtonTapped(_ sender: UIButton) {
-
+        switch invoiceType {
+        case InvoiceType.phone.rawValue:
+            let count = invoicePhoneTextField.text?.count
+            guard count == 0 || count == 8 else {
+                Alert.showMessage(title: "系統訊息", msg: "手機載具條碼格式不符", vc: self)
+                return
+            }
+        case InvoiceType.uniform.rawValue:
+            let count = uniformNoTextField.text?.count
+            guard count == 0 || count == 8 else {
+                Alert.showMessage(title: "系統訊息", msg: "統一編號格式不符", vc: self)
+                return
+            }
+        default:
+            return
+        }
+        let group = DispatchGroup()
+        group.enter()
         guard let orderAmount = orderAmountLabel.text,
               let discountAmount = discountAmountLabel.text,
               let orderPay = orderPayLabel.text else { return }
-        print(#function)
-//        print("orderAmount:\(orderAmount)")
-//        print("discount:\(discountAmount)")
-//        print("orderPay:\(orderPay)")
         OrderService.shared.addECOrder(id: account,
                                        pwd: password,
                                        orderAmount: orderAmount,
                                        discountAmount: discountAmount,
                                        orderPay: orderPay) { response in
+            let orderNo = response.responseMessage
+            self.orderNo = orderNo
+            print("訂單確認")
+//            group.leave()
+//            group.enter()
+            InvoiceService.shared.createInvoice(orderNo: orderNo,
+                                                invoiceType: "\(self.invoiceType)",
+                                                companyTitle: self.uniformNoTitleTextField.text ?? "",
+                                                uniformNo: self.uniformNoTextField.text ?? "",
+                                                invoicePhone: self.invoicePhoneTextField.text ?? "") { success, response in
+                print("發票確認")
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
             let alertController = UIAlertController(title: "準備結帳", message: "", preferredStyle: .alert)
             let checkoutAction = UIAlertAction(title: "付款去", style: .default) { _ in
                 let wkWebVC = WKWebViewController()
                 wkWebVC.delegate = self
-                wkWebVC.urlStr = PAYMENT_API_URL + "\(response.responseMessage)"
-                wkWebVC.orderNo = response.responseMessage
+                wkWebVC.urlStr = PAYMENT_API_URL + self.orderNo!
+                wkWebVC.orderNo = self.orderNo!
                 let popVC = PopupViewController(contentController: wkWebVC,
                                                 popupWidth: self.view.bounds.width - 40,
                                                 popupHeight: self.view.bounds.height - 100)
-
+                
                 popVC.cornerRadius  = 10
                 popVC.backgroundColor = .black
                 popVC.backgroundAlpha = 1
                 popVC.shadowEnabled = true
                 popVC.canTapOutsideToDismiss = false
-
-//                self.navigationController?.popToRootViewController(animated: true)
                 self.present(popVC, animated: true, completion: nil)
-
-//                self.present(popVC, animated: true) {
-//                    self.navigationController?.popToRootViewController(animated: true)
-//                }
-//                self.present(popVC, animated: true, completion: nil)
             }
             let backToShopAction = UIAlertAction(title: "回首頁", style: .default) { _ in
                 self.navigationController?.popToRootViewController(animated: true)
@@ -294,11 +354,37 @@ extension CheckoutViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        let bonusPoint = bonusPointTextField.text ?? "0"
-//        let point = Int(bonusPoint)! * 2
-//        discountAmountLabel.text = "\(point)"
-//    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == invoicePhoneTextField {
+            textField.text = "/"
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case invoicePhoneTextField: //必須以【 / 】為開頭，其餘7碼則由數字【0-9】大寫英文【A-Z】與特殊符號【+】【-】【.】這39個字元組成的編號
+            let maxLength = 8
+            let currentString = textField.text ?? ""
+            let newString = (currentString as NSString).replacingCharacters(in: range, with: string)
+            let newStringWithoutSlash = newString.dropFirst()
+            if range.location == 0 && range.length == 1 {
+                return false
+            }
+
+            return newString.count <= maxLength && allowedPredicate.evaluate(with: newStringWithoutSlash)
+        case uniformNoTextField: //8碼數字【0-9】組成
+            let maxLength = 8
+            let currentString: NSString = textField.text! as NSString
+            let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+            let allowedCharacterSet = CharacterSet.decimalDigits
+            let characterSet = CharacterSet(charactersIn: string)
+            
+            return newString.length <= maxLength && allowedCharacterSet.isSuperset(of: characterSet)
+        default:
+            return true
+        }
+    }
 }
 // MARK: - WKWebViewControllerDelegate
 extension CheckoutViewController: WKWebViewControllerDelegate {

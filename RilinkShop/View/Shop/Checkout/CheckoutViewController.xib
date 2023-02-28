@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,13 +14,18 @@
                 <outlet property="backButton" destination="La5-DA-Hiy" id="wvZ-EI-3ZO"/>
                 <outlet property="bonusPointLabel" destination="nEX-mb-lvu" id="epc-Hp-pwj"/>
                 <outlet property="bonusPointTextField" destination="aXb-Gk-VQz" id="Myd-yo-dh4"/>
-                <outlet property="cartTableView" destination="FoN-Gb-VvH" id="KYm-20-W5Z"/>
                 <outlet property="checkoutButton" destination="g0l-rr-36E" id="LLi-Q6-EuK"/>
                 <outlet property="discountAmountLabel" destination="7rl-jg-zCX" id="YxG-Rb-VyU"/>
+                <outlet property="invoicePhoneStackView" destination="Soj-n9-Zwm" id="O7C-Jq-5DZ"/>
+                <outlet property="invoicePhoneTextField" destination="zeq-Mv-1Hy" id="HoW-1k-jMZ"/>
                 <outlet property="orderAmountLabel" destination="OQQ-cO-ZUH" id="wRs-uw-udB"/>
                 <outlet property="orderPayLabel" destination="G7N-uS-pse" id="C4a-H1-8o4"/>
                 <outlet property="scrollView" destination="C52-uE-9wE" id="H1t-if-qBf"/>
+                <outlet property="tableView" destination="FoN-Gb-VvH" id="KYm-20-W5Z"/>
                 <outlet property="tableViewHeightConstraint" destination="vBO-95-zaK" id="s9b-1k-myG"/>
+                <outlet property="uniformNoStackView" destination="Lju-9n-UKK" id="Jmz-cM-QfG"/>
+                <outlet property="uniformNoTextField" destination="hSt-ml-GAA" id="wWe-3k-hsx"/>
+                <outlet property="uniformNoTitleTextField" destination="ZwK-Fd-gbc" id="Ccs-o9-hBD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,10 +38,10 @@
                     <rect key="frame" x="0.0" y="47" width="375" height="671"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqx-xe-f6G">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="613.66666666666663"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="876.66666666666663"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="L38-3A-tUm">
-                                    <rect key="frame" x="10" y="0.0" width="355" height="613.66666666666663"/>
+                                    <rect key="frame" x="10" y="0.0" width="355" height="876.66666666666663"/>
                                     <subviews>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FoN-Gb-VvH">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="340"/>
@@ -99,25 +104,99 @@
                                                 </button>
                                             </subviews>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tRI-pF-Ag3">
-                                            <rect key="frame" x="0.0" y="432.33333333333331" width="355" height="89.333333333333314"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xUS-D5-t7U">
+                                            <rect key="frame" x="0.0" y="432.33333333333331" width="355" height="57.333333333333314"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發票資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcw-Ot-J7s">
-                                                    <rect key="frame" x="0.0" y="0.0" width="69.333333333333329" height="20.333333333333332"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊配送開立發票方" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YW7-eS-EwM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="響應電子化發票，發票將寄送至您的E-MAIL。提醒你，發票一旦開立，不得任意更改或改開發票。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJX-eI-8QE">
-                                                    <rect key="frame" x="0.0" y="28.333333333333371" width="350.66666666666669" height="61"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOH-ci-EV1">
+                                                    <rect key="frame" x="0.0" y="23.000000000000004" width="355" height="34.333333333333343"/>
+                                                    <color key="tintColor" red="0.37254901959999998" green="0.61960784310000006" blue="0.62745098040000002" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="個人電子發票"/>
+                                                    <connections>
+                                                        <action selector="invoiceButtonTapped:" destination="-1" eventType="touchUpInside" id="KJa-o2-LYw"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EhU-ql-5EW">
+                                            <rect key="frame" x="0.0" y="504.66666666666663" width="355" height="280"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="發票資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmk-sf-dr1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Soj-n9-Zwm">
+                                                    <rect key="frame" x="0.0" y="28" width="355" height="62"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手機條碼載具" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcd-iS-uhZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入載具號碼" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zeq-Mv-1Hy">
+                                                            <rect key="frame" x="0.0" y="28" width="355" height="34"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Lju-9n-UKK">
+                                                    <rect key="frame" x="0.0" y="100" width="355" height="134"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="統一編號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFC-DZ-KEc">
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入統一編號" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hSt-ml-GAA">
+                                                            <rect key="frame" x="0.0" y="28" width="355" height="34"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="發票抬頭" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wm6-yb-40Z">
+                                                            <rect key="frame" x="0.0" y="72" width="355" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="請輸入抬頭" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZwK-Fd-gbc">
+                                                            <rect key="frame" x="0.0" y="100" width="355" height="34"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-MAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cja-Bu-jiK">
+                                                            <rect key="frame" x="0.0" y="134" width="355" height="0.0"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="abc123456@xyz.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CtI-V7-uT9">
+                                                            <rect key="frame" x="0.0" y="134" width="355" height="0.0"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="響應電子化發票，發票將寄送至您的E-MAIL。提醒你，發票一旦開立，不得任意更改或改開發票。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qzz-Pr-Ocl">
+                                                    <rect key="frame" x="0.0" y="244" width="355" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Jv5-mK-WiK">
-                                            <rect key="frame" x="0.0" y="536.66666666666663" width="355" height="77"/>
+                                            <rect key="frame" x="0.0" y="799.66666666666663" width="355" height="77"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHK-bP-vJs">
                                                     <rect key="frame" x="0.0" y="0.0" width="355" height="20.333333333333332"/>

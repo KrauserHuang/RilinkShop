@@ -30,8 +30,6 @@ class NotificationService {
             }
             
             let value = JSON(response.value)
-            print(#function)
-            print(value)
             
             switch response.result {
             case .success:
@@ -65,8 +63,6 @@ class NotificationService {
             }
             
             let value = JSON(response.value)
-            print(#function)
-            print(value)
             
             switch response.result {
             case .success:

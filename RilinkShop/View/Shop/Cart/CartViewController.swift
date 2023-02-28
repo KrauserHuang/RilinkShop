@@ -64,19 +64,11 @@ class CartViewController: UIViewController {
     }
     // 載入購物車資料
     func loadInCartItems() {
-//        let indicator = MBProgressHUD.showAdded(to: self.view, animated: true)
-//        indicator.isUserInteractionEnabled = false
-//        indicator.show(animated: true)
-//        cartTableView.isHidden = true
         HUD.showLoadingHUD(inView: self.view, text: "")
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             ProductService.shared.loadShoppingCartList(id: self.account, pwd: self.password) { items in
                 HUD.hideLoadingHUD(inView: self.view)
                 self.inCartItems = items
-//                self.cartTableView.isHidden = false
-//                print(#function)
-//                print(items)
-//                indicator.hide(animated: true)
 
 //                self.noItemView.isHidden = self.inCartItems.isEmpty ? false : true
                 self.noItemView.isHidden = self.inCartItems.count != 0

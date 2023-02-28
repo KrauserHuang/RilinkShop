@@ -121,6 +121,7 @@ class MemberNavigationViewController: UINavigationController {
     
     private func setUserToken() {
         let apnsToken = AppDelegate.apnsToken ?? ""
+        print("apnToken: \(apnsToken)")
         guard let account = MyKeyChain.getAccount(),
               let password = MyKeyChain.getPassword() else { return }
         NotificationService.shared.memberSetToken(id: account,

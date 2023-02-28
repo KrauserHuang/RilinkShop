@@ -51,6 +51,7 @@ class ShopMainViewController: BaseViewController {
 
     let notificationCenter = NotificationCenter.default
     var productType: String?
+    var searchController: UISearchController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,14 +91,10 @@ class ShopMainViewController: BaseViewController {
                         if product.product_type == self.productType { // 如果item內容與所有物件內producttype_name有吻合
                             self.sortedItems.append(singleItem) // 則更新filteredItems的內容
                             self.shopTypeButton.setTitle(product.producttype_name, for: .normal)
-                        } else {
-        //                        print("append product失敗！")
                         }
                     case .package:
                         if self.productType == "套票" {
                             self.sortedItems.append(singleItem)
-                        } else {
-        //                        print("append package失敗！")
                         }
                     }
                 }
@@ -213,7 +210,7 @@ class ShopMainViewController: BaseViewController {
     }
     
     private func configureSearchController() {
-        let searchController                    = UISearchController()
+        searchController                        = UISearchController()
         searchController.searchResultsUpdater   = self //設定代理UISearchResultsUpdating的協議
         searchController.searchBar.placeholder  = "請填入要搜尋的商品"
         searchController.obscuresBackgroundDuringPresentation = false //true: obscure(有遮罩),代表UISearchController會半透明蓋著目前的VC，false則透明使用者不會發現
@@ -230,6 +227,8 @@ class ShopMainViewController: BaseViewController {
         dropDown.selectionAction = { [weak self] (_: Int, item: String) in
             guard let self = self else { return }
             self.shopTypeButton.setTitle(item, for: .normal) // 點擊dropDown的item則將item的內容放進button的UI
+            self.searchController.searchBar.text = ""
+            self.searchController.isActive = false
 
             self.sortedItems.removeAll()
             for singleItem in self.items {
@@ -237,14 +236,10 @@ class ShopMainViewController: BaseViewController {
                 case .product(let product):
                     if product.producttype_name == item { // 如果item內容與所有物件內producttype_name有吻合
                         self.sortedItems.append(singleItem) // 則更新filteredItems的內容
-                    } else {
-//                        print("append product失敗！")
                     }
                 case .package:
                     if item == "套票" {
                         self.sortedItems.append(singleItem)
-                    } else {
-//                        print("append package失敗！")
                     }
                 }
             }
@@ -268,10 +263,10 @@ extension ShopMainViewController: UICollectionViewDelegate {
 // MARK: - Item DiffableDataSource/Snapshot/Compositional Layout
 extension ShopMainViewController {
     private func configureDataSource() -> DataSource {
-        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+        let dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShopCollectionViewCell.reuseIdentifier, for: indexPath) as! ShopCollectionViewCell
 
-            cell.configure(with: itemIdentifier)
+            cell.configure(with: item)
 
             return cell
         }
@@ -311,47 +306,34 @@ extension ShopMainViewController: UISearchResultsUpdating, UISearchBarDelegate {
             updateSnapshot(on: sortedItems, animated: true)
             return
         }
-//        if sortedItems is [Product] {
-//            searchItems = sortedItems.filter { ($0 as! Product).product_name.lowercased().contains(filter) }
-//        } else {
-//            searchItems = sortedItems.filter { ($0 as! Package).productName.lowercased().contains(filter) }
-//        }
         searchItems = searchItems(with: sortedItems, by: filter)
-//        searchItems = sortedItems.filter {
-//            switch $0 {
-//            case .product(let product):
-//                product.product_name.lowercased().contains(filter)
-//                return true
-//            case .package(let package):
-//                if package.productName.lowercased().contains(filter) {
-//                    searchItems.append($0)
-//                }
-//                return true
-//            }
-//        }
     }
     
-    func searchItems(with items: [Item],by filter: String) -> [Item] {
+    private func searchItems(with items: [Item], by filter: String) -> [Item] {
         var searchItems: [Item] = []
         searchItems = items.filter {
             switch $0 {
+                
             case .product(let product):
-                product.product_name.lowercased().contains(filter)
+                if product.product_name.lowercased().contains(filter) {
+                    searchItems.append($0)
+                    return true
+                } else {
+                    return false
+                }
+                
             case .package(let package):
-                package.productName.lowercased().contains(filter)
+                
+                if package.productName.lowercased().contains(filter) {
+                    searchItems.append($0)
+                    return true
+                } else {
+                    return false
+                }
             }
-            return true
         }
         return searchItems
     }
-    
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        updateSnapshot(on: sortedItems)
-//    }
-//
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        updateSnapshot(on: sortedItems)
-//    }
 }
 // MARK: - UITextFieldDelegate
 extension ShopMainViewController: UITextFieldDelegate {
