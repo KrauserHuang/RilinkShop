@@ -95,6 +95,8 @@
 		4F74528B28179053006D6E93 /* ShopRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74528928179053006D6E93 /* ShopRuleViewController.swift */; };
 		4F74528C28179053006D6E93 /* ShopRuleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F74528A28179053006D6E93 /* ShopRuleViewController.xib */; };
 		4F7452902817A577006D6E93 /* ShopLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74528F2817A577006D6E93 /* ShopLocationTableViewController.swift */; };
+		4F81A83629AEE24D00D056EF /* RSProductImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81A83529AEE24D00D056EF /* RSProductImageView.swift */; };
+		4F81A83829AEFD5E00D056EF /* OrderInvoiceStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81A83729AEFD5E00D056EF /* OrderInvoiceStatusCell.swift */; };
 		4F82505F286EE92400A4298C /* BadgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F82505E286EE92400A4298C /* BadgeBarButtonItem.swift */; };
 		4F8498B4292C798200DFE7CC /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8498B3292C798200DFE7CC /* APIManager.swift */; };
 		4F8498B7292C7B1A00DFE7CC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8498B6292C7B1A00DFE7CC /* Constants.swift */; };
@@ -170,6 +172,11 @@
 		4FE7408328DC4D1B0067E620 /* QATableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE7408128DC4D1B0067E620 /* QATableViewCell.swift */; };
 		4FE7408428DC4D1B0067E620 /* QATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FE7408228DC4D1B0067E620 /* QATableViewCell.xib */; };
 		4FE8DB7D295554D5002E88DA /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FE8DB7C295554D5002E88DA /* Login.storyboard */; };
+		4FED28CA29ADF70D00634B76 /* NewOrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED28C929ADF70D00634B76 /* NewOrderDetailViewController.swift */; };
+		4FED28CC29ADF7B600634B76 /* NewOrderStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED28CB29ADF7B600634B76 /* NewOrderStatusCell.swift */; };
+		4FED28CE29ADF7C800634B76 /* NewOrderInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED28CD29ADF7C800634B76 /* NewOrderInfoCell.swift */; };
+		4FED28D029ADF82100634B76 /* NewOrderDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED28CF29ADF82100634B76 /* NewOrderDetailFooterView.swift */; };
+		4FED28D329ADFD7B00634B76 /* RSTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FED28D229ADFD7B00634B76 /* RSTitleLabel.swift */; };
 		4FEEEBD62824A25900A8F3B2 /* UIImageView + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEEEBD52824A25900A8F3B2 /* UIImageView + Ext.swift */; };
 		4FF26C8728386AC700CA3665 /* StoreIDSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF26C8528386AC700CA3665 /* StoreIDSelectViewController.swift */; };
 		4FF26C8828386AC700CA3665 /* StoreIDSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF26C8628386AC700CA3665 /* StoreIDSelectViewController.xib */; };
@@ -324,6 +331,8 @@
 		4F74528928179053006D6E93 /* ShopRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopRuleViewController.swift; sourceTree = "<group>"; };
 		4F74528A28179053006D6E93 /* ShopRuleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopRuleViewController.xib; sourceTree = "<group>"; };
 		4F74528F2817A577006D6E93 /* ShopLocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopLocationTableViewController.swift; sourceTree = "<group>"; };
+		4F81A83529AEE24D00D056EF /* RSProductImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSProductImageView.swift; sourceTree = "<group>"; };
+		4F81A83729AEFD5E00D056EF /* OrderInvoiceStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInvoiceStatusCell.swift; sourceTree = "<group>"; };
 		4F82505E286EE92400A4298C /* BadgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeBarButtonItem.swift; sourceTree = "<group>"; };
 		4F8498B3292C798200DFE7CC /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		4F8498B6292C7B1A00DFE7CC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -400,6 +409,11 @@
 		4FE7408128DC4D1B0067E620 /* QATableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QATableViewCell.swift; sourceTree = "<group>"; };
 		4FE7408228DC4D1B0067E620 /* QATableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QATableViewCell.xib; sourceTree = "<group>"; };
 		4FE8DB7C295554D5002E88DA /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		4FED28C929ADF70D00634B76 /* NewOrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderDetailViewController.swift; sourceTree = "<group>"; };
+		4FED28CB29ADF7B600634B76 /* NewOrderStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderStatusCell.swift; sourceTree = "<group>"; };
+		4FED28CD29ADF7C800634B76 /* NewOrderInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderInfoCell.swift; sourceTree = "<group>"; };
+		4FED28CF29ADF82100634B76 /* NewOrderDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderDetailFooterView.swift; sourceTree = "<group>"; };
+		4FED28D229ADFD7B00634B76 /* RSTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSTitleLabel.swift; sourceTree = "<group>"; };
 		4FEEEBD52824A25900A8F3B2 /* UIImageView + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Ext.swift"; sourceTree = "<group>"; };
 		4FF26C8528386AC700CA3665 /* StoreIDSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreIDSelectViewController.swift; sourceTree = "<group>"; };
 		4FF26C8628386AC700CA3665 /* StoreIDSelectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreIDSelectViewController.xib; sourceTree = "<group>"; };
@@ -736,6 +750,14 @@
 			path = Rule;
 			sourceTree = "<group>";
 		};
+		4F81A83429AEE22A00D056EF /* ImageViews */ = {
+			isa = PBXGroup;
+			children = (
+				4F81A83529AEE24D00D056EF /* RSProductImageView.swift */,
+			);
+			path = ImageViews;
+			sourceTree = "<group>";
+		};
 		4F8498B2292C794300DFE7CC /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -910,6 +932,25 @@
 			path = "Q&A";
 			sourceTree = "<group>";
 		};
+		4FED28C729ADF6D400634B76 /* NewOrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4FED28C929ADF70D00634B76 /* NewOrderDetailViewController.swift */,
+				4FED28CB29ADF7B600634B76 /* NewOrderStatusCell.swift */,
+				4FED28CD29ADF7C800634B76 /* NewOrderInfoCell.swift */,
+				4FED28CF29ADF82100634B76 /* NewOrderDetailFooterView.swift */,
+			);
+			path = NewOrderDetail;
+			sourceTree = "<group>";
+		};
+		4FED28D129ADFD6300634B76 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				4FED28D229ADFD7B00634B76 /* RSTitleLabel.swift */,
+			);
+			path = Labels;
+			sourceTree = "<group>";
+		};
 		4FEDE0CE2887E13C00634C14 /* OrderMain */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,6 +974,7 @@
 		4FFA9D0D282B547F0015AC7C /* OrderDetail */ = {
 			isa = PBXGroup;
 			children = (
+				4FED28C729ADF6D400634B76 /* NewOrderDetail */,
 				45F016FC278D34E800F03BC2 /* OrderDetailViewController.swift */,
 				45F016FD278D34E800F03BC2 /* OrderDetailViewController.xib */,
 				4FA9612F282B629100BB22EB /* OrderStatusCell.swift */,
@@ -940,6 +982,7 @@
 				4FA96133282B62AB00BB22EB /* ProductInfoCell.swift */,
 				4FA96134282B62AB00BB22EB /* ProductInfoCell.xib */,
 				4FA9612D282B5FF000BB22EB /* OrderDetailFooterView.swift */,
+				4F81A83729AEFD5E00D056EF /* OrderInvoiceStatusCell.swift */,
 			);
 			path = OrderDetail;
 			sourceTree = "<group>";
@@ -1123,6 +1166,8 @@
 		57A5ECE02784243300245DB0 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				4F81A83429AEE22A00D056EF /* ImageViews */,
+				4FED28D129ADFD6300634B76 /* Labels */,
 				4FB0FE1C2977A44300113802 /* UIViewControllers */,
 				4FCD722B297528A300C95F38 /* Views */,
 				4F82505E286EE92400A4298C /* BadgeBarButtonItem.swift */,
@@ -1424,6 +1469,7 @@
 				4FB038F92838C59A00A69875 /* DatePicker.swift in Sources */,
 				4FFE3BBA281926D100F09CFE /* UIAlertController + Ext.swift in Sources */,
 				4F74528B28179053006D6E93 /* ShopRuleViewController.swift in Sources */,
+				4F81A83629AEE24D00D056EF /* RSProductImageView.swift in Sources */,
 				4FE7407B28DC413E0067E620 /* QAViewController.swift in Sources */,
 				5789AE8A278C24F900B15225 /* ExpiredViewController.swift in Sources */,
 				4F8498BB292C7F7100DFE7CC /* NotificationService.swift in Sources */,
@@ -1469,6 +1515,7 @@
 				5789AE70278C0CCC00B15225 /* UsableTicketViewController.swift in Sources */,
 				4F025B5F2834DFFA00DC0101 /* ForgotPasswordViewController_2.swift in Sources */,
 				4F6D16F028167A3300772FF3 /* ProductDetailViewController.swift in Sources */,
+				4F81A83829AEFD5E00D056EF /* OrderInvoiceStatusCell.swift in Sources */,
 				4F521D622817DD1200391292 /* HostelDetailViewController.swift in Sources */,
 				5789AE86278C24DD00B15225 /* ConvertibleViewController.swift in Sources */,
 				571A9A382786B72500E8440D /* MainTabBarController.swift in Sources */,
@@ -1483,6 +1530,7 @@
 				4F0D4690296C12EA00BC49B7 /* MerchantMainViewController.swift in Sources */,
 				571A9A6527880D6900E8440D /* ForgotPasswordViewController.swift in Sources */,
 				4FDF7B0329A89D9B0093C273 /* InvoiceService.swift in Sources */,
+				4FED28CA29ADF70D00634B76 /* NewOrderDetailViewController.swift in Sources */,
 				4FE12E8C28800A67001230FE /* ContainerMemberCenterTableViewController.swift in Sources */,
 				4F6F0BF229029D3200C0568D /* MessageTableViewCell.swift in Sources */,
 				57ADBD1D2786910B009C1C4E /* CalendarViewController.swift in Sources */,
@@ -1503,6 +1551,7 @@
 				4FE7408328DC4D1B0067E620 /* QATableViewCell.swift in Sources */,
 				4F0D468E296C0C9800BC49B7 /* NotifyTableViewCell.swift in Sources */,
 				4F3B43C828AA3CD500CD8684 /* MainPageWebViewController.swift in Sources */,
+				4FED28CE29ADF7C800634B76 /* NewOrderInfoCell.swift in Sources */,
 				4FCD722F2975305300C95F38 /* UIViewController + Ext.swift in Sources */,
 				4F74528728178087006D6E93 /* URLPath.swift in Sources */,
 				4FFE3BB72818F98C00F09CFE /* ShopTypeTableViewCell.swift in Sources */,
@@ -1541,6 +1590,7 @@
 				4F1669DB282CF2C80031E37C /* DidReimbursementViewController.swift in Sources */,
 				4F719579282213DE00B2A63A /* CompositionalLayoutOption.swift in Sources */,
 				4F71957B2822143500B2A63A /* NSCollectionLayoutSize + Ext.swift in Sources */,
+				4FED28CC29ADF7B600634B76 /* NewOrderStatusCell.swift in Sources */,
 				571A9A492786BB5D00E8440D /* ReservationTableViewController.swift in Sources */,
 				450ED64C2790070E00CDF731 /* SuccessAlert.swift in Sources */,
 				4F5E02BD298E03A600E0316A /* StoreTypeModel.swift in Sources */,
@@ -1555,9 +1605,11 @@
 				4F99638228CEE4B30020A685 /* RepairReservationMainViewController.swift in Sources */,
 				4F025B5B2834DE7800DC0101 /* ForgotPasswordViewController_1.swift in Sources */,
 				4F675356281A9697008E0CAF /* UIBarButtonItem + Ext.swift in Sources */,
+				4FED28D329ADFD7B00634B76 /* RSTitleLabel.swift in Sources */,
 				571A9A322786B4B900E8440D /* ShopNavigationViewController.swift in Sources */,
 				4F6D170C2816A2E900772FF3 /* ProductService.swift in Sources */,
 				5789AE72278C0CDA00B15225 /* UsedTicketViewController.swift in Sources */,
+				4FED28D029ADF82100634B76 /* NewOrderDetailFooterView.swift in Sources */,
 				4F0A29DA282A13B00000FFB6 /* PackageInfoViewController.swift in Sources */,
 				450ED6502790072F00CDF731 /* CancelAlert.swift in Sources */,
 				4F6D17022816896A00772FF3 /* CheckoutViewController.swift in Sources */,

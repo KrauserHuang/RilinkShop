@@ -16,62 +16,62 @@ class MyOrderTableViewController: UITableViewController {
             }
         }
     }
-    let account = Global.ACCOUNT
-    let password = Global.ACCOUNT_PASSWORD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        tableView.register(MyOrderTableViewCell.nib, forCellReuseIdentifier: MyOrderTableViewCell.reuseIdentifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         getOrder()
-
-        tableView.rowHeight = 130
-
-        tableView.register(UINib(nibName: "MyOrderTableViewCell", bundle: nil), forCellReuseIdentifier: "myOrderTableViewCell")
     }
 
-    func getOrder() {
-        OrderService.shared.getECOrderList(id: account, pwd: password) { ordersResponse in
+    private func getOrder() {
+        OrderService.shared.getECOrderList { ordersResponse in
             self.orders = ordersResponse
         }
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orders.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "myOrderTableViewCell") as! MyOrderTableViewCell
-
-        cell.delegate = self
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: MyOrderTableViewCell.reuseIdentifier) as! MyOrderTableViewCell
 
         let order = orders[indexPath.row]
         cell.set(with: order)
-
-        cell.closure = {
-            let orderDetailVC = OrderDetailViewController()
-            orderDetailVC.order = order
-            orderDetailVC.orderNo = order.orderNo
-            self.navigationController?.pushViewController(orderDetailVC, animated: true)
-        }
+        cell.delegate = self
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 130
     }
 }
 
 extension MyOrderTableViewController: MyOrderTableViewCellDelegate {
+    func didTapDetailButton(_ cell: MyOrderTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let order = orders[indexPath.row]
+        let controller = OrderDetailViewController()
+        controller.order = order
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func payImmediate(_ cell: MyOrderTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        let orderNo = self.orders[indexPath.row].orderNo
+        let orderNo = orders[indexPath.row].orderNo
         let controller = WKWebViewController()
         controller.delegate = self
         controller.title = "行動支付"
-        controller.urlStr = PAYMENT_API_URL + "\(orderNo)"
-        self.navigationController?.pushViewController(controller, animated: true)
+        controller.urlStr = PAYMENT_API_URL + orderNo
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

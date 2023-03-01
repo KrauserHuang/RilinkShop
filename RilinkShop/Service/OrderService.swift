@@ -32,16 +32,14 @@ class OrderService {
         }
     }
 
-    func getECOrderList(id: String, pwd: String, completion: @escaping ([Order]) -> Void) {
+    func getECOrderList(completion: @escaping ([Order]) -> Void) {
         let url = SHOP_API_URL + URL_ECORDERLIST
         let parameters = [
-            "member_id": id,
-            "member_pwd": pwd
+            "member_id": Global.ACCOUNT,
+            "member_pwd": Global.ACCOUNT_PASSWORD
         ]
 
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [Order].self) { response in
-//            print("-----")
-//            print(response.response)
             guard let orders = response.value else { return }
             completion(orders)
         }
@@ -112,18 +110,16 @@ class OrderService {
 //        }
 //    }
 
-    func getECOrderInfo(id: String, pwd: String, no: String, completion: @escaping ([OrderInfo]) -> Void) {
+    func getECOrderInfo(no: String, completion: @escaping ([OrderInfo]) -> Void) {
         let url = SHOP_API_URL + URL_ECORDERINFO
         let parameters = [
-            "member_id": id,
-            "member_pwd": pwd,
+            "member_id": Global.ACCOUNT,
+            "member_pwd": Global.ACCOUNT_PASSWORD,
             "order_no": no
         ]
 
         AF.request(url, method: .post, parameters: parameters).validate().responseDecodable(of: [OrderInfo].self) { response in
-            print(#function)
             guard let order = response.value else { return }
-            print(order)
             completion(order)
         }
     }

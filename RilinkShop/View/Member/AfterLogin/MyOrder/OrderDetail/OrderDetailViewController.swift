@@ -9,25 +9,22 @@ import UIKit
 
 class OrderDetailViewController: UIViewController {
 
-    @IBOutlet weak var orderDetailTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var footerView: OrderDetailFooterView!
 
-    let account = Global.ACCOUNT
-    let password = Global.ACCOUNT_PASSWORD
-    var order = Order()
+    var order: Order!
     var orderInfos = [OrderInfo]()
-    var orderNo: String?
     var products = [List]() {
         didSet {
             DispatchQueue.main.async {
-                self.orderDetailTableView.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
     var products1 = [ProductList]() {
         didSet {
             DispatchQueue.main.async {
-                self.orderDetailTableView.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
@@ -35,53 +32,54 @@ class OrderDetailViewController: UIViewController {
     var products2 = [PackageList]() {
         didSet {
             DispatchQueue.main.async {
-                self.orderDetailTableView.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
 //    var products = [Product]() {
 //        didSet {
 //            DispatchQueue.main.async {
-//                self.orderDetailTableView.reloadData()
+//                self.tableView.reloadData()
 //            }
 //        }
 //    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        orderDetailTableView.alwaysBounceVertical = false
-        orderDetailTableView.isUserInteractionEnabled = false
-        getList()
+        
+        tableView.alwaysBounceVertical = false
         configureTableView()
         configureFooterView()
-//        print("--------------------")
-//        print("orderNo:\(orderNo)")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getList()
     }
 
-    func getList() {
-        OrderService.shared.getECOrderInfo(id: account, pwd: password, no: order.orderNo) { listResponse in
+    private func getList() {
+        OrderService.shared.getECOrderInfo(no: order.orderNo) { listResponse in
 
             if let products = listResponse.first?.productList,
                let packages = listResponse.first?.packageList {
                 self.products = products + packages
+                print("products:\(products)")
+                print("packages:\(packages)")
             }
             self.orderInfos = listResponse
-            print("=====測試======")
-            print("orderInfos:\(self.orderInfos)")
         }
     }
 
-    func configureTableView() {
-        orderDetailTableView.delegate = self
-        orderDetailTableView.dataSource = self
-        let nibStatus = UINib(nibName: OrderStatusCell.reuseIdentifier, bundle: nil)
-        let nibInfo = UINib(nibName: ProductInfoCell.reuseIdentifier, bundle: nil)
-        orderDetailTableView.register(nibStatus, forCellReuseIdentifier: OrderStatusCell.reuseIdentifier)
-        orderDetailTableView.register(nibInfo, forCellReuseIdentifier: ProductInfoCell.reuseIdentifier)
+    private func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(OrderStatusCell.nib, forCellReuseIdentifier: OrderStatusCell.reuseIdentifier)
+        tableView.register(OrderInvoiceStatusCell.self, forCellReuseIdentifier: OrderInvoiceStatusCell.reuseIdentifier)
+        tableView.register(ProductInfoCell.nib, forCellReuseIdentifier: ProductInfoCell.reuseIdentifier)
     }
 
-    func configureFooterView() {
+    private func configureFooterView() {
         footerView.orderAmountLabel.text = order.orderAmount
         footerView.discountAmountLabel.text = order.discountAmount
         footerView.orderPayLabel.text = order.orderPay
@@ -90,12 +88,14 @@ class OrderDetailViewController: UIViewController {
 
 extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else if section == 1 {
+            return 1
+        } else if section == 2 {
             return products.count
         }
         return 0
@@ -110,6 +110,13 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
 
             return cell
         case 1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: OrderInvoiceStatusCell.reuseIdentifier, for: indexPath) as? OrderInvoiceStatusCell else { return UITableViewCell() }
+            
+            guard let orderInfo = orderInfos.first else { return UITableViewCell() }
+            cell.set(with: orderInfo)
+            
+            return cell
+        case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: ProductInfoCell.reuseIdentifier, for: indexPath) as! ProductInfoCell
 
             let product = products[indexPath.row]
@@ -118,6 +125,19 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
             return cell
         default:
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "購買記錄"
+        case 1:
+            return "發票資訊"
+        case 2:
+            return "訂單明細"
+        default:
+            return nil
         }
     }
 }

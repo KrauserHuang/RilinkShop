@@ -30,7 +30,6 @@ class OrderStatusCell: UITableViewCell {
         orderNoLabel.text = "訂單編號：\(model.orderNo)"
         orderDateLabel.text = "訂單日期：\(model.orderDate)"
         orderAmountLabel.text = "訂單金額：\(model.orderAmount)" // 顯示應付 -> 再改回商品合計
-//        orderStatusLabel.text = "訂單狀態：\(model.orderStatus)"
         payStatusLabel.text = "付款狀態：\(model.payStatus)"
         // 訂單狀態
         switch model.orderStatus {
@@ -55,7 +54,6 @@ class OrderStatusCell: UITableViewCell {
             } else {
                 payStatusLabel.text = "付款狀態：店家派發"
             }
-//            payStatusLabel.text = "付款狀態：付款完成"
         default:
             payStatusLabel.text = "付款狀態：處理中"
         }

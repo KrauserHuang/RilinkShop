@@ -42,6 +42,12 @@ extension UIView {
             self.addSubview(view)
         }
     }
+    
+    func addArrangedSubviews(_ views: UIView...) {
+        for view in views {
+            self.addSubview(view)
+        }
+    }
 }
 
 protocol Badgeable {}

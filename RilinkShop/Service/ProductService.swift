@@ -25,7 +25,7 @@ class ProductService {
     private(set) var productList = [Product]()
     // MARK: - Product/Package Related
     func getProductType(id: String, pwd: String, completion: @escaping ([Category]) -> Void) {
-        let url = SHOP_API_URL + URL_PRODUCTTYPE // 測試機
+        let url = SHOP_API_URL + URL_PRODUCTTYPE
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
@@ -36,12 +36,23 @@ class ProductService {
         }
     }
     
-//    func getProductType() async throws -> [Category] {
-//        let url = URL(string: SHOP_API_URL + URL_PRODUCTTYPE)!
-//        let (data, response) = try await URLSession.shared.data(from: url)
-//        
-//        
-//    }
+    func getProductType() async throws -> [Category] {
+        let urlString = SHOP_API_URL + URL_PRODUCTTYPE
+        var components = URLComponents(string: urlString)!
+        components.queryItems = [
+            "member_id": Global.ACCOUNT,
+            "member_pwd": Global.ACCOUNT_PASSWORD
+        ].map { URLQueryItem(name: $0.key, value: $0.value) }
+        let url = components.url!
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            throw RSError.connectionFailure
+        }
+        let decoder = JSONDecoder()
+        let categories = try decoder.decode([Category].self, from: data)
+        return categories
+    }
 
     // 載入商品列表
     func loadProductList(id: String, pwd: String, completion: @escaping ([Product]) -> Void) {

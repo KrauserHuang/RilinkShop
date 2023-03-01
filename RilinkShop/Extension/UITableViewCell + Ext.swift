@@ -5,7 +5,6 @@
 //  Created by Tai Chin Huang on 2022/6/17.
 //
 
-import Foundation
 import UIKit
 
 extension UITableViewCell {
@@ -27,3 +26,15 @@ extension UITableViewCell {
         return tableView?.indexPath(for: self)
     }
 }
+
+protocol ReuseIdentifiable {
+    static var reuseIdentifier: String { get }
+}
+
+extension ReuseIdentifiable {
+    static var reuseIdentifier: String {
+        return String(describing: self)
+    }
+}
+
+extension UITableViewHeaderFooterView: ReuseIdentifiable {}

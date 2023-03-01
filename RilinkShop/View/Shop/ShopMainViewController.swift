@@ -130,7 +130,10 @@ class ShopMainViewController: BaseViewController {
 
     private func initUI() {
         configureCollectionView()
-        loadProductType()
+//        loadProductType()
+        Task {
+            await loadCategoryType()
+        }
         configureSearchController()
     }
 
@@ -161,6 +164,31 @@ class ShopMainViewController: BaseViewController {
                 self.shopTypeButton.setTitle(firstType.category.productTypeName, for: .normal)
             }
             self.loadProduct()
+        }
+    }
+    
+    private func loadCategoryType() async {
+        Task {
+            do {
+                let categories = try await ProductService.shared.getProductType()
+                var isFirstCategory = true
+                let packageCategory = Category(pid: "", productType: "", productTypeName: "套票") // 建立一個空的類別儲存套票
+                var wholeCategories = categories // 建立全部類別，先加入商品類別(從API來)
+                wholeCategories.append(packageCategory) // 將套票類別也加進來
+                self.categories = wholeCategories.map {
+                    if isFirstCategory {
+                        isFirstCategory = false
+                        return CategoryCellModel(category: $0, isSelected: true) // 之前是為了變化categoryCollectionViewCell的UI做的，這邊應該沒用途
+                    } else {
+                        return CategoryCellModel(category: $0)
+                    }
+                }
+                if let firstType = self.categories.first { // 從類別中的第一個提出來顯示(假如是“保健食品”，那就直接變更button的UI)
+                    self.shopTypeButton.setTitle(firstType.category.productTypeName, for: .normal)
+                }
+            } catch {
+                print("error:\(error)")
+            }
         }
     }
     

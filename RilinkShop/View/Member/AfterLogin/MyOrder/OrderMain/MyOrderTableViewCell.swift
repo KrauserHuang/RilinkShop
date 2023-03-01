@@ -9,6 +9,7 @@ import UIKit
 
 protocol MyOrderTableViewCellDelegate: AnyObject {
     func payImmediate(_ cell: MyOrderTableViewCell)
+    func didTapDetailButton(_ cell: MyOrderTableViewCell)
 }
 
 class MyOrderTableViewCell: UITableViewCell {
@@ -20,13 +21,12 @@ class MyOrderTableViewCell: UITableViewCell {
     @IBOutlet weak var detailButton: UIButton!
     @IBOutlet weak var payImmediateButton: UIButton!
     @IBAction func detailAction(_ sender: UIButton) {
-        closure?()
+        delegate?.didTapDetailButton(self)
     }
     @IBAction func payImmediateAction(_ sender: UIButton) {
         delegate?.payImmediate(self)
     }
-
-    var closure: (() -> Void)?
+    
     weak var delegate: MyOrderTableViewCellDelegate?
 
     override func awakeFromNib() {
