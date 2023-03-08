@@ -47,7 +47,6 @@ class OrderDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.alwaysBounceVertical = false
         configureTableView()
         configureFooterView()
     }
@@ -74,15 +73,17 @@ class OrderDetailViewController: UIViewController {
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.alwaysBounceVertical = false
+        tableView.separatorStyle = .none
         tableView.register(OrderStatusCell.nib, forCellReuseIdentifier: OrderStatusCell.reuseIdentifier)
         tableView.register(OrderInvoiceStatusCell.self, forCellReuseIdentifier: OrderInvoiceStatusCell.reuseIdentifier)
         tableView.register(ProductInfoCell.nib, forCellReuseIdentifier: ProductInfoCell.reuseIdentifier)
     }
 
     private func configureFooterView() {
-        footerView.orderAmountLabel.text = order.orderAmount
-        footerView.discountAmountLabel.text = order.discountAmount
-        footerView.orderPayLabel.text = order.orderPay
+        footerView.orderAmountLabel.text = "$ \(order.orderAmount)"
+        footerView.discountAmountLabel.text = "$ \(order.discountAmount)"
+        footerView.orderPayLabel.text = "$ \(order.orderPay)"
     }
 }
 

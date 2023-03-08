@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,47 +18,59 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="130.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="tfr-mu-12N">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UI7-kp-qkw">
                         <rect key="frame" x="10" y="10" width="300" height="110.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單編號：16442155247186" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1f-O7-akd">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單日期：2022-02-07 14:32:04" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tCP-KU-OX5">
-                                <rect key="frame" x="0.0" y="22.5" width="300" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單金額：710" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vk5-ub-DBA">
-                                <rect key="frame" x="0.0" y="45" width="300" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單狀態：處理中" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xut-Mh-Qa5">
-                                <rect key="frame" x="0.0" y="67.5" width="300" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款狀態：未付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOY-fl-jIl">
-                                <rect key="frame" x="0.0" y="90" width="300" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="tfr-mu-12N">
+                                <rect key="frame" x="10" y="10" width="280" height="90.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單編號：16442155247186" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1f-O7-akd">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="11.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單日期：2022-02-07 14:32:04" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tCP-KU-OX5">
+                                        <rect key="frame" x="0.0" y="19.5" width="280" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單金額：710" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vk5-ub-DBA">
+                                        <rect key="frame" x="0.0" y="39.5" width="280" height="11.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單狀態：處理中" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xut-Mh-Qa5">
+                                        <rect key="frame" x="0.0" y="59" width="280" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款狀態：未付款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOY-fl-jIl">
+                                        <rect key="frame" x="0.0" y="79" width="280" height="11.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                    </stackView>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tfr-mu-12N" firstAttribute="top" secondItem="UI7-kp-qkw" secondAttribute="top" constant="10" id="Uhb-SO-TdK"/>
+                            <constraint firstAttribute="trailing" secondItem="tfr-mu-12N" secondAttribute="trailing" constant="10" id="q4h-SM-xTI"/>
+                            <constraint firstAttribute="bottom" secondItem="tfr-mu-12N" secondAttribute="bottom" constant="10" id="qIc-oj-q9u"/>
+                            <constraint firstItem="tfr-mu-12N" firstAttribute="leading" secondItem="UI7-kp-qkw" secondAttribute="leading" constant="10" id="wZl-bG-7Ht"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="tfr-mu-12N" secondAttribute="bottom" constant="10" id="32G-zS-4KS"/>
-                    <constraint firstItem="tfr-mu-12N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="D7q-Tt-cAj"/>
-                    <constraint firstAttribute="trailing" secondItem="tfr-mu-12N" secondAttribute="trailing" constant="10" id="Kni-Rh-OS1"/>
-                    <constraint firstItem="tfr-mu-12N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="dCK-XJ-C6c"/>
+                    <constraint firstAttribute="trailing" secondItem="UI7-kp-qkw" secondAttribute="trailing" constant="10" id="FLN-Xx-K8k"/>
+                    <constraint firstItem="UI7-kp-qkw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="NgY-E0-WMq"/>
+                    <constraint firstAttribute="bottom" secondItem="UI7-kp-qkw" secondAttribute="bottom" constant="10" id="gKu-4J-zFd"/>
+                    <constraint firstItem="UI7-kp-qkw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="syq-ZM-OMm"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -66,9 +79,15 @@
                 <outlet property="orderDateLabel" destination="tCP-KU-OX5" id="eyQ-Zm-1T8"/>
                 <outlet property="orderNoLabel" destination="v1f-O7-akd" id="KLN-jU-kXP"/>
                 <outlet property="orderStatusLabel" destination="xut-Mh-Qa5" id="OqL-B9-YtW"/>
+                <outlet property="outerView" destination="UI7-kp-qkw" id="RHp-Te-MvN"/>
                 <outlet property="payStatusLabel" destination="cOY-fl-jIl" id="zSR-C5-Xbl"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="146.31696428571428"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

@@ -131,6 +131,11 @@
 		4FA96136282B62AB00BB22EB /* ProductInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FA96134282B62AB00BB22EB /* ProductInfoCell.xib */; };
 		4FA96138282BAF5C00BB22EB /* UNQRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA96137282BAF5C00BB22EB /* UNQRCode.swift */; };
 		4FA9613A282BB0AD00BB22EB /* QRCodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA96139282BB0AD00BB22EB /* QRCodeService.swift */; };
+		4FAE2C6729B5C80600BAEAA3 /* CouponDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAE2C6629B5C80600BAEAA3 /* CouponDetailViewController.swift */; };
+		4FAE2C6A29B5CF0700BAEAA3 /* RSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAE2C6929B5CF0700BAEAA3 /* RSButton.swift */; };
+		4FAE2C6C29B5D55300BAEAA3 /* RSAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAE2C6B29B5D55300BAEAA3 /* RSAlertView.swift */; };
+		4FAE2C6F29B5D64400BAEAA3 /* RSAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAE2C6E29B5D64400BAEAA3 /* RSAlertViewController.swift */; };
+		4FAE2C7129B5D68F00BAEAA3 /* RSBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAE2C7029B5D68F00BAEAA3 /* RSBodyLabel.swift */; };
 		4FAE563E283DB90C004EA6B8 /* MemberInfoViewController_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAE563C283DB90B004EA6B8 /* MemberInfoViewController_1.swift */; };
 		4FAE563F283DB90C004EA6B8 /* MemberInfoViewController_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FAE563D283DB90C004EA6B8 /* MemberInfoViewController_1.xib */; };
 		4FB038F92838C59A00A69875 /* DatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB038F82838C59A00A69875 /* DatePicker.swift */; };
@@ -368,6 +373,11 @@
 		4FA96134282B62AB00BB22EB /* ProductInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductInfoCell.xib; sourceTree = "<group>"; };
 		4FA96137282BAF5C00BB22EB /* UNQRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UNQRCode.swift; sourceTree = "<group>"; };
 		4FA96139282BB0AD00BB22EB /* QRCodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeService.swift; sourceTree = "<group>"; };
+		4FAE2C6629B5C80600BAEAA3 /* CouponDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponDetailViewController.swift; sourceTree = "<group>"; };
+		4FAE2C6929B5CF0700BAEAA3 /* RSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSButton.swift; sourceTree = "<group>"; };
+		4FAE2C6B29B5D55300BAEAA3 /* RSAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAlertView.swift; sourceTree = "<group>"; };
+		4FAE2C6E29B5D64400BAEAA3 /* RSAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAlertViewController.swift; sourceTree = "<group>"; };
+		4FAE2C7029B5D68F00BAEAA3 /* RSBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSBodyLabel.swift; sourceTree = "<group>"; };
 		4FAE563C283DB90B004EA6B8 /* MemberInfoViewController_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoViewController_1.swift; sourceTree = "<group>"; };
 		4FAE563D283DB90C004EA6B8 /* MemberInfoViewController_1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberInfoViewController_1.xib; sourceTree = "<group>"; };
 		4FB038F82838C59A00A69875 /* DatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePicker.swift; sourceTree = "<group>"; };
@@ -858,10 +868,27 @@
 			path = MemberLogin;
 			sourceTree = "<group>";
 		};
+		4FAE2C6529B5C7D400BAEAA3 /* CouponDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4FAE2C6629B5C80600BAEAA3 /* CouponDetailViewController.swift */,
+			);
+			path = CouponDetail;
+			sourceTree = "<group>";
+		};
+		4FAE2C6829B5CEBE00BAEAA3 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				4FAE2C6929B5CF0700BAEAA3 /* RSButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		4FB0FE1C2977A44300113802 /* UIViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				4FB0FE1D2977A45D00113802 /* BaseViewController.swift */,
+				4FAE2C6E29B5D64400BAEAA3 /* RSAlertViewController.swift */,
 			);
 			path = UIViewControllers;
 			sourceTree = "<group>";
@@ -891,6 +918,7 @@
 			isa = PBXGroup;
 			children = (
 				4FCD722C297528C400C95F38 /* RSEmptyStateView.swift */,
+				4FAE2C6B29B5D55300BAEAA3 /* RSAlertView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -947,6 +975,7 @@
 			isa = PBXGroup;
 			children = (
 				4FED28D229ADFD7B00634B76 /* RSTitleLabel.swift */,
+				4FAE2C7029B5D68F00BAEAA3 /* RSBodyLabel.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -1052,6 +1081,7 @@
 		5789AE6A278C0AC700B15225 /* MyTicket */ = {
 			isa = PBXGroup;
 			children = (
+				4FAE2C6529B5C7D400BAEAA3 /* CouponDetail */,
 				5789AE73278C0CE500B15225 /* TicketViewController.swift */,
 				5789AE6D278C0B4700B15225 /* Ticket.storyboard */,
 				5789AE6B278C0AF800B15225 /* Usable */,
@@ -1166,6 +1196,7 @@
 		57A5ECE02784243300245DB0 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				4FAE2C6829B5CEBE00BAEAA3 /* Buttons */,
 				4F81A83429AEE22A00D056EF /* ImageViews */,
 				4FED28D129ADFD6300634B76 /* Labels */,
 				4FB0FE1C2977A44300113802 /* UIViewControllers */,
@@ -1468,6 +1499,7 @@
 			files = (
 				4FB038F92838C59A00A69875 /* DatePicker.swift in Sources */,
 				4FFE3BBA281926D100F09CFE /* UIAlertController + Ext.swift in Sources */,
+				4FAE2C6729B5C80600BAEAA3 /* CouponDetailViewController.swift in Sources */,
 				4F74528B28179053006D6E93 /* ShopRuleViewController.swift in Sources */,
 				4F81A83629AEE24D00D056EF /* RSProductImageView.swift in Sources */,
 				4FE7407B28DC413E0067E620 /* QAViewController.swift in Sources */,
@@ -1499,10 +1531,12 @@
 				5789AE74278C0CE500B15225 /* TicketViewController.swift in Sources */,
 				571A9A362786B52900E8440D /* MemberNavigationViewController.swift in Sources */,
 				4F018801296D522A00EED3DD /* QRCodeViewController.swift in Sources */,
+				4FAE2C6C29B5D55300BAEAA3 /* RSAlertView.swift in Sources */,
 				4FB8BB6B28813C7200A8DE3E /* TopPageOptionCollectionViewCell.swift in Sources */,
 				4FF26C8B2838715200CA3665 /* StoreIDSelectTableViewCell.swift in Sources */,
 				5789AE8D278C252800B15225 /* ConvertibleTableViewCell.swift in Sources */,
 				571A9A472786B95800E8440D /* LoginViewController.swift in Sources */,
+				4FAE2C6F29B5D64400BAEAA3 /* RSAlertViewController.swift in Sources */,
 				4F34779C285C6F8B005E676F /* CalendarTableViewCell.swift in Sources */,
 				571A9A6D27880D9300E8440D /* PrivateRuleViewController.swift in Sources */,
 				571A9A302786B48B00E8440D /* TopPageNavigationViewController.swift in Sources */,
@@ -1539,6 +1573,7 @@
 				4F82505F286EE92400A4298C /* BadgeBarButtonItem.swift in Sources */,
 				4F6D17112816A37D00772FF3 /* Category.swift in Sources */,
 				450ED64E2790071900CDF731 /* AlternateAlert.swift in Sources */,
+				4FAE2C6A29B5CF0700BAEAA3 /* RSButton.swift in Sources */,
 				45F016E8278D2DFC00F03BC2 /* MyOrderTableViewController.swift in Sources */,
 				4F101BEE28E2CFAD002DA4FB /* TopPageMainCollectionReusableView.swift in Sources */,
 				4FB4E6A3287FBA9E00DBA71E /* TopPageStoreCollectionViewCell.swift in Sources */,
@@ -1573,6 +1608,7 @@
 				5789AE77278C0D8500B15225 /* UsableTableViewCell.swift in Sources */,
 				4FA0E7DA2826152F0082021B /* Package.swift in Sources */,
 				4F6D170F2816A35E00772FF3 /* Product.swift in Sources */,
+				4FAE2C7129B5D68F00BAEAA3 /* RSBodyLabel.swift in Sources */,
 				4577B543278E993600838139 /* SceneDelegate.swift in Sources */,
 				4FCD048C2824CA7F00E30C3E /* Order.swift in Sources */,
 				57ADBD2127869F9C009C1C4E /* TimeCollectionViewCell.swift in Sources */,
@@ -1774,7 +1810,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1793,7 +1829,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.07;
+				MARKETING_VERSION = 1.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jotanji.RilinkShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1810,7 +1846,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1829,7 +1865,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.07;
+				MARKETING_VERSION = 1.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jotanji.RilinkShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

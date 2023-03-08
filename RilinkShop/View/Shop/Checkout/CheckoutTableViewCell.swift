@@ -9,6 +9,7 @@ import UIKit
 
 class CheckoutTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
@@ -16,8 +17,8 @@ class CheckoutTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        productImageView.layer.cornerRadius = 10
+        
+        configure()
     }
 
     override func layoutSubviews() {
@@ -28,14 +29,23 @@ class CheckoutTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    private func configure() {
+        outerView.backgroundColor = .white
+        outerView.addShadow(cornerRadius: 10,
+                            shadowColor: .systemGray,
+                            shadowOffset: CGSize(width: 0.5, height: 0.5),
+                            shadowOpacity: 0.4,
+                            shadowRadius: 5)
+        productImageView.layer.cornerRadius = 10
+        
     }
 
     func configure(with model: Product) {
-        nameLabel.text = model.product_name
-        numberLabel.text = "X \(model.order_qty)"
-        totalCostLabel.text = "$\(model.total_amount)"
+        nameLabel.text      = model.product_name
+        numberLabel.text    = "X \(model.order_qty)"
+        totalCostLabel.text = "$ \(model.total_amount)"
 
         let imageURLString = SHOP_ROOT_URL + model.product_picture
         productImageView.setImage(with: imageURLString)

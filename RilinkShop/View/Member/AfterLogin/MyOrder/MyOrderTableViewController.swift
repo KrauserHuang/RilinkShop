@@ -20,7 +20,7 @@ class MyOrderTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(MyOrderTableViewCell.nib, forCellReuseIdentifier: MyOrderTableViewCell.reuseIdentifier)
+        configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,6 +34,11 @@ class MyOrderTableViewController: UITableViewController {
             self.orders = ordersResponse
         }
     }
+    
+    private func configureUI() {
+        tableView.register(MyOrderTableViewCell.nib, forCellReuseIdentifier: MyOrderTableViewCell.reuseIdentifier)
+        tableView.separatorStyle = .none
+    }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,7 +46,7 @@ class MyOrderTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: MyOrderTableViewCell.reuseIdentifier) as! MyOrderTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: MyOrderTableViewCell.reuseIdentifier) as! MyOrderTableViewCell
 
         let order = orders[indexPath.row]
         cell.set(with: order)
@@ -61,7 +66,7 @@ extension MyOrderTableViewController: MyOrderTableViewCellDelegate {
         let order = orders[indexPath.row]
         let controller = OrderDetailViewController()
         controller.order = order
-        self.navigationController?.pushViewController(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     func payImmediate(_ cell: MyOrderTableViewCell) {
@@ -77,6 +82,6 @@ extension MyOrderTableViewController: MyOrderTableViewCellDelegate {
 
 extension MyOrderTableViewController: WKWebViewControllerDelegate {
     func backAction(_ viewController: WKWebViewController) {
-        self.navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
 }

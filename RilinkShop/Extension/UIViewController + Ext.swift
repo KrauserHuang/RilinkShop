@@ -21,4 +21,13 @@ extension UIViewController {
             present(vc, animated: true)
         }
     }
+    
+    func presentGFAlertOnMainThread(title: String, message: String, buttonTitle: String) { //在 UIViewController 顯示 Alert
+        DispatchQueue.main.async {
+            let alertVC = RSAlertViewController(alertTitle: title, message: message, buttonTitle: buttonTitle)
+            alertVC.modalPresentationStyle = .overFullScreen
+            alertVC.modalTransitionStyle   = .crossDissolve
+            self.present(alertVC, animated: true)
+        }
+    }
 }

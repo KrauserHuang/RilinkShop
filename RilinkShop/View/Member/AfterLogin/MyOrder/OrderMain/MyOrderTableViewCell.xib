@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,99 +17,98 @@
                 <rect key="frame" x="0.0" y="0.0" width="344" height="130"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單編號：202105260099" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYS-1L-m8x">
-                        <rect key="frame" x="12" y="19" width="173" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單日期：2021-05-26 10:10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZG-hk-t0V">
-                        <rect key="frame" x="12" y="42" width="188" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單金額：1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4At-IG-btU">
-                        <rect key="frame" x="12" y="71" width="104" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單狀態：已下單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ks1-vI-8jr">
-                        <rect key="frame" x="12" y="94" width="115" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6q-V4-UQz">
-                        <rect key="frame" x="240" y="71" width="96" height="40"/>
-                        <color key="backgroundColor" red="0.6148123741" green="0.1017967239" blue="0.1002308354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="96" id="MQ5-gV-ulV"/>
-                            <constraint firstAttribute="height" constant="40" id="rJP-J4-jda"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" title="查看詳情"/>
-                        <connections>
-                            <action selector="detailAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cfr-M1-ruR"/>
-                        </connections>
-                    </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lLv-vJ-sPj" userLabel="CenterView">
-                        <rect key="frame" x="12" y="65" width="10" height="0.0"/>
-                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                        <rect key="frame" x="15" y="10" width="314" height="110"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tq5-mk-XYJ">
+                                <rect key="frame" x="10" y="10" width="188" height="90"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單編號：202105260099" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYS-1L-m8x">
+                                        <rect key="frame" x="0.0" y="0.0" width="172.33333333333334" height="16.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單日期：2021-05-26 10:10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZG-hk-t0V">
+                                        <rect key="frame" x="0.0" y="24.666666666666664" width="188" height="16.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單金額：1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4At-IG-btU">
+                                        <rect key="frame" x="0.0" y="49" width="104" height="16.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單狀態：已下單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ks1-vI-8jr">
+                                        <rect key="frame" x="0.0" y="73.666666666666671" width="114.33333333333333" height="16.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6q-V4-UQz">
+                                <rect key="frame" x="208" y="60" width="96" height="40"/>
+                                <color key="backgroundColor" red="0.6148123741" green="0.1017967239" blue="0.1002308354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="MQ5-gV-ulV"/>
+                                    <constraint firstAttribute="height" constant="40" id="rJP-J4-jda"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="查看詳情"/>
+                                <connections>
+                                    <action selector="detailAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Cfr-M1-ruR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDo-oV-aTq">
+                                <rect key="frame" x="208" y="10" width="96" height="40"/>
+                                <color key="backgroundColor" red="0.6148123741" green="0.1017967239" blue="0.1002308354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="YW6-YX-yjF"/>
+                                    <constraint firstAttribute="width" constant="96" id="g5n-0S-TX8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="立即付款"/>
+                                <connections>
+                                    <action selector="payImmediateAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KFI-wN-7ZM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" id="Nte-G1-UaW"/>
-                            <constraint firstAttribute="width" constant="10" id="vee-lK-U23"/>
+                            <constraint firstItem="IDo-oV-aTq" firstAttribute="top" secondItem="lLv-vJ-sPj" secondAttribute="top" constant="10" id="1Fj-gB-0D0"/>
+                            <constraint firstAttribute="bottom" secondItem="Tq5-mk-XYJ" secondAttribute="bottom" constant="10" id="2My-tH-VcF"/>
+                            <constraint firstItem="Tq5-mk-XYJ" firstAttribute="leading" secondItem="lLv-vJ-sPj" secondAttribute="leading" constant="10" id="3NO-cW-9f6"/>
+                            <constraint firstItem="i6q-V4-UQz" firstAttribute="leading" secondItem="Tq5-mk-XYJ" secondAttribute="trailing" constant="10" id="Dhx-rA-SSp"/>
+                            <constraint firstAttribute="trailing" secondItem="IDo-oV-aTq" secondAttribute="trailing" constant="10" id="S7f-9m-ka6"/>
+                            <constraint firstAttribute="bottom" secondItem="i6q-V4-UQz" secondAttribute="bottom" constant="10" id="bgn-Ah-ps9"/>
+                            <constraint firstItem="Tq5-mk-XYJ" firstAttribute="top" secondItem="lLv-vJ-sPj" secondAttribute="top" constant="10" id="fCq-Oq-M24"/>
+                            <constraint firstItem="IDo-oV-aTq" firstAttribute="trailing" secondItem="i6q-V4-UQz" secondAttribute="trailing" id="g2z-VO-w0r"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDo-oV-aTq">
-                        <rect key="frame" x="240" y="19" width="96" height="40"/>
-                        <color key="backgroundColor" red="0.6148123741" green="0.1017967239" blue="0.1002308354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="YW6-YX-yjF"/>
-                            <constraint firstAttribute="width" constant="96" id="g5n-0S-TX8"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" title="立即付款"/>
-                        <connections>
-                            <action selector="payImmediateAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KFI-wN-7ZM"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="lLv-vJ-sPj" firstAttribute="top" secondItem="5ZG-hk-t0V" secondAttribute="bottom" constant="6" id="1FP-2K-KLC"/>
-                    <constraint firstItem="ks1-vI-8jr" firstAttribute="leading" secondItem="MYS-1L-m8x" secondAttribute="leading" id="4TH-RV-N2r"/>
-                    <constraint firstItem="i6q-V4-UQz" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="12" id="Dfk-oZ-reU"/>
-                    <constraint firstItem="lLv-vJ-sPj" firstAttribute="leading" secondItem="MYS-1L-m8x" secondAttribute="leading" id="Dva-fd-gSF"/>
-                    <constraint firstItem="5ZG-hk-t0V" firstAttribute="leading" secondItem="MYS-1L-m8x" secondAttribute="leading" id="OZd-C3-E4i"/>
-                    <constraint firstItem="4At-IG-btU" firstAttribute="leading" secondItem="MYS-1L-m8x" secondAttribute="leading" id="OoO-Od-0Fj"/>
-                    <constraint firstItem="i6q-V4-UQz" firstAttribute="bottom" secondItem="ks1-vI-8jr" secondAttribute="bottom" id="TfI-Jn-AAC"/>
-                    <constraint firstItem="lLv-vJ-sPj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XgC-n8-P6m"/>
-                    <constraint firstItem="IDo-oV-aTq" firstAttribute="top" secondItem="MYS-1L-m8x" secondAttribute="top" id="ayt-Rd-1Yz"/>
-                    <constraint firstItem="5ZG-hk-t0V" firstAttribute="top" secondItem="MYS-1L-m8x" secondAttribute="bottom" constant="6" id="fsJ-sG-uIC"/>
-                    <constraint firstItem="lLv-vJ-sPj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="lJx-vV-W2P"/>
-                    <constraint firstItem="ks1-vI-8jr" firstAttribute="top" secondItem="4At-IG-btU" secondAttribute="bottom" constant="6" id="ld5-Jj-559"/>
-                    <constraint firstItem="4At-IG-btU" firstAttribute="top" secondItem="lLv-vJ-sPj" secondAttribute="bottom" constant="6" id="p65-Ls-Flo"/>
-                    <constraint firstItem="i6q-V4-UQz" firstAttribute="trailing" secondItem="IDo-oV-aTq" secondAttribute="trailing" id="ta7-WI-xUt"/>
+                    <constraint firstItem="lLv-vJ-sPj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="FyQ-GN-0JK"/>
+                    <constraint firstItem="lLv-vJ-sPj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="hLe-3C-HgC"/>
+                    <constraint firstAttribute="trailing" secondItem="lLv-vJ-sPj" secondAttribute="trailing" constant="15" id="m6k-Ba-tz8"/>
+                    <constraint firstAttribute="bottom" secondItem="lLv-vJ-sPj" secondAttribute="bottom" constant="10" id="m8q-e7-6cS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="detailButton" destination="i6q-V4-UQz" id="Ime-FK-CQv"/>
+                <outlet property="orderAmount" destination="4At-IG-btU" id="dGG-fe-TQZ"/>
                 <outlet property="orderDate" destination="5ZG-hk-t0V" id="FzS-wn-Clz"/>
-                <outlet property="orderMoney" destination="4At-IG-btU" id="dGG-fe-TQZ"/>
                 <outlet property="orderNo" destination="MYS-1L-m8x" id="Ka1-VH-Szr"/>
-                <outlet property="payImmediateButton" destination="IDo-oV-aTq" id="MjW-ZD-GP5"/>
+                <outlet property="outerView" destination="lLv-vJ-sPj" id="FaA-X4-hhc"/>
+                <outlet property="payButton" destination="IDo-oV-aTq" id="MjW-ZD-GP5"/>
                 <outlet property="payStatusLabel" destination="ks1-vI-8jr" id="Rv3-Y3-Z2j"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="105.80357142857143"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

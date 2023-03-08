@@ -9,6 +9,7 @@ import UIKit
 
 class ProductInfoCell: UITableViewCell {
 
+    @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -18,15 +19,23 @@ class ProductInfoCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        productImageView.contentMode = .scaleAspectFill
-        productImageView.layer.cornerRadius = 10
-        productImageView.clipsToBounds = true
+        configure()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    private func configure() {
+        outerView.addShadow(cornerRadius: 10,
+                            shadowColor: .systemGray,
+                            shadowOffset: CGSize(width: 2, height: 2),
+                            shadowOpacity: 0.8,
+                            shadowRadius: 5)
+        
+        productImageView.contentMode = .scaleAspectFill
+        productImageView.layer.cornerRadius = 10
+        productImageView.clipsToBounds = true
     }
 
     func configure(with model: List) {

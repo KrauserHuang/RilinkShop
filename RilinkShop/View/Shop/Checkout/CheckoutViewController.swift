@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import MBProgressHUD
+//import MBProgressHUD
 import SwiftUI
 import EzPopup
 import DropDown
@@ -42,8 +42,6 @@ class CheckoutViewController: UIViewController {
             }
         }
     }
-//    var account = MyKeyChain.getAccount() ?? ""
-//    var password = MyKeyChain.getPassword() ?? ""
     var account: String!
     var password: String!
     let dropDown = DropDown()
@@ -64,9 +62,7 @@ class CheckoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        loadInCartItems()
+        
         configureTableView()
         configureButton()
         showInfo()
@@ -91,7 +87,7 @@ class CheckoutViewController: UIViewController {
         }
     }
 
-    func loadInCartItems() {
+    private func loadInCartItems() {
         HUD.showLoadingHUD(inView: self.view, text: "載入中")
         ProductService.shared.loadShoppingCartList(id: account, pwd: password) { items in
             DispatchQueue.global(qos: .userInitiated).async {
@@ -99,7 +95,7 @@ class CheckoutViewController: UIViewController {
                 DispatchQueue.main.sync {
                     HUD.hideLoadingHUD(inView: self.view)
                     self.inCartItems = items
-                    self.tableViewHeightConstraint.constant = CGFloat(items.count * 85)
+                    self.tableViewHeightConstraint.constant = CGFloat(items.count * 105)
                 }
             }
         }
@@ -160,9 +156,10 @@ class CheckoutViewController: UIViewController {
     }
 
     private func configureTableView() {
-        tableView.rowHeight = UITableView.automaticDimension
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.register(CheckoutTableViewCell.nib, forCellReuseIdentifier: CheckoutTableViewCell.reuseIdentifier)
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.isScrollEnabled = false
         tableView.allowsSelection = false
     }
@@ -192,7 +189,7 @@ class CheckoutViewController: UIViewController {
 
                     guard success else {
                         let errorMsg = response as! String
-                        Alert.showMessage(title: "", msg: errorMsg, vc: self, handler: nil)
+                        Alert.showMessage(title: "系統訊息", msg: errorMsg, vc: self, handler: nil)
                         return
                     }
                     if let user = response as? User {
@@ -279,7 +276,7 @@ class CheckoutViewController: UIViewController {
                 return
             }
         default:
-            return
+            break
         }
         let group = DispatchGroup()
         group.enter()

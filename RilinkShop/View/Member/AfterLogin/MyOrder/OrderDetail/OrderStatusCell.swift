@@ -9,6 +9,7 @@ import UIKit
 
 class OrderStatusCell: UITableViewCell {
 
+    @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var orderNoLabel: UILabel!
     @IBOutlet weak var orderDateLabel: UILabel!
     @IBOutlet weak var orderAmountLabel: UILabel!
@@ -17,15 +18,22 @@ class OrderStatusCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        configure()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-//    func configure(with model: Order) {
+    
+    private func configure() {
+        outerView.addShadow(cornerRadius: 10,
+                            shadowColor: .systemGray,
+                            shadowOffset: CGSize(width: 2, height: 2),
+                            shadowOpacity: 0.8,
+                            shadowRadius: 5)
+    }
+    
     func configure(with model: OrderInfo) {
         orderNoLabel.text = "訂單編號：\(model.orderNo)"
         orderDateLabel.text = "訂單日期：\(model.orderDate)"

@@ -130,10 +130,10 @@ class ShopMainViewController: BaseViewController {
 
     private func initUI() {
         configureCollectionView()
-//        loadProductType()
-        Task {
-            await loadCategoryType()
-        }
+        loadProductType()
+//        Task {
+//            await loadCategoryType()
+//        }
         configureSearchController()
     }
 

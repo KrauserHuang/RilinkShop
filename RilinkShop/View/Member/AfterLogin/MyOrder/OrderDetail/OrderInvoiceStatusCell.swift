@@ -20,23 +20,30 @@ class OrderInvoiceStatusCell: UITableViewCell {
      隨機碼
      */
     
-    let invoiceTypeText = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let invoicePhoneText = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let uniformNoText = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let companyTitleText = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    //發票號碼
-    let invoiceStatusText = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let invoiceDateText = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let randomNoText = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
+    let outerView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
-    let invoiceTypeLabel = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let invoicePhoneLabel = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let uniformNoLabel = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let companyTitleLabel = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
+    let invoiceTypeText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
+    let invoicePhoneText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
+    let uniformNoText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
+    let companyTitleText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
     //發票號碼
-    let invoiceStatusLabel = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let invoiceDateLabel = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
-    let randomNoLabel = RSTitleLabel(textAlignment: .left, fontSize: 18, weight: .medium)
+    let invoiceStatusText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
+    let invoiceDateText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
+    let randomNoText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
+    
+    let invoiceTypeLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
+    let invoicePhoneLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
+    let uniformNoLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
+    let companyTitleLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
+    //發票號碼
+    let invoiceStatusLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
+    let invoiceDateLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
+    let randomNoLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
     
     let textStackView: UIStackView = {
         let sv = UIStackView()
@@ -69,7 +76,8 @@ class OrderInvoiceStatusCell: UITableViewCell {
     }
     
     private func configure() {
-        contentView.addSubviews(textStackView, labelStackView)
+        contentView.addSubview(outerView)
+        outerView.addSubviews(textStackView, labelStackView)
         
         let textAltogether = [invoiceTypeText, invoicePhoneText, uniformNoText, companyTitleText, invoiceStatusText, invoiceDateText, randomNoText]
         let labelAltogether = [invoiceTypeLabel, invoicePhoneLabel, uniformNoLabel, companyTitleLabel, invoiceStatusLabel, invoiceDateLabel, randomNoLabel]
@@ -77,17 +85,28 @@ class OrderInvoiceStatusCell: UITableViewCell {
         textAltogether.forEach { textStackView.addArrangedSubview($0) }
         labelAltogether.forEach { labelStackView.addArrangedSubview($0) }
         
+        outerView.addShadow(cornerRadius: 10,
+                            shadowColor: .systemGray,
+                            shadowOffset: CGSize(width: 2, height: 2),
+                            shadowOpacity: 0.8,
+                            shadowRadius: 5)
+        
         let padding: CGFloat = 10
         
         NSLayoutConstraint.activate([
-            textStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            textStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            textStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
+            outerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            outerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            outerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            outerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
             
-            labelStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            textStackView.topAnchor.constraint(equalTo: outerView.topAnchor, constant: padding),
+            textStackView.leadingAnchor.constraint(equalTo: outerView.leadingAnchor, constant: padding),
+            textStackView.bottomAnchor.constraint(equalTo: outerView.bottomAnchor, constant: -padding),
+            
+            labelStackView.topAnchor.constraint(equalTo: outerView.topAnchor, constant: padding),
             labelStackView.leadingAnchor.constraint(equalTo: textStackView.trailingAnchor, constant: padding),
-            labelStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
-            labelStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding)
+            labelStackView.bottomAnchor.constraint(equalTo: outerView.bottomAnchor, constant: -padding),
+            labelStackView.trailingAnchor.constraint(equalTo: outerView.trailingAnchor, constant: -padding)
         ])
         
         invoiceTypeText.text    = "發票類型："
@@ -100,12 +119,12 @@ class OrderInvoiceStatusCell: UITableViewCell {
     }
     
     func set(with model: OrderInfo) {
-        invoiceTypeLabel.text   = model.orderNo
-        invoicePhoneLabel.text  = model.orderNo
-        uniformNoLabel.text     = model.orderNo
-        companyTitleLabel.text  = model.orderNo
-        invoiceStatusLabel.text = model.orderNo
-        invoiceDateLabel.text   = model.orderNo
-        randomNoLabel.text      = model.orderNo
+        invoiceTypeLabel.text   = model.invoiceTypeText
+        invoicePhoneLabel.text  = model.invoicephone ?? " "
+        uniformNoLabel.text     = model.uniformno ?? " "
+        companyTitleLabel.text  = model.companytitle ?? " "
+        invoiceStatusLabel.text = model.invoiceStatusText
+        invoiceDateLabel.text   = model.invoicedate ?? " "
+        randomNoLabel.text      = model.randomno ?? " "
     }
 }

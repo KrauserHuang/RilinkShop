@@ -80,13 +80,12 @@ class NotificationService {
         }
     }
     
-    func pushMsgGetHistory(id: String, pwd: String, completion: @escaping Completion) {
+    func pushMsgGetHistory(completion: @escaping Completion) {
         let url = SHOP_API_URL + URL_PUSHMSGGETHISTORY
         let parameters = [
-            "member_id": id,
-            "member_pwd": pwd
+            "member_id": Global.ACCOUNT,
+            "member_pwd": Global.ACCOUNT_PASSWORD
         ]
-        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
         
         AF.request(url, method: .post, parameters: parameters).response { response in
             

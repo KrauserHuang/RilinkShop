@@ -64,6 +64,13 @@ struct OrderInfo: Codable {
     var productList: [List] = []
     var packageList: [List] = []
     var assigntype: String = ""
+    var invoicetype: String?
+    var invoicephone: String?
+    var companytitle: String?
+    var uniformno: String?
+    var invoicestatus: String?
+    var invoicedate: String?
+    var randomno: String?
 
     enum CodingKeys: String, CodingKey {
         case oid
@@ -82,6 +89,24 @@ struct OrderInfo: Codable {
         case productList = "product_list"
         case packageList = "package_list"
         case assigntype
+    }
+    
+    var invoiceTypeText: String {
+        switch invoicetype {
+        case "1": return "個人發票"
+        case "2": return "手機載具"
+        case "3": return "統一編號電子發票"
+        default: return " "
+        }
+    }
+    
+    var invoiceStatusText: String {
+        switch invoicestatus {
+        case "0": return "未開立發票"
+        case "1": return "已開立"
+        case "2": return "已作廢"
+        default: return "未開立發票"
+        }
     }
 }
 

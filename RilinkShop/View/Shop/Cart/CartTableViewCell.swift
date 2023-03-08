@@ -53,9 +53,9 @@ class CartTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func initCell() {
+    private func initCell() {
         totalCostLabel.textColor            = .primaryOrange
-
+        
         stepperOuterView.backgroundColor    = .systemGray6 // stepper外圍
         stepperOuterView.layer.cornerRadius = stepperOuterView.frame.height / 2
         

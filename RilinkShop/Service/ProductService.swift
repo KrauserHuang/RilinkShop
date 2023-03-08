@@ -44,14 +44,29 @@ class ProductService {
             "member_pwd": Global.ACCOUNT_PASSWORD
         ].map { URLQueryItem(name: $0.key, value: $0.value) }
         let url = components.url!
-        let (data, response) = try await URLSession.shared.data(from: url)
+        print("url:\(url)")
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+//        let (data, response) = try await URLSession.shared.data(from: url)
         
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             throw RSError.connectionFailure
         }
-        let decoder = JSONDecoder()
-        let categories = try decoder.decode([Category].self, from: data)
-        return categories
+//        print("\nresponse:\(response)")
+        print("\ndata:\(String(data: data, encoding: .utf8))")
+        
+        do {
+            let decoder = JSONDecoder()
+            let categories = try decoder.decode([Category].self, from: data)
+            return categories
+        } catch {
+//            print("\nerror:\(error)")
+            return []
+        }
     }
 
     // 載入商品列表

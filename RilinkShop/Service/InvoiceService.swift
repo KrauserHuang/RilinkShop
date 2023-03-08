@@ -38,7 +38,7 @@ class InvoiceService {
     }
     
     func createInvoice(orderNo: String, invoiceType: String, companyTitle: String, uniformNo: String, invoicePhone: String, completion: @escaping Completion) {
-        let urlString = API_URL + URL_ECORDERINVOICE
+        let urlString = SHOP_API_URL + URL_ECORDERINVOICE
         let parameters = [
             "member_id": Global.ACCOUNT,
             "member_pwd": Global.ACCOUNT_PASSWORD,
@@ -48,6 +48,9 @@ class InvoiceService {
             "uniformno": uniformNo,
             "invoicephone": invoicePhone,
         ]
+        
+        print("parameters:\(parameters)")
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
         
 //        var components = URLComponents(string: urlString)!
 //        components.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
@@ -77,12 +80,17 @@ class InvoiceService {
             
             switch response.result {
             case .success:
+                guard value["code"].stringValue == returnCode else {
+                    let errorMsg = value["responseMessage"].stringValue
+                    print("errorMsg:\(errorMsg)")
+                    completion(false, errorMsg as AnyObject)
+                    return
+                }
                 let successMsg = value["responseMessage"].stringValue
                 print("successMsg:\(successMsg)")
                 completion(true, successMsg as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue
-                print("errorMsg:\(errorMsg)")
                 completion(false, errorMsg as AnyObject)
             }
         }

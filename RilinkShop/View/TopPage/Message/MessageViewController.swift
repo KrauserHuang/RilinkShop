@@ -38,6 +38,10 @@ class MessageViewController: UIViewController {
         super.viewDidLoad()
         
         configureTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         fetchHistory()
     }
     
@@ -50,7 +54,7 @@ class MessageViewController: UIViewController {
     }
     
     private func fetchHistory() {
-        NotificationService.shared.pushMsgGetHistory(id: Global.ACCOUNT, pwd: Global.ACCOUNT_PASSWORD) { success, response in
+        NotificationService.shared.pushMsgGetHistory { success, response in
             guard success else {
                 return
             }
