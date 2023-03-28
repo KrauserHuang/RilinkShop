@@ -249,26 +249,18 @@ class ProductService {
     }
     // get shopping cart item count(取得購物商品種類數)
     func getShoppingCartCount(id: String, pwd: String, completion: @escaping (Response) -> Void) {
-        let url = SHOP_API_URL + URL_SHOPPINGCARTCOUNT // test
+        let url = SHOP_API_URL + URL_SHOPPINGCARTCOUNT
         let parameters = [
             "member_id": id,
             "member_pwd": pwd
         ]
         AF.request(url, method: .post, parameters: parameters).response { response in
             let json = JSON(response.value ?? "")
-//            print("json\(json)")
             var response = Response()
             response.code            = "\(json["code"])"
             response.status          = "\(json["status"])"
             response.responseMessage = "\(json["responseMessage"])"
             completion(response)
-            print("++++++++++++++++")
-            print("\(response)")
-//            print("新增訂單成功")
-            print("++++++++++++++++")
-//            guard response.response?.statusCode == 200 else {
-//                fatalError()
-//            }
         }
     }
     // edit shopping cart(修改商品的數量，直到數字變零則執行removeShoppingCartItem)

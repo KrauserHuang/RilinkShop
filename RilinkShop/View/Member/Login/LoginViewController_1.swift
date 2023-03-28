@@ -202,10 +202,6 @@ class LoginViewController_1: UIViewController {
 
         Global.ACCOUNT = account
         Global.ACCOUNT_PASSWORD = password
-//        LocalStorageManager.shared.setData(account, key: .userIdKey)
-//        LocalStorageManager.shared.setData(password, key: .userPasswordKey)
-//        MyKeyChain.setAccount(account)
-//        MyKeyChain.setPassword(password)
         
         let apnsToken = AppDelegate.apnsToken ?? ""
         
@@ -224,6 +220,9 @@ class LoginViewController_1: UIViewController {
         }
 
         HUD.showLoadingHUD(inView: self.view, text: "登入中")
+        
+        print(account)
+        print(password)
         
         UserService.shared.userLogin(id: account, pwd: password) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
@@ -251,10 +250,6 @@ class LoginViewController_1: UIViewController {
         }
 
         let storeID = storeID ?? ""
-        print("storeID:\(storeID)")
-        print("account:\(account)")
-        print("password:\(password)")
-        print("token:\(token)")
         
         HUD.showLoadingHUD(inView: self.view, text: "登入中")
         UserService.shared.storeAdminLogin(storeAcc: account,

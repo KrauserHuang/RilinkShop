@@ -15,22 +15,25 @@ struct UserResponse: Codable {
 
 struct User: Codable {
     var account: String = ""
+    var accountType: String = ""
     var tel: String = ""
     var name: String = ""
     var email: String = ""
     var sex: String = ""
+    var city: String = ""
+    var region: String = ""
     var address: String = ""
     var birthday: String = ""
+    var imageName: String? = ""
+    var mobileType: String? = ""
+    
     var point: String = ""
     var cmdImageFile: String? = ""
-
-    var accountType: String = ""
-    var referrerCount: String? = ""
-    var mobileType: String? = ""
-    var city: String = ""
+    
     var referrerPhone: String? = ""
-    var region: String = ""
-    var imageName: String? = ""
+    var referrerCount: String? = ""
+    var referrerStoreName: String = ""
+    var referrerStoreType: String = ""
 }
 // MARK: - 店長相關
 struct StoreID: Codable {

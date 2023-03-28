@@ -14,6 +14,8 @@ extension UIColor {
     // 訊息中心頁面
     static let messageOrange    = UIColor(hex: "DC5310")
     static let messageGray      = UIColor(hex: "B7B3B3")
+    
+    static let pickerViewMainColor = UIColor(hex: "FF5100")
 }
 
 extension UIColor {

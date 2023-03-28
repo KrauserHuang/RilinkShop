@@ -37,9 +37,16 @@ class RepairReservationMainViewController: UIViewController {
 
         searchButton.tintColor = .primaryOrange
 
-        loadFixMotorList()
         configTableView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadFixMotorList()
+    }
+    
+    
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         var motorNosString = [String]()
         for no in motorNos {
@@ -57,15 +64,7 @@ class RepairReservationMainViewController: UIViewController {
             self.specificMotorNoDetails.removeAll()
 
             HUD.showLoadingHUD(inView: self.view, text: "")
-//            FixMotorService.shared.bookingFixMotorList(id: self.account,
-//                                                       pwd: self.password,
-//                                                       no: item) { success, response in
-            FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? "",
-                                                       pwd: MyKeyChain.getPassword() ?? "",
-                                                       no: item) { success, response in
-//            FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-//                                                       pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
-//                                                       no: item) { success, response in
+            FixMotorService.shared.bookingFixMotorList(no: item) { success, response in
                 HUD.hideLoadingHUD(inView: self.view)
                 guard success else {
                     let errorMsg = response as! String
@@ -75,11 +74,7 @@ class RepairReservationMainViewController: UIViewController {
                 let detail = response as! [FixMotor]
                 self.specificMotorNoDetails = detail.sorted(by: { detail1, detail2 in
                     detail1.bookingDate > detail2.bookingDate
-//                    if detail1.bookingDate == detail2.bookingDate {
-//                        return detail1.duration > detail2.duration
-//                    }
                 })
-//                self.specificMotorNoDetails = response as! [FixMotor]
                 self.tableView.reloadData()
             }
         }
@@ -93,15 +88,7 @@ extension RepairReservationMainViewController {
         tableView.register(RepairReservationTableViewCell.nib, forCellReuseIdentifier: RepairReservationTableViewCell.reuseIdentifier)
     }
     private func loadFixMotorList() {
-//        FixMotorService.shared.bookingFixMotorList(id: account,
-//                                                   pwd: password,
-//                                                   no: "") { success, response in
-        FixMotorService.shared.bookingFixMotorList(id: Global.ACCOUNT,
-                                                   pwd: Global.ACCOUNT_PASSWORD,
-                                                   no: "") { success, response in
-//        FixMotorService.shared.bookingFixMotorList(id: MyKeyChain.getAccount() ?? UserService.shared.id,
-//                                                   pwd: MyKeyChain.getPassword() ?? UserService.shared.pwd,
-//                                                   no: "") { success, response in
+        FixMotorService.shared.bookingFixMotorList(no: "") { success, response in
             guard success else {
                 let errorMsg = response as! String
                 Alert.showMessage(title: "", msg: errorMsg, vc: self)
@@ -109,7 +96,6 @@ extension RepairReservationMainViewController {
             }
 
             self.motorNos = response as! [FixMotor]
-
         }
     }
 }
@@ -126,7 +112,6 @@ extension RepairReservationMainViewController: UITableViewDelegate, UITableViewD
 
         let model = specificMotorNoDetails[indexPath.row]
         cell.configure(with: model)
-//        cell.model = model
         cell.delegate = self
 
         return cell
@@ -163,9 +148,7 @@ extension RepairReservationMainViewController: RepairReservationTableViewCellDel
         Alert.showConfirm(title: "", msg: "是否取消預約？", vc: self) {
             HUD.showLoadingHUD(inView: self.view, text: "")
 
-            FixMotorService.shared.bookingFixMotorCancel(id: Global.ACCOUNT,
-                                                         pwd: Global.ACCOUNT_PASSWORD,
-                                                         bid: bid) { success, response in
+            FixMotorService.shared.bookingFixMotorCancel(bid: bid) { success, response in
                 HUD.hideLoadingHUD(inView: self.view)
                 guard success else {
                     let errorMsg = response as! String

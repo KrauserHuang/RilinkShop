@@ -39,7 +39,7 @@ class StorePicker: UIPickerView {
         toolBar.backgroundColor = .cyan
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
-        toolBar.tintColor = .black
+        toolBar.tintColor = .pickerViewMainColor
         toolBar.sizeToFit()
 
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped(_:)))

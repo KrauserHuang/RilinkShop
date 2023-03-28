@@ -50,7 +50,6 @@ class CalendarTableViewCell: UITableViewCell {
             appointmentButton.isUserInteractionEnabled = false
             appointmentButton.backgroundColor = .systemGray4
         }
-//        print("open duration:\(model.bookingDate) \(model.duration)")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
 //        dateFormatter.locale = Locale(identifier: "zh_Hant_TW")
@@ -71,10 +70,6 @@ class CalendarTableViewCell: UITableViewCell {
             appointmentButton.isUserInteractionEnabled = true
             appointmentButton.backgroundColor = .systemTeal
         }
-        print("openDuration:\(openDuration)")
-        print("openDurationFormat:\(openDurationFormat)")
-        print("timeSinceNow:\(timeSinceNow)")
-        print("timeSinceNowFormat:\(timeSinceNowFormat)")
     }
     
     private func within24hours(openDuration: Date, with currentTimePlus24hours: Date) -> Bool {

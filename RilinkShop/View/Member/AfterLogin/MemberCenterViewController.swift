@@ -282,8 +282,7 @@ class MemberCenterViewController: UIViewController {
         if Global.ACCOUNT == "" {
             Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self)
         } else {
-//            let vc = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
-            let vc = CouponDetailViewController()
+            let vc = UIStoryboard(name: "Ticket", bundle: nil).instantiateViewController(withIdentifier: "Ticket")
             navigationController?.pushViewController(vc, animated: true)
         }
     }

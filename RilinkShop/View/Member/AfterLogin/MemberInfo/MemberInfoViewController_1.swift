@@ -17,10 +17,12 @@ class MemberInfoViewController_1: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var birthdayTextField: UITextField!
-    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var maleButton: UIButton!
     @IBOutlet weak var femaleButton: UIButton!
+    @IBOutlet weak var storeTypeLabel: UILabel!
+    @IBOutlet weak var storeListLabel: UILabel!
     @IBOutlet weak var saveEditButton: UIButton!
 
     weak var delegate: MemberInfoViewController_1_Delegate?
@@ -33,18 +35,16 @@ class MemberInfoViewController_1: UIViewController {
     }()
     var account = MyKeyChain.getAccount() ?? ""
     var password = MyKeyChain.getPassword() ?? ""
-//    var account: String!
-//    var password: String!
-//    
-//    init(account: String, password: String) {
-//        super.init(nibName: nil, bundle: nil)
-//        self.account = account
-//        self.password = password
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    var storeTypes: [StoreTypeList] = []
+    var stores: [Store] = []
+    var realStores: [RealStore] = []
+    
+    var selectedStoreTypeIndex = 0
+    var selectedStoreIndex = 0
+    
+    let storeTypePickerView = UIPickerView()
+    let storePickerView = UIPickerView()
+    let toolBar = UIToolbar()
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -67,9 +67,13 @@ class MemberInfoViewController_1: UIViewController {
     private func configureViewController() {
         nameTextField.text      = user?.name ?? ""
         birthdayTextField.text  = user?.birthday ?? ""
-        phoneTextField.text     = user?.tel ?? ""
+        phoneLabel.text         = user?.tel ?? ""
         emailTextField.text     = user?.email ?? ""
-
+        storeTypeLabel.text     = user?.referrerStoreType ?? "無推薦店家類別"
+        storeListLabel.text     = user?.referrerStoreName ?? "無推薦店家"
+        print("referrerStoreType = \(user?.referrerStoreType)")
+        print("referrerStoreName = \(user?.referrerStoreName)")
+        
         if user?.sex == "1" {
             femaleButton.isSelected = true
         } else {
@@ -90,8 +94,10 @@ class MemberInfoViewController_1: UIViewController {
     private func configureTextField() {
         nameTextField.delegate      = self
         birthdayTextField.delegate  = self
-        phoneTextField.delegate     = self
         emailTextField.delegate     = self
+        
+        nameTextField.returnKeyType  = .next
+        emailTextField.returnKeyType = .next
     }
 
     private func getUserDate() {
@@ -113,7 +119,7 @@ class MemberInfoViewController_1: UIViewController {
                         self.user                   = user
                         self.nameTextField.text     = user.name
                         self.birthdayTextField.text = user.birthday
-                        self.phoneTextField.text    = user.account
+                        self.phoneLabel.text        = user.account
                         self.emailTextField.text    = user.email
                     }
                 }
@@ -184,7 +190,7 @@ class MemberInfoViewController_1: UIViewController {
 
     @IBAction func saveEditButtonTapped(_ sender: UIButton) {
         let accountType = "0"
-        guard let tel = phoneTextField.text else {
+        guard let tel = phoneLabel.text else {
             return
         }
 
@@ -236,9 +242,30 @@ class MemberInfoViewController_1: UIViewController {
         let city = ""
         let region = ""
         let address = ""
+        var referrerShopStoreId = realStores[selectedStoreTypeIndex].stores[selectedStoreIndex].storeID
+        var referrerShopStoreType = realStores[selectedStoreTypeIndex].storeType.storetype_id
+        
+        if referrerShopStoreId == "",
+           referrerShopStoreType == "" {
+            referrerShopStoreId = "-1"
+            referrerShopStoreType = "-1"
+        }
 
         HUD.showLoadingHUD(inView: self.view, text: "")
-        UserService.shared.modifyPersonalData(account: Global.ACCOUNT, pw: Global.ACCOUNT_PASSWORD, accountType: accountType, name: name, tel: tel, birthday: birthday, email: email, sex: sex, city: city, region: region, address: address) { success, response in
+        UserService.shared.modifyPersonalData(account: Global.ACCOUNT,
+                                              pw: Global.ACCOUNT_PASSWORD,
+                                              accountType: accountType,
+                                              name: name,
+                                              tel: tel,
+                                              birthday: birthday,
+                                              email: email,
+                                              sex: sex,
+                                              city: city,
+                                              region: region,
+                                              address: address,
+                                              referrerPhone: "",
+                                              referrerShopStoreId: referrerShopStoreId,
+                                              referrerShopStoreType: referrerShopStoreType) { success, response in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
@@ -262,13 +289,11 @@ class MemberInfoViewController_1: UIViewController {
 // MARK: - UITextFieldDelegate
 extension MemberInfoViewController_1: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        self.edittingTextField = textField
+        edittingTextField = textField
         return true
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTextField {
-            phoneTextField.becomeFirstResponder()
-        } else if textField == phoneTextField {
             emailTextField.becomeFirstResponder()
         } else if textField == emailTextField {
             textField.resignFirstResponder()

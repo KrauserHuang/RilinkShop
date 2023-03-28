@@ -187,21 +187,23 @@ class UserService {
 
                 let data = value["returnData"]
                 let personal = User(account: data["account"].stringValue,
+                                    accountType: data["accountType"].stringValue,
                                     tel: data["tel"].stringValue,
                                     name: data["name"].stringValue,
                                     email: data["email"].stringValue,
                                     sex: data["sex"].stringValue,
+                                    city: data["city"].stringValue,
+                                    region: data["region"].stringValue,
                                     address: data["address"].stringValue,
                                     birthday: data["birthday"].stringValue,
+                                    imageName: data["imageName"].stringValue,
+                                    mobileType: data["mobileType"].stringValue,
                                     point: data["point"].stringValue,
                                     cmdImageFile: data["cmdImageFile"].stringValue,
-                                    accountType: data["accountType"].stringValue,
-                                    referrerCount: data["referrerCount"].stringValue,
-                                    mobileType: data["mobileType"].stringValue,
-                                    city: data["city"].stringValue,
                                     referrerPhone: data["referrerPhone"].stringValue,
-                                    region: data["region"].stringValue,
-                                    imageName: data["imageName"].stringValue)
+                                    referrerCount: data["referrerCount"].stringValue,
+                                    referrerStoreName: data["referrerStoreName"].stringValue,
+                                    referrerStoreType: data["referrerStoreType"].stringValue)
 
                 completed(true, personal as AnyObject)
 
@@ -212,7 +214,7 @@ class UserService {
         }
     }
     // 編修個人資料
-    func modifyPersonalData(account: String, pw: String, accountType: String, name: String, tel: String, birthday: String, email: String, sex: String, city: String, region: String, address: String, completed: @escaping Completion) {
+    func modifyPersonalData(account: String, pw: String, accountType: String, name: String, tel: String, birthday: String, email: String, sex: String, city: String, region: String, address: String, referrerPhone: String, referrerShopStoreId: String, referrerShopStoreType: String, completed: @escaping Completion) {
 
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded"
@@ -228,11 +230,12 @@ class UserService {
                                       "address": Base64(string: address),
                                       "sex": Base64(string: sex),
                                       "city": Base64(string: city),
-                                      "region": Base64(string: region)
+                                      "region": Base64(string: region),
+                                      "referrerPhone":Base64(string: referrerPhone),
+                                      "referrerStore":Base64(string: "1"),
+                                      "referrerShopStoreId":Base64(string: referrerShopStoreId),
+                                      "referrerShopStoreType": Base64(string: referrerShopStoreType)
         ]
-        
-//        print("parameters:\(parameters)")
-//        dump(parameters)
 
         let url =  API_URL + MODIFY_PERSONAL_DATA
         let httpMethod = HTTPMethod.post
@@ -458,7 +461,7 @@ class UserService {
         }
     }
     // MARK: - 註冊3 - 初始個人資料
-    func InitPersonalData(account: String, pw: String, accountType: String, name: String, tel: String, birthday: String, email: String, sex: String, city: String, region: String, address: String, referrerPhone: String, completed: @escaping Completion) {
+    func InitPersonalData(account: String, pw: String, accountType: String, name: String, tel: String, birthday: String, email: String, sex: String, city: String, region: String, address: String, referrerPhone: String, referrerShopStoreId: String, referrerShopStoreType: String, completed: @escaping Completion) {
 
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded"
@@ -475,7 +478,10 @@ class UserService {
                                       "sex": Base64(string: sex),
                                       "city": Base64(string: city),
                                       "region": Base64(string: region),
-                                      "referrerPhone": Base64(string: referrerPhone)
+                                      "referrerPhone": Base64(string: referrerPhone),
+                                      "referrerStore":Base64(string: "1"), // Rilink == 0 / RilinkShop == 1
+                                      "referrerShopStoreId":Base64(string: referrerShopStoreId),
+                                      "referrerShopStoreType":Base64(string: referrerShopStoreType),
         ]
 
         let url =  API_URL + MODIFY_PERSONAL_DATA
@@ -721,6 +727,42 @@ class UserService {
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue
                 completed(false, errorMsg as AnyObject)
+            }
+        }
+    }
+    // MARK: - 註冊店家推薦
+    func getStoreTypeList(completion: @escaping Completion) {
+        let url = SHOP_API_URL + STORE_LIST
+//        let parameters = [
+//            "member_id": Global.ACCOUNT,
+//            "member_pwd": Global.ACCOUNT_PASSWORD
+//        ]
+        let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
+        
+        AF.request(url, method: .post).response { response in
+            guard response.error == nil else {
+                completion(false, "伺服器連線失敗" as AnyObject)
+                return
+            }
+            
+            var jsonValue = JSON(response.value!)
+            var storeTypes: [StoreTypeList] = []
+            let infos = jsonValue["info"].arrayValue
+            switch response.result {
+            case .success:
+                guard jsonValue["code"].stringValue == returnCode  else {
+                    completion(false, jsonValue["errorMsg"].stringValue as AnyObject)
+                    return
+                }
+                for info in infos {
+                    let storeType = StoreTypeList(storetype_id: info["storetype_id"].stringValue,
+                                           storetype_name: info["storetype_name"].stringValue)
+                    storeTypes.append(storeType)
+                }
+                
+                completion(true, storeTypes as AnyObject)
+            case .failure:
+                completion(false, jsonValue["errorMsg"].stringValue as AnyObject)
             }
         }
     }

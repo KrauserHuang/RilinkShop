@@ -335,7 +335,6 @@ extension TopPageMainViewController: UICollectionViewDelegate {
             var urlString = ""
             switch indexPath.row {
             case 0:
-//                optionDidPicked = .newCar
                 let vc = QRCodeViewController()
                 present(vc, animated: true, completion: nil)
             case 1:

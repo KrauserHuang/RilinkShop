@@ -36,4 +36,14 @@ class StoreService {
             completion(storeList)
         }
     }
+    
+    func getStoreList(storeType: String = "", completion: @escaping ([Store]) -> Void) {
+        let url = SHOP_API_URL + URL_STORELIST
+        let parameters = ["store_type": storeType]
+
+        AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [Store].self) { response in
+            guard let storeList = response.value else { return }
+            completion(storeList)
+        }
+    }
 }

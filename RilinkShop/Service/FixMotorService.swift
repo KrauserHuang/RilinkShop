@@ -124,18 +124,16 @@ class FixMotorService {
         }
     }
 
-    func bookingFixMotorList(id: String, pwd: String, no: String, completion: @escaping Completion) {
+    func bookingFixMotorList(no: String, completion: @escaping Completion) {
         let url = SHOP_API_URL + URL_BOOKINGFIXMOTORLIST
         let parameters = [
-            "member_id": id,
-            "member_pwd": pwd,
+            "member_id": Global.ACCOUNT,
+            "member_pwd": Global.ACCOUNT_PASSWORD,
             "motor_no": no
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
 
         AF.request(url, method: .post, parameters: parameters).response { response in
-            print(self, #function)
-//            print(response)
             guard response.error == nil else {
                 let errorMsg = "伺服器連線失敗"
                 completion(false, errorMsg as AnyObject)
@@ -143,7 +141,6 @@ class FixMotorService {
             }
 
             let value = JSON(response.value)
-//            print("value:\(value)")
 
             switch response.result {
             case .success:
@@ -155,7 +152,6 @@ class FixMotorService {
 
                 let datas = value["data"].arrayValue
                 var lists = [FixMotor]()
-//                print("datas:\(datas)")
 
                 for data in datas {
                     if no.count == 0 {
@@ -177,8 +173,6 @@ class FixMotorService {
                         lists.append(list)
                     }
                 }
-
-//                print("lists:\(lists)")
                 completion(true, lists as AnyObject)
             case .failure:
                 let errorMsg = value["responseMessage"].stringValue
@@ -187,11 +181,11 @@ class FixMotorService {
         }
     }
 
-    func bookingFixMotorCancel(id: String, pwd: String, bid: String, completion: @escaping Completion) {
+    func bookingFixMotorCancel(bid: String, completion: @escaping Completion) {
         let url = SHOP_API_URL + URL_BOOKINGFIXMOTORCANCEL
         let parameters = [
-            "member_id": id,
-            "member_pwd": pwd,
+            "member_id": Global.ACCOUNT,
+            "member_pwd": Global.ACCOUNT_PASSWORD,
             "bid": bid
         ]
         let returnCode = ReturnCode.MALL_RETURN_SUCCESS.0
@@ -205,8 +199,6 @@ class FixMotorService {
             }
 
             let value = JSON(response.value!)
-            print(#function)
-            print("responseValue:\(value)")
 
             switch response.result {
 

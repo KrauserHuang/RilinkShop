@@ -89,9 +89,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 DispatchQueue.main.async {
                     navigationController?.toTicketViewController()
                 }
-
             default:
-//                return
                 tabbarController?.selectedIndex = 0
             }
         } else {

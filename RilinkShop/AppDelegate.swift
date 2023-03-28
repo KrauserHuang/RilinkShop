@@ -91,7 +91,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             token += String(format: "%02.2hhx", arguments: [deviceToken[i]])
         }
         print("\n==========didRegisterForRemoteNotificationsWithDeviceToken===========")
-        print("apns token = " + token)
+        print("apns token = \n" + token)
         print("=================================End=================================\n")
 
         Messaging.messaging().apnsToken = deviceToken
@@ -121,8 +121,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken = fcmToken else { return }
-        print("Firebase registration token: \(fcmToken)")
-        
+        print("\n++++++++++didRegisterForRemoteNotificationsWithDeviceToken+++++++++++")
+        print("Firebase registration token = \n" + fcmToken)
+        print("+++++++++++++++++++++++++++++++++End+++++++++++++++++++++++++++++++++\n")
         AppDelegate.apnsToken = fcmToken //FCM確認有收到token後才把它存到AppDelegate的apnsToken
         Global.ACCESS_TOKEN = fcmToken
         MyKeyChain.setAccessToken(fcmToken)

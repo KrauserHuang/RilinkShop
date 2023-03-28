@@ -20,6 +20,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var birthdayButton: UIButton!
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var emailTF: UITextField!
+    @IBOutlet weak var storeTypeTF: UITextField!
+    @IBOutlet weak var storeListTF: UITextField!
     @IBOutlet weak var invitationCodeTF: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var maleButton: UIButton!
@@ -34,18 +36,33 @@ class SignUpViewController: UIViewController {
         return formatter
     }()
     var datePicker = DatePicker()
+    var storeTypes: [StoreTypeList] = []
+    var stores: [Store] = []
+    var realStores: [RealStore] = []
+    
+    var selectedStoreTypeIndex = 0
+    var selectedStoreIndex = 0
+    
+    let storeTypePickerView = UIPickerView()
+    let storePickerView = UIPickerView()
+    let toolBar = UIToolbar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTextField()
         configureKeyboard()
+        configurePickerView()
         configreButton()
         accountLabel.text = Global.ACCOUNT
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getStore()
+    }
     // MARK: - Keyboard
-    func configureKeyboard() {
-        
+    private func configureKeyboard() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
 
@@ -83,10 +100,53 @@ class SignUpViewController: UIViewController {
         birthdayTF.delegate             = self
         emailTF.delegate                = self
         invitationCodeTF.delegate       = self
+        storeTypeTF.delegate            = self
+        storeListTF.delegate            = self
         
         nameTF.returnKeyType            = .next
         emailTF.returnKeyType           = .next
         invitationCodeTF.returnKeyType  = .next
+    }
+    
+    private func configurePickerView() {
+        storeTypePickerView.delegate = self
+        storeTypePickerView.dataSource = self
+        storePickerView.delegate = self
+        storePickerView.dataSource = self
+        
+        storeTypeTF.inputView = storeTypePickerView
+        storeListTF.inputView = storePickerView
+        
+        storeTypeTF.inputAccessoryView = toolBar
+        storeListTF.inputAccessoryView = toolBar
+        
+        toolBar.backgroundColor = .white
+        let doneButton = UIBarButtonItem(title: "完成",
+                                         style: .done,
+                                         target: self, action: #selector(doneButtonTapped(_:)))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "取消",
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(cancelButtonTapped(_:)))
+        
+        toolBar.setItems([cancelButton, flexibleSpace, doneButton], animated: false)
+        toolBar.sizeToFit()
+    }
+    @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
+        if edittingTextField == storeTypeTF {
+            if storeTypeTF.text == "" {
+                storeTypeTF.text = realStores[selectedStoreTypeIndex].storeType.storetype_name
+            }
+        } else if edittingTextField == storeListTF {
+            if selectedStoreIndex == 0 {
+                storeListTF.text = realStores[selectedStoreTypeIndex].stores[selectedStoreIndex].storeName
+            }
+        }
+        view.endEditing(true)
+    }
+    @objc func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        view.endEditing(true)
     }
     
     private func configreButton() {
@@ -207,6 +267,15 @@ class SignUpViewController: UIViewController {
                 return
             }
         }
+        
+        var referrerShopStoreId = realStores[selectedStoreTypeIndex].stores[selectedStoreIndex].storeID
+        var referrerShopStoreType = realStores[selectedStoreTypeIndex].storeType.storetype_id
+        
+        if referrerShopStoreId == "",
+           referrerShopStoreType == "" {
+            referrerShopStoreId = "-1"
+            referrerShopStoreType = "-1"
+        }
 
         HUD.showLoadingHUD(inView: self.view, text: "註冊中")
         UserService.shared.InitPersonalData(account: Global.ACCOUNT,
@@ -220,7 +289,9 @@ class SignUpViewController: UIViewController {
                                             city: city,
                                             region: region,
                                             address: address,
-                                            referrerPhone: referrerPhone!) { (success, response) in
+                                            referrerPhone: referrerPhone!,
+                                            referrerShopStoreId: referrerShopStoreId,
+                                            referrerShopStoreType: referrerShopStoreType) { (success, response) in
             DispatchQueue.global(qos: .userInitiated).async {
                 URLCache.shared.removeAllCachedResponses()
                 DispatchQueue.main.sync {
@@ -248,7 +319,7 @@ class SignUpViewController: UIViewController {
 // MARK: - UITextField Delegate
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        self.edittingTextField = textField
+        edittingTextField = textField
         return true
     }
 
@@ -280,5 +351,65 @@ extension SignUpViewController: DatePickerDelegate {
 
     func datePickerDidSelectDate(_ datePicker: DatePicker, date: Date) {
         birthdayTF.text = dateFormatter.string(from: date)
+    }
+}
+
+extension SignUpViewController {
+    private func getStore() {
+        UserService.shared.getStoreTypeList { success, response in
+            guard success else {
+                return
+            }
+            
+            self.storeTypes = response as! [StoreTypeList]
+            self.storeTypes.append(StoreTypeList(storetype_id: "", storetype_name: "無"))
+            
+            self.storeTypes.forEach { storeType in
+                StoreService.shared.getStoreList(storeType: storeType.storetype_id) { storeList in
+                    self.stores = storeList as [Store]
+                    if storeType.storetype_id == "" {
+                        let realStore = RealStore(storeType: storeType, stores: [Store(storeID: "", storeName: "無")])
+                        self.realStores.append(realStore)
+                    } else {
+                        let realStore = RealStore(storeType: storeType, stores: self.stores)
+                        self.realStores.append(realStore)
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == storeTypePickerView {
+            return realStores.count
+        } else {
+            return  realStores[selectedStoreTypeIndex].stores.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == storeTypePickerView {
+            return realStores[row].storeType.storetype_name
+        } else {
+            return realStores[selectedStoreTypeIndex].stores[row].storeName
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == storeTypePickerView {
+            selectedStoreTypeIndex = row
+            storeTypeTF.text = realStores[row].storeType.storetype_name
+            selectedStoreIndex = 0
+            storeListTF.text = ""
+        } else {
+            selectedStoreIndex = row
+            storeListTF.text = realStores[selectedStoreTypeIndex].stores[row].storeName
+        }
     }
 }

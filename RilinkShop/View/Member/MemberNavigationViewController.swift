@@ -198,6 +198,7 @@ extension MemberNavigationViewController: LoginViewController_1_Delegate {
             present(vc, animated: true, completion: nil)
         case .Singup:
             let vc = SignUpViewController_1()
+//            let vc = SignUpViewController()
             vc.delegate = self
             present(vc, animated: true, completion: nil)
         case .BossLogIn:

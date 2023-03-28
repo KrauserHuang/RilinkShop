@@ -42,9 +42,6 @@ class SignUpViewController_1: UIViewController {
     }
     // MARK: - 提交手機號碼系統回傳驗證碼給使用者
     @IBAction func submitButtonTapped(_ sender: UIButton) {
-        let account = accountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
-
-//        guard account != "",
         guard let account = accountTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               account.count == 10 else {
             let alertController = UIAlertController(title: "", message: "請先輸入10碼手機號碼", preferredStyle: .alert)

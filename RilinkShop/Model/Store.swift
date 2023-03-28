@@ -7,6 +7,16 @@
 
 import Foundation
 
+struct RealStore {
+    var storeType: StoreTypeList
+    var stores: [Store]
+}
+
+struct StoreTypeList: Codable, Hashable {
+    let storetype_id: String
+    let storetype_name: String
+}
+
 struct StoreType: Codable, Hashable {
     var id: String
     var name: String

@@ -42,11 +42,11 @@ class Alert {
         vc.present(alert, animated: true, completion: nil)
     }
 
-    class func showConfirm(title: String?, msg: String, vc: UIViewController, handler: @escaping Handler) {
+    class func showConfirm(title: String?, msg: String, confirmTitle: String = "確定", vc: UIViewController, handler: @escaping Handler) {
 
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
 
-        let confirm = UIAlertAction(title: "確定", style: .default) { (_) in
+        let confirm = UIAlertAction(title: confirmTitle, style: .default) { (_) in
             handler()
         }
 

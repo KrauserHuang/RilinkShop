@@ -12,14 +12,14 @@ import SwiftyJSON
 class PointService {
     static let shared = PointService()
 
-    func fetchPointHistory(id: String, pwd: String, completion: @escaping Completion) {
+    func fetchPointHistory(completion: @escaping Completion) {
         let url = SHOP_API_URL + URL_FETCHPOINTHISTORY
         let parameters = [
-            "member_id": id,
-            "member_pwd": pwd
+            "member_id": Global.ACCOUNT,
+            "member_pwd": Global.ACCOUNT_PASSWORD
         ]
 
-        AF.request(url, method: .post, parameters: parameters).responseJSON { response in
+        AF.request(url, method: .post, parameters: parameters).response { response in
 
             guard response.error == nil else {
                 let errorMsg = "伺服器連線失敗"
@@ -28,9 +28,6 @@ class PointService {
             }
 
             let value = JSON(response.value!)
-            print(#function)
-//            print(value)
-            print(response.result)
 
             switch response.result {
             case .success:
