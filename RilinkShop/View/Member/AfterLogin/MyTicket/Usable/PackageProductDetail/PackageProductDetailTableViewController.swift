@@ -41,10 +41,8 @@ class PackageProductDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let product = products[indexPath.row]
-        let controller = TicketDetailViewController()
+        let controller = TicketDetailViewController(ticket: ticket) // 傳套票資訊
         controller.product = product // 傳商品資訊
-        controller.ticket = ticket // 傳套票資訊
         navigationController?.pushViewController(controller, animated: true)
-//        present(controller, animated: true, completion: nil)
     }
 }

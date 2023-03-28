@@ -19,7 +19,9 @@ class UsedTicketViewController: UIViewController {
             }
         }
     }
-    var sortedTickets = [QRCode]() {
+    
+    var coupons: [Coupon] = []
+    var allTickets: [AnyObject] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableViiew.reloadData()
@@ -28,101 +30,82 @@ class UsedTicketViewController: UIViewController {
     }
 
     var refreshControl = UIRefreshControl()
-//    var account = MyKeyChain.getAccount() ?? ""
-//    var password = MyKeyChain.getPassword() ?? ""
-//    var account: String!
-//    var password: String!
-//
-//    init(account: String, password: String) {
-//        super.init(nibName: nil, bundle: nil)
-//        self.account = account
-//        self.password = password
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableViiew.rowHeight = 120
-        tableViiew.register(UINib(nibName: "UsedTableViewCell", bundle: nil), forCellReuseIdentifier: "UsedTableViewCell")
-        tableViiew.delegate = self
-        tableViiew.dataSource = self
-        tableViiew.allowsSelection = false
-
-        tableViiew.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshList), for: .valueChanged)
-
-        getTicket()
+        
+        configureViewController()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getTicket()
     }
-
-    func getTicket() {
-
-//        QRCodeService.shared.confirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                         pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
-//                                         ispackage: "0") { productResponse in
-//            QRCodeService.shared.confirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                             pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
-//                                             ispackage: "1") { packageResponse in
-        QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
-            QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
-
-                let packageWithoutQRConfirm = packageResponse.filter { package in
-                    package.product?.allSatisfy({ $0.qrconfirm == nil }) as! Bool
-                }
-//                var packageWithQR = [QRCode]()
-//                var packages = [QRCode]()
-//                packageResponse.forEach { package in
-//                    let hasNotQRConfirm = package.product?.filter({ product in
-//                        product.qrconfirm == nil
-//                    }).isEmpty
-//                    print(hasNotQRConfirm)
-//                    if hasNotQRConfirm! {
-//                        packages.append(package)
-//                    } else {
-//                        packageWithQR.append(package)
-//                    }
-//                }
-//                self.tickets = productResponse + packageWithoutQRConfirm
-                self.tickets = productResponse + packageResponse
-                self.sortedTickets = self.tickets.sorted(by: { ticket1, ticket2 in
-                    ticket1.orderDate > ticket2.orderDate
-                })
-                self.emptyView.isHidden = self.sortedTickets.count != 0
-            }
-        }
+    
+    private func configureViewController() {
+        tableViiew.rowHeight = 140
+        tableViiew.register(UsedTableViewCell.nib, forCellReuseIdentifier: UsedTableViewCell.reuseIdentifier)
+        tableViiew.delegate = self
+        tableViiew.dataSource = self
+        tableViiew.allowsSelection = false
+        tableViiew.separatorStyle = .none
+        tableViiew.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshList), for: .valueChanged)
     }
-
     @objc func refreshList() {
-        self.refreshControl.beginRefreshing()
-//        QRCodeService.shared.confirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                         pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
-//                                         ispackage: "0") { productResponse in
-//            QRCodeService.shared.confirmList(id: LocalStorageManager.shared.getData(String.self, forKey: .userIdKey)!,
-//                                             pwd: LocalStorageManager.shared.getData(String.self, forKey: .userPasswordKey)!,
-//                                             ispackage: "1") { packageResponse in
-        QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "0") { productResponse in
-            QRCodeService.shared.confirmList(id: MyKeyChain.getAccount() ?? "", pwd: MyKeyChain.getPassword() ?? "", ispackage: "1") { packageResponse in
-                let packageWithoutQRConfirm = packageResponse.filter { package in
-                    package.product?.allSatisfy({ $0.qrconfirm == nil }) as! Bool
-                }
-                self.tickets = productResponse + packageWithoutQRConfirm
-                self.sortedTickets = self.tickets.sorted(by: { ticket1, ticket2 in
-                    ticket1.orderDate > ticket2.orderDate
-                })
-                if self.sortedTickets.count != 0 {
+        getTicket()
+    }
+    
+    private func getTicket() {
+        refreshControl.beginRefreshing()
+        QRCodeService.shared.getQRConfirmList(type: .product) { productResponse in
+            QRCodeService.shared.getQRConfirmList(type: .package) { packageResponse in
+                CouponService.shared.getNewMemberCoupon(type: .redeemed) { success, response in
+                    var allTickets: [AnyObject] = []
+                    guard success else {
+                        let errorMsg = response as! String
+                        Alert.showMessage(title: "系統訊息", msg: errorMsg, vc: self)
+                        return
+                    }
+                    //                let packageWithoutQRConfirm = packageResponse.filter { package in
+                    //                    package.product?.allSatisfy({ $0.qrconfirm == nil })
+                    //                    return true
+                    //                }
+                    self.tickets = productResponse + packageResponse
+                    self.coupons = response as! [Coupon]
+                    allTickets.append(contentsOf: self.tickets as [AnyObject])
+                    allTickets.append(contentsOf: self.coupons as [AnyObject])
+                    self.allTickets = allTickets.sorted { ticket1, ticket2 in
+                        let timeString1: String
+                        if let ticket1 = ticket1 as? QRCode {
+                            timeString1 = ticket1.orderDate
+                        } else if let ticket1 = ticket1 as? Coupon {
+                            timeString1 = ticket1.couponEnddate
+                        } else {
+                            return true
+                        }
+                        
+                        let timeString2: String
+                        if let ticket2 = ticket2 as? QRCode {
+                            timeString2 = ticket2.orderDate
+                        } else if let ticket2 = ticket2 as? Coupon {
+                            timeString2 = ticket2.couponEnddate
+                        } else {
+                            return true
+                        }
+                        guard let time1 = self.dateFormatter.date(from: timeString1)?.timeIntervalSince1970,
+                              let time2 = self.dateFormatter.date(from: timeString2)?.timeIntervalSince1970 else { return true }
+                        return time1 > time2
+                    }
+
+                    self.emptyView.isHidden = self.allTickets.count != 0
                     self.refreshControl.endRefreshing()
-                    self.tableViiew.reloadData()
-                } else {
-                    self.refreshControl.endRefreshing()
-                    self.tableViiew.reloadData()
                 }
             }
         }
@@ -131,13 +114,13 @@ class UsedTicketViewController: UIViewController {
 
 extension UsedTicketViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedTickets.count
+        return allTickets.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UsedTableViewCell") as! UsedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: UsedTableViewCell.reuseIdentifier) as! UsedTableViewCell
 
-        let ticket = sortedTickets[indexPath.row]
+        let ticket = allTickets[indexPath.row]
         cell.configure(with: ticket)
 
         return cell

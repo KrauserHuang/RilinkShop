@@ -15,9 +15,19 @@ class TicketDetailViewController: UIViewController {
     @IBOutlet weak var buyDateLabel: UILabel!
     @IBOutlet weak var orderNoLabel: UILabel!
 
-    var ticket = QRCode() // 套票資訊
+//    var ticket = QRCode()
     var product = PackageProduct() // 商品資訊
-
+    var ticket: QRCode! // 套票資訊
+    
+    init(ticket: QRCode) {
+        self.ticket = ticket
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

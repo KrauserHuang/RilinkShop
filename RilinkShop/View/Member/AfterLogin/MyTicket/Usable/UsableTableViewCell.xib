@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,67 +18,87 @@
                 <rect key="frame" x="0.0" y="0.0" width="343" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_color 2" translatesAutoresizingMaskIntoConstraints="NO" id="h5H-4A-GDY">
-                        <rect key="frame" x="10" y="10" width="100" height="100"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="100" id="Dfg-xV-s4p"/>
-                            <constraint firstAttribute="width" secondItem="h5H-4A-GDY" secondAttribute="height" multiplier="1:1" id="ciz-jT-NcC"/>
-                        </constraints>
-                    </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tat-WC-buP">
-                        <rect key="frame" x="120" y="10" width="172.5" height="100"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Awd-10-7Fo">
+                        <rect key="frame" x="10" y="10" width="323" height="126"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EECP體驗券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fz-RS-4KI">
-                                <rect key="frame" x="0.0" y="0.0" width="93.5" height="19"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="購買日期：2021-05-26" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ke6-Ma-2a6">
-                                <rect key="frame" x="0.0" y="27" width="150.5" height="19"/>
-                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單編號：202105260099" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjY-Lr-6sq">
-                                <rect key="frame" x="0.0" y="54" width="172.5" height="19"/>
-                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="數量：202105260099" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDR-ai-ubx">
-                                <rect key="frame" x="0.0" y="81" width="144" height="19"/>
-                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_color 2" translatesAutoresizingMaskIntoConstraints="NO" id="h5H-4A-GDY">
+                                <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Dfg-xV-s4p"/>
+                                    <constraint firstAttribute="width" secondItem="h5H-4A-GDY" secondAttribute="height" multiplier="1:1" id="ciz-jT-NcC"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tat-WC-buP">
+                                <rect key="frame" x="120" y="10" width="193" height="106"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EECP體驗券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fz-RS-4KI">
+                                        <rect key="frame" x="0.0" y="0.0" width="95" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="購買日期：2021-05-26" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ke6-Ma-2a6">
+                                        <rect key="frame" x="0.0" y="28.5" width="160.5" height="20.5"/>
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單編號：202105260099" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjY-Lr-6sq">
+                                        <rect key="frame" x="0.0" y="57" width="184" height="20.5"/>
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="數量：202105260099" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDR-ai-ubx">
+                                        <rect key="frame" x="0.0" y="85.5" width="153" height="20.5"/>
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                    </stackView>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="h5H-4A-GDY" secondAttribute="bottom" constant="10" id="Pr2-rG-jHw"/>
+                            <constraint firstItem="h5H-4A-GDY" firstAttribute="top" secondItem="Awd-10-7Fo" secondAttribute="top" constant="10" id="R0M-pR-IWP"/>
+                            <constraint firstItem="Tat-WC-buP" firstAttribute="leading" secondItem="h5H-4A-GDY" secondAttribute="trailing" constant="10" id="RI6-53-lMb"/>
+                            <constraint firstItem="h5H-4A-GDY" firstAttribute="leading" secondItem="Awd-10-7Fo" secondAttribute="leading" constant="10" id="WlX-Sh-Hqa"/>
+                            <constraint firstAttribute="bottom" secondItem="Tat-WC-buP" secondAttribute="bottom" constant="10" id="mNe-Xf-0yT"/>
+                            <constraint firstItem="Tat-WC-buP" firstAttribute="top" secondItem="Awd-10-7Fo" secondAttribute="top" constant="10" id="pkA-32-BgN"/>
+                            <constraint firstAttribute="trailing" secondItem="Tat-WC-buP" secondAttribute="trailing" constant="10" id="x8k-cU-fVX"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Tat-WC-buP" firstAttribute="leading" secondItem="h5H-4A-GDY" secondAttribute="trailing" constant="10" id="0XB-yU-Enm"/>
-                    <constraint firstAttribute="bottom" secondItem="h5H-4A-GDY" secondAttribute="bottom" constant="10" id="8Yl-Ce-BeG"/>
-                    <constraint firstItem="h5H-4A-GDY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="JxN-Cs-3dh"/>
-                    <constraint firstItem="Tat-WC-buP" firstAttribute="bottom" secondItem="h5H-4A-GDY" secondAttribute="bottom" id="rLG-Lg-GXZ"/>
-                    <constraint firstItem="Tat-WC-buP" firstAttribute="top" secondItem="h5H-4A-GDY" secondAttribute="top" id="tcm-p8-dNt"/>
-                    <constraint firstItem="h5H-4A-GDY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="vTa-pw-L5c"/>
+                    <constraint firstAttribute="bottom" secondItem="Awd-10-7Fo" secondAttribute="bottom" constant="10" id="3SF-so-BKu"/>
+                    <constraint firstItem="Awd-10-7Fo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="hQw-Pt-sDH"/>
+                    <constraint firstItem="Awd-10-7Fo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="mNO-ko-wZy"/>
+                    <constraint firstAttribute="trailing" secondItem="Awd-10-7Fo" secondAttribute="trailing" constant="10" id="yQK-zs-ECr"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="buyDay" destination="Ke6-Ma-2a6" id="8Ji-WL-cGh"/>
-                <outlet property="name" destination="6Fz-RS-4KI" id="3qL-CM-0Ja"/>
-                <outlet property="orderNo" destination="xjY-Lr-6sq" id="QcO-DW-Aho"/>
+                <outlet property="dateLabel" destination="Ke6-Ma-2a6" id="8Ji-WL-cGh"/>
+                <outlet property="orderNoLabel" destination="xjY-Lr-6sq" id="QcO-DW-Aho"/>
+                <outlet property="outerView" destination="Awd-10-7Fo" id="hEl-sH-X89"/>
                 <outlet property="qtyLabel" destination="jDR-ai-ubx" id="eDi-fv-r06"/>
-                <outlet property="ticketImage" destination="h5H-4A-GDY" id="dcy-zm-12y"/>
+                <outlet property="ticketImageView" destination="h5H-4A-GDY" id="dcy-zm-12y"/>
+                <outlet property="ticketNameLabel" destination="6Fz-RS-4KI" id="3qL-CM-0Ja"/>
             </connections>
             <point key="canvasLocation" x="154.34782608695653" y="97.098214285714278"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="background_color 2" width="1242" height="740"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

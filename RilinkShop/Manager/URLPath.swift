@@ -39,6 +39,7 @@ let RESEND_CODE                 = "/account/resendcode"                         
 let GET_PERSONAL_DATA           = "/account/getpersondata"                          // 取得會員詳細資料
 let MODIFY_PERSONAL_DATA        = "/account/modifypersondata"                       // 註冊驗證通過 (初始個人資料)
 let URL_USERDEL                 = "user_del.php"                                    // 使用者刪除
+let STORE_LIST                  = "storetype_list.php"                              //商店類別列表
     
 let MALL_REGISTER               = "https://ks-api.jotangi.net/api/auth/register"    // 後台會員註冊
 let MALL_REWRITE_PWD            = "https://ks-api.jotangi.net/api/auth/rewritepwd"  // 會員密碼變更
@@ -88,7 +89,12 @@ let URL_MEMBERCLEARTOKEN        = "member_clear_token.php"      //清除會員�
 let URL_PUSHMSGGETHISTORY       = "pushmsg_get_history.php"     //取得推播歷史資料
 
 // MARK: - INVOICE
-let URL_ECORDERINVOICE          = "ecorder_invoice.php"         //開立發票資訊
+let URL_ECORDERINVOICE          = "ecorder_invoice.php"         // 開立發票資訊
+
+// MARK: - MEMBERCOUPON
+let URL_GETNEWMEMBERCOUPON      = "get_newmember_coupon.php"    // 新會員好禮優惠卷
+let URL_NEWMEMBERCOUPONCONFIRM  = "newmember_coupon_confirm.php" // 新會員好禮核銷(領取)
+
 
 enum Endpoint {
     case storeList
