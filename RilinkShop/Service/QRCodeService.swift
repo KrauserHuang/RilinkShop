@@ -9,35 +9,30 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-enum ispackage: Int { // 訂單類型
-    case product
-    case package
-}
+
 
 class QRCodeService {
     static let shared = QRCodeService()
     var theqrcodes = [String]()
+    
+    enum QRListType: Int { // 0: 商品, 1: 套票
+        case product
+        case package
+    }
     // 會員未核銷商品/套票
-    func unconfirmList(id: String, pwd: String, ispackage: String, completion: @escaping ([QRCode]) -> Void) {
+    func getQRUnconfirmList(type: QRListType, completion: @escaping ([QRCode]) -> Void) {
         let url = SHOP_API_URL + URL_QRUNCONFIRMLIST
         let parameters = [
-            "member_id": id,
-            "member_pwd": pwd,
-            "ispackage": ispackage
+            "member_id": Global.ACCOUNT,
+            "member_pwd": Global.ACCOUNT_PASSWORD,
+            "ispackage": "\(type.rawValue)"
         ]
 
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [QRCode].self) { response in
-
-//            print(#function)
-//            print(response)
-
             guard response.value != nil else {
                 print("伺服器連線失敗")
                 return
             }
-
-//            print(#function)
-//            print(response.value)
 
             switch response.result {
             case .success:
@@ -48,7 +43,7 @@ class QRCodeService {
             }
         }
     }
-//    func unconfirmList(id: String, pwd: String, ispackage: String, completed: @escaping Completion) {
+//    func getQRUnconfirmList(id: String, pwd: String, ispackage: String, completed: @escaping Completion) {
 //        let url = SHOP_API_URL + URL_QRUNCONFIRMLIST
 //        let parameters = [
 //            "member_id": id,
@@ -78,7 +73,7 @@ class QRCodeService {
 //                    return
 //                }
 //
-//                var unconfirmList: [UNQRCode] = []
+//                var getQRUnconfirmList: [UNQRCode] = []
 //                for value in value.arrayValue {
 //                    let unconfirm = UNQRCode(orderNo: value["order_no"].stringValue,
 //                                             orderDate: value["order_date"].stringValue,
@@ -90,11 +85,11 @@ class QRCodeService {
 //                                             packageName: value["package_name"].stringValue,
 //                                             packagePicture: value["package_picture"].stringValue,
 //                                             product: value["product"])
-//                    unconfirmList.append(unconfirm)
+//                    getQRUnconfirmList.append(unconfirm)
 //                }
 //
-//                print(unconfirmList)
-//                completed(true, unconfirmList as AnyObject)
+//                print(getQRUnconfirmList)
+//                completed(true, getQRUnconfirmList as AnyObject)
 //            case .failure:
 //                let errorMsg = value["responseMessage"].stringValue
 //                completed(false, errorMsg as AnyObject)
@@ -102,12 +97,12 @@ class QRCodeService {
 //        }
 //    }
     // 會員已核銷商品/套票
-    func confirmList(id: String, pwd: String, ispackage: String, completion: @escaping ([QRCode]) -> Void) {
+    func getQRConfirmList(type: QRListType, completion: @escaping ([QRCode]) -> Void) {
         let url = SHOP_API_URL + URL_QRCONFIRMLIST
         let parameters = [
-            "member_id": id,
-            "member_pwd": pwd,
-            "ispackage": ispackage
+            "member_id": Global.ACCOUNT,
+            "member_pwd": Global.ACCOUNT_PASSWORD,
+            "ispackage": "\(type.rawValue)"
         ]
 
         AF.request(url, method: .post, parameters: parameters).responseDecodable(of: [QRCode].self) { response in
@@ -145,9 +140,6 @@ class QRCodeService {
             }
 
             let value = JSON(response.value!)
-            print(#function)
-            print("value:\(value)")
-//            print("result:\(response.result)")
 
             switch response.result {
             case .success:
