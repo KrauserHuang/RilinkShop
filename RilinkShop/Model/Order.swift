@@ -47,6 +47,31 @@ struct Order: Codable {
     }
 }
 
+extension Order {
+    var orderStatusText: String {
+        switch orderStatus {
+        case "0": return "處理中"
+        case "1": return "完成" // 完成 -> 已發貨?
+        case "2": return "取消(退款)"
+        default: return "處理中"
+        }
+    }
+    
+    var payStatusText: String {
+        switch payStatus {
+        case "0": return "未付款"
+        case "-1": return "付款中"
+        case "1":
+            if assigntype == "0" {
+                return "付款完成"
+            } else {
+                return "店家派發"
+            }
+        default: return "處理中"
+        }
+    }
+}
+
 struct OrderInfo: Codable {
     var oid: String = ""
     var orderNo: String = ""
@@ -67,6 +92,7 @@ struct OrderInfo: Codable {
     var invoicetype: String?
     var invoicephone: String?
     var companytitle: String?
+    var invoiceno: String?
     var uniformno: String?
     var invoicestatus: String?
     var invoicedate: String?
@@ -89,6 +115,39 @@ struct OrderInfo: Codable {
         case productList = "product_list"
         case packageList = "package_list"
         case assigntype
+        case invoicetype
+        case invoicephone
+        case companytitle
+        case invoiceno
+        case uniformno
+        case invoicestatus
+        case invoicedate
+        case randomno
+    }
+}
+
+extension OrderInfo {
+    var orderStatusText: String {
+        switch orderStatus {
+        case "0": return "處理中"
+        case "1": return "完成" // 完成 -> 已發貨?
+        case "2": return "取消(退款)"
+        default: return "處理中"
+        }
+    }
+    
+    var payStatusText: String {
+        switch payStatus {
+        case "0": return "未付款"
+        case "-1": return "付款中"
+        case "1":
+            if assigntype == "0" {
+                return "付款完成"
+            } else {
+                return "店家派發"
+            }
+        default: return "處理中"
+        }
     }
     
     var invoiceTypeText: String {

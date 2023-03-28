@@ -67,27 +67,13 @@ class MyOrderTableViewCell: UITableViewCell {
     }
 
     func set(with model: Order) {
-        orderNo.text = "訂單編號：\(model.orderNo)"
-        orderDate.text = "訂單日期：\(model.orderDate)"
-        orderAmount.text = "訂單金額：\(model.orderAmount)"
-        // 付款狀態
-        switch model.payStatus {
-        case "0":
-            payStatusLabel.text = "付款狀態：未付款"
-            payButton.isHidden = false
-        case "-1":
-            payStatusLabel.text = "付款狀態：付款中"
-        case "1":
-            if model.assigntype == "0" {
-                payStatusLabel.text = "付款狀態：付款完成"
-                payButton.isHidden = true
-            } else {
-                payStatusLabel.text = "付款狀態：店家派發"
-            }
-//            payButton.alpha = 0
-//            payButton.isUserInteractionEnabled = false
-        default:
-            payStatusLabel.text = "付款狀態：處理中"
+        orderNo.text        = "訂單編號：\(model.orderNo)"
+        orderDate.text      = "訂單日期：\(model.orderDate)"
+        orderAmount.text    = "訂單金額：\(model.orderAmount)"
+        payStatusLabel.text = "付款狀態：\(model.payStatusText)"
+        if model.payStatus == "1" {
+            payButton.isHidden = true
+        } else {
             payButton.isHidden = false
         }
     }

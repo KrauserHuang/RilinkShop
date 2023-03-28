@@ -40,7 +40,7 @@ extension NewOrderDetailViewController {
         let dataSource = DataSource(tableView: tableView) { tableView, indexPath, itemIdentifier in
             let cell = tableView.dequeueReusableCell(withIdentifier: NewOrderInfoCell.reuseIdentifier, for: indexPath) as! NewOrderInfoCell
             
-            cell.set(with: itemIdentifier)
+            cell.configure(with: itemIdentifier)
             
             return cell
         }

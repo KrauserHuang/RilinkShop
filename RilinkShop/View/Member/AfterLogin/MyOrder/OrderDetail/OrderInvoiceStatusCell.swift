@@ -14,7 +14,7 @@ class OrderInvoiceStatusCell: UITableViewCell {
      手機載具
      統一編號
      發票抬頭
-     發票號碼 ??
+     發票號碼
      發票狀態
      開立時間
      隨機碼
@@ -31,7 +31,7 @@ class OrderInvoiceStatusCell: UITableViewCell {
     let invoicePhoneText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
     let uniformNoText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
     let companyTitleText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
-    //發票號碼
+    let invoiceNoText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
     let invoiceStatusText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
     let invoiceDateText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
     let randomNoText = RSTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular)
@@ -40,7 +40,7 @@ class OrderInvoiceStatusCell: UITableViewCell {
     let invoicePhoneLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
     let uniformNoLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
     let companyTitleLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
-    //發票號碼
+    let invoiceNoLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
     let invoiceStatusLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
     let invoiceDateLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
     let randomNoLabel = RSTitleLabel(textAlignment: .right, fontSize: 16, weight: .regular)
@@ -79,8 +79,8 @@ class OrderInvoiceStatusCell: UITableViewCell {
         contentView.addSubview(outerView)
         outerView.addSubviews(textStackView, labelStackView)
         
-        let textAltogether = [invoiceTypeText, invoicePhoneText, uniformNoText, companyTitleText, invoiceStatusText, invoiceDateText, randomNoText]
-        let labelAltogether = [invoiceTypeLabel, invoicePhoneLabel, uniformNoLabel, companyTitleLabel, invoiceStatusLabel, invoiceDateLabel, randomNoLabel]
+        let textAltogether = [invoiceTypeText, invoicePhoneText, uniformNoText, companyTitleText, invoiceNoText, invoiceStatusText, invoiceDateText, randomNoText]
+        let labelAltogether = [invoiceTypeLabel, invoicePhoneLabel, uniformNoLabel, companyTitleLabel, invoiceNoLabel, invoiceStatusLabel, invoiceDateLabel, randomNoLabel]
         
         textAltogether.forEach { textStackView.addArrangedSubview($0) }
         labelAltogether.forEach { labelStackView.addArrangedSubview($0) }
@@ -113,6 +113,7 @@ class OrderInvoiceStatusCell: UITableViewCell {
         invoicePhoneText.text   = "手機載具："
         uniformNoText.text      = "統一編號："
         companyTitleText.text   = "發票抬頭："
+        invoiceNoText.text      = "發票號碼："
         invoiceStatusText.text  = "發票狀態："
         invoiceDateText.text    = "開立時間："
         randomNoText.text       = "隨機碼："
@@ -120,11 +121,12 @@ class OrderInvoiceStatusCell: UITableViewCell {
     
     func set(with model: OrderInfo) {
         invoiceTypeLabel.text   = model.invoiceTypeText
-        invoicePhoneLabel.text  = model.invoicephone ?? " "
-        uniformNoLabel.text     = model.uniformno ?? " "
-        companyTitleLabel.text  = model.companytitle ?? " "
+        invoicePhoneLabel.text  = model.invoicephone ?? "---"
+        uniformNoLabel.text     = model.uniformno ?? "---"
+        companyTitleLabel.text  = model.companytitle ?? "---"
+        invoiceNoLabel.text     = model.invoiceno ?? "---"
         invoiceStatusLabel.text = model.invoiceStatusText
-        invoiceDateLabel.text   = model.invoicedate ?? " "
-        randomNoLabel.text      = model.randomno ?? " "
+        invoiceDateLabel.text   = model.invoicedate ?? "---"
+        randomNoLabel.text      = model.randomno ?? "---"
     }
 }

@@ -265,13 +265,26 @@ class CheckoutViewController: UIViewController {
         switch invoiceType {
         case InvoiceType.phone.rawValue:
             let count = invoicePhoneTextField.text?.count
-            guard count == 0 || count == 8 else {
+            guard count == 8 else {
                 Alert.showMessage(title: "系統訊息", msg: "手機載具條碼格式不符", vc: self)
                 return
             }
         case InvoiceType.uniform.rawValue:
-            let count = uniformNoTextField.text?.count
-            guard count == 0 || count == 8 else {
+            let uniformNoCount = uniformNoTextField.text?.count
+            let companyTitleCount = uniformNoTitleTextField?.text?.count
+            if uniformNoCount == 0, companyTitleCount == 0 {
+                Alert.showMessage(title: "系統訊息", msg: "統一編號、發票抬頭請勿空白", vc: self)
+                return
+            } else if uniformNoCount != 8, companyTitleCount == 0 {
+                Alert.showMessage(title: "系統訊息", msg: "統一編號格式不符\n發票抬頭未填寫", vc: self)
+                return
+            } else if uniformNoCount == 0, companyTitleCount != 0 {
+                Alert.showMessage(title: "系統訊息", msg: "統一編號未填寫", vc: self)
+                return
+            } else if uniformNoCount == 8, companyTitleCount == 0 {
+                Alert.showMessage(title: "系統訊息", msg: "發票抬頭未填寫", vc: self)
+                return
+            } else if uniformNoCount != 8, companyTitleCount != 0 {
                 Alert.showMessage(title: "系統訊息", msg: "統一編號格式不符", vc: self)
                 return
             }

@@ -10,7 +10,6 @@ import UIKit
 class OrderDetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var footerView: OrderDetailFooterView!
 
     var order: Order!
     var orderInfos = [OrderInfo]()
@@ -21,34 +20,11 @@ class OrderDetailViewController: UIViewController {
             }
         }
     }
-    var products1 = [ProductList]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-
-    var products2 = [PackageList]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-//    var products = [Product]() {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureTableView()
-        configureFooterView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,10 +39,10 @@ class OrderDetailViewController: UIViewController {
             if let products = listResponse.first?.productList,
                let packages = listResponse.first?.packageList {
                 self.products = products + packages
-                print("products:\(products)")
-                print("packages:\(packages)")
             }
             self.orderInfos = listResponse
+            
+            print("listResponse:\(listResponse)")
         }
     }
 
@@ -75,15 +51,11 @@ class OrderDetailViewController: UIViewController {
         tableView.dataSource = self
         tableView.alwaysBounceVertical = false
         tableView.separatorStyle = .none
-        tableView.register(OrderStatusCell.nib, forCellReuseIdentifier: OrderStatusCell.reuseIdentifier)
+        tableView.allowsSelection = false
+        tableView.register(NewOrderStatusCell.self, forCellReuseIdentifier: NewOrderStatusCell.reuseIdentifier)
         tableView.register(OrderInvoiceStatusCell.self, forCellReuseIdentifier: OrderInvoiceStatusCell.reuseIdentifier)
-        tableView.register(ProductInfoCell.nib, forCellReuseIdentifier: ProductInfoCell.reuseIdentifier)
-    }
-
-    private func configureFooterView() {
-        footerView.orderAmountLabel.text = "$ \(order.orderAmount)"
-        footerView.discountAmountLabel.text = "$ \(order.discountAmount)"
-        footerView.orderPayLabel.text = "$ \(order.orderPay)"
+        tableView.register(NewOrderInfoCell.self, forCellReuseIdentifier: NewOrderInfoCell.reuseIdentifier)
+        tableView.register(NewOrderDetailFooterView.self, forHeaderFooterViewReuseIdentifier: NewOrderDetailFooterView.reuseIdentifier)
     }
 }
 
@@ -104,7 +76,7 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: OrderStatusCell.reuseIdentifier, for: indexPath) as! OrderStatusCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewOrderStatusCell.reuseIdentifier, for: indexPath) as! NewOrderStatusCell
 
             guard let orderInfo = orderInfos.first else { return UITableViewCell() }
             cell.configure(with: orderInfo)
@@ -118,7 +90,7 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
             
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ProductInfoCell.reuseIdentifier, for: indexPath) as! ProductInfoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewOrderInfoCell.reuseIdentifier, for: indexPath) as! NewOrderInfoCell
 
             let product = products[indexPath.row]
             cell.configure(with: product)
@@ -139,6 +111,28 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
             return "訂單明細"
         default:
             return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        switch section {
+        case 2:
+            let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewOrderDetailFooterView.reuseIdentifier) as! NewOrderDetailFooterView
+            
+            footerView.set(with: order)
+            
+            return footerView
+        default:
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 2:
+            return 100
+        default:
+            return 0
         }
     }
 }

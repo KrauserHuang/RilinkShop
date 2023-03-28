@@ -38,6 +38,7 @@ class MyOrderTableViewController: UITableViewController {
     private func configureUI() {
         tableView.register(MyOrderTableViewCell.nib, forCellReuseIdentifier: MyOrderTableViewCell.reuseIdentifier)
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
     }
 
     // MARK: - Table view data source
