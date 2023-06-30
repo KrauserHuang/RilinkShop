@@ -8,18 +8,18 @@
 import Foundation
 
 // MARK: - 綠悠遊商城
-// let SHOP_API_URL   = "https://rilink.com.tw/ticketec/api/"             // 正式網域
-// let SHOP_ROOT_URL  = "https://rilink.com.tw/ticketec/"
- let SHOP_API_URL     = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
- let SHOP_ROOT_URL    = "https://rilink.jotangi.com.tw:11074/ticketec/"
+ let SHOP_API_URL   = "https://rilink.com.tw/ticketec/api/"             // 正式網域
+ let SHOP_ROOT_URL  = "https://rilink.com.tw/ticketec/"
+// let SHOP_API_URL     = "https://rilink.jotangi.com.tw:11074/ticketec/api/"
+// let SHOP_ROOT_URL    = "https://rilink.jotangi.com.tw:11074/ticketec/"
 
 // MARK: - 綠悠遊租車
-// let API_URL    = "https://rilink.com.tw/api/v1"                    // 正式網域
- let API_URL  = "https://rilink.jotangi.com.tw:11074/api/v1"      // 綠悠遊租車測試網域
+ let API_URL    = "https://rilink.com.tw/api/v1"                    // 正式網域
+// let API_URL  = "https://rilink.jotangi.com.tw:11074/api/v1"      // 綠悠遊租車測試網域
 
 // MARK: - Web串接金流
-// let PAYMENT_API_URL    = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="            // 正式
-let PAYMENT_API_URL = "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/ecpayindex.php?orderid=" // 新測試
+ let PAYMENT_API_URL    = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="            // 正式
+//let PAYMENT_API_URL = "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/ecpayindex.php?orderid=" // 新測試
 
 // MARK: - ADMIN
 let URL_STOREIDLIST             = "storeId_list.php"        // 商店ID列表

@@ -9,9 +9,16 @@ import UIKit
 
 class CouponDetailViewController: UIViewController {
     
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView(frame: .zero)
-        return scrollView
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    
+    private let containerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let imageView = RSProductImageView(frame: .zero)
@@ -72,43 +79,57 @@ class CouponDetailViewController: UIViewController {
         guard let couponEnddateToDate = coupon.couponEnddate.convertStringToDate() else { return }
         let couponEnddateToString = couponEnddateToDate.convertDateToMonthYearFormat()
         dueDateLabel.text       = "有效期限：\(couponEnddateToString)"
+        print(coupon.couponDescription+" --- \n")
         descriptionLabel.text   = coupon.couponDescription
     }
     
     private func configureUIElements() {
-        view.addSubviews(imageView, underlineView1, titleLabel, underlineView2, dueDateLabel, descriptionLabel, stackView)
+        view.addSubviews(scrollView, stackView)
+        scrollView.addSubview(containerView)
+        containerView.addSubviews(imageView, underlineView1, titleLabel, underlineView2, dueDateLabel, descriptionLabel)
         stackView.addArrangedSubview(backButton)
         stackView.addArrangedSubview(useButton)
         
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: stackView.topAnchor),
+            
+            containerView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            containerView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor, multiplier: 1.0),
+            
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 50),
+            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 100),
             
             underlineView1.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
-            underlineView1.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            underlineView1.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            underlineView1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            underlineView1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             underlineView1.heightAnchor.constraint(equalToConstant: 2),
             
             titleLabel.topAnchor.constraint(equalTo: underlineView1.bottomAnchor, constant: 10),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            titleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25),
             titleLabel.heightAnchor.constraint(equalToConstant: 60),
             
             underlineView2.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            underlineView2.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            underlineView2.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            underlineView2.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            underlineView2.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             underlineView2.heightAnchor.constraint(equalToConstant: 2),
             
             dueDateLabel.topAnchor.constraint(equalTo: underlineView2.bottomAnchor, constant: 10),
-            dueDateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dueDateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            dueDateLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            dueDateLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25),
             dueDateLabel.heightAnchor.constraint(equalToConstant: 60),
             
             descriptionLabel.topAnchor.constraint(equalTo: dueDateLabel.bottomAnchor, constant: 10),
-            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            descriptionLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 25),
             descriptionLabel.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -10),
             
             stackView.heightAnchor.constraint(equalToConstant: 40),

@@ -57,6 +57,7 @@ class MemberInfoViewController_1: UIViewController {
         configureTextField()
         configureKeyboard()
         getUserDate()
+        getStore()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -71,8 +72,6 @@ class MemberInfoViewController_1: UIViewController {
         emailTextField.text     = user?.email ?? ""
         storeTypeLabel.text     = user?.referrerStoreType ?? "無推薦店家類別"
         storeListLabel.text     = user?.referrerStoreName ?? "無推薦店家"
-        print("referrerStoreType = \(user?.referrerStoreType)")
-        print("referrerStoreName = \(user?.referrerStoreName)")
         
         if user?.sex == "1" {
             femaleButton.isSelected = true
@@ -121,6 +120,29 @@ class MemberInfoViewController_1: UIViewController {
                         self.birthdayTextField.text = user.birthday
                         self.phoneLabel.text        = user.account
                         self.emailTextField.text    = user.email
+                    }
+                }
+            }
+        }
+    }
+    private func getStore() {
+        UserService.shared.getStoreTypeList { success, response in
+            guard success else {
+                return
+            }
+            
+            self.storeTypes = response as! [StoreTypeList]
+            self.storeTypes.append(StoreTypeList(storetype_id: "", storetype_name: "無"))
+            
+            self.storeTypes.forEach { storeType in
+                StoreService.shared.getStoreList(storeType: storeType.storetype_id) { storeList in
+                    self.stores = storeList as [Store]
+                    if storeType.storetype_id == "" {
+                        let realStore = RealStore(storeType: storeType, stores: [Store(storeID: "", storeName: "無")])
+                        self.realStores.append(realStore)
+                    } else {
+                        let realStore = RealStore(storeType: storeType, stores: self.stores)
+                        self.realStores.append(realStore)
                     }
                 }
             }
@@ -235,7 +257,7 @@ class MemberInfoViewController_1: UIViewController {
         var sex = ""
         if maleButton.isSelected {
             sex = "0"
-        } else {
+        } else if femaleButton.isSelected {
             sex = "1"
         }
 

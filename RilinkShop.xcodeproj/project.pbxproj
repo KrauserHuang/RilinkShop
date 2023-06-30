@@ -1794,7 +1794,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1813,7 +1813,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.08;
+				MARKETING_VERSION = 1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jotanji.RilinkShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1830,7 +1830,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RilinkShop/RilinkShop.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = RV8U4Q9DP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RilinkShop/Info.plist;
@@ -1849,7 +1849,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.08;
+				MARKETING_VERSION = 1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jotanji.RilinkShop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

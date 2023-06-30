@@ -41,12 +41,9 @@ class MainTabBarController: UITabBarController {
         } else if MyKeyChain.getBossAccount() == nil,
                   MyKeyChain.getAccount() != nil {
             // 登入使用者頁面
-//            selectedIndex = 0
         } else if MyKeyChain.getAccount() == nil,
                   MyKeyChain.getBossAccount() == nil {
             selectedIndex = 3
-//            let memberCenterVC = UIStoryboard(name: "MemberCenterTableViewController", bundle: nil).instantiateViewController(identifier: "MemberCenterViewController") as! MemberCenterViewController
-//            setViewControllers([memberCenterVC], animated: false)
         }
     }
 }
@@ -54,32 +51,6 @@ class MainTabBarController: UITabBarController {
 extension MainTabBarController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         print(self, #function)
-//        guard LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) == nil else {
-////        guard MyKeyChain.getAccount() == nil else {
-//            tryLogIn()
-//            guard let MainTabViewControllers = self.viewControllers else {
-//                print("no valid viewControllers in MainTabBarController.")
-//                return
-//            }
-//            guard let rootVC = MainTabViewControllers[self.selectedIndex] as? UINavigationController else {
-//                print("fail to get viewControllers(as UINavigationController).")
-//                return
-//            }
-//            rootVC.popToRootViewController(animated: false)
-//            return
-//        }
-//        guard let MainTabViewControllers = self.viewControllers else {
-//            print("no valid viewControllers in MainTabBarController.")
-//            return
-//        }
-//        guard let rootVC = MainTabViewControllers[self.selectedIndex] as? UINavigationController else {
-//            print("fail to get viewControllers(as UINavigationController).")
-//            return
-//        }
-//        rootVC.popToRootViewController(animated: false)
-//        Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self) {
-//            self.selectedIndex = 3
-//        }
         
         tryLogIn()
         guard let MainTabViewControllers = self.viewControllers else {
@@ -91,13 +62,6 @@ extension MainTabBarController: UITabBarControllerDelegate {
             return
         }
         rootVC.popToRootViewController(animated: false)
-        
-//        if LocalStorageManager.shared.getData(String.self, forKey: .userIdKey) == nil {
-////        if MyKeyChain.getAccount() == nil {
-//            Alert.showSecurityAlert(title: "", msg: "使用商城前\n請先登入帳號。", vc: self) {
-//                self.selectedIndex = 3
-//            }
-//        }
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {

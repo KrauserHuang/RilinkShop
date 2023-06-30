@@ -61,16 +61,13 @@ class MemberNavigationViewController: UINavigationController {
             print("showRoot失敗")
             return
         }
-//        if LocalStorageManager.shared.getData(String.self, forKey: .adminIdKey) != nil {
         if MyKeyChain.getBossAccount() != nil {
             let vc = UIStoryboard(name: "Merchant", bundle: nil).instantiateViewController(withIdentifier: "MerchantNavigationController") as! MerchantNavigationController
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         } else {
             memberCenterVC.delegate = self
-//            pushViewController(memberCenterTVC, animated: animated)
             self.popToRootViewController(animated: true)
-//            self.viewControllers = [memberCenterVC]
             self.setViewControllers([memberCenterVC], animated: false)
         }
     }

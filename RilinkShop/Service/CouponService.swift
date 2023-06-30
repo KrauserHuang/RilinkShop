@@ -76,6 +76,22 @@ class CouponService {
             }
             
             let value = JSON(response.value)
+            
+            switch response.result {
+            case .success:
+                guard value["code"].stringValue == returnCode else {
+                    let errorMsg = value["responseMessage"].stringValue
+                    print("errorMsg:\(errorMsg)")
+                    completion(false, errorMsg as AnyObject)
+                    return
+                }
+                let successMsg = value["responseMessage"].stringValue
+                print("successMsg:\(successMsg)")
+                completion(true, successMsg as AnyObject)
+            case .failure:
+                let errorMsg = value["responseMessage"].stringValue
+                completion(false, errorMsg as AnyObject)
+            }
         }
     }
 }

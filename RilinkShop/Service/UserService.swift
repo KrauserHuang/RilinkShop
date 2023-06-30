@@ -66,7 +66,7 @@ class UserService {
     func reloadUser() {
         print("UserService " + #function)
         guard let user = user else { return }
-//        loadUser(id: user.memberId, pw: user.password)
+//        loadUser(account: user.account, password: user.password)
     }
     // MARK: - 使用者登入Login
     func userLogin(id: String, pwd: String, completed: @escaping Completion) {

@@ -44,6 +44,7 @@ class MyOrderTableViewCell: UITableViewCell {
         
         detailButton.isHidden = false
         payButton.isHidden = false
+        payButton.isEnabled = true
     }
     
     private func configure() {
@@ -74,7 +75,14 @@ class MyOrderTableViewCell: UITableViewCell {
         if model.payStatus == "1" {
             payButton.isHidden = true
         } else {
-            payButton.isHidden = false
+            if model.orderStatus == "2" {
+                payButton.isEnabled = false
+                payButton.layer.borderColor = UIColor.systemGray3.cgColor
+                payButton.setTitle("逾期取消", for: .normal)
+            } else {
+                payButton.isHidden = false
+
+            }
         }
     }
 }
